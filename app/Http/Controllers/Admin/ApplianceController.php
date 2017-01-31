@@ -34,7 +34,14 @@ class ApplianceController extends Controller
 
         ]);
 
-        if (Appliance::create($request->all())) {
+
+        $t = $request->all();
+        foreach ($t as $k=>$v){
+            if(is_string($v) && $v === '') unset($t[$k]);
+        }
+
+
+        if (Appliance::create($t)) {
             return redirect('admin/appliance');
         } else {
             return redirect()->back()->withInput()->withErrors('添加失败！');
@@ -59,7 +66,14 @@ class ApplianceController extends Controller
 //            'cutout' => 'required',
         ]);
 
-        if (Appliance::find($id)->update($request->all())) {
+
+        $t = $request->all();
+        foreach ($t as $k=>$v){
+            if(is_string($v) && $v === '') unset($t[$k]);
+        }
+
+
+        if (Appliance::find($id)->update($t)) {
             return redirect('admin/appliance');
         } else {
             return redirect()->back()->withInput()->withErrors('更新失败！');
