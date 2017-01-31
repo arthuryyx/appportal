@@ -18,3 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
+
+Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
+    Route::resource('appliance', 'ApplianceController');
+    Route::get('brand/{type}', 'BrandController@index');
+    Route::resource('brand', 'BrandController');
+    Route::get('category/{type}', 'CategoryController@index');
+    Route::resource('category', 'CategoryController');
+});
