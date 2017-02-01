@@ -16,6 +16,8 @@
     <!-- MetisMenu CSS -->
     <link href="/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
+    @yield('css')
+
     <!-- Custom CSS -->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
 
@@ -281,10 +283,13 @@
                                         </span>
                         </div>
                         <!-- /input-group -->
+                    <li>
+                        <a href="{{ url('/') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    </li>
                     </li>
                     @can('root')
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 基础信息维护<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-gear fa-fw"></i> 基础信息维护<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{{ url('#') }}">Roles</a>
@@ -296,9 +301,6 @@
                             <!-- /.nav-second-level -->
                         </li>
                     @endcan
-                    <li>
-                        <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                    </li>
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -371,11 +373,11 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a class="active" href="blank.html">Blank Page</a>
+                                <a href="blank.html">Blank Page</a>
                             </li>
                             <li>
                                 <a href="login.html">Login Page</a>
@@ -392,19 +394,7 @@
 
     <!-- Page Content -->
     <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">
-                        @yield('title')
-                    </h1>
-                    @yield('content')
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
+        @yield('content')
     </div>
     <!-- /#page-wrapper -->
 
@@ -419,6 +409,8 @@
 
 <!-- Metis Menu Plugin JavaScript -->
 <script src="/vendor/metisMenu/metisMenu.min.js"></script>
+
+@yield('js')
 
 <!-- Custom Theme JavaScript -->
 <script src="/js/sb-admin-2.js"></script>
