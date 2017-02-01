@@ -289,7 +289,7 @@
                     </li>
                     @can('root')
                         <li>
-                            <a href="#"><i class="fa fa-gear fa-fw"></i> 基础信息维护<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-gear fa-fw"></i> Config<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{{ url('#') }}">Roles</a>
