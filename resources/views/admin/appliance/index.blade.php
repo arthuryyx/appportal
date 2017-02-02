@@ -18,7 +18,8 @@
     <!-- /.row -->
 
     @if (count($errors) > 0)
-        <div class="alert alert-danger">
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             {!! implode('<br>', $errors->all()) !!}
         </div>
     @endif
@@ -38,7 +39,7 @@
                                 Name
                             </th>
                             <th>
-                                model
+                                Model
                             </th>
                             <th>
                                 Brand
@@ -47,19 +48,19 @@
                                 Category
                             </th>
                             <th>
-                                best
+                                Best price
                             </th>
                             <th>
-                                rrp
+                                RRP
                             </th>
                             <th>
-                                promotion
+                                Promotion price
                             </th>
                             <th>
-                                cut-out
+                                Cut-out
                             </th>
                             <th>
-                                description
+                                Description
                             </th>
                             <th>
 
