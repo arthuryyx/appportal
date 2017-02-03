@@ -51,7 +51,7 @@
                         <br>
                         <input type="text" name="promotion" class="form-control" placeholder="Promotion" value="{{ $appliance->promotion }}">
                         <br>
-                        <textarea name="description" rows="5" class="form-control" placeholder="description" value="{{ $appliance->description }}"></textarea>
+                        <textarea name="description" rows="5" class="form-control" placeholder="Description">{{ $appliance->description }}</textarea>
                         <br>
 
                         <br>

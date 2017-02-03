@@ -69,7 +69,7 @@ class ApplianceController extends Controller
 
         $t = $request->all();
         foreach ($t as $k=>$v){
-            if(is_string($v) && $v === '') unset($t[$k]);
+            if(is_string($v) && $v === '') $t[$k] = null;
         }
 
 
