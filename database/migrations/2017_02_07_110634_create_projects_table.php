@@ -16,8 +16,9 @@ class CreateProjectsTable extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('customer_id');
-            $table->string('job_no')->unique();
+            $table->string('job_id')->unique();
             $table->string('address');
+            $table->integer('state')->unsigned()->default(1);
             $table->timestamps();
         });
     }

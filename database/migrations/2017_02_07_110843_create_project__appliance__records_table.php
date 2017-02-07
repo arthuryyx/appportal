@@ -13,7 +13,7 @@ class CreateProjectApplianceRecordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_appliance_records', function (Blueprint $table) {
+        Schema::create('project__appliance__records', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('project_id')->unsigned();
             $table->integer('appliance_id')->unsigned();

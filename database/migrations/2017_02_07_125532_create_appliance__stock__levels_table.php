@@ -13,7 +13,7 @@ class CreateApplianceStockLevelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('appliance_stock_levels', function (Blueprint $table) {
+        Schema::create('appliance__stock__levels', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('appliance_order_detail_id')->unsigned();
             $table->integer('shelf_id')->unsigned()->unique()->nullable();

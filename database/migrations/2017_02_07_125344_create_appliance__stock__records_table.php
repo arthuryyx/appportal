@@ -13,7 +13,7 @@ class CreateApplianceStockRecordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('appliance_stock_records', function (Blueprint $table) {
+        Schema::create('appliance__stock__records', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('appliance_order_detail_id')->unsigned();
             $table->integer('deliver_to')->unsigned()->unique()->nullable();

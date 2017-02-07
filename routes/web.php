@@ -22,9 +22,9 @@ Route::get('/', 'HomeController@index');
 Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
     Route::resource('appliance', 'ApplianceController');
     Route::get('brand/{type}', 'BrandController@index');
-    Route::resource('brand', 'BrandController');
+    Route::resource('brand', 'BrandController',['except' => ['index', 'create', 'show']]);
     Route::get('category/{type}', 'CategoryController@index');
-    Route::resource('category', 'CategoryController');
+    Route::resource('category', 'CategoryController',['except' => ['index', 'create', 'show']]);
     Route::resource('project', 'ProjectController');
     Route::get('project/{pid}/appliance/', 'ProjectApplianceRecordController@create');
 
