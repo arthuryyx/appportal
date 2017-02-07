@@ -25,4 +25,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
     Route::resource('brand', 'BrandController');
     Route::get('category/{type}', 'CategoryController@index');
     Route::resource('category', 'CategoryController');
+    Route::resource('project', 'ProjectController');
+    Route::get('project/{pid}/appliance/', 'ProjectApplianceRecordController@create');
+
 });

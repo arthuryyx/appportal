@@ -301,6 +301,9 @@
                             <!-- /.nav-second-level -->
                         </li>
                     @endcan
+                    <li>
+                        <a href="{{ url('admin/project') }}"><i class="fa fa-th- fa-folder-open fa-fw"></i> Project</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
