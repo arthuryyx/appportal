@@ -36,13 +36,16 @@
                         <thead>
                         <tr>
                             <th>
-                                Brand
+                                Quantity
                             </th>
                             <th>
                                 Model
                             </th>
                             <th>
-                                Quantity
+                                Brand
+                            </th>
+                            <th>
+                                Category
                             </th>
                             <th>
                                 RRP
@@ -58,9 +61,10 @@
                         <tbody>
                         @foreach ($stocks as $stock)
                             <tr>
-                                <td>{{ $stock->appliance->belongsToBrand->name }}</td>
-                                <td>{{ $stock->appliance->model }}</td>
                                 <td>{{ $stock->total }}</td>
+                                <td>{{ $stock->appliance->model }}</td>
+                                <td>{{ $stock->appliance->belongsToBrand->name }}</td>
+                                <td>{{ $stock->appliance->belongsToCategory->name }}</td>
                                 <td>{{ $stock->appliance->rrp }}</td>
                                 <td>{{ $stock->appliance->promotion }}</td>
                                 <td><a href="{{ url('tempstock/'.$stock->id.'/edit') }}" class="btn btn-success">编辑</a></td>
