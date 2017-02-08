@@ -29,3 +29,10 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
     Route::get('project/{pid}/appliance/', 'ProjectApplianceRecordController@create');
 
 });
+
+Route::get('tempstock/list/{state}', 'StockController@list');
+Route::get('tempstock/create', 'StockController@create');
+Route::post('tempstock', 'StockController@store');
+Route::get('tempstock/{id}/edit', 'StockController@edit');
+Route::put('tempstock/{id}', 'StockController@update');
+Route::get('tempstock/{id}/out', 'StockController@out');
