@@ -13,7 +13,7 @@ class StockController extends Controller
         switch ($state)
         {
             case 1:
-                return view('tempstock.index'.$state)->withStocks(Stock::where('state', $state)->get());
+                return view('tempstock.index'.$state)->withStocks(Stock::where('state', $state)->groupBy('aid')->select('aid', DB::raw('count(aid) as total'))->get());
                 break;
             case 2:
                 return view('tempstock.index'.$state)->withStocks(Stock::where('state', $state)->get());
