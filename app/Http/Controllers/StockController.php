@@ -114,4 +114,10 @@ class StockController extends Controller
             return redirect()->back()->withInput()->withErrors('更新失败！');
         }
     }
+
+    public function destroy($id)
+    {
+        Stock::find($id)->delete();
+        return redirect()->back()->withInput()->withErrors('删除成功！');
+    }
 }

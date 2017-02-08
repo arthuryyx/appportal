@@ -44,8 +44,15 @@
                                 Order for
                             </th>
                             <th>
+                                Assign to
+                            </th>
+                            <th>
+                                Deliver to
+                            </th>
+                            <th>
                                 Date
                             </th>
+                            @can('root')<th></th>@endcan
                         </tr>
                         </thead>
                         <tbody>
@@ -55,7 +62,17 @@
                                 <td>{{ $stock->appliance->model }}</td>
                                 <td>{{ $stock->receipt }}</td>
                                 <td>{{ $stock->init }}</td>
+                                <td>{{ $stock->assign_to }}</td>
+                                <td>{{ $stock->deliver_to }}</td>
                                 <td>{{ $stock->created_at }}</td>
+                                @can('root')
+                                <td><form action="{{ url('tempstock/'.$stock->id) }}" method="POST" style="display: inline;">
+                                        {{ method_field('DELETE') }}
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-danger">删除</button>
+                                    </form>
+                                </td>
+                                @endcan
                             </tr>
                         @endforeach
                         </tbody>
