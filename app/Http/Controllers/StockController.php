@@ -69,7 +69,7 @@ class StockController extends Controller
 
     public function edit($id)
     {
-        return view('tempstock.edit')->withStock(Stock::find($id))->withAppliances(Appliance::pluck('model', 'id'));
+        return view('tempstock.edit')->withStock(Stock::find($id));
     }
 
 
