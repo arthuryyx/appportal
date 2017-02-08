@@ -31,7 +31,7 @@ class StockController extends Controller
     }
 
     public function create(){
-        return view('tempstock.create')->withAppliances(Appliance::pluck('model', 'id'));
+        return view('tempstock.create')->withAppliances(Appliance::orderBy('model')->pluck('model', 'id'));
 
     }
 
