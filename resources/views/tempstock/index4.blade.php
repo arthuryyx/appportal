@@ -27,6 +27,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="{{ url('tempstock/create') }}" class="btn btn-primary ">入库</a>
+                </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
@@ -50,6 +53,9 @@
                                 Deliver to
                             </th>
                             <th>
+                                Shelf
+                            </th>
+                            <th>
                                 Date
                             </th>
                             @can('root')<th></th>@endcan
@@ -64,6 +70,7 @@
                                 <td>{{ $stock->init }}</td>
                                 <td>{{ $stock->assign_to }}</td>
                                 <td>{{ $stock->deliver_to }}</td>
+                                <td>{{ $stock->shelf }}</td>
                                 <td>{{ $stock->created_at }}</td>
                                 @can('root')
                                 <td><form action="{{ url('tempstock/'.$stock->id) }}" method="POST" style="display: inline;">
