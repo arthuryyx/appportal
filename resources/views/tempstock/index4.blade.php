@@ -73,11 +73,35 @@
                                 <td>{{ $stock->shelf }}</td>
                                 <td>{{ $stock->created_at }}</td>
                                 @can('root')
-                                <td><form action="{{ url('tempstock/'.$stock->id) }}" method="POST" style="display: inline;">
-                                        {{ method_field('DELETE') }}
-                                        {{ csrf_field() }}
-                                        <button type="submit" class="btn btn-danger">删除</button>
-                                    </form>
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <button class="btn btn-danger" data-toggle="modal" data-target={{"#myModal".$stock->id}}>
+                                        删除
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id={{"myModal".$stock->id}} tabindex="-1" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{ $stock->receipt }}
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <form action="{{ url('tempstock/'.$stock->id) }}" method="POST" style="display: inline;">
+                                                        {{ method_field('DELETE') }}
+                                                        {{ csrf_field() }}
+                                                        <button type="submit" class="btn btn-danger">删除</button>
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal -->
                                 </td>
                                 @endcan
                             </tr>

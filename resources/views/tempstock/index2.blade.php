@@ -66,7 +66,35 @@
                                 <td>{{ $stock->receipt }}</td>
                                 <td>{{ $stock->shelf }}</td>
                                 <td><a href="{{ url('tempstock/'.$stock->id.'/edit') }}" class="btn btn-success">编辑</a></td>
-                                <td><a href="{{ url('tempstock/'.$stock->id.'/out') }}" class="btn btn-warning">出库</a></td>
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <button class="btn btn-warning" data-toggle="modal" data-target={{"#myModal".$stock->id}}>
+                                        出库
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id={{"myModal".$stock->id}} tabindex="-1" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{$stock->appliance->model}}<br>
+                                                    {{ $stock->assign_to }}
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="{{ url('tempstock/'.$stock->id.'/out') }}" class="btn btn-warning">出库</a>
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal -->
+
+
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
