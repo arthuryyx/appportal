@@ -120,4 +120,8 @@ class StockController extends Controller
         Stock::find($id)->delete();
         return redirect()->back()->withInput()->withErrors('删除成功！');
     }
+
+    public function detail($aid){
+        return view('tempstock.detail')->withStocks(Stock::where(['aid'=> $aid, 'state'=> 1])->get());
+    }
 }
