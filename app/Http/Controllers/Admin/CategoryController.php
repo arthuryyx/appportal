@@ -47,7 +47,12 @@ class CategoryController extends Controller
     }
     public function destroy($id)
     {
-        Category::find($id)->delete();
-        return redirect()->back()->withInput()->withErrors('删除成功！');
+        $category = Category::find($id);
+        if($category->hasManyAppliances()->count()==0){
+            $category->delete();
+            return redirect()->back()->withInput()->withErrors('删除成功！');
+        } else{
+            return redirect()->back()->withInput()->withErrors('有关联关系，删除失败！');
+        }
     }
 }

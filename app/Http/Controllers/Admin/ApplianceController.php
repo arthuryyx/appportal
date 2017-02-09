@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Appliance;
 use App\Brand;
 use App\Category;
+use App\Stock;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -81,7 +82,11 @@ class ApplianceController extends Controller
     }
     public function destroy($id)
     {
-        Appliance::find($id)->delete();
-        return redirect()->back()->withInput()->withErrors('删除成功！');
+        if(Stock::where('aid', $id)->count()==0){
+            Appliance::find($id)->delete();
+            return redirect()->back()->withInput()->withErrors('删除成功！');
+        } else{
+            return redirect()->back()->withInput()->withErrors('有关联关系，删除失败！');
+        }
     }
 }

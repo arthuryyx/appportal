@@ -47,7 +47,12 @@ class BrandController extends Controller
     }
     public function destroy($id)
     {
-        Brand::find($id)->delete();
-        return redirect()->back()->withInput()->withErrors('删除成功！');
+        $brand = Brand::find($id);
+        if($brand->hasManyAppliances()->count()==0){
+            $brand->delete();
+            return redirect()->back()->withInput()->withErrors('删除成功！');
+        } else{
+            return redirect()->back()->withInput()->withErrors('有关联关系，删除失败！');
+        }
     }
 }
