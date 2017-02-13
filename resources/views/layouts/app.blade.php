@@ -11,18 +11,18 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="{{ asset('vendor/metisMenu/metisMenu.min.css') }}" rel="stylesheet">
 
     @yield('css')
 
     <!-- Custom CSS -->
-    <link href="/css/sb-admin-2.css" rel="stylesheet">
+    <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
     <!-- Scripts -->
     <script>
@@ -339,17 +339,17 @@
 <!-- /#wrapper -->
 
 <!-- jQuery -->
-<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="{{ asset('vendor/jquery/jquery.min.js')}}"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
-<script src="/vendor/metisMenu/metisMenu.min.js"></script>
+<script src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>
 
 @yield('js')
 
 <!-- Custom Theme JavaScript -->
-<script src="/js/sb-admin-2.js"></script>
+<script src="{{ asset('js/sb-admin-2.js')}}"></script>
 </body>
 </html>

@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes();
 
@@ -30,11 +30,13 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
 
 });
 
-Route::get('tempstock/list/{state}', 'StockController@list');
-Route::get('tempstock/create', 'StockController@create');
-Route::post('tempstock', 'StockController@store');
-Route::get('tempstock/{id}/edit', 'StockController@edit');
-Route::put('tempstock/{id}', 'StockController@update');
-Route::get('tempstock/{id}/out', 'StockController@out');
-Route::delete('tempstock/{id}', 'StockController@destroy');
-Route::get('tempstock/{aid}/detail', 'StockController@detail');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('tempstock/list/{state}', 'StockController@list');
+    Route::get('tempstock/create', 'StockController@create');
+    Route::post('tempstock', 'StockController@store');
+    Route::get('tempstock/{id}/edit', 'StockController@edit');
+    Route::put('tempstock/{id}', 'StockController@update');
+    Route::get('tempstock/{id}/out', 'StockController@out');
+    Route::delete('tempstock/{id}', 'StockController@destroy');
+    Route::get('tempstock/{aid}/detail', 'StockController@detail');
+});

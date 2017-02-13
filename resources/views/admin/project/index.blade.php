@@ -2,10 +2,10 @@
 
 @section('css')
     <!-- DataTables CSS -->
-    <link href="/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="{{ asset('vendor/datatables-plugins/dataTables.bootstrap.css')}}" rel="stylesheet">
 
     <!-- DataTables Responsive CSS -->
-    <link href="/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+    <link href="{{ asset('vendor/datatables-responsive/dataTables.responsive.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -111,9 +111,9 @@
 
 @section('js')
     <!-- DataTables JavaScript -->
-    <script src="/vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-    <script src="/vendor/datatables-responsive/dataTables.responsive.js"></script>
+    <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('vendor/datatables-plugins/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{ asset('vendor/datatables-responsive/dataTables.responsive.js')}}"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
         $(document).ready(function() {

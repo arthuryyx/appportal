@@ -2,7 +2,7 @@
 
 @section('css')
     <!-- Morris Charts CSS -->
-    <link href="/vendor/morrisjs/morris.css" rel="stylesheet">
+    <link href="{{ asset('vendor/morrisjs/morris.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -548,7 +548,7 @@
 
 @section('js')
     <!-- Morris Charts JavaScript -->
-    <script src="/vendor/raphael/raphael.min.js"></script>
-    <script src="/vendor/morrisjs/morris.min.js"></script>
-    <script src="/js/data/morris-data.js"></script>
+    <script src="{{ asset('vendor/raphael/raphael.min.js')}}"></script>
+    <script src="{{ asset('vendor/morrisjs/morris.min.js')}}"></script>
+    <script src="{{ asset('js/data/morris-data.js')}}"></script>
 @endsection
