@@ -16,7 +16,7 @@ class StockController extends Controller
                 return view('tempstock.index'.$state)->withStocks(Stock::where('state', $state)->groupBy('aid')->select('aid', DB::raw('count(aid) as total'))->get())->withTotal(Stock::where('state', $state)->count());
                 break;
             case 2:
-                return view('tempstock.index'.$state)->withStocks(Stock::where('state', $state)->get());
+                return view('tempstock.index'.$state)->withStocks(Stock::orderBy('updated_at', 'desc')->where('state', $state)->get());
                 break;
             case 3:
                 return view('tempstock.index'.$state)->withStocks(Stock::where('state', $state)->get());
