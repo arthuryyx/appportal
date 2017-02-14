@@ -29,6 +29,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a href="{{ url('tempstock/create') }}" class="btn btn-primary ">入库</a>
+                    <a href="{{ url('tempstock/exportPDF') }}" target="_blank" class="btn btn-primary ">exportPDF</a>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">

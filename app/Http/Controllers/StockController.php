@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Appliance;
-use App\Stock;
 use Illuminate\Support\Facades\DB;
+
+use App\Stock;
+use App\Appliance;
+
+use Barryvdh\DomPDF\Facade as PDF;
 
 class StockController extends Controller
 {
@@ -123,5 +126,16 @@ class StockController extends Controller
 
     public function detail($aid){
         return view('tempstock.detail')->withStocks(Stock::where(['aid'=> $aid, 'state'=> 1])->get());
+    }
+
+    public function exportPDF(Request $request){
+        $data = Stock::where('state', 1)->groupBy('aid')->orderBy('total', 'desc')->select('aid', DB::raw('count(aid) as total'))->get();
+        $date = date('Y-m-d H:i:s');
+        $pdf = PDF::loadView('tempstock.pdfview', [ 'stocks' => $data, 'date' => $date]);
+
+        if($request->has('download')){
+            return $pdf->download('available_stocks.pdf');
+        }
+        return $pdf->stream();
     }
 }
