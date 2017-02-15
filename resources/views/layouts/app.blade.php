@@ -292,7 +292,7 @@
                             <a href="#"><i class="fa fa-gears fa-fw"></i> Config<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{{ url('#') }}">Roles</a>
+                                    <a href="{{ url('admin/permission') }}">Permission</a>
                                 </li>
                                 <li>
                                     <a href="{{ url('admin/appliance') }}">Appliances</a>
