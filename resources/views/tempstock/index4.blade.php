@@ -32,7 +32,7 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables" data-order='[[ 7, "desc" ]]'>
                         <thead>
                         <tr><th>
                                 Brand
