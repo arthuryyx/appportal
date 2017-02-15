@@ -129,7 +129,7 @@ class StockController extends Controller
     }
 
     public function exportPDF(Request $request){
-        $data = Stock::where('state', 1)->groupBy('aid')->orderBy('total', 'desc')->select('aid', DB::raw('count(aid) as total'))->get();
+        $data = Stock::where('state', 1)->groupBy('aid')->select('aid', DB::raw('count(aid) as total'))->leftJoin('appliances', 'appliances.id', '=', 'stocks.aid')->orderBy('category_id')->get();
         $date = date('Y-m-d H:i:s');
         $pdf = PDF::loadView('tempstock.pdfview', [ 'stocks' => $data, 'date' => $date]);
 
