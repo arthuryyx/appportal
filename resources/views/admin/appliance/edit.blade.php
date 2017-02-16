@@ -33,13 +33,13 @@
                         <br>
                         <select name="brand_id" class="form-control" required="required">
                             @foreach($brands as $id => $name)
-                                <option value="{{$id}}" @if($id == $appliance->belongsToBrand->id) selected='selected' @endif >{{$name}}</option>
+                                <option value="{{$id}}" @if($id == $appliance->brand_id) selected='selected' @endif >{{$name}}</option>
                             @endforeach
                         </select>
                         <br>
                         <select name="category_id" class="form-control" required="required">
                             @foreach($categories as $id => $name)
-                                <option value="{{$id}}" @if($id == $appliance->belongsToCategory->id) selected='selected' @endif>{{$name}}</option>
+                                <option value="{{$id}}" @if($id == $appliance->category_id) selected='selected' @endif>{{$name}}</option>
                             @endforeach
                         </select>
                         <br>
