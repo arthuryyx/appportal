@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
     Route::resource('permission', 'PermissionController');
+    Route::resource('role', 'RoleController');
 
     Route::resource('appliance', 'ApplianceController');
     Route::get('brand/{type}', 'BrandController@index');

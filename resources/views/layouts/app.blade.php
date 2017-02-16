@@ -295,6 +295,12 @@
                                     <a href="{{ url('admin/permission') }}">Permission</a>
                                 </li>
                                 <li>
+                                    <a href="{{ url('admin/role') }}">Role</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('#') }}">Account</a>
+                                </li>
+                                <li>
                                     <a href="{{ url('admin/appliance') }}">Appliances</a>
                                 </li>
                             </ul>
