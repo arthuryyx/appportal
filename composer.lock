@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1b8b4d6b70a6601d00f2d829ba0468eb",
-    "content-hash": "df36246a19cb0dc0801b308e0bd2a61a",
+    "hash": "5ea01122e1af389f494fb1c621524a0f",
+    "content-hash": "e050e170ce6bf8ab006afe0b9ac7916a",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -542,6 +542,60 @@
                 "laravel"
             ],
             "time": "2017-01-26 14:29:55"
+        },
+        {
+            "name": "laravelcollective/html",
+            "version": "v5.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LaravelCollective/html.git",
+                "reference": "2f7f2e127c6fed47f269ea29ab5efeb8f65e9d35"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/2f7f2e127c6fed47f269ea29ab5efeb8f65e9d35",
+                "reference": "2f7f2e127c6fed47f269ea29ab5efeb8f65e9d35",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "5.3.*",
+                "illuminate/routing": "5.3.*",
+                "illuminate/session": "5.3.*",
+                "illuminate/support": "5.3.*",
+                "illuminate/view": "5.3.*",
+                "php": ">=5.6.4"
+            },
+            "require-dev": {
+                "illuminate/database": "5.3.*",
+                "mockery/mockery": "~0.9.4",
+                "phpunit/phpunit": "~5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Collective\\Html\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                },
+                {
+                    "name": "Adam Engebretson",
+                    "email": "adam@laravelcollective.com"
+                }
+            ],
+            "description": "HTML and Form Builders for the Laravel Framework",
+            "homepage": "http://laravelcollective.com",
+            "time": "2016-12-13 14:23:36"
         },
         {
             "name": "league/flysystem",
