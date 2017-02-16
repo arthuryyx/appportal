@@ -75,7 +75,7 @@ class ApplianceController extends Controller
 
 
         if (Appliance::find($id)->update($t)) {
-            return redirect('admin/appliance');
+            return redirect('admin/appliance')->withErrors('更新成功！');
         } else {
             return redirect()->back()->withInput()->withErrors('更新失败！');
         }
