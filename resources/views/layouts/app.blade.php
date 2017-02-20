@@ -292,16 +292,22 @@
                             <a href="#"><i class="fa fa-gears fa-fw"></i> Config<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{{ url('admin/permission') }}">Permission</a>
+                                    <a href="#"><i class="fa fa-gears fa-fw"></i> Account<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="{{ url('admin/permission') }}"><i class="fa fa-gears fa-fw"></i> Permission</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url('admin/role') }}"><i class="fa fa-gears fa-fw"></i> Role</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url('admin/account') }}"><i class="fa fa-gears fa-fw"></i> User</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
                                 </li>
                                 <li>
-                                    <a href="{{ url('admin/role') }}">Role</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('#') }}">Account</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('admin/appliance') }}">Appliances</a>
+                                    <a href="{{ url('admin/appliance') }}">Appliance</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
