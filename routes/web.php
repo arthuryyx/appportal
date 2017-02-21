@@ -44,7 +44,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('tempstock/{id}/out', 'StockController@out');
     Route::delete('tempstock/{id}', 'StockController@destroy');
     Route::get('tempstock/{aid}/detail', 'StockController@detail');
-    Route::get('tempstock/exportPDF', 'StockController@exportPDF');
+    Route::get('tempstock/exportAvailable', 'StockController@exportAvailable');
+    Route::get('tempstock/exportStockCheckingList', 'StockController@exportStockCheckingList');
 
     Route::get('settings', 'UserController@settings');
     Route::post('/settings/reset', 'UserController@reset');

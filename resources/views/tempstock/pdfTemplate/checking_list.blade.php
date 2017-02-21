@@ -8,12 +8,10 @@
     </head>
     <body>
         <h2>Date: {{$date}}</h2>
+        <h2>{{$stocks->count()}} in total</h2>
         <table>
             <thead>
             <tr>
-                <th>
-                    Quantity
-                </th>
                 <th>
                     Model
                 </th>
@@ -21,25 +19,20 @@
                     Brand
                 </th>
                 <th>
-                    Category
+                    Assign to
                 </th>
                 <th>
-                    RRP
-                </th>
-                <th>
-                    Promotion price
+                    Shelf
                 </th>
             </tr>
             </thead>
             <tbody>
             @foreach ($stocks as $stock)
                 <tr>
-                    <td>{{ $stock->total }}</td>
                     <td>{{ $stock->appliance->model }}</td>
                     <td>{{ $stock->appliance->belongsToBrand->name }}</td>
-                    <td>{{ $stock->appliance->belongsToCategory->name }}</td>
-                    <td>{{ $stock->appliance->rrp }}</td>
-                    <td>{{ $stock->appliance->promotion }}</td>
+                    <td>{{ $stock->assign_to }}</td>
+                    <td>{{ $stock->shelf }}</td>
                 </tr>
             @endforeach
             </tbody>

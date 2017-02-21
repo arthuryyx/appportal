@@ -128,14 +128,22 @@ class StockController extends Controller
         return view('tempstock.detail')->withStocks(Stock::where(['aid'=> $aid, 'state'=> 1])->get());
     }
 
-    public function exportPDF(Request $request){
-        $data = Stock::where('state', 1)->groupBy('aid')->select('aid', DB::raw('count(aid) as total'))->leftJoin('appliances', 'appliances.id', '=', 'stocks.aid')->orderBy('category_id')->get();
+    public function exportAvailable(){
+        $data = Stock::where('state', 1)->groupBy('aid')->select('aid', DB::raw('count(aid) as total'))->leftJoin('appliances', 'appliances.id', '=', 'stocks.aid')->orderBy('brand_id')->get();
         $date = date('Y-m-d H:i:s');
-        $pdf = PDF::loadView('tempstock.pdfview', [ 'stocks' => $data, 'date' => $date]);
+        $pdf = PDF::loadView('tempstock.pdfTemplate.available', [ 'stocks' => $data, 'date' => $date]);
 
-        if($request->has('download')){
-            return $pdf->download('available_stocks.pdf');
-        }
+//        if($request->has('download')){
+//            return $pdf->download('available_stocks.pdf');
+//        }
+        return $pdf->stream();
+    }
+
+    public function exportStockCheckingList(){
+        $data = Stock::where('state', 1)->orWhere('state', 2)->orderBy('shelf')->get();
+        $date = date('Y-m-d H:i:s');
+        $pdf = PDF::loadView('tempstock.pdfTemplate.checking_list', [ 'stocks' => $data, 'date' => $date]);
+
         return $pdf->stream();
     }
 }
