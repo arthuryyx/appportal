@@ -46,7 +46,7 @@
                                         <strong>Roles:</strong>
                                         <br/>
                                         @foreach($roles as $id => $label)
-                                            <label>{{ Form::checkbox('role[]', $id, in_array($id, $checks) ? true : false, array('class' => 'name checkbox-inline')) }}
+                                            <label>{{ Form::checkbox('roles[]', $id, in_array($id, $checks) ? true : false, array('class' => 'name checkbox-inline')) }}
                                                 {{ $label }}
                                             </label>
                                             &nbsp;

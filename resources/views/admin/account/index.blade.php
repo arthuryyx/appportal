@@ -19,7 +19,7 @@
                     @endif
                     <div class="collapse" id="collapseExample">
                         <div class="container-fluid">
-                            {!! Form::open(['url' => 'admin/user','method'=>'POST']) !!}
+                            {!! Form::open(['url' => 'admin/account','method'=>'POST']) !!}
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
@@ -29,14 +29,34 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>Label:</strong>
-                                        {!! Form::text('label', null, array('placeholder' => 'Label','class' => 'form-control', 'required' => 'required')) !!}
+                                        <strong>Email:</strong>
+                                        {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control', 'required' => 'required')) !!}
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>password:</strong>
+                                        {!! Form::password('password', array('placeholder' => 'password','class' => 'form-control', 'required' => 'required')) !!}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>Description:</strong>
-                                        {!! Form::textarea('description', null, array('placeholder' => 'Description','class' => 'form-control','style'=>'height:100px')) !!}
+                                        <strong>password_confirmation:</strong>
+                                        {!! Form::password('password_confirmation', array('placeholder' => 'password_confirmation','class' => 'form-control', 'required' => 'required')) !!}
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>State:</strong>
+                                        <br/>
+                                        <label>{!! Form::radio('active', 1, array('class' => 'form-control checkbox-inline')) !!}
+                                            Active
+                                        </label>
+                                        <label>{!! Form::radio('active', 0, array('class' => 'form-control checkbox-inline')) !!}
+                                            Deactive
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -53,7 +73,7 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                     {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    {{--<button type="submit" class="btn btn-primary">Submit</button>--}}
                                 </div>
                             </div>
                             {!! Form::close() !!}

@@ -16,28 +16,35 @@ class AccountController extends Controller
         return view('admin.account.index')->withUsers(User::all())->withRoles(Role::pluck('label', 'id'));
     }
 
-//    public function store(Request $request)
-//    {
-//        $this->validate($request, [
-//            'name' => 'required|unique:roles',
-//            'label' => 'required',
-//        ]);
-//
-//        DB::beginTransaction();
-//
-//        try {
-//            $role = Role::create($request->all());
-//            $role->permissions()->attach($request->all()['permission']);
-//
-//        } catch(\Exception $e)
-//        {
-//            DB::rollback();
-//            return redirect()->back()->withInput()->withErrors($e);
-//        }
-//        DB::commit();
-//        return redirect()->back()->withInput()->withErrors('Success!');
-//    }
-//
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        DB::beginTransaction();
+
+        $data = $request->all();
+        try {
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'active' => $data['active'],
+            ]);
+            $user->roles()->attach($data['roles']);
+
+        } catch(\Exception $e)
+        {
+            DB::rollback();
+            return redirect()->back()->withInput()->withErrors($e);
+        }
+        DB::commit();
+        return redirect()->back()->withInput()->withErrors('Success!');
+    }
+
     public function edit($id)
     {
         return view('admin/account/edit')->withUser(User::find($id))->withRoles(Role::pluck('label', 'id'))->withChecks(User::find($id)->roles()->pluck('id')->all());
@@ -52,13 +59,13 @@ class AccountController extends Controller
 
         DB::beginTransaction();
         $r = $request->all();
-        if (!array_key_exists('role', $r)){
-            $r['role'] = [];
+        if (!array_key_exists('roles', $r)){
+            $r['roles'] = [];
         }
         try {
             $user = User::find($id);
             $user->update($r);
-            $user->roles()->sync($r['role']);
+            $user->roles()->sync($r['roles']);
         } catch(\Exception $e)
         {
             DB::rollback();
