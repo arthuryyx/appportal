@@ -15,14 +15,11 @@ class CreateAppliancesTable extends Migration
     {
         Schema::create('appliances', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->nullable();
             $table->string('model')->unique();
             $table->integer('brand_id')->unsigned();
             $table->integer('category_id')->unsigned();
             $table->string('cutout')->nullable();
             $table->integer('best')->unsigned()->nullable()->default(null);
-            $table->integer('rrp')->unsigned()->nullable()->default(null);
-            $table->integer('promotion')->unsigned()->nullable()->default(null);
             $table->string('description')->nullable();
             $table->timestamps();
 

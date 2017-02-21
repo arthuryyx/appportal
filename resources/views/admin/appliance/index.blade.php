@@ -36,9 +36,6 @@
                         <thead>
                         <tr>
                             <th>
-                                Name
-                            </th>
-                            <th>
                                 Model
                             </th>
                             <th>
@@ -49,12 +46,6 @@
                             </th>
                             <th>
                                 Best price
-                            </th>
-                            <th>
-                                RRP
-                            </th>
-                            <th>
-                                Promotion price
                             </th>
                             <th>
                                 Cut-out
@@ -73,13 +64,10 @@
                         <tbody>
                         @foreach ($appliances as $appliance)
                             <tr>
-                                <td>{{ $appliance->name }}</td>
                                 <td>{{ $appliance->model }}</td>
                                 <td>{{ $appliance->belongsToBrand->name }}</td>
                                 <td>{{ $appliance->belongsToCategory->name }}</td>
                                 <td>{{ $appliance->best }}</td>
-                                <td>{{ $appliance->rrp }}</td>
-                                <td>{{ $appliance->promotion }}</td>
                                 <td>{{ $appliance->cutout }}</td>
                                 <td>{{ $appliance->description }}</td>
                                 <td><a href="{{ url('admin/appliance/'.$appliance->id.'/edit') }}" class="btn btn-success">编辑</a></td>

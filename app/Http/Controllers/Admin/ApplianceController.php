@@ -24,23 +24,16 @@ class ApplianceController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-//            'name' => 'required|unique:appliances',
             'model' => 'required|unique:appliances',
             'brand_id' => 'required|exists:brands,id',
             'category_id' => 'required|exists:categories,id',
             'best' => 'integer|min:1',
-            'rrp' => 'integer|min:1',
-            'promotion' => 'integer|min:1',
-//            'cutout' => 'required',
-
         ]);
-
 
         $t = $request->all();
         foreach ($t as $k=>$v){
             if(is_string($v) && $v === '') unset($t[$k]);
         }
-
 
         if (Appliance::create($t)) {
             return redirect('admin/appliance');
@@ -57,14 +50,10 @@ class ApplianceController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-//            'name' => 'required|unique:appliances',
             'model' => 'required|unique:appliances,model,'.$id,
             'brand_id' => 'required|exists:brands,id',
             'category_id' => 'required|exists:categories,id',
             'best' => 'integer|min:0',
-            'rrp' => 'integer|min:0',
-            'promotion' => 'integer|min:0',
-//            'cutout' => 'required',
         ]);
 
 
