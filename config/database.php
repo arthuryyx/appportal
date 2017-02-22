@@ -63,7 +63,7 @@ return [
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
             'strict' => true,
-            'engine' => null,
+            'engine' => 'InnoDB ROW_FORMAT=DYNAMIC',
 //            'options'   => [
 //                \PDO::ATTR_EMULATE_PREPARES => true
 //            ],
