@@ -8,6 +8,7 @@
     </head>
     <body>
         <h2>Date: {{$date}}</h2>
+        <h2>Sum: {{$total}}</h2>
         <table>
             <thead>
             <tr>

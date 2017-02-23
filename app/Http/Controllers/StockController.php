@@ -131,7 +131,8 @@ class StockController extends Controller
     public function exportAvailable(){
         $data = Stock::where('state', 1)->groupBy('aid')->select('aid', DB::raw('count(aid) as total'))->leftJoin('appliances', 'appliances.id', '=', 'stocks.aid')->orderBy('brand_id')->orderBy('category_id')->get();
         $date = date('Y-m-d H:i:s');
-        $pdf = PDF::loadView('tempstock.pdfTemplate.available', [ 'stocks' => $data, 'date' => $date]);
+        $total= array_sum($data -> pluck('total')->all());
+        $pdf = PDF::loadView('tempstock.pdfTemplate.available', [ 'stocks' => $data, 'date' => $date, 'total' => $total]);
 
 //        if($request->has('download')){
 //            return $pdf->download('available_stocks.pdf');
