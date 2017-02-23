@@ -129,7 +129,7 @@ class StockController extends Controller
     }
 
     public function exportAvailable(){
-        $data = Stock::where('state', 1)->groupBy('aid')->select('aid', DB::raw('count(aid) as total'))->leftJoin('appliances', 'appliances.id', '=', 'stocks.aid')->orderBy('brand_id')->get();
+        $data = Stock::where('state', 1)->groupBy('aid')->select('aid', DB::raw('count(aid) as total'))->leftJoin('appliances', 'appliances.id', '=', 'stocks.aid')->orderBy('brand_id')->orderBy('category_id')->get();
         $date = date('Y-m-d H:i:s');
         $pdf = PDF::loadView('tempstock.pdfTemplate.available', [ 'stocks' => $data, 'date' => $date]);
 
@@ -140,7 +140,7 @@ class StockController extends Controller
     }
 
     public function exportStockCheckingList(){
-        $data = Stock::where('state', 1)->orWhere('state', 2)->orderBy('shelf')->get();
+        $data = Stock::where('state', 1)->orWhere('state', 2)->orderBy('shelf')->orderBy('aid')->get();
         $date = date('Y-m-d H:i:s');
         $pdf = PDF::loadView('tempstock.pdfTemplate.checking_list', [ 'stocks' => $data, 'date' => $date]);
 
