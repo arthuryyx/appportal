@@ -7,12 +7,14 @@ use Illuminate\Support\Facades\DB;
 
 use App\Stock;
 use App\Appliance;
+use Illuminate\Support\Facades\Session;
 
 use Barryvdh\DomPDF\Facade as PDF;
 
 class StockController extends Controller
 {
-    public function list($state){
+    public function list(Request $request, $state){
+        Session::flash('backUrl', $request->fullUrl());
         switch ($state)
         {
             case 1:
@@ -72,12 +74,18 @@ class StockController extends Controller
 
     public function edit($id)
     {
+        if (Session::has('backUrl')) {
+            Session::keep('backUrl');
+        }
         return view('tempstock.edit')->withStock(Stock::find($id));
     }
 
 
     public function update(Request $request, $id)
     {
+        if (Session::has('backUrl')) {
+            Session::keep('backUrl');
+        }
 
         $t = $request->all();
 
@@ -95,9 +103,8 @@ class StockController extends Controller
             if(is_string($v) && $v === '') $t[$k] = null;
         }
 
-
         if (Stock::find($id)->update($t)) {
-            return redirect('tempstock/list/2');
+            return redirect(Session::get('backUrl'))->withErrors('更新成功！');
         } else {
             return redirect()->back()->withInput()->withErrors('更新失败！');
         }
@@ -112,7 +119,7 @@ class StockController extends Controller
         $t['state'] = 3;
 
         if ($obj->update($t)) {
-            return redirect('tempstock/list/2');
+            return redirect()->back()->withErrors('已出库');
         } else {
             return redirect()->back()->withInput()->withErrors('更新失败！');
         }
@@ -124,7 +131,8 @@ class StockController extends Controller
         return redirect()->back()->withInput()->withErrors('删除成功！');
     }
 
-    public function detail($aid){
+    public function detail(Request $request, $aid){
+        Session::flash('backUrl', $request->fullUrl());
         return view('tempstock.detail')->withStocks(Stock::where(['aid'=> $aid, 'state'=> 1])->get());
     }
 
