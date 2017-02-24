@@ -133,7 +133,7 @@ class StockController extends Controller
 
     public function detail(Request $request, $aid){
         Session::flash('backUrl', $request->fullUrl());
-        return view('tempstock.detail')->withStocks(Stock::where(['aid'=> $aid, 'state'=> 1])->get());
+        return view('tempstock.detail')->withStocks(Stock::where(['aid'=> $aid, 'state'=> 1])->orderBy('created_at', 'desc')->get());
     }
 
     public function exportAvailable(){
