@@ -155,4 +155,12 @@ class StockController extends Controller
 
         return $pdf->stream();
     }
+
+    public function exportAssigned(){
+        $data = Stock::where('state', 2)->orderBy('assign_to')->get();
+        $date = date('Y-m-d H:i:s');
+        $pdf = PDF::loadView('tempstock.pdfTemplate.checking_list', [ 'stocks' => $data, 'date' => $date]);
+
+        return $pdf->stream();
+    }
 }
