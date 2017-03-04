@@ -28,8 +28,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="{{ url('tempstock/create') }}" class="btn btn-primary ">入库</a>
-                    <a href="{{ url('tempstock/exportAvailable') }}" target="_blank" class="btn btn-primary ">exportPDF</a>
+                    <a href="{{ url('tempstock/exportAvailable') }}" target="_blank" class="btn btn-primary ">exportAvailable</a>
                     @can('root')
                         <a href="{{ url('tempstock/exportStockCheckingList') }}" target="_blank" class="btn btn-primary ">StockCheckingList</a>
                     @endif

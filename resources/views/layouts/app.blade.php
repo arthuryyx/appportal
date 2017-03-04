@@ -320,6 +320,9 @@
                         <a href="#">临时库存管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
+                                <a href="{{ url('tempstock/create') }}">入库</a>
+                            </li>
+                            <li>
                                 <a href="{{ url('tempstock/list/1') }}">可用库存</a>
                             </li>
                             <li>

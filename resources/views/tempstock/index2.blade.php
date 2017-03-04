@@ -28,7 +28,6 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="{{ url('tempstock/create') }}" class="btn btn-primary ">入库</a>
                     <a href="{{ url('tempstock/exportAssigned') }}" target="_blank" class="btn btn-primary ">exportAssigned</a>
                 </div>
                 <!-- /.panel-heading -->
