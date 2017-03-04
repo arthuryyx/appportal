@@ -25,13 +25,19 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
     Route::resource('role', 'RoleController');
     Route::resource('account', 'AccountController');
 
+    Route::resource('appliance/ajax', 'ApplianceController@ajax');
     Route::resource('appliance', 'ApplianceController');
+
     Route::get('brand/{type}', 'BrandController@index');
     Route::resource('brand', 'BrandController',['except' => ['index', 'create', 'show']]);
+
     Route::get('category/{type}', 'CategoryController@index');
     Route::resource('category', 'CategoryController',['except' => ['index', 'create', 'show']]);
+
     Route::resource('project', 'ProjectController');
     Route::get('project/{pid}/appliance/', 'ProjectApplianceRecordController@create');
+
+    Route::resource('material/board', 'BoardController');
 
 });
 

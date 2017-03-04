@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading"><h3>Account Management</h3></div>
+                <div class="panel-heading"><h3>Board Management</h3></div>
                 <div class="panel-body">
 
                     <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -19,58 +19,51 @@
                     @endif
                     <div class="collapse" id="collapseExample">
                         <div class="container-fluid">
-                            {!! Form::open(['url' => 'admin/account','method'=>'POST']) !!}
+                            {!! Form::open(['url' => 'admin/material/board','method'=>'POST']) !!}
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>Name:</strong>
-                                        {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control', 'required' => 'required')) !!}
+                                        <strong>Thickness:</strong>
+                                        {!! Form::text('thickness', null, array('placeholder' => 'Thickness','class' => 'form-control', 'required' => 'required')) !!}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>Email:</strong>
-                                        {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control', 'required' => 'required')) !!}
+                                        <strong>Brand:</strong>
+                                        {!! Form::text('brand', null, array('placeholder' => 'Brand','class' => 'form-control', 'required' => 'required')) !!}
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>Color:</strong>
+                                        {!! Form::text('color', null, array('placeholder' => 'Color','class' => 'form-control', 'required' => 'required')) !!}
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>Finish:</strong>
+                                        {!! Form::text('finish', null, array('placeholder' => 'Finish','class' => 'form-control', 'required' => 'required')) !!}
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>Making:</strong>
+                                        {!! Form::text('making', null, array('placeholder' => 'Making','class' => 'form-control', 'required' => 'required')) !!}
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>Type:</strong>
+                                        <br/>
+                                        <label>{!! Form::radio('type', 1, array('class' => 'form-control checkbox-inline')) !!}
+                                            Panel
+                                        </label>
+                                        <label>{!! Form::radio('type', 0, array('class' => 'form-control checkbox-inline')) !!}
+                                            内柜板
+                                        </label>
                                     </div>
                                 </div>
 
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group">
-                                        <strong>password:</strong>
-                                        {!! Form::password('password', array('placeholder' => 'password','class' => 'form-control', 'required' => 'required')) !!}
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group">
-                                        <strong>password_confirmation:</strong>
-                                        {!! Form::password('password_confirmation', array('placeholder' => 'password_confirmation','class' => 'form-control', 'required' => 'required')) !!}
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group">
-                                        <strong>State:</strong>
-                                        <br/>
-                                        <label>{!! Form::radio('active', 1, array('class' => 'form-control checkbox-inline')) !!}
-                                            Active
-                                        </label>
-                                        <label>{!! Form::radio('active', 0, array('class' => 'form-control checkbox-inline')) !!}
-                                            Deactive
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group">
-                                        <strong>Permission:</strong>
-                                        <br/>
-                                        @foreach($roles as $id => $label)
-                                            <label>{{ Form::checkbox('roles[]', $id, false, array('class' => 'name checkbox-inline')) }}
-                                                {{ $label }}
-                                            </label>
-                                            &nbsp;
-                                        @endforeach
-                                    </div>
-                                </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                     {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
                                     {{--<button type="submit" class="btn btn-primary">Submit</button>--}}
@@ -86,16 +79,22 @@
                             <thead>
                             <tr>
                                 <th>
-                                    Name
+                                    Thickness
                                 </th>
                                 <th>
-                                    Email
+                                    Brand
                                 </th>
                                 <th>
-                                    Active
+                                    Color
                                 </th>
                                 <th>
-                                    Roles
+                                    Finish
+                                </th>
+                                <th>
+                                    Making
+                                </th>
+                                <th>
+                                    Type
                                 </th>
                                 <th>
 
@@ -104,25 +103,48 @@
                             </thead>
 
                             <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($boards as $board)
                                 <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $board->thickness }}</td>
+                                    <td>{{ $board->brand }}</td>
+                                    <td>{{ $board->color }}</td>
+                                    <td>{{ $board->finish }}</td>
+                                    <td>{{ $board->making }}</td>
                                     <td>
-                                        @if($user->active)
-                                            <button type="button" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>
-                                        @else
-                                            <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button>
+                                        @if($board->type == 1)
+                                            Panel
+                                        @elseif($board->type == 0)
+                                            内柜板
                                         @endif
                                     </td>
                                     <td>
-                                        @if(!empty($user->roles))
-                                            @foreach($user->roles as $v)
-                                                <label class="label label-info">{{ $v->label }}</label>
-                                            @endforeach
-                                        @endif
+                                        <button class="btn btn-danger" data-toggle="modal" data-target={{"#myModal".$board->id}}>
+                                            删除
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id={{"myModal".$board->id}} tabindex="-1" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h4>{{ $board->name }}</h4>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <form action="{{ url('admin/material/board/'.$board->id) }}" method="POST" style="display: inline;">
+                                                            {{ method_field('DELETE') }}
+                                                            {{ csrf_field() }}
+                                                            <button type="submit" class="btn btn-danger">删除</button>
+                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
                                     </td>
-                                    <td class="text-center"><a href="{{ url('admin/account/'.$user->id.'/edit') }}" class="btn btn-success">编辑</a></td>
                                 </tr>
                             @endforeach
                             </tbody>
