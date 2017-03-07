@@ -23,19 +23,42 @@
                             {!! implode('<br>', $errors->all()) !!}
                         </div>
                     @endif
+                        {!! Form::open(['url' => 'admin/project','method'=>'POST']) !!}
+                        <div class="row">
 
-                    <form action="{{ url('admin/project') }}" method="POST">
-                        {!! csrf_field() !!}
-                        <input type="text" name="customer_id" class="form-control" required="required" placeholder="customer_id">
-                        <br>
-                        <input type="text" name="job_id" class="form-control" required="required" placeholder="job_id">
-                        <br>
-                        <input type="text" name="address" class="form-control" required="required" placeholder="address">
-                        <br>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>receipt_id:</strong>
+                                    {!! Form::text('receipt_id', null, array('class' => 'form-control', 'required' => 'required')) !!}
+                                </div>
+                            </div>
 
-                        <a href="{{ url('admin/project') }}" class="btn btn-lg btn-danger">Cancel</a>
-                        <button class="btn btn-lg btn-success pull-right">Create</button>
-                    </form>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>job_id:</strong>
+                                    {!! Form::text('job_id', null, array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>customer_name:</strong>
+                                    {!! Form::text('customer_name', null, array('class' => 'form-control', 'required' => 'required')) !!}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>address:</strong>
+                                    {!! Form::text('address', null, array('class' => 'form-control', 'required' => 'required')) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <a href="{{ url()->previous()}}" class="btn btn-lg btn-danger">Go back</a>
+                                {{Form::submit('Submit', ['class' => 'btn btn-lg btn-success pull-right'])}}
+                            </div>
+                        </div>
+                        {!! Form::close() !!}
 
                 </div>
             </div>

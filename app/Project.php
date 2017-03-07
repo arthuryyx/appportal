@@ -6,10 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    protected $fillable = ['customer_id', 'job_id', 'address', 'state'];
+    protected $fillable = ['receipt_id', 'job_id', 'customer_name', 'address', 'state', 'created_by'];
 
-    public function haManyAppliances()
-    {
-        return $this->hasMany('App\Project_Appliance_Record', 'project_id', 'id');
+//    public function hasManyAppliances()
+//    {
+//        return $this->hasMany('App\Project_Appliance_Record', 'project_id', 'id');
+//    }
+
+    public function getCreated_by(){
+        return $this->belongsTo('App\User', 'created_by', 'id');
     }
 }

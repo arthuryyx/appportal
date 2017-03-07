@@ -36,16 +36,25 @@
                         <thead>
                         <tr>
                             <th>
-                                Custom ID
+                                receipt_id
                             </th>
                             <th>
-                                Job ID
+                                job_id
                             </th>
                             <th>
-                                Address
+                                customer_name
                             </th>
                             <th>
-                                State
+                                address
+                            </th>
+                            <th>
+                                state
+                            </th>
+                            <th>
+                                created_by
+                            </th>
+                            <th>
+                                created_at
                             </th>
                             <th>
 
@@ -58,41 +67,15 @@
                         <tbody>
                         @foreach ($projects as $project)
                             <tr>
-                                <td>{{ $project->customer_id }}</td>
+                                <td>{{ $project->receipt_id }}</td>
                                 <td>{{ $project->job_id }}</td>
+                                <td>{{ $project->customer_name }}</td>
                                 <td>{{ $project->address }}</td>
                                 <td>{{ $project->state }}</td>
-                                <td><a href="{{ url('admin/project/'.$project->id.'/edit') }}" class="btn btn-success">编辑</a></td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button class="btn btn-danger" data-toggle="modal" data-target={{"#myModal".$project->id}}>
-                                        删除
-                                    </button>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id={{"myModal".$project->id}} tabindex="-1" role="dialog">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" >&times;</button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    {{$project->customer_id}}
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <form action="{{ url('admin/project/'.$project->id) }}" method="POST" style="display: inline;">
-                                                        {{ method_field('DELETE') }}
-                                                        {{ csrf_field() }}
-                                                        <button type="submit" class="btn btn-danger">删除</button>
-                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <!-- /.modal-content -->
-                                        </div>
-                                        <!-- /.modal-dialog -->
-                                    </div>
-                                    <!-- /.modal -->
-                                </td>
+                                <td>{{ $project->getCreated_by->name }}</td>
+                                <td>{{ $project->created_at }}</td>
+                                <td><a href="{{ url('admin/project/'.$project->id) }}" class="btn btn-info">详情</a></td>
+                                <td><a href="{{ url('admin/project/'.$project->id.'/edit') }}" class="btn btn-success">修改</a></td>
                             </tr>
                         @endforeach
                         </tbody>

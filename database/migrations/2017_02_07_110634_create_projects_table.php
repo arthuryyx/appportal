@@ -15,10 +15,12 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('customer_id');
-            $table->string('job_id')->unique();
-            $table->string('address');
-            $table->integer('state')->unsigned()->default(1);
+            $table->string('receipt_id')->unique();
+            $table->string('job_id')->nullable();
+            $table->string('customer_name')->require();
+            $table->string('address')->require();
+            $table->integer('state')->unsigned()->default(0);
+            $table->integer('created_by')->unsigned();
             $table->timestamps();
         });
     }
