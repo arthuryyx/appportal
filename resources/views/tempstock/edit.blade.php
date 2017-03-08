@@ -19,7 +19,6 @@
 
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
-                            <strong>编辑失败</strong> 输入不符合要求<br><br>
                             {!! implode('<br>', $errors->all()) !!}
                         </div>
                     @endif
@@ -34,10 +33,9 @@
                             {{--@endforeach--}}
                         {{--</select>--}}
                         <input type="text" name="aid" class="form-control" disabled="disabled" value="{{ $stock->appliance->model }}">
-
                         <br>
-                        <input type="text" name="job" class="form-control" placeholder="job" value="{{ $stock->assign_to }}">
-                        <br>
+                        {{--<input type="text" name="job" class="form-control" placeholder="job" value="{{ $stock->assign_to }}">--}}
+                        {{--<br>--}}
                         <input type="text" name="receipt" class="form-control" disabled="disabled" value="{{ $stock->receipt }}">
                         <br>
                         <input type="text" name="shelf" class="form-control" placeholder="shelf" value="{{ $stock->shelf }}">

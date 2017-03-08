@@ -12,11 +12,6 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    {{--<a href="{{ url('admin/brand/appliance') }}" class="btn btn-primary">Manage Brand</a>--}}
-                    {{--<a href="{{ url('admin/category/appliance') }}" class="btn btn-primary">Manage Category</a>--}}
-                </div>
-                <!-- /.panel-heading -->
                 <div class="panel-body">
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
@@ -34,16 +29,16 @@
                             @endforeach
                         </select>
                         <br>
-                        <input type="text" name="job" class="form-control" placeholder="job">
-                        <br>
+                        {{--<input type="text" name="job" class="form-control" placeholder="job">--}}
+                        {{--<br>--}}
                         <input type="text" name="receipt" class="form-control" required="required" placeholder="receipt">
                         <br>
                         <input type="text" name="shelf" class="form-control" placeholder="shelf">
                         <br>
                         <input type="text" name="mount" class="form-control" required="required" placeholder="mount" value="1">
                         <br>
-                        <a href="{{ url('tempstock/list/1') }}" class="btn btn-lg btn-danger">Cancel</a>
-                        <button class="btn btn-lg btn-success pull-right">Create</button>
+{{--                        <a href="{{ url('tempstock/list/1') }}" class="btn btn-lg btn-danger">Cancel</a>--}}
+                        <button class="btn btn-primary pull-right">Submit</button>
                     </form>
 
                 </div>
