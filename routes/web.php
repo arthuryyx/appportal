@@ -35,7 +35,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
     Route::resource('category', 'CategoryController',['except' => ['index', 'create', 'show']]);
 
     Route::resource('project', 'ProjectController');
-    Route::get('project/{pid}/appliance/', 'ProjectApplianceRecordController@create');
+//    Route::get('project/{pid}/appliance/', 'ProjectApplianceRecordController@create');
 
     Route::resource('material/board', 'BoardController');
 
@@ -53,8 +53,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('tempstock/exportAvailable', 'StockController@exportAvailable');
     Route::get('tempstock/exportAssigned', 'StockController@exportAssigned');
     Route::get('tempstock/exportStockCheckingList', 'StockController@exportStockCheckingList');
+    Route::post('tempstock/assign', 'StockController@assign');
 
     Route::get('settings', 'UserController@settings');
     Route::post('/settings/reset', 'UserController@reset');
+
+    Route::get('select2-autocomplete-ajax/applianceModel', 'Select2AutocompleteController@applianceModel');
+    Route::get('select2-autocomplete-ajax/available', 'Select2AutocompleteController@available');
 
 });

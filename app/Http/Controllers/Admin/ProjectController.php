@@ -61,14 +61,18 @@ class ProjectController extends Controller
         }
     }
 
-//    public function show($id)
-//    {
-//        return view('admin.project.show')->withProject(Project::with('haManyAppliances')->find($id));
-//    }
+    public function show($id)
+    {
+        return view('admin.project.show')->withProject(Project::with('hasManyAppliances')->find($id));
+    }
 
 //    public function destroy($id)
 //    {
 //        Project::find($id)->delete();
 //        return redirect()->back()->withInput()->withErrors('删除成功！');
 //    }
+
+    public function generateDeliveryList(){
+        return view('admin.project.pdf.delivery');
+    }
 }

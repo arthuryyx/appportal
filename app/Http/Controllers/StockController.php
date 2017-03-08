@@ -43,13 +43,13 @@ class StockController extends Controller
     public function store(Request $request){
         $this->validate($request, [
             'aid' => 'required',
-            'receipt' => 'required',
+//            'receipt' => 'required',
         ]);
         $t = $request->all();
         if($t['job']){
             $t['init'] = $t['job'];
             $t['assign_to'] = $t['job'];
-            $t['state'] = 2;
+            $t['state'] = 0;
         } else{
             $t['state'] = 1;
         }
@@ -68,7 +68,7 @@ class StockController extends Controller
             return redirect()->back()->withInput()->withErrors($e);
         }
         DB::commit();
-        return redirect()->back();
+        return redirect()->back()->withErrors('更新成功！');
     }
 
 
@@ -89,13 +89,13 @@ class StockController extends Controller
 
         $t = $request->all();
 
-        if($t['job']){
-            $t['assign_to'] = $t['job'];
-            $t['state'] = 2;
-        } else{
-            $t['assign_to'] = null;
-            $t['state'] = 1;
-        }
+//        if($t['job']){
+//            $t['assign_to'] = $t['job'];
+//            $t['state'] = 2;
+//        } else{
+//            $t['assign_to'] = null;
+//            $t['state'] = 1;
+//        }
         unset($t['aid']);
         unset($t['receipt']);
 
@@ -108,6 +108,21 @@ class StockController extends Controller
         } else {
             return redirect()->back()->withInput()->withErrors('更新失败！');
         }
+    }
+
+    public function assign(Request $request){
+        $this->validate($request, [
+            'assign_to' => 'required',
+            'sid' => 'required',
+        ]);
+        $t = $request->all();
+        $t['state'] = 2;
+        if (Stock::find($t['sid'])->update($t)) {
+            return redirect()->back()->withErrors('更新成功！');
+        } else {
+            return redirect()->back()->withInput()->withErrors('更新失败！');
+        }
+
     }
 
     public function out($id)
