@@ -322,11 +322,23 @@
                             </ul>
                         </li>
                     @endcan
+                    {{--<li>--}}
+                        {{--<a href="{{ url('admin/project') }}"><i class="fa fa-th- fa-folder-open fa-fw"></i> Project</a>--}}
+                    {{--</li>--}}
                     <li>
-                        <a href="{{ url('admin/project') }}"><i class="fa fa-th- fa-folder-open fa-fw"></i> Project</a>
+                        <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Invoice<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ url('appliance/invoice/job') }}">Job</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('appliance/invoice/bulk') }}">Bulk</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="#">临时库存管理<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> 临时库存管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="{{ url('tempstock/create') }}">入库</a>

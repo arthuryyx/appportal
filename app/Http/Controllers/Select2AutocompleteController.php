@@ -25,7 +25,15 @@ class Select2AutocompleteController extends Controller
 
         if($request->has('q')){
             $search = $request->q;
-            $data = Stock::join('appliances', 'appliances.id', 'stocks.aid')->where('appliances.model','LIKE',"%$search%")->where('stocks.state', 1)->select('stocks.id', 'model', 'shelf')->get();
+            $data = Stock::where(function ($query){
+                $query->where('state', 1)
+                    ->whereNull('assign_to')
+                    ->orWhere('state', 0)
+                    ->whereNull('assign_to');
+            })->join('appliances', 'appliances.id', 'stocks.aid')
+                ->where('appliances.model','LIKE',"%$search%")
+                ->select('stocks.id', 'model', 'shelf')
+                ->get();
         }
         return response()->json($data);
     }
