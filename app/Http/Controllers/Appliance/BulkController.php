@@ -22,7 +22,7 @@ class BulkController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'receipt_id' => 'required|unique:projects',
+            'receipt_id' => 'required|unique:appliance__invoices',
         ]);
 
         $t = $request->all();
@@ -44,7 +44,7 @@ class BulkController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'receipt_id' => 'required|unique:projects,receipt_id,'.$id,
+            'receipt_id' => 'required|unique:appliance__invoices,receipt_id,'.$id,
         ]);
 
         if (Appliance_Invoice::find($id)->update($request->all())) {

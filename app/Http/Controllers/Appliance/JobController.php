@@ -22,7 +22,7 @@ class JobController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'receipt_id' => 'required|unique:projects',
+            'receipt_id' => 'required|unique:appliance__invoices',
             'job_id' => 'required',
             'customer_name' => 'required',
             'address' => 'required',
@@ -46,7 +46,7 @@ class JobController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'receipt_id' => 'required|unique:projects,receipt_id,'.$id,
+            'receipt_id' => 'required|unique:appliance__invoices,receipt_id,'.$id,
             'job_id' => 'required',
             'customer_name' => 'required',
             'address' => 'required',

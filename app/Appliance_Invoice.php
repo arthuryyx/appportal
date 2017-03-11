@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appliance_Invoice extends Model
 {
-    protected $fillable = ['receipt_id', 'job_id', 'customer_name', 'address', 'state', 'created_by'];
+    protected $fillable = ['receipt_id', 'job_id', 'customer_name', 'address', 'state', 'type', 'created_by'];
 
     public function hasManyStocks()
     {
