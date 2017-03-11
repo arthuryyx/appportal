@@ -7,7 +7,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Project Info</h1>
+            <h1 class="page-header">Invoice Info</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -46,6 +46,7 @@
                     </table>
                     <hr>
                     <div class="col-lg-6">
+                        <div class="col-lg-8">
                         {!! Form::open(['url' => 'tempstock/assign','method'=>'POST']) !!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -56,17 +57,21 @@
                             </div>
                         </div>
                         {!! Form::close() !!}
+                        </div>
                     </div>
 
                     <div class="col-lg-6">
+                        <div class="col-lg-8">
                         {!! Form::open(['url' => 'tempstock','method'=>'POST']) !!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
-                                <strong>place new order</strong>
+                                <strong>add new</strong>
                                 <select class="aid form-control" name="aid" required="required"></select>
+                                <strong>quantity</strong>
                                 {{ Form::number('mount', 1, array('class' => 'form-control')) }}
                                 {{ Form::hidden('job', $invoice->id) }}
                                 {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
+                            </div>
                             </div>
                         </div>
                         {!! Form::close() !!}
@@ -102,10 +107,12 @@
                         <td>{{ $stock->appliance->belongsToCategory->name }}</td>
                         <td>
                             @if($stock->state == 0)
-                                <label class="label label-warning">Transit</label>
+                                <label class="label label-warning">Pending payments</label>
                             @elseif($stock->state == 1)
-                                <label class="label label-success">Ready</label>
+                                <label class="label label-warning">Order placed</label>
                             @elseif($stock->state == 2)
+                                <label class="label label-success">In Stock</label>
+                            @elseif($stock->state == 3)
                                 <label class="label label-primary">Delivered</label>
                             @else
                                 <label class="label label-danger">Exception</label>
@@ -129,7 +136,7 @@
             ajax: {
                 url: '/select2-autocomplete-ajax/available',
                 dataType: 'json',
-                delay: 250,
+                delay: 200,
                 processResults: function (data) {
                     return {
                         results:  $.map(data, function (item) {
@@ -149,7 +156,7 @@
             ajax: {
                 url: '/select2-autocomplete-ajax/applianceModel',
                 dataType: 'json',
-                delay: 250,
+                delay: 200,
                 processResults: function (data) {
                     return {
                         results:  $.map(data, function (item) {

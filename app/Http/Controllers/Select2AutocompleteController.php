@@ -28,7 +28,7 @@ class Select2AutocompleteController extends Controller
             $data = Stock::where(function ($query){
                 $query->where('state', 1)
                     ->whereNull('assign_to')
-                    ->orWhere('state', 0)
+                    ->orWhere('state', 2)
                     ->whereNull('assign_to');
             })->join('appliances', 'appliances.id', 'stocks.aid')
                 ->where('appliances.model','LIKE',"%$search%")

@@ -7,7 +7,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Project Info</h1>
+            <h1 class="page-header">Invoice Info</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -87,10 +87,12 @@
                         <td>{{ $stock->appliance->belongsToCategory->name }}</td>
                         <td>
                             @if($stock->state == 0)
-                                <label class="label label-warning">Transit</label>
+                                <label class="label label-warning">Pending payments</label>
                             @elseif($stock->state == 1)
-                                <label class="label label-success">Ready</label>
+                                <label class="label label-warning">Order placed</label>
                             @elseif($stock->state == 2)
+                                <label class="label label-success">In Stock</label>
+                            @elseif($stock->state == 3)
                                 <label class="label label-primary">Delivered</label>
                             @else
                                 <label class="label label-danger">Exception</label>
