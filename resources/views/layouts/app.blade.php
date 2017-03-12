@@ -338,23 +338,26 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> 临时库存管理<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Stock<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{{ url('tempstock/create') }}">入库</a>
+                                <a href="{{ url('appliance/stock/index') }}">库存</a>
                             </li>
-                            <li>
-                                <a href="{{ url('tempstock/list/1') }}">可用库存</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('tempstock/list/2') }}">已分配库存</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('tempstock/list/4') }}">入库记录</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('tempstock/list/3') }}">出库记录</a>
-                            </li>
+                            {{--<li>--}}
+                                {{--<a href="{{ url('tempstock/create') }}">入库</a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<a href="{{ url('tempstock/list/1') }}">可用库存</a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<a href="{{ url('tempstock/list/2') }}">已分配库存</a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<a href="{{ url('tempstock/list/4') }}">入库记录</a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<a href="{{ url('tempstock/list/3') }}">出库记录</a>--}}
+                            {{--</li>--}}
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>

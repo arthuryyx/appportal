@@ -47,7 +47,7 @@
                     <hr>
                     <div class="col-lg-6">
                         <div class="col-lg-8">
-                        {!! Form::open(['url' => 'tempstock/assign','method'=>'POST']) !!}
+                        {!! Form::open(['url' => 'appliance/stock/job/assign','method'=>'POST']) !!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <strong>from stock</strong>
@@ -62,7 +62,7 @@
 
                     <div class="col-lg-6">
                         <div class="col-lg-8">
-                        {!! Form::open(['url' => 'tempstock','method'=>'POST']) !!}
+                        {!! Form::open(['url' => 'appliance/stock','method'=>'POST']) !!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <strong>add new</strong>
@@ -109,7 +109,7 @@
                             @if($stock->state == 0)
                                 <label class="label label-warning">Pending payments</label>
                             @elseif($stock->state == 1)
-                                <label class="label label-warning">Order placed</label>
+                                <label class="label label-info">Order placed</label>
                             @elseif($stock->state == 2)
                                 <label class="label label-success">In Stock</label>
                             @elseif($stock->state == 3)

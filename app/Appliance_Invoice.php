@@ -10,7 +10,12 @@ class Appliance_Invoice extends Model
 
     public function hasManyStocks()
     {
-        return $this->hasMany('App\Stock', 'assign_to', 'id');
+        return $this->hasMany('App\Appliance_Stock', 'assign_to', 'id');
+    }
+
+    public function hasManyInits()
+    {
+        return $this->hasMany('App\Appliance_Stock', 'init', 'id');
     }
 
     public function getCreated_by(){

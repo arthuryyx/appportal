@@ -43,14 +43,15 @@
                     </table>
                     <hr>
 
-                    <div class="col-lg-12">
-                        {!! Form::open(['url' => 'tempstock','method'=>'POST']) !!}
+                    <div class="col-lg-4">
+                        {!! Form::open(['url' => 'appliance/stock','method'=>'POST']) !!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <strong>place new order</strong>
                                 <select class="aid form-control" name="aid" required="required"></select>
+                                <strong>quantity</strong>
                                 {{ Form::number('mount', 1, array('class' => 'form-control')) }}
-                                {{ Form::hidden('job', $invoice->id) }}
+                                {{ Form::hidden('bulk', $invoice->id) }}
                                 {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
                             </div>
                         </div>
@@ -79,7 +80,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($invoice->hasManyStocks as $stock)
+                @foreach ($invoice->hasManyInits as $stock)
                     <tr>
                         {{--<td>{{ $stock->total }}</td>--}}
                         <td>{{ $stock->appliance->model }}</td>
@@ -89,7 +90,7 @@
                             @if($stock->state == 0)
                                 <label class="label label-warning">Pending payments</label>
                             @elseif($stock->state == 1)
-                                <label class="label label-warning">Order placed</label>
+                                <label class="label label-info">Order placed</label>
                             @elseif($stock->state == 2)
                                 <label class="label label-success">In Stock</label>
                             @elseif($stock->state == 3)

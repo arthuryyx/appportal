@@ -44,6 +44,8 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
 Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'appliance'], function() {
     Route::resource('invoice/job', 'JobController');
     Route::resource('invoice/bulk', 'BulkController');
+    Route::post('stock/job/assign', 'StockController@assign');
+    Route::post('stock', 'StockController@store');
 
 });
 
@@ -60,7 +62,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('tempstock/exportAvailable', 'StockController@exportAvailable');
     Route::get('tempstock/exportAssigned', 'StockController@exportAssigned');
     Route::get('tempstock/exportStockCheckingList', 'StockController@exportStockCheckingList');
-    Route::post('tempstock/assign', 'StockController@assign');
 
     Route::get('settings', 'UserController@settings');
     Route::post('/settings/reset', 'UserController@reset');

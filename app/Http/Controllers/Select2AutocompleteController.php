@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Appliance;
-use App\Stock;
+use App\Appliance_Stock;
 use Illuminate\Http\Request;
 
 class Select2AutocompleteController extends Controller
@@ -25,14 +25,14 @@ class Select2AutocompleteController extends Controller
 
         if($request->has('q')){
             $search = $request->q;
-            $data = Stock::where(function ($query){
+            $data = Appliance_Stock::where(function ($query){
                 $query->where('state', 1)
                     ->whereNull('assign_to')
                     ->orWhere('state', 2)
                     ->whereNull('assign_to');
-            })->join('appliances', 'appliances.id', 'stocks.aid')
+            })->join('appliances', 'appliances.id', 'appliance__stocks.aid')
                 ->where('appliances.model','LIKE',"%$search%")
-                ->select('stocks.id', 'model', 'shelf')
+                ->select('appliance__stocks.id', 'model', 'shelf')
                 ->get();
         }
         return response()->json($data);
