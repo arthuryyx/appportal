@@ -30,6 +30,7 @@
                                 <th>Data</th>
                                 <th>Job</th>
                                 <th>Job No.</th>
+                                <th>Final Price</th>
                                 <th>Customer</th>
                                 <th>Address</th>
                             </tr>
@@ -40,6 +41,7 @@
                                 <td>{{$invoice->created_at->format('d-m-Y')}}</td>
                                 <td>{{$invoice->getCreated_by->name}}</td>
                                 <td>{{$invoice->job_id}}</td>
+                                <td>{{$invoice->price}}</td>
                                 <td>{{$invoice->customer_name}}</td>
                                 <td>{{$invoice->address}}</td>
                             </tr>

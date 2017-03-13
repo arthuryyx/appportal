@@ -19,9 +19,10 @@ class CreateApplianceInvoicesTable extends Migration
             $table->string('job_id')->nullable();
             $table->string('customer_name')->nullable();
             $table->string('address')->nullable();
-            $table->integer('state')->unsigned()->default(0);
-            $table->integer('type')->unsigned()->default(0);
-            $table->integer('created_by')->unsigned();
+            $table->unsignedInteger('price')->default(0);
+            $table->unsignedInteger('state')->default(0);
+            $table->unsignedInteger('type')->default(0);
+            $table->unsignedInteger('created_by');
             $table->timestamps();
         });
     }

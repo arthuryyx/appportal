@@ -24,6 +24,7 @@ class JobController extends Controller
         $this->validate($request, [
             'receipt_id' => 'required|unique:appliance__invoices',
             'job_id' => 'required',
+            'price' => 'required|integer|min:0',
             'customer_name' => 'required',
             'address' => 'required',
         ]);
@@ -48,6 +49,7 @@ class JobController extends Controller
         $this->validate($request, [
             'receipt_id' => 'required|unique:appliance__invoices,receipt_id,'.$id,
             'job_id' => 'required',
+            'price' => 'required|integer|min:0',
             'customer_name' => 'required',
             'address' => 'required',
         ]);
