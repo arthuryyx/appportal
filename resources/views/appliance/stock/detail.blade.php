@@ -11,7 +11,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">可用库存 {{array_sum($stocks->pluck('total')->all())}} in total</h1>
+            <h1 class="page-header">库存信息</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -27,34 +27,23 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="{{ url('tempstock/exportAvailable') }}" target="_blank" class="btn btn-primary ">exportAvailable</a>
-                    @can('root')
-                        <a href="{{ url('tempstock/exportStockCheckingList') }}" target="_blank" class="btn btn-primary ">StockCheckingList</a>
-                    @endif
-                </div>
-                <!-- /.panel-heading -->
                 <div class="panel-body">
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                         <thead>
-                        <tr>
-                            <th>
-                                Quantity
+                        <tr><th>
+                                Brand
                             </th>
                             <th>
                                 Model
                             </th>
                             <th>
-                                Brand
+                                Receipt
                             </th>
                             <th>
-                                Category
+                                Shelf
                             </th>
                             <th>
-                                RRP
-                            </th>
-                            <th>
-                                Promotion price
+                                State
                             </th>
                             <th>
 
@@ -64,13 +53,23 @@
                         <tbody>
                         @foreach ($stocks as $stock)
                             <tr>
-                                <td>{{ $stock->total }}</td>
-                                <td>{{ $stock->appliance->model }}</td>
                                 <td>{{ $stock->appliance->belongsToBrand->name }}</td>
-                                <td>{{ $stock->appliance->belongsToCategory->name }}</td>
-                                <td>{{ $stock->appliance->rrp }}</td>
-                                <td>{{ $stock->appliance->promotion }}</td>
-                                <td><a href="{{ url('appliance/'.$stock->aid.'/detail') }}" class="btn btn-success">查看</a></td>
+                                <td>{{ $stock->appliance->model }}</td>
+                                <td>{{ $stock->receipt }}</td>
+                                <td>{{ $stock->shelf }}</td>
+                                <td>
+                                    @if($stock->state == 0)
+                                        <label class="label label-warning">Pending payments</label>
+                                    @elseif($stock->state == 1)
+                                        <label class="label label-info">Order placed</label>
+                                    @elseif($stock->state == 2)
+                                        <label class="label label-success">In Stock</label>
+                                    @elseif($stock->state == 3)
+                                        <label class="label label-primary">Delivered</label>
+                                    @else
+                                        <label class="label label-danger">Exception</label>
+                                    @endif</td>
+                                <td><a href="{{ url('appliance/stock/'.$stock->id.'/edit') }}" class="btn btn-success">编辑</a></td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -96,8 +95,7 @@
     <script>
         $(document).ready(function() {
             $('#dataTables').DataTable({
-                responsive: true,
-                order: [2, 'asc']
+                responsive: true
             });
         });
     </script>

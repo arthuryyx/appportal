@@ -44,24 +44,24 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
 Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'appliance'], function() {
     Route::resource('invoice/job', 'JobController');
     Route::resource('invoice/bulk', 'BulkController');
+    Route::get('stock/index/{state}', 'StockController@index');
     Route::post('stock/job/assign', 'StockController@assign');
     Route::post('stock', 'StockController@store');
+    Route::get('stock/{aid}/detail', 'StockController@detail');
+    Route::get('stock/{id}/edit', 'StockController@edit');
+    Route::put('stock/{id}', 'StockController@update');
+    Route::get('stock/exportAvailable', 'StockController@exportAvailable');
+    Route::get('stock/exportCheckingList', 'StockController@exportStockCheckingList');
 
 });
 
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('tempstock/list/{state}', 'StockController@list');
     Route::get('tempstock/create', 'StockController@create');
     Route::post('tempstock', 'StockController@store');
-    Route::get('tempstock/{id}/edit', 'StockController@edit');
-    Route::put('tempstock/{id}', 'StockController@update');
     Route::get('tempstock/{id}/out', 'StockController@out');
     Route::delete('tempstock/{id}', 'StockController@destroy');
-    Route::get('tempstock/{aid}/detail', 'StockController@detail');
-    Route::get('tempstock/exportAvailable', 'StockController@exportAvailable');
     Route::get('tempstock/exportAssigned', 'StockController@exportAssigned');
-    Route::get('tempstock/exportStockCheckingList', 'StockController@exportStockCheckingList');
 
     Route::get('settings', 'UserController@settings');
     Route::post('/settings/reset', 'UserController@reset');

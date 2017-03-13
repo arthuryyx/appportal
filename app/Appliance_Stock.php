@@ -12,4 +12,14 @@ class Appliance_Stock extends Model
     {
         return $this->belongsTo('App\Appliance', 'aid', 'id');
     }
+
+    public function getAssignTo()
+    {
+        return $this->belongsTo('App\Appliance_Invoice', 'assign_to', 'id');
+    }
+
+    public function getInvoice()
+    {
+        return $this->belongsTo('App\Appliance_Invoice', 'init', 'id');
+    }
 }

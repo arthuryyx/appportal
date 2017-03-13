@@ -340,15 +340,12 @@
                     <li>
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Stock<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{ url('appliance/stock/index') }}">库存</a>
-                            </li>
                             {{--<li>--}}
                                 {{--<a href="{{ url('tempstock/create') }}">入库</a>--}}
                             {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="{{ url('tempstock/list/1') }}">可用库存</a>--}}
-                            {{--</li>--}}
+                            <li>
+                                <a href="{{ url('appliance/stock/index/1') }}">Available</a>
+                            </li>
                             {{--<li>--}}
                                 {{--<a href="{{ url('tempstock/list/2') }}">已分配库存</a>--}}
                             {{--</li>--}}

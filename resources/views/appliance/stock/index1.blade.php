@@ -28,9 +28,9 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="{{ url('tempstock/exportAvailable') }}" target="_blank" class="btn btn-primary ">exportAvailable</a>
+                    <a href="{{ url('appliance/stock/exportAvailable') }}" target="_blank" class="btn btn-primary ">exportAvailable</a>
                     @can('root')
-                        <a href="{{ url('tempstock/exportStockCheckingList') }}" target="_blank" class="btn btn-primary ">StockCheckingList</a>
+                        <a href="{{ url('appliance/stock/exportCheckingList') }}" target="_blank" class="btn btn-primary ">CheckingList</a>
                     @endif
                 </div>
                 <!-- /.panel-heading -->
@@ -70,7 +70,18 @@
                                 <td>{{ $stock->appliance->belongsToCategory->name }}</td>
                                 <td>{{ $stock->appliance->rrp }}</td>
                                 <td>{{ $stock->appliance->promotion }}</td>
-                                <td><a href="{{ url('appliance/'.$stock->aid.'/detail') }}" class="btn btn-success">查看</a></td>
+                                <td><a href="{{ url('appliance/stock/'.$stock->aid.'/detail') }}" class="btn btn-success">查看</a></td>
+                            </tr>
+                        @endforeach
+                        @foreach ($appliances as $appliance)
+                            <tr>
+                                <td>0</td>
+                                <td>{{ $appliance->model }}</td>
+                                <td>{{ $appliance->belongsToBrand->name }}</td>
+                                <td>{{ $appliance->belongsToCategory->name }}</td>
+                                <td>{{ $appliance->rrp }}</td>
+                                <td>{{ $appliance->promotion }}</td>
+                                <td></td>
                             </tr>
                         @endforeach
                         </tbody>
