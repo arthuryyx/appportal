@@ -64,6 +64,7 @@ class StockController extends Controller
     public function store(Request $request){
         $this->validate($request, [
             'aid' => 'required',
+            'amount' => 'required|integer|min:0',
         ]);
         $t = $request->all();
         if(array_key_exists('job',$t)){
@@ -77,7 +78,7 @@ class StockController extends Controller
 
         DB::beginTransaction();
         try {
-            for ($x=$t['mount']; $x>0; $x--) {
+            for ($x=$t['amount']; $x>0; $x--) {
                 Appliance_Stock::create($t);
             }
         } catch(\Exception $e)

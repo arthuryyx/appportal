@@ -68,7 +68,7 @@
                                 <strong>add new</strong>
                                 <select class="aid form-control" name="aid" required="required"></select>
                                 <strong>quantity</strong>
-                                {{ Form::number('mount', 1, array('class' => 'form-control', 'required' => 'required')) }}
+                                {{ Form::number('amount', 1, array('class' => 'form-control', 'required' => 'required')) }}
                                 {{ Form::hidden('job', $invoice->id) }}
                                 {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
                             </div>

@@ -51,7 +51,7 @@
                                 <strong>place new order</strong>
                                 <select class="aid form-control" name="aid" required="required"></select>
                                 <strong>quantity</strong>
-                                {{ Form::number('mount', 1, array('class' => 'form-control')) }}
+                                {{ Form::number('amount', 1, array('class' => 'form-control')) }}
                                 {{ Form::hidden('bulk', $invoice->id) }}
                                 {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
                             </div>
