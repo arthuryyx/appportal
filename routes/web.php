@@ -52,6 +52,8 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
     Route::put('stock/{id}', 'StockController@update');
     Route::get('stock/exportAvailable', 'StockController@exportAvailable');
     Route::get('stock/exportCheckingList', 'StockController@exportStockCheckingList');
+    Route::get('deposit/index/{id}', 'DepositController@index');
+    Route::post('deposit', 'DepositController@store');
 
 });
 

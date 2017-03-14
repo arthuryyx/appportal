@@ -48,11 +48,10 @@
                         </tbody>
                     </table>
                     <hr>
-                    <div class="col-lg-6">
-                        <div class="col-lg-8">
+                    <div class="col-lg-4">
                         {!! Form::open(['url' => 'appliance/stock/job/assign','method'=>'POST']) !!}
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="col-xs-10 col-sm-10 col-md-10">
                                 <strong>from stock</strong>
                                 <select class="sid form-control" name="sid" required="required"></select>
                                 {{ Form::hidden('assign_to', $invoice->id) }}
@@ -60,26 +59,36 @@
                             </div>
                         </div>
                         {!! Form::close() !!}
-                        </div>
                     </div>
 
-                    <div class="col-lg-6">
-                        <div class="col-lg-8">
+                    <div class="col-lg-4">
                         {!! Form::open(['url' => 'appliance/stock','method'=>'POST']) !!}
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="col-xs-10 col-sm-10 col-md-10">
                                 <strong>add new</strong>
                                 <select class="aid form-control" name="aid" required="required"></select>
                                 <strong>quantity</strong>
-                                {{ Form::number('mount', 1, array('class' => 'form-control')) }}
+                                {{ Form::number('mount', 1, array('class' => 'form-control', 'required' => 'required')) }}
                                 {{ Form::hidden('job', $invoice->id) }}
                                 {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
-                            </div>
                             </div>
                         </div>
                         {!! Form::close() !!}
                     </div>
-                </div>
+
+                    <div class="col-lg-4">
+                        <a href="{{ url('appliance/deposit/index/'.$invoice->id) }}" class="btn btn-primary">history</a>
+                        {!! Form::open(['url' => 'appliance/deposit','method'=>'POST']) !!}
+                        <div class="row">
+                            <div class="col-xs-10 col-sm-10 col-md-10">
+                                <strong>Deposit</strong>
+                                {{ Form::number('amount', null, array('class' => 'form-control', 'required' => 'required')) }}
+                                {{ Form::hidden('invoice_id', $invoice->id) }}
+                                {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
+                            </div>
+                        </div>
+                        {!! Form::close() !!}
+                    </div>
             </div>
             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                 <thead>
