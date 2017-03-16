@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-    <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <link href="{{ asset('vendor/select2/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/datatables-checkboxes/dataTables.checkboxes.css') }}" rel="stylesheet">
 @endsection
 
@@ -151,7 +151,7 @@
 @endsection
 
 @section('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script src="{{ asset('vendor/select2/select2.min.js')}}"></script>
 
     <script type="text/javascript">
         $('.sid').select2({
