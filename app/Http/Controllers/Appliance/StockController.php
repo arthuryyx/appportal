@@ -122,6 +122,15 @@ class StockController extends Controller
         }
 
     }
+
+    public function placeOrder(Request $request){
+        dd($request->all());
+//        if (Appliance_Stock::find($id)->update($request->all())) {
+//            return redirect(Session::get('backUrl'))->withErrors('更新成功！');
+//        } else {
+//            return redirect()->back()->withInput()->withErrors('更新失败！');
+//        }
+    }
 //
 //    public function out($id)
 //    {
