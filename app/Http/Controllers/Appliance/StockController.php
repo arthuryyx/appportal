@@ -124,34 +124,77 @@ class StockController extends Controller
     }
 
     public function placeOrder(Request $request){
-        dd($request->all());
-//        if (Appliance_Stock::find($id)->update($request->all())) {
-//            return redirect(Session::get('backUrl'))->withErrors('更新成功！');
-//        } else {
-//            return redirect()->back()->withInput()->withErrors('更新失败！');
-//        }
+        $t = $request->all();
+        if(array_key_exists('id', $t)){
+            $m = '';
+            foreach ($t['id'] as $id){
+                $obj = Appliance_Stock::find($id);
+                if($obj->state == 0){
+                    $obj->update(['state' => 1]);
+                }else{
+                    $m = $m.$obj->appliance->model.' not updated.<br>';
+                }
+            }
+            if($m === ''){
+                return redirect()->back()->withErrors('更新成功！');
+            }else{
+                return redirect()->back()->withInput()->withErrors($m);
+            }
+        } else{
+            return redirect()->back()->withInput()->withErrors('No checkbox checked!');
+        }
     }
-//
-//    public function out($id)
-//    {
-//        $obj = Stock::find($id);
-//
-//        $t = [];
-//        $t['deliver_to'] = $obj['assign_to'];
-//        $t['state'] = 3;
-//
-//        if ($obj->update($t)) {
-//            return redirect()->back()->withErrors('已出库');
-//        } else {
-//            return redirect()->back()->withInput()->withErrors('更新失败！');
-//        }
-//    }
-//
-//    public function destroy($id)
-//    {
-//        Stock::find($id)->delete();
-//        return redirect()->back()->withInput()->withErrors('删除成功！');
-//    }
+
+    public function warehousing(Request $request){
+        $t = $request->all();
+        if(array_key_exists('id', $t)){
+            $m = '';
+            foreach ($t['id'] as $id){
+                $obj = Appliance_Stock::find($id);
+                if($obj->state == 1){
+                    $obj->update(['state' => 2]);
+                }else{
+                    $m = $m.$obj->appliance->model.' not updated.<br>';
+                }
+            }
+            if($m === ''){
+                return redirect()->back()->withErrors('更新成功！');
+            }else{
+                return redirect()->back()->withInput()->withErrors($m);
+            }
+        } else{
+            return redirect()->back()->withInput()->withErrors('No checkbox checked!');
+        }
+    }
+
+    public function delivery(Request $request, $cid)
+    {
+        $t = $request->all();
+        if(array_key_exists('id', $t)){
+            $m = '';
+            foreach ($t['id'] as $id){
+                $obj = Appliance_Stock::find($id);
+                if($obj->state == 2 && $obj->assign_to == $cid){
+                    $obj->update(['state' => 3, 'deliver_to'=> $cid]);
+                }else{
+                    $m = $m.$obj->appliance->model.' not updated.<br>';
+                }
+            }
+            if($m === ''){
+                return redirect()->back()->withErrors('更新成功！');
+            }else{
+                return redirect()->back()->withInput()->withErrors($m);
+            }
+        } else{
+            return redirect()->back()->withInput()->withErrors('No checkbox checked!');
+        }
+    }
+
+    public function destroy($id)
+    {
+        Stock::find($id)->delete();
+        return redirect()->back()->withInput()->withErrors('删除成功！');
+    }
 
     public function detail(Request $request, $aid){
         Session::flash('backUrl', $request->fullUrl());

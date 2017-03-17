@@ -16,13 +16,13 @@
 
     <div class="row">
         <div class="col-lg-12">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {!! implode('<br>', $errors->all()) !!}
+                </div>
+            @endif
             <div class="panel panel-default">
-                @if (count($errors) > 0)
-                    <div class="alert alert-danger alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        {!! implode('<br>', $errors->all()) !!}
-                    </div>
-                @endif
                 <div class="panel-body">
                     <table width="100%" class="table">
                         <thead>
@@ -97,6 +97,10 @@
                     <form id="frm-example" name="frm_example" action="" method="post">
                         {{ csrf_field() }}
                         <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/order')}}'">order</button>
+                    @can('root')
+                        <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/arrive')}}'">arrive</button>
+                        <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/deliver/'.$invoice->id)}}'">deliver</button>
+                    @endcan
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                             <thead>
                             <tr>
