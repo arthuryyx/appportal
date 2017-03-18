@@ -171,21 +171,20 @@ class StockController extends Controller
     {
         $t = $request->all();
         if(array_key_exists('id', $t)){
-            $m = '';
-            foreach ($t['id'] as $id){
-                $obj = Appliance_Stock::find($id);
-                if($obj->state == 2 && $obj->assign_to == $cid){
-                    $obj->update(['state' => 3, 'deliver_to'=> $cid]);
-                }else{
-                    $m = $m.$obj->appliance->model.' not updated.<br>';
+            $stocks = Appliance_Stock::where('state', 2)->whereIn('id', $t['id'])->get();
+            DB::beginTransaction();
+            try {
+                foreach ($stocks as $stock){
+                    $stock->update(['state' => 3, 'deliver_to'=> $cid]);
                 }
+            } catch(\Exception $e)
+            {
+                DB::rollback();
+                return redirect()->back()->withInput()->withErrors($e);
             }
-            if($m === ''){
-                return redirect()->back()->withErrors('更新成功！');
-            }else{
-                return redirect()->back()->withInput()->withErrors($m);
-            }
-        } else{
+            DB::commit();
+            return redirect()->back()->withErrors('出库成功！');
+        }else{
             return redirect()->back()->withInput()->withErrors('No checkbox checked!');
         }
     }
