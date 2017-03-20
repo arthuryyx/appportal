@@ -39,7 +39,7 @@ class CreateApplianceStocksTable extends Migration
 
             $table->foreign('deliver_to')
                 ->references('id')
-                ->on('appliance__invoices')
+                ->on('appliance__deliveries')
                 ->onDelete('cascade');
 
             $table->timestamps();

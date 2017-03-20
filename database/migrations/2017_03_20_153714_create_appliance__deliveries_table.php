@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateApplianceDepositsTable extends Migration
+class CreateApplianceDeliveriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateApplianceDepositsTable extends Migration
      */
     public function up()
     {
-        Schema::create('appliance__deposits', function (Blueprint $table) {
+        Schema::create('appliance__deliveries', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('invoice_id');
-            $table->integer('amount');
+            $table->string('carrier')->nullable();
+            $table->string('packing_slip')->nullable();
+            $table->string('signature')->nullable();
+            $table->integer('state')->default(0);
 
             $table->foreign('invoice_id')
                 ->references('id')
@@ -34,6 +37,6 @@ class CreateApplianceDepositsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('appliance__deposits');
+        Schema::dropIfExists('appliance__deliveries');
     }
 }
