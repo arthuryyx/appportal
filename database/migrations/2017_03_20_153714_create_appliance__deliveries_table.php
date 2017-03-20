@@ -16,7 +16,7 @@ class CreateApplianceDeliveriesTable extends Migration
         Schema::create('appliance__deliveries', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('invoice_id');
-            $table->string('carrier')->nullable();
+            $table->string('carrier');
             $table->string('packing_slip')->nullable();
             $table->string('signature')->nullable();
             $table->integer('state')->default(0);

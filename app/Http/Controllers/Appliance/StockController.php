@@ -120,73 +120,70 @@ class StockController extends Controller
         } else {
             return redirect()->back()->withInput()->withErrors('更新失败！');
         }
-
     }
 
     public function placeOrder(Request $request){
+        $this->validate($request, [
+            'id' => 'required',
+        ]);
         $t = $request->all();
-        if(array_key_exists('id', $t)){
-            $m = '';
-            foreach ($t['id'] as $id){
-                $obj = Appliance_Stock::find($id);
-                if($obj->state == 0){
-                    $obj->update(['state' => 1]);
-                }else{
-                    $m = $m.$obj->appliance->model.' not updated.<br>';
-                }
-            }
-            if($m === ''){
-                return redirect()->back()->withErrors('更新成功！');
+        $m = '';
+        foreach ($t['id'] as $id){
+            $obj = Appliance_Stock::find($id);
+            if($obj->state == 0){
+                $obj->update(['state' => 1]);
             }else{
-                return redirect()->back()->withInput()->withErrors($m);
+                $m = $m.$obj->appliance->model.' not updated.<br>';
             }
-        } else{
-            return redirect()->back()->withInput()->withErrors('No checkbox checked!');
+        }
+        if($m === ''){
+            return redirect()->back()->withErrors('更新成功！');
+        }else{
+            return redirect()->back()->withInput()->withErrors($m);
         }
     }
 
     public function warehousing(Request $request){
+        $this->validate($request, [
+            'id' => 'required',
+        ]);
         $t = $request->all();
-        if(array_key_exists('id', $t)){
-            $m = '';
-            foreach ($t['id'] as $id){
-                $obj = Appliance_Stock::find($id);
-                if($obj->state == 1){
-                    $obj->update(['state' => 2]);
-                }else{
-                    $m = $m.$obj->appliance->model.' not updated.<br>';
-                }
-            }
-            if($m === ''){
-                return redirect()->back()->withErrors('更新成功！');
+        $m = '';
+        foreach ($t['id'] as $id){
+            $obj = Appliance_Stock::find($id);
+            if($obj->state == 1){
+                $obj->update(['state' => 2]);
             }else{
-                return redirect()->back()->withInput()->withErrors($m);
+                $m = $m.$obj->appliance->model.' not updated.<br>';
             }
-        } else{
-            return redirect()->back()->withInput()->withErrors('No checkbox checked!');
+        }
+        if($m === ''){
+            return redirect()->back()->withErrors('更新成功！');
+        }else{
+            return redirect()->back()->withInput()->withErrors($m);
         }
     }
 
     public function delivery(Request $request, $cid)
     {
+        $this->validate($request, [
+            'id' => 'required',
+            'carrier' => 'required',
+        ]);
         $t = $request->all();
-        if(array_key_exists('id', $t)){
-            $stocks = Appliance_Stock::where('state', 2)->whereIn('id', $t['id'])->get();
-            DB::beginTransaction();
-            try {
-                foreach ($stocks as $stock){
-                    $stock->update(['state' => 3, 'deliver_to'=> $cid]);
-                }
-            } catch(\Exception $e)
-            {
-                DB::rollback();
-                return redirect()->back()->withInput()->withErrors($e);
+        $stocks = Appliance_Stock::where('state', 2)->whereIn('id', $t['id'])->get();
+        DB::beginTransaction();
+        try {
+            foreach ($stocks as $stock){
+                $stock->update(['state' => 3, 'deliver_to'=> $cid]);
             }
-            DB::commit();
-            return redirect()->back()->withErrors('出库成功！');
-        }else{
-            return redirect()->back()->withInput()->withErrors('No checkbox checked!');
+        } catch(\Exception $e)
+        {
+            DB::rollback();
+            return redirect()->back()->withInput()->withErrors($e);
         }
+        DB::commit();
+        return redirect()->back()->withErrors('出库成功！');
     }
 
     public function destroy($id)
