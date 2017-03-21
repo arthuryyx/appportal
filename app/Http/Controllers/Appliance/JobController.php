@@ -11,7 +11,11 @@ class JobController extends Controller
 {
     public function index()
     {
-        return view('appliance.invoice.job.index')->withInvoices(Appliance_Invoice::where('type', 0)->get());
+        if(Auth::user()->can('root')){
+            return view('appliance.invoice.job.index')->withInvoices(Appliance_Invoice::where('type', 0)->get());
+        } else{
+            return view('appliance.invoice.job.index')->withInvoices(Appliance_Invoice::where('type', 0)->where('created_by', Auth::user()->id)->get());
+        }
     }
 
     public function create()
