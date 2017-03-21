@@ -8,9 +8,9 @@ use App\Http\Controllers\Controller;
 
 class DepositController extends Controller
 {
-    public function index($id){
+    public function index($invoice){
         return view('appliance.invoice.job.deposit')
-            ->withDeposits(Appliance_Deposit::where('invoice_id', $id)->get());
+            ->withDeposits(Appliance_Deposit::where('invoice_id', $invoice)->get());
     }
 
     public function store(Request $request)

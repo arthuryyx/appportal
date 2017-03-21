@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Appliance;
 
+use App\Appliance_Delivery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -164,7 +165,7 @@ class StockController extends Controller
         }
     }
 
-    public function delivery(Request $request, $cid)
+    public function delivery(Request $request, $invoice)
     {
         $this->validate($request, [
             'id' => 'required',
@@ -174,8 +175,9 @@ class StockController extends Controller
         $stocks = Appliance_Stock::where('state', 2)->whereIn('id', $t['id'])->get();
         DB::beginTransaction();
         try {
+            $dr = Appliance_Delivery::create(['invoice_id' => $invoice, 'carrier' => $t['carrier']]);
             foreach ($stocks as $stock){
-                $stock->update(['state' => 3, 'deliver_to'=> $cid]);
+                $stock->update(['state' => 3, 'deliver_to'=> $dr->id]);
             }
         } catch(\Exception $e)
         {
@@ -183,7 +185,7 @@ class StockController extends Controller
             return redirect()->back()->withInput()->withErrors($e);
         }
         DB::commit();
-        return redirect()->back()->withErrors('出库成功！');
+        return redirect('appliance/delivery/index/'.$invoice)->withErrors('出库成功！');
     }
 
     public function destroy($id)

@@ -52,11 +52,13 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
     Route::put('stock/{id}', 'StockController@update');
     Route::post('stock/order', 'StockController@placeOrder');
     Route::post('stock/arrive', 'StockController@warehousing');
-    Route::post('stock/deliver/{cid}', 'StockController@delivery');
+    Route::post('stock/deliver/{invoice}', 'StockController@delivery');
     Route::get('stock/exportAvailable', 'StockController@exportAvailable');
     Route::get('stock/exportCheckingList', 'StockController@exportStockCheckingList');
-    Route::get('deposit/index/{id}', 'DepositController@index');
+    Route::get('deposit/index/{invoice}', 'DepositController@index');
     Route::post('deposit', 'DepositController@store');
+    Route::get('delivery/index/{invoice}', 'DeliveryController@index');
+    Route::get('delivery/packing-slip/{delivery}', 'DeliveryController@exportPackingSlip');
 
 });
 
