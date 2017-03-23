@@ -92,8 +92,10 @@
                                 <label class="label label-warning">Pending payments</label>
                             @elseif($stock->state == 1)
                                 <label class="label label-info">Order placed</label>
-                            @elseif($stock->state == 2)
+                            @elseif($stock->state == 2 && $stock->assign_to == null)
                                 <label class="label label-success">In Stock</label>
+                            @elseif($stock->state == 2 && $stock->assign_to != null)
+                                <label class="label label-default">Assigned</label>
                             @elseif($stock->state == 3)
                                 <label class="label label-primary">Delivered</label>
                             @else
