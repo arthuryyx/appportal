@@ -19,6 +19,10 @@ class StockController extends Controller
         Session::flash('backUrl', $request->fullUrl());
         switch ($state)
         {
+            case 0:
+                return view('appliance.stock.index0')
+                    ->withStocks(Appliance_Stock::where('state', 0)->get());
+                break;
             case 1:
                 return view('appliance.stock.index1')
                     ->withStocks(Appliance_Stock::where(function ($query){

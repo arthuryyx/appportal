@@ -344,6 +344,9 @@
                                 {{--<a href="{{ url('tempstock/create') }}">入库</a>--}}
                             {{--</li>--}}
                             <li>
+                                <a href="{{ url('appliance/stock/index/0') }}">Pending</a>
+                            </li>
+                            <li>
                                 <a href="{{ url('appliance/stock/index/1') }}">Available</a>
                             </li>
                             {{--<li>--}}
