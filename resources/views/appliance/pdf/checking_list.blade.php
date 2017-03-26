@@ -31,7 +31,11 @@
                 <tr>
                     <td>{{ $stock->appliance->model }}</td>
                     <td>{{ $stock->appliance->belongsToBrand->name }}</td>
-                    <td>{{ $stock->getAssignTo->job_id }}</td>
+                    <td>
+                        @if($stock->assign_to != null)
+                            {{ $stock->getAssignTo->job_id }}
+                        @endif
+                    </td>
                     <td>{{ $stock->shelf }}</td>
                 </tr>
             @endforeach
