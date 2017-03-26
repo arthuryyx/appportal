@@ -11,7 +11,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">可用库存 {{array_sum($stocks->pluck('total')->all())}} in total</h1>
+            <h1 class="page-header">Pending Order</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -27,13 +27,6 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="{{ url('appliance/stock/exportAvailable') }}" target="_blank" class="btn btn-primary ">exportAvailable</a>
-                    @can('root')
-                        <a href="{{ url('appliance/stock/exportCheckingList') }}" target="_blank" class="btn btn-primary ">CheckingList</a>
-                        @endif
-                </div>
-                <!-- /.panel-heading -->
                 <div class="panel-body">
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                         <thead>
