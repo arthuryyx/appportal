@@ -35,9 +35,9 @@ class JobController extends Controller
 
         $t = $request->all();
         $t['created_by'] = Auth::user()->id;
-
-        if (Appliance_Invoice::create($t)) {
-            return redirect('appliance/invoice/job')->withErrors('添加成功！');
+        $obj = Appliance_Invoice::create($t);
+        if ($obj) {
+            return redirect('appliance/invoice/job/'.$obj->id)->withErrors('添加成功！');
         } else {
             return redirect()->back()->withInput()->withErrors('添加失败！');
         }
