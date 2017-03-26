@@ -21,7 +21,7 @@ class DepositController extends Controller
         ]);
 
         if (Appliance_Deposit::create($request->all())) {
-            return redirect()->back()->withInput()->withErrors('添加成功！');
+            return redirect()->back()->withErrors('添加成功！');
         } else {
             return redirect()->back()->withInput()->withErrors('添加失败！');
         }
