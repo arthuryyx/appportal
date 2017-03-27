@@ -47,8 +47,9 @@
                                 Receipt No.
                             </th>
                             <th>
-
+                                Date
                             </th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -58,9 +59,8 @@
                                 <td>{{ $stock->appliance->model }}</td>
                                 <td>{{ $stock->appliance->belongsToBrand->name }}</td>
                                 <td>{{ $stock->appliance->belongsToCategory->name }}</td>
-                                <td>
-                                    {{ $stock->getDeliveryHistory->getInvoice->receipt_id }}
-                                </td>
+                                <td>{{ $stock->getDeliveryHistory->getInvoice->receipt_id }}</td>
+                                <td>{{ $stock->getDeliveryhistory->created_at->format('d-m-Y') }}</td>
                                 <td><a href="{{ url('appliance/invoice/job/'.$stock->getDeliveryHistory->getInvoice->id) }}" class="btn btn-success">查看</a></td>
                             </tr>
                         @endforeach
@@ -89,8 +89,7 @@
         $(document).ready(function() {
             $('#dataTables').DataTable({
                 responsive: true,
-                paging: false,
-                order: [3, 'asc']
+                order: [4]
             });
         });
     </script>
