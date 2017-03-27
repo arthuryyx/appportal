@@ -25,6 +25,9 @@
                     Category
                 </th>
                 <th>
+                    RRP
+                </th>
+                <th>
                     Best Price
                 </th>
                 <th>
@@ -39,6 +42,7 @@
                     <td>{{ $stock->appliance->model }}</td>
                     <td>{{ $stock->appliance->belongsToBrand->name }}</td>
                     <td>{{ $stock->appliance->belongsToCategory->name }}</td>
+                    <td>{{ $stock->appliance->rrp }}</td>
                     <td>{{ $stock->appliance->best }}</td>
                     <td>{{ $stock->appliance->description }}</td>
                 </tr>
