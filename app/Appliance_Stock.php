@@ -22,4 +22,9 @@ class Appliance_Stock extends Model
     {
         return $this->belongsTo('App\Appliance_Invoice', 'init', 'id');
     }
+
+    public function getDeliveryHistory()
+    {
+        return $this->belongsTo('App\Appliance_Delivery', 'deliver_to', 'id');
+    }
 }

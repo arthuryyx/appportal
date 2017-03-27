@@ -51,10 +51,8 @@ class StockController extends Controller
                         })->get());
                 break;
             case 3:
-                return view('tempstock.index'.$state)->withStocks(Stock::where('state', $state)->get());
-                break;
-            case 4:
-                return view('tempstock.index'.$state)->withStocks(Stock::all());
+                return view('appliance.stock.index'.$state)
+                    ->withStocks(Appliance_Stock::where('state', $state)->get());
                 break;
 
             default:

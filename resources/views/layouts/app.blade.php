@@ -349,18 +349,15 @@
                             <li>
                                 <a href="{{ url('appliance/stock/index/1') }}">Orderd</a>
                             </li>
+                            {{--<li>--}}
+                                {{--<a href="{{ url('appliance/stock/index/?') }}">Assigned</a>--}}
+                            {{--</li>--}}
                             <li>
                                 <a href="{{ url('appliance/stock/index/2') }}">Available</a>
                             </li>
-                            {{--<li>--}}
-                                {{--<a href="{{ url('tempstock/list/2') }}">已分配库存</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="{{ url('tempstock/list/4') }}">入库记录</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="{{ url('tempstock/list/3') }}">出库记录</a>--}}
-                            {{--</li>--}}
+                            <li>
+                                <a href="{{ url('appliance/stock/index/3') }}">Delivered</a>
+                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
