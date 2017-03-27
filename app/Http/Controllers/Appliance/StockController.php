@@ -24,7 +24,10 @@ class StockController extends Controller
                     ->withStocks(Appliance_Stock::where('state', 0)->get());
                 break;
             case 1:
-                return view('appliance.stock.index1')
+                return view('tempstock.index'.$state)->withStocks(Stock::orderBy('updated_at', 'desc')->where('state', $state)->get());
+                break;
+            case 2:
+                return view('appliance.stock.index2')
                     ->withStocks(Appliance_Stock::where(function ($query){
                         $query->where('state', 1)
                             ->whereNull('assign_to')
@@ -45,9 +48,6 @@ class StockController extends Controller
                                     ->whereNull('assign_to');
                             });
                         })->get());
-                break;
-            case 2:
-                return view('tempstock.index'.$state)->withStocks(Stock::orderBy('updated_at', 'desc')->where('state', $state)->get());
                 break;
             case 3:
                 return view('tempstock.index'.$state)->withStocks(Stock::where('state', $state)->get());

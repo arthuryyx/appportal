@@ -347,7 +347,7 @@
                                 <a href="{{ url('appliance/stock/index/0') }}">Pending</a>
                             </li>
                             <li>
-                                <a href="{{ url('appliance/stock/index/1') }}">Available</a>
+                                <a href="{{ url('appliance/stock/index/2') }}">Available</a>
                             </li>
                             {{--<li>--}}
                                 {{--<a href="{{ url('tempstock/list/2') }}">已分配库存</a>--}}
