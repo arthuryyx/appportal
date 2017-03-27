@@ -90,7 +90,8 @@
         $(document).ready(function() {
             $('#dataTables').DataTable({
                 responsive: true,
-                order: [2, 'asc']
+                paging: false,
+                order: [3, 'asc']
             });
         });
     </script>
