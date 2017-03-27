@@ -287,10 +287,10 @@
                         <a href="{{ url('/') }}"><i class="fa fa-th-list fa-fw"></i> Dashboard</a>
                     </li>
                     </li>
-                    @can('root')
                         <li>
                             <a href="#"><i class="fa fa-gears fa-fw"></i> Config<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                @can('root')
                                 <li>
                                     <a href="#"><i class="fa fa-gears fa-fw"></i> Account<span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
@@ -306,9 +306,11 @@
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
+                                @endcan
                                 <li>
-                                    <a href="{{ url('admin/appliance') }}">Appliance</a>
+                                    <a href="{{ url('admin/appliance') }}"><i class="fa fa-gears fa-fw"></i> Appliance</a>
                                 </li>
+                                @can('root')
                                 <li>
                                     <a href="#"><i class="fa fa-gears fa-fw"></i> Material<span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
@@ -319,9 +321,9 @@
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
+                                @endcan
                             </ul>
                         </li>
-                    @endcan
                     {{--<li>--}}
                         {{--<a href="{{ url('admin/project') }}"><i class="fa fa-th- fa-folder-open fa-fw"></i> Project</a>--}}
                     {{--</li>--}}

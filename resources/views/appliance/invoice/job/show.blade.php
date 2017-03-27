@@ -76,7 +76,7 @@
                         </div>
                         {!! Form::close() !!}
                     </div>
-
+                    @can('root')
                     <div class="col-lg-2">
                         {!! Form::open(['url' => 'appliance/deposit','method'=>'POST']) !!}
                         <div class="row">
@@ -89,7 +89,7 @@
                         </div>
                         {!! Form::close() !!}
                     </div>
-
+                    @endcan
                     <div class="col-lg-2">
                         <p>
                             <strong>Deposit History: </strong>
@@ -107,8 +107,8 @@
                 <div class="panel panel-body">
                     <form id="frm-example" name="frm_example" action="" method="post">
                         {{ csrf_field() }}
+                        @can('root')
                         <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/order')}}'">order</button>
-                    @can('root')
                         <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/arrive')}}'">arrive</button>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target={{"#myModal"}}>deliver</button>
