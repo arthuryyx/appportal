@@ -20,14 +20,15 @@ class StockController extends Controller
         switch ($state)
         {
             case 0:
-                return view('appliance.stock.index0')
-                    ->withStocks(Appliance_Stock::where('state', 0)->get());
+                return view('appliance.stock.index'.$state)
+                    ->withStocks(Appliance_Stock::where('state', $state)->get());
                 break;
             case 1:
-                return view('tempstock.index'.$state)->withStocks(Stock::orderBy('updated_at', 'desc')->where('state', $state)->get());
+                return view('appliance.stock.index'.$state)
+                    ->withStocks(Appliance_Stock::where('state', $state)->get());
                 break;
             case 2:
-                return view('appliance.stock.index2')
+                return view('appliance.stock.index'.$state)
                     ->withStocks(Appliance_Stock::where(function ($query){
                         $query->where('state', 1)
                             ->whereNull('assign_to')
