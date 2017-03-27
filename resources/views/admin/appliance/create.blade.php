@@ -43,6 +43,8 @@
                             @endforeach
                         </select>
                         <br>
+                        <input type="text" name="rrp" class="form-control" placeholder="RRP">
+                        <br>
                         <input type="text" name="best" class="form-control" placeholder="Best Price">
                         <br>
                         <input type="text" name="cutout" class="form-control" placeholder="Cut-out">

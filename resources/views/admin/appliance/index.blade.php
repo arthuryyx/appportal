@@ -45,6 +45,9 @@
                                 Category
                             </th>
                             <th>
+                                RRP
+                            </th>
+                            <th>
                                 Best price
                             </th>
                             <th>
@@ -67,6 +70,7 @@
                                 <td>{{ $appliance->model }}</td>
                                 <td>{{ $appliance->belongsToBrand->name }}</td>
                                 <td>{{ $appliance->belongsToCategory->name }}</td>
+                                <td>{{ $appliance->rrp }}</td>
                                 <td>{{ $appliance->best }}</td>
                                 <td>{{ $appliance->cutout }}</td>
                                 <td>{{ $appliance->description }}</td>

@@ -41,6 +41,8 @@
                             @endforeach
                         </select>
                         <br>
+                        <input type="text" name="rrp" class="form-control" placeholder="RRP" value="{{ $appliance->rrp }}">
+                        <br>
                         <input type="text" name="best" class="form-control" placeholder="Best Price" value="{{ $appliance->best }}">
                         <br>
                         <input type="text" name="cutout" class="form-control" placeholder="Cut-out" value="{{ $appliance->cutout }}">

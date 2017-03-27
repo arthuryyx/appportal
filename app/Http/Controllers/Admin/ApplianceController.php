@@ -27,6 +27,7 @@ class ApplianceController extends Controller
             'model' => 'required|unique:appliances',
             'brand_id' => 'required|exists:brands,id',
             'category_id' => 'required|exists:categories,id',
+            'rrp' => 'integer|min:1',
             'best' => 'integer|min:1',
         ]);
 
@@ -53,7 +54,8 @@ class ApplianceController extends Controller
             'model' => 'required|unique:appliances,model,'.$id,
             'brand_id' => 'required|exists:brands,id',
             'category_id' => 'required|exists:categories,id',
-            'best' => 'integer|min:0',
+            'rrp' => 'integer|min:1',
+            'best' => 'integer|min:1',
         ]);
 
 
