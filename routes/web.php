@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
     Route::post('deposit', 'DepositController@store');
     Route::get('delivery/index/{invoice}', 'DeliveryController@index');
     Route::get('delivery/packing-slip/{delivery}', 'DeliveryController@exportPackingSlip');
+    Route::get('order/{invoice}', 'OrderController@index');
 
 });
 

@@ -47,6 +47,9 @@
                                 Receipt No.
                             </th>
                             <th>
+                                Status
+                            </th>
+                            <th>
 
                             </th>
                         </tr>
@@ -58,15 +61,16 @@
                                 <td>{{ $stock->appliance->model }}</td>
                                 <td>{{ $stock->appliance->belongsToBrand->name }}</td>
                                 <td>{{ $stock->appliance->belongsToCategory->name }}</td>
-                                <td>
-                                    {{ $stock->getInvoice->receipt_id }}
-                                </td>
+                                <td>{{ $stock->getInvoice->receipt_id }}</td>
                                 <td>
                                     @if($stock->assign_to != null)
-                                        <a href="{{ url('appliance/invoice/job/'.$stock->getInvoice->id) }}" class="btn btn-success">查看</a>
+                                        <label class="label label-default">Assign</label>
                                     @else
-                                        <a href="{{ url('appliance/invoice/bulk/'.$stock->getInvoice->id) }}" class="btn btn-success">查看</a>
+                                        <label class="label label-success">Available</label>
                                     @endif
+                                </td>
+                                <td>
+                                    <a href="{{ url('appliance/order/'.$stock->getInvoice->id) }}" class="btn btn-success">查看</a>
                                 </td>
                             </tr>
                         @endforeach
