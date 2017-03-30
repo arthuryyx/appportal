@@ -55,32 +55,8 @@
                     <form id="frm-example" name="frm_example" action="" method="post">
                         {{ csrf_field() }}
                         @can('root')
-                        <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/order')}}'">order</button>
-                        <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/arrive')}}'">arrive</button>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target={{"#myModal"}}>deliver</button>
-                        <!-- Modal -->
-                        <div class="modal fade" id={{"myModal"}} tabindex="-1" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" >&times;</button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <strong>Carrier</strong>
-                                        <input type="text" name="carrier" class="form-control">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/deliver/'.$invoice->id)}}'">deliver</button>
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
-                                    </div>
-                                </div>
-                                <!-- /.modal-content -->
-                            </div>
-                            <!-- /.modal-dialog -->
-                        </div>
-                        <!-- /.modal -->
-                    @endcan
+                            <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/arrive')}}'">arrive</button>
+                        @endcan
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                             <thead>
                             <tr>
