@@ -54,7 +54,15 @@ class StockController extends Controller
                 return view('appliance.stock.index'.$state)
                     ->withStocks(Appliance_Stock::where('state', $state)->get());
                 break;
-
+            case 4:
+                return view('appliance.stock.index'.$state)
+                    ->withStocks(Appliance_Stock::where(function ($query){
+                        $query->where('state', 1)
+                            ->whereNotNull('assign_to')
+                            ->orWhere('state', 2)
+                            ->whereNotNull('assign_to');
+                    })->get());
+                break;
             default:
                 break;
         }
