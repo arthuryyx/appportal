@@ -352,7 +352,7 @@
                                 <a href="{{ url('appliance/stock/index/1') }}">Orderd</a>
                             </li>
                             <li>
-                                <a href="{{ url('appliance/stock/index/4') }}">Assigned</a>
+                                <a href="{{ url('appliance/stock/index/4') }}">Ready</a>
                             </li>
                             <li>
                                 <a href="{{ url('appliance/stock/index/2') }}">Available</a>
