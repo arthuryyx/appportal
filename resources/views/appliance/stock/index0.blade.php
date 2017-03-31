@@ -47,7 +47,9 @@
                                 Receipt No.
                             </th>
                             <th></th>
+                            @can('root')
                             <th></th>
+                            @endcan
                         </tr>
                         </thead>
                         <tbody>
@@ -63,6 +65,7 @@
                                     {{--@endif--}}
                                 </td>
                                 <td><a href="{{ url('appliance/invoice/job/'.$stock->getAssignTo->id) }}" class="btn btn-success">查看</a></td>
+                                @can('root')
                                 <td>
                                     <!-- Button trigger modal -->
                                     <button class="btn btn-danger" data-toggle="modal" data-target={{"#myModal".$stock->id}}>
@@ -93,6 +96,7 @@
                                     </div>
                                     <!-- /.modal -->
                                 </td>
+                                @endcan
                             </tr>
                         @endforeach
 
