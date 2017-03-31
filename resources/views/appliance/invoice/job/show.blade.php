@@ -66,7 +66,7 @@
                         {!! Form::open(['url' => 'appliance/stock','method'=>'POST']) !!}
                         <div class="row">
                             <div class="col-xs-10 col-sm-10 col-md-10">
-                                <strong>add new</strong>
+                                <strong>order new</strong>
                                 <select class="aid form-control" name="aid" required="required"></select>
                                 <strong>quantity</strong>
                                 {{ Form::number('qty', 1, array('class' => 'form-control', 'required' => 'required')) }}
@@ -109,11 +109,32 @@
                         {{ csrf_field() }}
                         @can('root')
                         <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/order')}}'">order</button>
-                        <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/arrive')}}'">arrive</button>
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target={{"#myModal"}}>deliver</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target={{"#myModalrelease"}}>release</button>
                         <!-- Modal -->
-                        <div class="modal fade" id={{"myModal"}} tabindex="-1" role="dialog">
+                        <div class="modal fade" id={{"myModalrelease"}} tabindex="-1" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Confirm release appliance from current job!
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/release')}}'">release</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target={{"#myModaldeliver"}}>deliver</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id={{"myModaldeliver"}} tabindex="-1" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -125,7 +146,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/deliver/'.$invoice->id)}}'">deliver</button>
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
                                     </div>
                                 </div>
                                 <!-- /.modal-content -->

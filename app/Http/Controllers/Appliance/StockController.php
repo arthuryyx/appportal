@@ -171,6 +171,27 @@ class StockController extends Controller
         }
     }
 
+    public function release(Request $request){
+        $this->validate($request, [
+            'id' => 'required',
+        ]);
+        $t = $request->all();
+        $m = '';
+        foreach ($t['id'] as $id){
+            $obj = Appliance_Stock::find($id);
+            if($obj->state == 1 || $obj->state == 2){
+                $obj->update(['assign_to' => null]);
+            }else{
+                $m = $m.$obj->appliance->model.' not updated.<br>';
+            }
+        }
+        if($m === ''){
+            return redirect()->back()->withErrors('更新成功！');
+        }else{
+            return redirect()->back()->withInput()->withErrors($m);
+        }
+    }
+
     public function delivery(Request $request, $invoice)
     {
         $this->validate($request, [
