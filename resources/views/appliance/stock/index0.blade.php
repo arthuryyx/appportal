@@ -46,9 +46,8 @@
                             <th>
                                 Receipt No.
                             </th>
-                            <th>
-
-                            </th>
+                            <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -58,11 +57,42 @@
                                 <td>{{ $stock->appliance->model }}</td>
                                 <td>{{ $stock->appliance->belongsToBrand->name }}</td>
                                 <td>{{ $stock->appliance->belongsToCategory->name }}</td>
-                                <td>@if($stock->assign_to != null)
+                                <td>
+                                    {{--@if($stock->assign_to != null)--}}
                                         {{ $stock->getAssignTo->receipt_id }}
-                                    @endif
+                                    {{--@endif--}}
                                 </td>
                                 <td><a href="{{ url('appliance/invoice/job/'.$stock->getAssignTo->id) }}" class="btn btn-success">查看</a></td>
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <button class="btn btn-danger" data-toggle="modal" data-target={{"#myModal".$stock->id}}>
+                                        删除
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id={{"myModal".$stock->id}} tabindex="-1" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{ $stock->appliance->model }}
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <form action="{{ url('appliance/stock/'.$stock->id) }}" method="POST" style="display: inline;">
+                                                        {{ method_field('DELETE') }}
+                                                        {{ csrf_field() }}
+                                                        <button type="submit" class="btn btn-danger">删除</button>
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal -->
+                                </td>
                             </tr>
                         @endforeach
 
