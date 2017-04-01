@@ -114,8 +114,9 @@ class StockController extends Controller
         if (Session::has('backUrl')) {
             Session::keep('backUrl');
         }
-
-        if (Appliance_Stock::find($id)->update($request->all())) {
+        $t = $request->all();
+        if(is_string($t['shelf']) && $t['shelf'] === '') $t['shelf'] = null;
+        if (Appliance_Stock::find($id)->update($t)) {
             return redirect(Session::get('backUrl'))->withErrors('更新成功！');
         } else {
             return redirect()->back()->withInput()->withErrors('更新失败！');
