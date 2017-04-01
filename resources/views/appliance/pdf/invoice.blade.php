@@ -1818,8 +1818,9 @@ AA==
             <td class=xl6553529136 width=170 style='width:128pt'></td>
             <td class=xl14329136 width=112 style='width:84pt'>　</td>
             <td class=xl14329136 width=110 style='width:83pt'>　</td>
-            <td class=xl14429136 width=108 style='width:81pt'>Tax<span
-                        style='mso-spacerun:yes'>&nbsp; </span>INVOICE</td>
+            {{--<td class=xl14429136 width=108 style='width:81pt'>Tax<span
+                        style='mso-spacerun:yes'>&nbsp; </span>INVOICE</td>--}}
+            <td class=xl14429136 width=108 style='width:81pt'>Delivery</td>
             <td class=xl14329136 width=89 style='width:67pt'>　</td>
         </tr>
         <tr height=22 style='mso-height-source:userset;height:16.5pt'>
@@ -1939,12 +1940,20 @@ AA==
                 <td colspan=2 class=xl12129136 width=222 style='border-right:.5pt solid #3B5E91;
   border-left:none;width:167pt'>{{ $stock->appliance->belongsToBrand->name }}: {{ $stock->appliance->belongsToCategory->name }}</td>
                 <td class=xl8929136 style='border-top:none;border-left:none'>　</td>
-                <td class=xl9029136 style='border-top:none;border-left:none'><span
-                            style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span>{{--530.00 --}}</td>
+                <td class=xl9029136 style='border-top:none;border-left:none'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{--530.00 --}}</td>
             </tr>
         @endforeach
 
+        @for($i=15 - $delivery->hasManyStocks->count(); $i>0; $i--)
+            <tr height=21 style='height:15.75pt'>
+                <td height=21 class=xl10629136 style='height:15.75pt;border-top:none'></td>
+                <td class=xl10729136 style='border-top:none;border-left:none'></td>
+                <td colspan=2 class=xl12129136 width=222 style='border-right:.5pt solid #3B5E91;
+  border-left:none;width:167pt'></td>
+                <td class=xl8929136 style='border-top:none;border-left:none'>　</td>
+                <td class=xl9029136 style='border-top:none;border-left:none'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{--530.00 --}}</td>
+            </tr>
+        @endfor
 
         <tr height=21 style='mso-height-source:userset;height:15.95pt'>
             <td height=21 class=xl9729136 colspan=2 style='height:15.95pt'>All appliance
