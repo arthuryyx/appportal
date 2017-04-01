@@ -114,27 +114,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
     <script type="text/javascript">
-
-        $('.sid').select2({
-            placeholder: 'Select an item',
-            ajax: {
-                url: '/select2-autocomplete-ajax/available',
-                dataType: 'json',
-                delay: 250,
-                processResults: function (data) {
-                    return {
-                        results:  $.map(data, function (item) {
-                            return {
-                                text: item.model + ' 【' + item.shelf + '】',
-                                id: item.id
-                            }
-                        })
-                    };
-                },
-                cache: true
-            }
-        });
-
         $('.aid').select2({
             placeholder: 'Select an model',
             ajax: {

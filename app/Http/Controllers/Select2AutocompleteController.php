@@ -19,7 +19,7 @@ class Select2AutocompleteController extends Controller
         return response()->json($data);
     }
 
-    public function available(Request $request)
+    public function unsigned(Request $request)
     {
         $data = [];
 
@@ -29,6 +29,23 @@ class Select2AutocompleteController extends Controller
                 $query->where('state', 1)
                     ->whereNull('assign_to')
                     ->orWhere('state', 2)
+                    ->whereNull('assign_to');
+            })->join('appliances', 'appliances.id', 'appliance__stocks.aid')
+                ->where('appliances.model','LIKE',"%$search%")
+                ->select('appliance__stocks.id', 'model', 'shelf')
+                ->get();
+        }
+        return response()->json($data);
+    }
+
+    public function available(Request $request)
+    {
+        $data = [];
+
+        if($request->has('q')){
+            $search = $request->q;
+            $data = Appliance_Stock::where(function ($query){
+                $query->where('state', 2)
                     ->whereNull('assign_to');
             })->join('appliances', 'appliances.id', 'appliance__stocks.aid')
                 ->where('appliances.model','LIKE',"%$search%")

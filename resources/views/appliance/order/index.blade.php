@@ -113,49 +113,6 @@
 @section('js')
     <script src="{{ asset('vendor/select2/select2.min.js')}}"></script>
 
-    <script type="text/javascript">
-        $('.sid').select2({
-            placeholder: 'Select an item',
-            ajax: {
-                url: '/select2-autocomplete-ajax/available',
-                dataType: 'json',
-                delay: 200,
-                processResults: function (data) {
-                    return {
-                        results:  $.map(data, function (item) {
-                            return {
-                                text: item.model + ' 【' + item.shelf + '】',
-                                id: item.id
-                            }
-                        })
-                    };
-                },
-                cache: true
-            }
-        });
-
-        $('.aid').select2({
-            placeholder: 'Select an model',
-            ajax: {
-                url: '/select2-autocomplete-ajax/applianceModel',
-                dataType: 'json',
-                delay: 200,
-                processResults: function (data) {
-                    return {
-                        results:  $.map(data, function (item) {
-                            return {
-                                text: item.model,
-                                id: item.id
-                            }
-                        })
-                    };
-                },
-                cache: true
-            }
-        });
-
-    </script>
-
     <!-- DataTables JavaScript -->
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables-plugins/dataTables.bootstrap.min.js')}}"></script>

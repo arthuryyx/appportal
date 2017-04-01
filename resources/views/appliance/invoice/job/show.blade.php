@@ -215,7 +215,7 @@
         $('.sid').select2({
             placeholder: 'Select an item',
             ajax: {
-                url: '/select2-autocomplete-ajax/available',
+                url: '/select2-autocomplete-ajax/unsigned',
                 dataType: 'json',
                 delay: 200,
                 processResults: function (data) {

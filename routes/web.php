@@ -79,5 +79,6 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('select2-autocomplete-ajax/applianceModel', 'Select2AutocompleteController@applianceModel');
     Route::get('select2-autocomplete-ajax/available', 'Select2AutocompleteController@available');
+    Route::get('select2-autocomplete-ajax/unsigned', 'Select2AutocompleteController@unsigned');
 
 });
