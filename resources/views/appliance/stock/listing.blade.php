@@ -11,7 +11,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Order Placed</h1>
+            <h1 class="page-header">Ready To Go</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -27,12 +27,6 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                @can('root')
-                <div class="panel-heading">
-                    <a href="{{ url('appliance/stock/listing') }}" class="btn btn-primary ">Listing</a>
-                </div>
-                <!-- /.panel-heading -->
-                @endcan
                 <div class="panel-body">
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                         <thead>
@@ -49,15 +43,7 @@
                             <th>
                                 Category
                             </th>
-                            <th>
-                                Receipt No.
-                            </th>
-                            <th>
-                                Status
-                            </th>
-                            <th>
-
-                            </th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -67,20 +53,9 @@
                                 <td>{{ $stock->appliance->model }}</td>
                                 <td>{{ $stock->appliance->belongsToBrand->name }}</td>
                                 <td>{{ $stock->appliance->belongsToCategory->name }}</td>
-                                <td>{{ $stock->getInvoice->receipt_id }}</td>
-                                <td>
-                                    @if($stock->assign_to != null)
-                                        <label class="label label-default">Assign</label>
-                                    @else
-                                        <label class="label label-success">Available</label>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ url('appliance/order/'.$stock->getInvoice->id) }}" class="btn btn-success">查看</a>
-                                </td>
+                                <td><a href="{{ url('appliance/stock/'.$stock->id.'/edit') }}" class="btn btn-success">编辑</a></td>
                             </tr>
                         @endforeach
-
                         </tbody>
                     </table>
                     <!-- /.table-responsive -->

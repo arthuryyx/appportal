@@ -97,6 +97,12 @@ class StockController extends Controller
         return redirect()->back()->withErrors('添加成功！');
     }
 
+    public function listing(Request $request){
+        Session::flash('backUrl', $request->fullUrl());
+        return view('appliance.stock.listing')
+            ->withStocks(Appliance_Stock::where('state', 2)->whereNull('shelf')->get());
+    }
+
     public function edit($id){
         if (Session::has('backUrl')) {
             Session::keep('backUrl');

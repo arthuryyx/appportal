@@ -47,8 +47,10 @@
                                 Receipt No.
                             </th>
                             <th>
-
+                                Shelf
                             </th>
+                            <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -59,6 +61,8 @@
                                 <td>{{ $stock->appliance->belongsToBrand->name }}</td>
                                 <td>{{ $stock->appliance->belongsToCategory->name }}</td>
                                 <td>{{ $stock->getAssignTo->receipt_id }}</td>
+                                <td>{{ $stock->shelf }}</td>
+                                <td><a href="{{ url('appliance/stock/'.$stock->id.'/edit') }}" class="btn btn-success">编辑</a></td>
                                 <td><a href="{{ url('appliance/invoice/job/'.$stock->getAssignTo->id) }}" class="btn btn-success">查看</a></td>
                             </tr>
                         @endforeach
