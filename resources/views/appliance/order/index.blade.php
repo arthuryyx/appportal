@@ -95,6 +95,8 @@
                                             <label class="label label-success">In Stock</label>
                                         @elseif($stock->state == 3)
                                             <label class="label label-primary">Delivered</label>
+                                        @elseif($stock->state == 5)
+                                            <label class="label label-primary">Display</label>
                                         @else
                                             <label class="label label-danger">Exception</label>
                                         @endif</td>
