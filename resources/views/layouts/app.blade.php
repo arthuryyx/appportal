@@ -360,6 +360,9 @@
                             <li>
                                 <a href="{{ url('appliance/stock/index/3') }}">Delivered</a>
                             </li>
+                            <li>
+                                <a href="{{ url('appliance/stock/index/5') }}">Display</a>
+                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>

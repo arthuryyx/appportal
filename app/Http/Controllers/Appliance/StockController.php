@@ -58,6 +58,10 @@ class StockController extends Controller
                 return view('appliance.stock.index'.$state)
                     ->withStocks(Appliance_Stock::where('state', 2)->whereNotNull('assign_to')->get());
                 break;
+            case 5:
+                return view('appliance.stock.index'.$state)
+                    ->withStocks(Appliance_Stock::where('state', $state)->get());
+                break;
             default:
                 break;
         }
@@ -130,6 +134,18 @@ class StockController extends Controller
         ]);
         $t = $request->all();
         if (Appliance_Stock::find($t['sid'])->update($t)) {
+            return redirect()->back()->withErrors('更新成功！');
+        } else {
+            return redirect()->back()->withInput()->withErrors('更新失败！');
+        }
+    }
+
+    public function display(Request $request){
+        Session::flash('backUrl', $request->fullUrl());
+        $this->validate($request, [
+            'sid' => 'required',
+        ]);
+        if (Appliance_Stock::find($request->all()['sid'])->update(['state' => 5])) {
             return redirect()->back()->withErrors('更新成功！');
         } else {
             return redirect()->back()->withInput()->withErrors('更新失败！');
