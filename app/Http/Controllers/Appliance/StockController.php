@@ -141,7 +141,9 @@ class StockController extends Controller
     }
 
     public function display(Request $request){
-        Session::flash('backUrl', $request->fullUrl());
+        if (Session::has('backUrl')) {
+            Session::keep('backUrl');
+        }
         $this->validate($request, [
             'sid' => 'required',
         ]);
