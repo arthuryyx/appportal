@@ -2,10 +2,13 @@
 
 @section('css')
     <!-- DataTables CSS -->
-    <link href="{{ asset('vendor/datatables-plugins/dataTables.bootstrap.css') }}" rel="stylesheet">
+    {{--<link href="{{ asset('vendor/datatables-plugins/dataTables.bootstrap.css') }}" rel="stylesheet">--}}
 
     <!-- DataTables Responsive CSS -->
     <link href="{{ asset('vendor/datatables-responsive/dataTables.responsive.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('vendor/datatables-checkboxes/dataTables.checkboxes.css') }}" rel="stylesheet">
+
 @endsection
 
 @section('content')
@@ -34,6 +37,7 @@
                             {{--<th>--}}
                                 {{--Quantity--}}
                             {{--</th>--}}
+                            <th></th>
                             <th>
                                 Model
                             </th>
@@ -56,6 +60,7 @@
                         @foreach ($stocks as $stock)
                             <tr>
                                 {{--<td>{{ $stock->total }}</td>--}}
+                                <td>{{ $stock->id }}</td>
                                 <td>{{ $stock->appliance->model }}</td>
                                 <td>{{ $stock->appliance->belongsToBrand->name }}</td>
                                 <td>{{ $stock->appliance->belongsToCategory->name }}</td>
@@ -119,13 +124,44 @@
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables-plugins/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables-responsive/dataTables.responsive.js')}}"></script>
+    <script src="{{ asset('vendor/datatables-checkboxes/dataTables.checkboxes.min.js')}}"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
         $(document).ready(function() {
             $('#dataTables').DataTable({
                 responsive: true,
                 paging: false,
-                order: [3, 'asc']
+                searching: false,
+                columnDefs: [
+                    {
+                        'targets': 0,
+                        'checkboxes': {
+                            'selectRow': true,
+                            'value': 1
+                        }
+                    }
+                ],
+                select: {
+                    'style': 'multi'
+                },
+                order: [[3, 'asc']]
+            });
+
+            // Handle form submission event
+            $('#frm-example').on('submit', function(e){
+                var form = this;
+                var rows_selected = table.column(0).checkboxes.selected();
+
+                // Iterate over all selected checkboxes
+                $.each(rows_selected, function(index, sid){
+                    // Create a hidden element
+                    $(form).append(
+                        $('<input>')
+                            .attr('type', 'hidden')
+                            .attr('name', 'id[]')
+                            .val(sid)
+                    );
+                });
             });
         });
     </script>
