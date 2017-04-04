@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Appliance;
 
-use App\Appliance_Delivery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 use App\Http\Controllers\Controller;
-use App\Appliance_Stock;
+
 use App\Appliance;
+use App\Appliance_Stock;
+use App\Appliance_Invoice;
+use App\Appliance_Delivery;
 
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -238,6 +241,31 @@ class StockController extends Controller
         }
         DB::commit();
         return redirect('appliance/delivery/index/'.$invoice)->withErrors('出库成功！');
+    }
+
+    public function mergeOrders(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required',
+            'receipt_id' => 'required|unique:appliance__invoices',
+        ]);
+        $t = $request->all();
+        $t['type'] = 1;
+        $t['created_by'] = Auth::user()->id;
+        $stocks = Appliance_Stock::whereIn('id', $t['id'])->get();
+        DB::beginTransaction();
+        try {
+            $invoice = Appliance_Invoice::create($t);
+            foreach ($stocks as $stock){
+                $stock->update(['state' => 1, 'init'=> $invoice->id]);
+            }
+        } catch(\Exception $e)
+        {
+            DB::rollback();
+            return redirect()->back()->withInput()->withErrors($e);
+        }
+        DB::commit();
+        return redirect('appliance/invoice/bulk/'.$invoice->id)->withErrors('订单合并成功！');
     }
 
     public function destroy($id)
