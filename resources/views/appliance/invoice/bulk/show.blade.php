@@ -12,16 +12,15 @@
         <!-- /.col-lg-12 -->
     </div>
     <!-- /.row -->
-
+    @if (count($errors) > 0)
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {!! implode('<br>', $errors->all()) !!}
+        </div>
+    @endif
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                @if (count($errors) > 0)
-                    <div class="alert alert-danger alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        {!! implode('<br>', $errors->all()) !!}
-                    </div>
-                @endif
                 <div class="panel-body">
                     <table width="100%" class="table">
                         <thead>
