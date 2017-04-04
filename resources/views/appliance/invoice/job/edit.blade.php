@@ -26,7 +26,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>receipt_id:</strong>
-                                    {!! Form::text('receipt_id', null, array('class' => 'form-control', 'required' => 'required')) !!}
+                                    {!! Form::text('receipt_id', null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
                                 </div>
                             </div>
 

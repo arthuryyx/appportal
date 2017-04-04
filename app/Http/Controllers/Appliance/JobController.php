@@ -25,17 +25,18 @@ class JobController extends Controller
 
     public function store(Request $request)
     {
+        $request->merge(['receipt_id' => 'C'.(substr(Appliance_Invoice::where('type', 0)->max('receipt_id'), 1) + 1), 'created_by' => Auth::user()->id]);
+
         $this->validate($request, [
             'receipt_id' => 'required|unique:appliance__invoices',
             'job_id' => 'required',
             'price' => 'required|integer|min:0',
             'customer_name' => 'required',
             'address' => 'required',
+            'created_by' => 'required|exists:users,id',
         ]);
 
-        $t = $request->all();
-        $t['created_by'] = Auth::user()->id;
-        $obj = Appliance_Invoice::create($t);
+        $obj = Appliance_Invoice::create($request->all());
         if ($obj) {
             return redirect('appliance/invoice/job/'.$obj->id)->withErrors('添加成功！');
         } else {
@@ -51,7 +52,7 @@ class JobController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'receipt_id' => 'required|unique:appliance__invoices,receipt_id,'.$id,
+//            'receipt_id' => 'required|unique:appliance__invoices,receipt_id,'.$id,
             'job_id' => 'required',
             'price' => 'required|integer|min:0',
             'customer_name' => 'required',
