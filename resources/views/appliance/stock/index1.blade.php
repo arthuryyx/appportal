@@ -27,12 +27,6 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                @can('root')
-                <div class="panel-heading">
-                    <a href="{{ url('appliance/stock/listing') }}" class="btn btn-primary ">Listing</a>
-                </div>
-                <!-- /.panel-heading -->
-                @endcan
                 <div class="panel-body">
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                         <thead>

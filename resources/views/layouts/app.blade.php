@@ -346,13 +346,18 @@
                                 {{--<a href="{{ url('tempstock/create') }}">入库</a>--}}
                             {{--</li>--}}
                             <li>
-                                <a href="{{ url('appliance/stock/index/0') }}">Pending</a>
+                                <a href="{{ url('appliance/stock/index/0') }}">Waiting for order</a>
                             </li>
                             <li>
-                                <a href="{{ url('appliance/stock/index/1') }}">Orderd</a>
+                                <a href="{{ url('appliance/stock/index/1') }}">Waiting for arrival</a>
                             </li>
+                            @can('root')
                             <li>
-                                <a href="{{ url('appliance/stock/index/4') }}">Ready</a>
+                                    <a href="{{ url('appliance/stock/listing') }}">Waiting for warehousing</a>
+                                </li>
+                            @endcan
+                            <li>
+                                <a href="{{ url('appliance/stock/index/4') }}">Assigned and in stock</a>
                             </li>
                             <li>
                                 <a href="{{ url('appliance/stock/index/2') }}">Available</a>
