@@ -143,6 +143,18 @@ class StockController extends Controller
         }
     }
 
+    public function reentry(Request $request){
+        $this->validate($request, [
+            'sid' => 'required|exists:appliance__stocks,id',
+        ]);
+        $request->merge(['shelf' => null, 'deliver_to' => null, 'state' => 2]);
+        if (Appliance_Stock::find($request->all()['sid'])->update($request->all())) {
+            return redirect()->back()->withErrors('更新成功！');
+        } else {
+            return redirect()->back()->withInput()->withErrors('更新失败！');
+        }
+    }
+
     public function display(Request $request){
         if (Session::has('backUrl')) {
             Session::keep('backUrl');
