@@ -23,6 +23,35 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-body">
+                    @if($invoice->state == 0)
+                        @can('root')
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#myModalpayment"}}>Payment received</button>
+                            <!-- Modal -->
+                            <div class="modal fade" id={{"myModalpayment"}} tabindex="-1" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <strong>${{array_sum($invoice->hasManyDeposits->pluck('amount')->all())}}</strong>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="{{ url('appliance/invoice/paid') }}" method="POST" style="display: inline;">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="id" value="{{$invoice->id}}">
+                                                <button type="submit" class="btn btn-danger">confirm</button>
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+                        @endcan
+                    @endif
                     <table width="100%" class="table">
                         <thead>
                             <tr>
@@ -48,20 +77,25 @@
                         </tbody>
                     </table>
                     <hr>
-                    <div class="col-lg-4">
-                        {!! Form::open(['url' => 'appliance/stock/job/assign','method'=>'POST']) !!}
-                        <div class="row">
-                            <div class="col-xs-10 col-sm-10 col-md-10">
-                                <strong>from stock</strong>
-                                <select class="sid form-control" name="sid" required="required"></select>
-                                {{ Form::hidden('assign_to', $invoice->id) }}
-                                {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
-                            </div>
-                        </div>
-                        {!! Form::close() !!}
+                    <div class="col-lg-2">
+                        @if($invoice->state == 0)
+                            <img src="{{ asset('img/unpaid.png')}}" height="150" width="150">
+                        @elseif($invoice->state == 1)
+                            <img src="{{ asset('img/paid.png')}}" height="150" width="150" >
+                        @endif
+                        {{--{!! Form::open(['url' => 'appliance/stock/job/assign','method'=>'POST']) !!}--}}
+                        {{--<div class="row">--}}
+                            {{--<div class="col-xs-10 col-sm-10 col-md-10">--}}
+                                {{--<strong>from stock</strong>--}}
+                                {{--<select class="sid form-control" name="sid" required="required"></select>--}}
+                                {{--{{ Form::hidden('assign_to', $invoice->id) }}--}}
+                                {{--{{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--{!! Form::close() !!}--}}
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         {!! Form::open(['url' => 'appliance/stock','method'=>'POST']) !!}
                         <div class="row">
                             <div class="col-xs-10 col-sm-10 col-md-10">
@@ -76,7 +110,7 @@
                         {!! Form::close() !!}
                     </div>
                     @can('root')
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         {!! Form::open(['url' => 'appliance/deposit','method'=>'POST']) !!}
                         <div class="row">
                             <div class="col-xs-10 col-sm-10 col-md-10">
@@ -89,7 +123,7 @@
                         {!! Form::close() !!}
                     </div>
                     @endcan
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <p>
                             <strong>Deposit History: </strong>
                             <a href="{{ url('appliance/deposit/index/'.$invoice->id) }}" class="btn btn-primary">view</a>

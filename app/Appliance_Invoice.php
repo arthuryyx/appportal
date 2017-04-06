@@ -18,6 +18,11 @@ class Appliance_Invoice extends Model
         return $this->hasMany('App\Appliance_Stock', 'init', 'id');
     }
 
+    public function hasManyDeposits()
+    {
+        return $this->hasMany('App\Appliance_Deposit', 'invoice_id', 'id');
+    }
+
     public function getCreated_by(){
         return $this->belongsTo('App\User', 'created_by', 'id');
     }

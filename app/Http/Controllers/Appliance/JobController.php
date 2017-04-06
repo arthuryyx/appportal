@@ -70,4 +70,21 @@ class JobController extends Controller
     {
         return view('appliance.invoice.job.show')->withInvoice(Appliance_Invoice::with('hasManyStocks')->find($id));
     }
+
+    public function paid(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required|exists:appliance__invoices,id',
+        ]);
+        $obj = Appliance_Invoice::with('hasManyDeposits')->find($request->all()['id']);
+        if($obj->price <= array_sum($obj->hasManyDeposits->pluck('amount')->all())){
+            if($obj->update(['state' => 1])){
+                return redirect()->back();
+            }else{
+                return redirect()->back()->withErrors('更新失败！');
+            }
+        }else{
+            return redirect()->back()->withErrors('定金不足！');
+        }
+    }
 }

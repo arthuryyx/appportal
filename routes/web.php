@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
 Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'appliance'], function() {
     Route::resource('invoice/job', 'JobController');
     Route::resource('invoice/bulk', 'BulkController');
+    Route::post('invoice/paid', 'JobController@paid');
     Route::get('stock/index/{state}', 'StockController@index');
     Route::post('stock/job/assign', 'StockController@assign');
     Route::post('stock', 'StockController@store');
