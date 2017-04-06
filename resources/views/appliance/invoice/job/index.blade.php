@@ -47,9 +47,6 @@
                             <th>
                                 address
                             </th>
-                            {{--<th>--}}
-                                {{--state--}}
-                            {{--</th>--}}
                             <th>
                                 created_by
                             </th>
@@ -57,11 +54,10 @@
                                 created_at
                             </th>
                             <th>
-
+                                state
                             </th>
-                            <th>
-
-                            </th>
+                            <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -71,9 +67,17 @@
                                 <td>{{ $invoice->job_id }}</td>
                                 <td>{{ $invoice->customer_name }}</td>
                                 <td>{{ $invoice->address }}</td>
-                                {{--<td>{{ $project->state }}</td>--}}
                                 <td>{{ $invoice->getCreated_by->name }}</td>
                                 <td>{{ $invoice->created_at->format('d-m-Y') }}</td>
+                                <td>
+                                    @if($invoice->state == 0)
+                                        <label class="label label-danger">Unpaid</label>
+                                    @elseif($invoice->state == 1)
+                                        <label class="label label-success">&nbsp;&nbsp;Paid&nbsp;&nbsp;</label>
+                                    @else
+                                        <label class="label label-primary">Exception</label>
+                                    @endif
+                                </td>
                                 <td><a href="{{ url('appliance/invoice/job/'.$invoice->id) }}" class="btn btn-info">详情</a></td>
                                 <td><a href="{{ url('appliance/invoice/job/'.$invoice->id.'/edit') }}" class="btn btn-success">修改</a></td>
                             </tr>
