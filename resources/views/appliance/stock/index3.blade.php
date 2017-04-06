@@ -82,7 +82,6 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <form action="{{ url('appliance/stock/reentry') }}" method="POST" style="display: inline;">
-                                                        {{ method_field('POST') }}
                                                         {{ csrf_field() }}
                                                         <input type="hidden" name="sid" value="{{$stock->id}}">
                                                         <button type="submit" class="btn btn-danger">确认</button>
