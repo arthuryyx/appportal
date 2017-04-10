@@ -83,18 +83,19 @@
                         @elseif($invoice->state == 1)
                             <img src="{{ asset('img/paid.png')}}" height="150" width="150" >
                         @endif
-                        {{--{!! Form::open(['url' => 'appliance/stock/job/assign','method'=>'POST']) !!}--}}
-                        {{--<div class="row">--}}
-                            {{--<div class="col-xs-10 col-sm-10 col-md-10">--}}
-                                {{--<strong>from stock</strong>--}}
-                                {{--<select class="sid form-control" name="sid" required="required"></select>--}}
-                                {{--{{ Form::hidden('assign_to', $invoice->id) }}--}}
-                                {{--{{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--{!! Form::close() !!}--}}
                     </div>
-
+                    <div class="col-lg-3">
+                        {!! Form::open(['url' => 'appliance/stock/job/assign','method'=>'POST']) !!}
+                        <div class="row">
+                            <div class="col-xs-10 col-sm-10 col-md-10">
+                                <strong>from stock</strong>
+                                <select class="sid form-control" name="sid" required="required"></select>
+                                {{ Form::hidden('assign_to', $invoice->id) }}
+                                {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
+                            </div>
+                        </div>
+                        {!! Form::close() !!}
+                    </div>
                     <div class="col-lg-3">
                         {!! Form::open(['url' => 'appliance/stock','method'=>'POST']) !!}
                         <div class="row">
@@ -110,7 +111,7 @@
                         {!! Form::close() !!}
                     </div>
                     @can('root')
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         {!! Form::open(['url' => 'appliance/deposit','method'=>'POST']) !!}
                         <div class="row">
                             <div class="col-xs-10 col-sm-10 col-md-10">
@@ -123,7 +124,7 @@
                         {!! Form::close() !!}
                     </div>
                     @endcan
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <p>
                             <strong>Deposit History: </strong>
                             <a href="{{ url('appliance/deposit/index/'.$invoice->id) }}" class="btn btn-primary">view</a>
