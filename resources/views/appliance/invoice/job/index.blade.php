@@ -105,7 +105,9 @@
     <script>
         $(document).ready(function() {
             $('#dataTables').DataTable({
-                responsive: true
+                responsive: true,
+                pageLength: 100,
+                order: [5, 'asc']
             });
         });
     </script>
