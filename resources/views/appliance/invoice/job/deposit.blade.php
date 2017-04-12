@@ -71,12 +71,16 @@
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables-plugins/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables-responsive/dataTables.responsive.js')}}"></script>
+    <script src="{{ asset('vendor/datatables-plugins/date-eu.js')}}"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
         $(document).ready(function() {
             $('#dataTables').DataTable({
+                columnDefs: [
+                    { type: 'date-eu', targets: 1 }
+                ],
                 responsive: true,
-                order: [1, 'asc'],
+                order: [1],
                 paging: false,
                 searching: false
             });
