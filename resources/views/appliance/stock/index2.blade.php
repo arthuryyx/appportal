@@ -54,7 +54,7 @@
                                 RRP
                             </th>
                             <th>
-                                Promotion price
+                                Best price
                             </th>
                             <th>
 
@@ -80,7 +80,7 @@
                                 <td>{{ $appliance->belongsToBrand->name }}</td>
                                 <td>{{ $appliance->belongsToCategory->name }}</td>
                                 <td>{{ $appliance->rrp }}</td>
-                                <td>{{ $appliance->promotion }}</td>
+                                <td>{{ $appliance->best }}</td>
                                 <td></td>
                             </tr>
                         @endforeach
