@@ -69,7 +69,7 @@
                                 <td>{{ $stock->appliance->belongsToBrand->name }}</td>
                                 <td>{{ $stock->appliance->belongsToCategory->name }}</td>
                                 <td>{{ $stock->appliance->rrp }}</td>
-                                <td>{{ $stock->appliance->promotion }}</td>
+                                <td>{{ $stock->appliance->best }}</td>
                                 <td><a href="{{ url('appliance/stock/'.$stock->aid.'/detail') }}" class="btn btn-success">查看</a></td>
                             </tr>
                         @endforeach
