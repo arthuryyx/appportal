@@ -17,7 +17,7 @@ class DepositController extends Controller
     {
         $this->validate($request, [
             'invoice_id' => 'required|exists:appliance__invoices,id',
-            'amount' => 'required|integer',
+            'amount' => 'required|numeric',
         ]);
 
         if (Appliance_Deposit::create($request->all())) {

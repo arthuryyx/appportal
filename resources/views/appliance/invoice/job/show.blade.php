@@ -116,7 +116,7 @@
                         <div class="row">
                             <div class="col-xs-10 col-sm-10 col-md-10">
                                 <strong>Deposit</strong>
-                                {{ Form::number('amount', null, array('class' => 'form-control', 'required' => 'required')) }}
+                                {{ Form::number('amount', null, array('class' => 'form-control', 'step' => 'any', 'required' => 'required')) }}
                                 {{ Form::hidden('invoice_id', $invoice->id) }}
                                 {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
                             </div>

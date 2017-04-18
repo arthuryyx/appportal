@@ -16,7 +16,7 @@ class CreateApplianceDepositsTable extends Migration
         Schema::create('appliance__deposits', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('invoice_id');
-            $table->integer('amount');
+            $table->float('amount');
 
             $table->foreign('invoice_id')
                 ->references('id')
