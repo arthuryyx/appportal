@@ -50,9 +50,9 @@
                             <th>
                                 created_by
                             </th>
-                            <th>
-                                created_at
-                            </th>
+                            {{--<th>--}}
+                                {{--created_at--}}
+                            {{--</th>--}}
                             <th>
                                 state
                             </th>
@@ -68,7 +68,7 @@
                                 <td>{{ $invoice->customer_name }}</td>
                                 <td>{{ $invoice->address }}</td>
                                 <td>{{ $invoice->getCreated_by->name }}</td>
-                                <td>{{ $invoice->created_at->format('d-m-Y') }}</td>
+                                {{--<td>{{ $invoice->created_at->format('d-m-Y') }}</td>--}}
                                 <td>
                                     @if($invoice->state == 0)
                                         <label class="label label-danger">Unpaid</label>
@@ -101,17 +101,17 @@
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables-plugins/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables-responsive/dataTables.responsive.js')}}"></script>
-    <script src="{{ asset('vendor/datatables-plugins/date-eu.js')}}"></script>
+    {{--<script src="{{ asset('vendor/datatables-plugins/date-eu.js')}}"></script>--}}
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
         $(document).ready(function() {
             $('#dataTables').DataTable({
-                columnDefs: [
-                    { type: 'date-eu', targets: 5 }
-                ],
+//                columnDefs: [
+//                    { type: 'date-eu', targets: 5 }
+//                ],
                 responsive: true,
                 pageLength: 100,
-                order: [5]
+                order: [0]
             });
         });
     </script>
