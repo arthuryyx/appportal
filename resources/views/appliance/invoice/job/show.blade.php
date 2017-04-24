@@ -24,7 +24,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     @if($invoice->state == 0)
-                        @can('root')
+                        @can('appliance_confirm_payment')
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#myModalpayment"}}>Payment received</button>
                             <!-- Modal -->
                             <div class="modal fade" id={{"myModalpayment"}} tabindex="-1" role="dialog">
@@ -110,7 +110,7 @@
                         </div>
                         {!! Form::close() !!}
                     </div>
-                    @can('root')
+                    @can('appliance_add_deposit')
                     <div class="col-lg-2">
                         {!! Form::open(['url' => 'appliance/deposit','method'=>'POST']) !!}
                         <div class="row">
@@ -140,9 +140,12 @@
             <div class="panel panel-default">
                 <form id="frm-example" name="frm_example" action="" method="post">
                     {{ csrf_field() }}
-                    @can('root')
+
                     <div class="panel-heading">
+                        @can('appliance_order')
                         <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/order')}}'">order</button>
+                        @endcan
+                        @can('appliance_release')
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target={{"#myModalrelease"}}>release</button>
                         <!-- Modal -->
@@ -165,6 +168,8 @@
                             <!-- /.modal-dialog -->
                         </div>
                         <!-- /.modal -->
+                        @endcan
+                        @can('appliance_deliver')
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target={{"#myModaldeliver"}}>deliver</button>
                         <!-- Modal -->
@@ -188,8 +193,8 @@
                             <!-- /.modal-dialog -->
                         </div>
                         <!-- /.modal -->
+                        @endcan
                     </div>
-                    @endcan
                     <div class="panel panel-body">
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                             <thead>
