@@ -242,7 +242,7 @@ class StockController extends Controller
         $stocks = Appliance_Stock::where('state', 2)->whereIn('id', $t['id'])->get();
         DB::beginTransaction();
         try {
-            $dr = Appliance_Delivery::create(['invoice_id' => $invoice, 'carrier' => $t['carrier']]);
+            $dr = Appliance_Delivery::create(['invoice_id' => $invoice, 'carrier' => $t['carrier'], 'created_by' => Auth::user()->id]);
             foreach ($stocks as $stock){
                 $stock->update(['state' => 3, 'deliver_to'=> $dr->id]);
             }

@@ -26,6 +26,7 @@ class CreateApplianceDeliveriesTable extends Migration
                 ->on('appliance__invoices')
                 ->onDelete('cascade');
 
+            $table->unsignedInteger('created_by');
             $table->timestamps();
         });
     }

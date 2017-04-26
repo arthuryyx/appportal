@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appliance_Delivery extends Model
 {
-    protected $fillable = ['invoice_id', 'carrier', 'packing_slip', 'signature', 'state'];
+    protected $fillable = ['invoice_id', 'carrier', 'packing_slip', 'signature', 'state', 'created_by'];
 
     public function hasManyStocks()
     {
@@ -15,5 +15,9 @@ class Appliance_Delivery extends Model
 
     public function getInvoice(){
         return $this->belongsTo('App\Appliance_Invoice', 'invoice_id', 'id');
+    }
+
+    public function getCreated_by(){
+        return $this->belongsTo('App\User', 'created_by', 'id');
     }
 }

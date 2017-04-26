@@ -39,6 +39,9 @@
                                 carrier
                             </th>
                             <th>
+                                created_by
+                            </th>
+                            <th>
                                 created_at
                             </th>
                             <th>
@@ -50,8 +53,9 @@
                         @foreach ($deliveries as $delivery)
                             <tr>
                                 <td>{{ $delivery->carrier }}</td>
+                                <td>@if($delivery->getCreated_by){{ $delivery->getCreated_by->name}}@endif</td>
                                 <td>{{ $delivery->created_at }}</td>
-                                <td><a href="{{ url('appliance/delivery/packing-slip/'.$delivery->id) }}" target="_blank" class="btn btn-primary ">download</a>
+                                <td><a href="{{ url('appliance/delivery/packing-slip/'.$delivery->id) }}" target="_blank" class="btn btn-primary ">view</a>
                                 </td>
                             </tr>
                         @endforeach

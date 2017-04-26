@@ -41,6 +41,9 @@
                                 amount
                             </th>
                             <th>
+                                created_by
+                            </th>
+                            <th>
                                 created_at
                             </th>
                         </tr>
@@ -49,6 +52,7 @@
                         @foreach ($deposits as $deposit)
                             <tr>
                                 <td>{{ $deposit->amount }}</td>
+                                <td>@if($deposit->getCreated_by){{ $deposit->getCreated_by->name}}@endif</td>
                                 <td>{{ $deposit->created_at }}</td>
                             </tr>
                         @endforeach
