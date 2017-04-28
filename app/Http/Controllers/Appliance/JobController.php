@@ -54,13 +54,18 @@ class JobController extends Controller
         $this->validate($request, [
 //            'receipt_id' => 'required|unique:appliance__invoices,receipt_id,'.$id,
             'job_id' => 'required',
-            'price' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:0',
+            'fee' => 'numeric|min:0',
             'customer_name' => 'required',
             'address' => 'required',
         ]);
 
-        if (Appliance_Invoice::find($id)->update($request->all())) {
-            return redirect('appliance/invoice/job')->withErrors('更新成功！');
+        $t = $request->all();
+        if($t['fee']>$t['price']){
+            return redirect()->back()->withInput()->withErrors('invalid deliver fee amount！');
+        }
+        if (Appliance_Invoice::find($id)->update($t)) {
+            return redirect('appliance/invoice/job/'.$id)->withErrors('更新成功！');
         } else {
             return redirect()->back()->withInput()->withErrors('更新失败！');
         }

@@ -20,6 +20,7 @@ class CreateApplianceInvoicesTable extends Migration
             $table->string('customer_name')->nullable();
             $table->string('address')->nullable();
             $table->unsignedFloat('price')->default(0);
+            $table->unsignedFloat('fee')->default(0);
             $table->unsignedInteger('state')->default(0);
             $table->unsignedInteger('type')->default(0);
             $table->unsignedInteger('created_by');

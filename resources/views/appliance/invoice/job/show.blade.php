@@ -52,6 +52,7 @@
                             <!-- /.modal -->
                         @endcan
                     @endif
+                    <a href="{{ url('appliance/invoice/job/'.$invoice->id.'/edit') }}" class="btn btn-success pull-right">修改</a>
                     <table width="100%" class="table">
                         <thead>
                             <tr>
@@ -62,6 +63,7 @@
                                 <th>Final Price</th>
                                 <th>Customer</th>
                                 <th>Address</th>
+                                <th>Deliver Fee</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,6 +75,7 @@
                                 <td>{{$invoice->price}}</td>
                                 <td>{{$invoice->customer_name}}</td>
                                 <td>{{$invoice->address}}</td>
+                                <td>{{$invoice->fee}}</td>
                             </tr>
                         </tbody>
                     </table>

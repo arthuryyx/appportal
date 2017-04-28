@@ -41,10 +41,17 @@
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>final price:</strong>
-                                    {!! Form::number('price', null, array('class' => 'form-control', 'required' => 'required')) !!}
+                                    {!! Form::number('price', null, array('class' => 'form-control', 'step' => 'any', 'min' => '0', 'required' => 'required')) !!}
                                 </div>
                             </div>
                             @endcan
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>deliver fee:</strong>
+                                    {!! Form::number('fee', null, array('class' => 'form-control', 'step' => 'any', 'min' => '0', 'required' => 'required')) !!}
+                                </div>
+                            </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">

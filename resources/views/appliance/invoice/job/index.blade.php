@@ -57,7 +57,7 @@
                                 state
                             </th>
                             <th></th>
-                            <th></th>
+                            {{--<th></th>--}}
                         </tr>
                         </thead>
                         <tbody>
@@ -78,8 +78,8 @@
                                         <label class="label label-primary">Exception</label>
                                     @endif
                                 </td>
-                                <td><a href="{{ url('appliance/invoice/job/'.$invoice->id) }}" class="btn btn-info">详情</a></td>
-                                <td><a href="{{ url('appliance/invoice/job/'.$invoice->id.'/edit') }}" class="btn btn-success">修改</a></td>
+                                <td><a href="{{ url('appliance/invoice/job/'.$invoice->id) }}" class="btn btn-success">详情</a></td>
+                                {{--<td><a href="{{ url('appliance/invoice/job/'.$invoice->id.'/edit') }}" class="btn btn-success">修改</a></td>--}}
                             </tr>
                         @endforeach
                         </tbody>
