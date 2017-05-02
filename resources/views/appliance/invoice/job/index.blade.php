@@ -50,6 +50,9 @@
                             <th>
                                 created_by
                             </th>
+                            <th>
+                                final price
+                            </th>
                             {{--<th>--}}
                                 {{--created_at--}}
                             {{--</th>--}}
@@ -68,6 +71,7 @@
                                 <td>{{ $invoice->customer_name }}</td>
                                 <td>{{ $invoice->address }}</td>
                                 <td>{{ $invoice->getCreated_by->name }}</td>
+                                <td>{{ $invoice->price }}</td>
                                 {{--<td>{{ $invoice->created_at->format('d-m-Y') }}</td>--}}
                                 <td>
                                     @if($invoice->state == 0)
