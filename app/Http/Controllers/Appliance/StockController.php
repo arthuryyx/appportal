@@ -330,6 +330,12 @@ class StockController extends Controller
         return $pdf->stream();
     }
 
+
+    public function invoiceHtml($id){
+        return view('appliance.pdf.invoice')->withInvoice(Appliance_Invoice::find($id))
+            ->withStocks(Appliance_Stock::where('assign_to', $id)->groupBy('aid')->select('aid', DB::raw('count(aid) as total'))->get());
+    }
+
 //    public function exportAssigned(){
 //        $data = Stock::where('state', 2)->orderBy('assign_to')->get();
 //        $date = date('Y-m-d H:i:s');

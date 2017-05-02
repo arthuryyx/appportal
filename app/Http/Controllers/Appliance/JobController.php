@@ -93,7 +93,7 @@ class JobController extends Controller
         }
     }
 
-    public function html($id){
-        return view('appliance.pdf.invoice')->withInvoice(Appliance_Invoice::with('hasManyStocks')->find($id));
-    }
+//    public function html($id){
+//        return view('appliance.pdf.invoice')->withInvoice(Appliance_Invoice::with('hasManyStocks')->find($id));
+//    }
 }

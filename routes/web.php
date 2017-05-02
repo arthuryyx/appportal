@@ -45,7 +45,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
     Route::resource('invoice/job', 'JobController');
     Route::resource('invoice/bulk', 'BulkController');
     Route::post('invoice/paid', 'JobController@paid');
-    Route::get('invoice/job/{id}/html', 'JobController@html');
+    Route::get('invoice/job/{id}/html', 'StockController@invoiceHtml');
     Route::get('stock/index/{state}', 'StockController@index');
     Route::post('stock/job/assign', 'StockController@assign');
     Route::post('stock', 'StockController@store');

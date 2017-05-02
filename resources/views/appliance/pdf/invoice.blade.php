@@ -1933,9 +1933,9 @@ AA==
             <td class=xl7629136 style='border-top:none;border-left:none'>LINE TOTAL</td>
         </tr>
 
-        @foreach ($invoice->hasManyStocks as $stock)
+        @foreach ($stocks as $stock)
             <tr height=21 style='height:15.75pt'>
-                <td height=21 class=xl10629136 style='height:15.75pt;border-top:none'>1</td>
+                <td height=21 class=xl10629136 style='height:15.75pt;border-top:none'>{{ $stock->total }}</td>
                 <td class=xl10729136 style='border-top:none;border-left:none'>{{ $stock->appliance->model }}</td>
                 <td colspan=2 class=xl12129136 width=222 style='border-right:.5pt solid #3B5E91;border-left:none;width:167pt'>{{ $stock->appliance->belongsToBrand->name }}: {{ $stock->appliance->belongsToCategory->name }}</td>
                 <td class=xl8929136 style='border-top:none;border-left:none'>　</td>
