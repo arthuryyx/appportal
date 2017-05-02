@@ -52,7 +52,7 @@
                             <!-- /.modal -->
                         @endcan
                     @endif
-                    <a href="{{ url('appliance/invoice/job/'.$invoice->id.'/html') }}" class="btn btn-primary">Print</a>
+                    <a href="{{ url('appliance/invoice/job/'.$invoice->id.'/html') }}" class="btn btn-primary" target="_blank">Print</a>
                     <a href="{{ url('appliance/invoice/job/'.$invoice->id.'/edit') }}" class="btn btn-success">Edit</a>
                     <table width="100%" class="table">
                         <thead>
