@@ -14,8 +14,8 @@ class DeliveryController extends Controller
     }
     public function exportPackingSlip($delivery){
         $data = Appliance_Delivery::with('hasManyStocks')->with('getInvoice')->find($delivery);
-        return view('appliance.pdf.invoice')->withDelivery($data);
-        $pdf = PDF::loadView('appliance.pdf.invoice', [ 'delivery' => $data]);
+        return view('appliance.pdf.slip')->withDelivery($data);
+        $pdf = PDF::loadView('appliance.pdf.slip', [ 'delivery' => $data]);
 
         return $pdf->stream();
     }
