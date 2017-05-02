@@ -1977,7 +1977,7 @@ AA==
             <td class=xl6829136></td>
             <td class=xl8029136></td>
             <td class=xl8129136>Sales Tax</td>
-            <td class=xl10529136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format($invoice->price * 0.15, 2, '.', ',')}}<span
+            <td class=xl10529136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format($invoice->price * 0.15 / 1.15, 2, '.', ',')}}<span
                         style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{{--144.78 --}}</td>
         </tr>
         <tr height=21 style='mso-height-source:userset;height:15.95pt'>
