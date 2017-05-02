@@ -25,7 +25,7 @@
                 <div class="panel-body">
                     @if($invoice->state == 0)
                         @can('appliance_confirm_payment')
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#myModalpayment"}}>Payment received</button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#myModalpayment"}}>Payment</button>
                             <!-- Modal -->
                             <div class="modal fade" id={{"myModalpayment"}} tabindex="-1" role="dialog">
                                 <div class="modal-dialog">
@@ -52,7 +52,8 @@
                             <!-- /.modal -->
                         @endcan
                     @endif
-                    <a href="{{ url('appliance/invoice/job/'.$invoice->id.'/edit') }}" class="btn btn-success pull-right">修改</a>
+                    <a href="{{ url('appliance/invoice/job/'.$invoice->id.'/html') }}" class="btn btn-primary">Print</a>
+                    <a href="{{ url('appliance/invoice/job/'.$invoice->id.'/edit') }}" class="btn btn-success">Edit</a>
                     <table width="100%" class="table">
                         <thead>
                             <tr>
