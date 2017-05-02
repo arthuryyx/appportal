@@ -92,4 +92,8 @@ class JobController extends Controller
             return redirect()->back()->withErrors('定金不足！');
         }
     }
+
+    public function html($id){
+        return view('appliance.pdf.invoice')->withInvoice(Appliance_Invoice::with('hasManyStocks')->find($id));
+    }
 }

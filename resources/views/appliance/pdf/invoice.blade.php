@@ -1820,7 +1820,7 @@ AA==
             <td class=xl14329136 width=110 style='width:83pt'>　</td>
             {{--<td class=xl14429136 width=108 style='width:81pt'>Tax<span
                         style='mso-spacerun:yes'>&nbsp; </span>INVOICE</td>--}}
-            <td class=xl14429136 width=108 style='width:81pt'>Delivery</td>
+            <td class=xl14429136 width=108 style='width:81pt'>INVOICE</td>
             <td class=xl14329136 width=89 style='width:67pt'>　</td>
         </tr>
         <tr height=22 style='mso-height-source:userset;height:16.5pt'>
@@ -1841,51 +1841,51 @@ AA==
             <td class=xl6529136></td>
             <td colspan=3 class=xl13129136>Tax Invoice<span
                         style='mso-spacerun:yes'>&nbsp; </span>NO.<span
-                        style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp; </span>{{$delivery->getInvoice->receipt_id}}</td>
+                        style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp; </span>{{$invoice->receipt_id}}</td>
         </tr>
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
             <td colspan=2 height=18 class=xl11929136 style='height:14.1pt'>East
                 Tamaki<span style='mso-spacerun:yes'>&nbsp;</span></td>
             <td class=xl6529136></td>
             <td colspan=3 class=xl13129136>DATE :<span
-                        style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span>{{$delivery->getInvoice->created_at->format('d-m-Y')}}</td>
+                        style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span>{{$invoice->created_at->format('d-m-Y')}}</td>
         </tr>
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
             <td colspan=2 height=18 class=xl12529136 style='height:14.1pt'>Tel: 09
                 2174888</td>
             <td colspan=2 class=xl10829136>CUSTOMER ID</td>
-            <td colspan=2 class=xl12529136>{{$delivery->getInvoice->job_id}}</td>
+            <td colspan=2 class=xl12529136>{{$invoice->job_id}}</td>
         </tr>
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
             <td colspan=2 height=18 class=xl12929136 style='height:14.1pt'><a
-                        href="mailto:{{$delivery->getInvoice->getCreated_by->email}}">{{$delivery->getInvoice->getCreated_by->email}}</a></td>
+                        href="mailto:{{$invoice->getCreated_by->email}}">{{$invoice->getCreated_by->email}}</a></td>
             <td colspan=2 class=xl6929136></td>
             <td class=xl7829136></td>
             <td class=xl6929136></td>
         </tr>
-        {{--<tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>--}}
-            {{--<td height=18 class=xl6529136 colspan=2 style='height:14.1pt'><span--}}
-                        {{--style='mso-spacerun:yes'>&nbsp;&nbsp; </span>GST NO:<span--}}
-                        {{--style='mso-spacerun:yes'>&nbsp; </span>120-636-316</td>--}}
-            {{--<td class=xl6529136></td>--}}
-            {{--<td class=xl6529136></td>--}}
-            {{--<td class=xl6529136></td>--}}
-            {{--<td class=xl6529136></td>--}}
-        {{--</tr>--}}
+        <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
+            <td height=18 class=xl6529136 colspan=2 style='height:14.1pt'><span
+                        style='mso-spacerun:yes'>&nbsp;&nbsp; </span>GST NO:<span
+                        style='mso-spacerun:yes'>&nbsp; </span>120-636-316</td>
+            <td class=xl6529136></td>
+            <td class=xl6529136></td>
+            <td class=xl6529136></td>
+            <td class=xl6529136></td>
+        </tr>
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
             <td height=18 class=xl6829136 style='height:14.1pt'></td>
             <td class=xl6829136></td>
             <td class=xl6829136></td>
-            {{--<td colspan=3 rowspan=2 class=xl13229136 width=307 style='width:231pt'>ACC NUM: ANZ 01-0190-0377780-00<span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>ACC NAME: Appliance Star NZ Ltd</td>--}}
+            <td colspan=3 rowspan=2 class=xl13229136 width=307 style='width:231pt'>ACC NUM: ANZ 01-0190-0377780-00</br>ACC NAME: Appliance Star NZ Ltd</td>
         </tr>
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
             <td height=18 class=xl7029136 width=82 style='height:14.1pt;width:62pt'>SOLD
                 TO</td>
-            <td colspan=2 class=xl14229136 width=282 style='width:212pt'>{{$delivery->getInvoice->customer_name}}</td>
+            <td colspan=2 class=xl14229136 width=282 style='width:212pt'>{{$invoice->customer_name}}</td>
         </tr>
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
             <td height=18 class=xl8229136 style='height:14.1pt'>ADD</td>
-            <td class=xl11229136 width=170 style='width:128pt'>{{$delivery->getInvoice->address}}</td>
+            <td class=xl11229136 width=170 style='width:128pt'>{{$invoice->address}}</td>
             <td class=xl9229136></td>
             <td class=xl8529136></td>
             <td class=xl8529136></td>
@@ -1915,7 +1915,7 @@ AA==
             <td colspan=2 class=xl13329136 style='border-right:.5pt solid #3B5E91;
   border-left:none'>{{--Kenneth--}}</td>
             <td colspan=2 class=xl13329136 style='border-right:.5pt solid black;
-  border-left:none'>{{$delivery->getInvoice->getCreated_by->name}}</td>
+  border-left:none'>{{$invoice->getCreated_by->name}}</td>
         </tr>
         <tr height=21 style='mso-height-source:userset;height:15.95pt'>
             <td height=21 class=xl8629136 style='height:15.95pt;border-top:none'>　</td>
@@ -1933,23 +1933,29 @@ AA==
             <td class=xl7629136 style='border-top:none;border-left:none'>LINE TOTAL</td>
         </tr>
 
-        @foreach ($delivery->hasManyStocks as $stock)
+        @foreach ($invoice->hasManyStocks as $stock)
             <tr height=21 style='height:15.75pt'>
                 <td height=21 class=xl10629136 style='height:15.75pt;border-top:none'>1</td>
                 <td class=xl10729136 style='border-top:none;border-left:none'>{{ $stock->appliance->model }}</td>
-                <td colspan=2 class=xl12129136 width=222 style='border-right:.5pt solid #3B5E91;
-  border-left:none;width:167pt'>{{ $stock->appliance->belongsToBrand->name }}: {{ $stock->appliance->belongsToCategory->name }}</td>
+                <td colspan=2 class=xl12129136 width=222 style='border-right:.5pt solid #3B5E91;border-left:none;width:167pt'>{{ $stock->appliance->belongsToBrand->name }}: {{ $stock->appliance->belongsToCategory->name }}</td>
                 <td class=xl8929136 style='border-top:none;border-left:none'>　</td>
                 <td class=xl9029136 style='border-top:none;border-left:none'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{--530.00 --}}</td>
             </tr>
         @endforeach
-
-        @for($i=15 - $delivery->hasManyStocks->count(); $i>0; $i--)
+        @if($invoice->fee>0)
+            <tr height=21 style='height:15.75pt'>
+                <td height=21 class=xl10629136 style='height:15.75pt;border-top:none'>1</td>
+                <td class=xl10729136 style='border-top:none;border-left:none'>Delivery Fee</td>
+                <td colspan=2 class=xl12129136 width=222 style='border-right:.5pt solid #3B5E91;border-left:none;width:167pt'></td>
+                <td class=xl8929136 style='border-top:none;border-left:none'>${{number_format($invoice->fee, 2, '.', ',')}}</td>
+                <td class=xl9029136 style='border-top:none;border-left:none'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{--530.00 --}}</td>
+            </tr>
+        @endif
+        @for($i=17 - ($invoice->fee>0?$invoice->hasManyStocks->count()+1:$invoice->hasManyStocks->count()); $i>0; $i--)
             <tr height=21 style='height:15.75pt'>
                 <td height=21 class=xl10629136 style='height:15.75pt;border-top:none'></td>
                 <td class=xl10729136 style='border-top:none;border-left:none'></td>
-                <td colspan=2 class=xl12129136 width=222 style='border-right:.5pt solid #3B5E91;
-  border-left:none;width:167pt'></td>
+                <td colspan=2 class=xl12129136 width=222 style='border-right:.5pt solid #3B5E91;border-left:none;width:167pt'></td>
                 <td class=xl8929136 style='border-top:none;border-left:none'>　</td>
                 <td class=xl9029136 style='border-top:none;border-left:none'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{--530.00 --}}</td>
             </tr>
@@ -1962,7 +1968,7 @@ AA==
             <td colspan=2 class=xl11629136 style='border-right:.5pt solid #3B5E91'><span
                         style='mso-spacerun:yes'>&nbsp;</span>SUBTOTAL<span
                         style='mso-spacerun:yes'>&nbsp;</span></td>
-            <td class=xl10429136><span style='mso-spacerun:yes'>&nbsp;</span>$<span
+            <td class=xl10429136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format($invoice->price * 0.75, 2, '.', ',')}}<span
                         style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span>{{--1,110.00 --}}</td>
         </tr>
         <tr height=24 style='mso-height-source:userset;height:18.0pt'>
@@ -1971,7 +1977,7 @@ AA==
             <td class=xl6829136></td>
             <td class=xl8029136></td>
             <td class=xl8129136>Sales Tax</td>
-            <td class=xl10529136><span style='mso-spacerun:yes'>&nbsp;</span>$<span
+            <td class=xl10529136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format($invoice->price * 0.15, 2, '.', ',')}}<span
                         style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{{--144.78 --}}</td>
         </tr>
         <tr height=21 style='mso-height-source:userset;height:15.95pt'>
@@ -1980,25 +1986,25 @@ AA==
             <td class=xl7529136>　</td>
             <td class=xl6829136></td>
             <td class=xl7129136>TOTAL:</td>
-            <td class=xl10929136><span style='mso-spacerun:yes'>&nbsp;</span>$<span
+            <td class=xl10929136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format($invoice->price, 2, '.', ',')}}<span
                         style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span>{{--1,110.00 --}}</td>
         </tr>
-        <tr height=21 style='mso-height-source:userset;height:15.95pt'>
-            <td height=21 class=xl6829136 style='height:15.95pt'></td>
-            <td class=xl6829136></td>
-            <td class=xl6829136></td>
-            <td class=xl6929136></td>
-            <td class=xl10829136>Pay today</td>
-            <td class=xl11129136 align=right>{{--$0.00 --}}</td>
-        </tr>
-        <tr height=21 style='mso-height-source:userset;height:15.95pt'>
-            <td height=21 class=xl7329136 style='height:15.95pt'>　</td>
-            <td class=xl7329136>　</td>
-            <td class=xl7329136>　</td>
-            <td class=xl6829136></td>
-            <td class=xl7929136>PAID Due</td>
-            <td class=xl11029136 align=right>{{--1,110.00--}}</td>
-        </tr>
+        {{--<tr height=21 style='mso-height-source:userset;height:15.95pt'>--}}
+            {{--<td height=21 class=xl6829136 style='height:15.95pt'></td>--}}
+            {{--<td class=xl6829136></td>--}}
+            {{--<td class=xl6829136></td>--}}
+            {{--<td class=xl6929136></td>--}}
+            {{--<td class=xl10829136>Pay today</td>--}}
+            {{--<td class=xl11129136 align=right>--}}{{--$0.00 --}}{{--</td>--}}
+        {{--</tr>--}}
+        {{--<tr height=21 style='mso-height-source:userset;height:15.95pt'>--}}
+            {{--<td height=21 class=xl7329136 style='height:15.95pt'>　</td>--}}
+            {{--<td class=xl7329136>　</td>--}}
+            {{--<td class=xl7329136>　</td>--}}
+            {{--<td class=xl6829136></td>--}}
+            {{--<td class=xl7929136>PAID Due</td>--}}
+            {{--<td class=xl11029136 align=right>--}}{{--1,110.00--}}{{--</td>--}}
+        {{--</tr>--}}
         <tr height=20 style='height:15.0pt'>
             <td height=20 class=xl6529136 style='height:15.0pt'></td>
             <td class=xl6529136></td>
