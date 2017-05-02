@@ -1968,7 +1968,7 @@ AA==
             <td colspan=2 class=xl11629136 style='border-right:.5pt solid #3B5E91'><span
                         style='mso-spacerun:yes'>&nbsp;</span>SUBTOTAL<span
                         style='mso-spacerun:yes'>&nbsp;</span></td>
-            <td class=xl10429136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format($invoice->price * 0.75, 2, '.', ',')}}<span
+            <td class=xl10429136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format($invoice->price / 1.15, 2, '.', ',')}}<span
                         style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span>{{--1,110.00 --}}</td>
         </tr>
         <tr height=24 style='mso-height-source:userset;height:18.0pt'>
