@@ -26,4 +26,9 @@ class Appliance_Invoice extends Model
     public function getCreated_by(){
         return $this->belongsTo('App\User', 'created_by', 'id');
     }
+
+    public function getState()
+    {
+        return $this->hasMany('App\Appliance_Stock', 'assign_to', 'id')->where('state', '<', 3);
+    }
 }
