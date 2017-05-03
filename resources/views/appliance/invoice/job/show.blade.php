@@ -231,7 +231,7 @@
                                     <td>{{ $stock->appliance->belongsToCategory->name }}</td>
                                     <td>
                                         @if($stock->state == 0)
-                                            <label class="label label-warning">Pending payments</label>
+                                            <label class="label label-warning">Pending order</label>
                                         @elseif($stock->state == 1)
                                             <label class="label label-info">Order placed</label>
                                         @elseif($stock->state == 2)
