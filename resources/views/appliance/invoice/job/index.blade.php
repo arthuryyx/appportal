@@ -118,9 +118,10 @@
     <script>
         $(document).ready(function() {
             $('#dataTables').DataTable({
-//                columnDefs: [
+                columnDefs: [
+                    { "width": "25%", "targets": 3 }
 //                    { type: 'date-eu', targets: 5 }
-//                ],
+                ],
                 responsive: true,
                 pageLength: 100,
                 order: [0]
