@@ -82,7 +82,9 @@
                                         <label class="label label-primary">Exception</label>
                                     @endif
 
-                                    @if($invoice->getState->count() == 0)
+                                    @if($invoice->hasManyStocks->count() == 0)
+                                        <label class="label label-warning">Empty</label>
+                                    @elseif($invoice->getState->count() == 0)
                                         <label class="label label-success">Delivered</label>
                                     @elseif($invoice->getState->count() > 0)
                                         <label class="label label-danger">&nbsp;&nbsp;Hold&nbsp;&nbsp;</label>

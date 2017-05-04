@@ -29,6 +29,6 @@ class Appliance_Invoice extends Model
 
     public function getState()
     {
-        return $this->hasMany('App\Appliance_Stock', 'assign_to', 'id')->where('state', '<', 3);
+        return $this->hasManyStocks()->where('state', '<', 3);
     }
 }
