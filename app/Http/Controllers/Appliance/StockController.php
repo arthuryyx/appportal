@@ -240,6 +240,9 @@ class StockController extends Controller
         ]);
         $t = $request->all();
         $stocks = Appliance_Stock::where('state', 2)->whereIn('id', $t['id'])->get();
+        if($stocks->count()==0){
+            return redirect()->back()->withErrors('出库失败！');
+        }
         DB::beginTransaction();
         try {
             $dr = Appliance_Delivery::create(['invoice_id' => $invoice, 'carrier' => $t['carrier'], 'created_by' => Auth::user()->id]);
@@ -249,7 +252,7 @@ class StockController extends Controller
         } catch(\Exception $e)
         {
             DB::rollback();
-            return redirect()->back()->withInput()->withErrors($e);
+            return redirect()->back()->withErrors($e);
         }
         DB::commit();
         return redirect('appliance/delivery/index/'.$invoice)->withErrors('出库成功！');
