@@ -1848,7 +1848,7 @@ AA==
                 Tamaki<span style='mso-spacerun:yes'>&nbsp;</span></td>
             <td class=xl6529136></td>
             <td colspan=3 class=xl13129136>DATE :<span
-                        style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span>{{$delivery->getInvoice->created_at->format('d-m-Y')}}</td>
+                        style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span>{{$delivery->created_at->format('d-m-Y')}}</td>
         </tr>
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
             <td colspan=2 height=18 class=xl12529136 style='height:14.1pt'>Tel: 09
