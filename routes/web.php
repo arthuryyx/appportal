@@ -41,6 +41,11 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
     Route::resource('material/board', 'BoardController');
 
 });
+
+Route::group(['middleware' => 'auth', 'namespace' => 'Customer', 'prefix' => 'customer'], function() {
+    Route::resource('/', 'CustomerController');
+});
+
 Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'appliance'], function() {
     Route::resource('invoice/job', 'JobController');
     Route::resource('invoice/bulk', 'BulkController');

@@ -286,47 +286,47 @@
                     <li>
                         <a href="{{ url('/') }}"><i class="fa fa-th-list fa-fw"></i> Dashboard</a>
                     </li>
-                    </li>
-                        <li>
-                            <a href="#"><i class="fa fa-gears fa-fw"></i> Config<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                @can('root')
-                                <li>
-                                    <a href="#"><i class="fa fa-gears fa-fw"></i> Account<span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="{{ url('admin/permission') }}"><i class="fa fa-gears fa-fw"></i> Permission</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ url('admin/role') }}"><i class="fa fa-gears fa-fw"></i> Role</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ url('admin/account') }}"><i class="fa fa-gears fa-fw"></i> User</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                                @endcan
-                                <li>
-                                    <a href="{{ url('admin/appliance') }}"><i class="fa fa-gears fa-fw"></i> Appliance</a>
-                                </li>
-                                @can('root')
-                                <li>
-                                    <a href="#"><i class="fa fa-gears fa-fw"></i> Material<span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="{{ url('admin/material/board') }}"><i class="fa fa-gears fa-fw"></i> Board</a>
-                                        </li>
 
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                                @endcan
-                            </ul>
-                        </li>
-                    {{--<li>--}}
-                        {{--<a href="{{ url('admin/project') }}"><i class="fa fa-th- fa-folder-open fa-fw"></i> Project</a>--}}
-                    {{--</li>--}}
+                    <li>
+                        <a href="#"><i class="fa fa-gears fa-fw"></i> Config<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            @can('root')
+                            <li>
+                                <a href="#"><i class="fa fa-gears fa-fw"></i> Account<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="{{ url('admin/permission') }}"><i class="fa fa-gears fa-fw"></i> Permission</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('admin/role') }}"><i class="fa fa-gears fa-fw"></i> Role</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('admin/account') }}"><i class="fa fa-gears fa-fw"></i> User</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-third-level -->
+                            </li>
+                            @endcan
+                            <li>
+                                <a href="{{ url('admin/appliance') }}"><i class="fa fa-gears fa-fw"></i> Appliance</a>
+                            </li>
+                            @can('root')
+                            <li>
+                                <a href="#"><i class="fa fa-gears fa-fw"></i> Material<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="{{ url('admin/material/board') }}"><i class="fa fa-gears fa-fw"></i> Board</a>
+                                    </li>
+
+                                </ul>
+                                <!-- /.nav-third-level -->
+                            </li>
+                            @endcan
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{{ url('customer') }}"><i class="fa fa-user fa-fw"></i> Customer</a>
+                    </li>
                     <li>
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Invoice<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
