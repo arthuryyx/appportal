@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header">New Customer</h2>
+            <h2 class="page-header">New Individual Customer</h2>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -18,19 +18,19 @@
                             {!! implode('<br>', $errors->all()) !!}
                         </div>
                     @endif
-                    {!! Form::open(['url' => 'customer','method'=>'POST']) !!}
+                    {!! Form::open(['url' => 'customer/individual','method'=>'POST']) !!}
                     <div class="row">
 
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <label>{!! Form::radio('type', 0, true ) !!}
-                                    Individual
-                                </label>
-                                <label>{!! Form::radio('type', 1 ) !!}
-                                    Corporation
-                                </label>
-                            </div>
-                        </div>
+                        {{--<div class="col-xs-12 col-sm-12 col-md-12">--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label>{!! Form::radio('type', 0, true ) !!}--}}
+                                    {{--Individual--}}
+                                {{--</label>--}}
+                                {{--<label>{!! Form::radio('type', 1 ) !!}--}}
+                                    {{--Corporation--}}
+                                {{--</label>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
@@ -49,7 +49,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong>phone:</strong>
-                                {!! Form::number('phone', null, array('class' => 'form-control')) !!}
+                                {!! Form::text('phone', null, array('class' => 'form-control')) !!}
                             </div>
                         </div>
 
@@ -92,10 +92,9 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong>zip:</strong>
-                                {!! Form::number('zip', null, array('class' => 'form-control', 'required' => 'required')) !!}
+                                {!! Form::number('zip', null, array('class' => 'form-control')) !!}
                             </div>
                         </div>
-
 
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">

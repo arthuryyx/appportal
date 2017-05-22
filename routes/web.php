@@ -43,7 +43,13 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
 });
 
 Route::group(['middleware' => 'auth', 'namespace' => 'Customer', 'prefix' => 'customer'], function() {
-    Route::resource('/', 'CustomerController');
+    Route::resource('individual', 'IndividualController');
+    Route::resource('corporation', 'CorporationController');
+    Route::get('address/create/{cid}', 'AddressController@create');
+    Route::post('address', 'AddressController@store');
+    Route::get('address/{id}/edit', 'AddressController@edit');
+    Route::put('address/{id}', 'AddressController@update');
+
 });
 
 Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'appliance'], function() {

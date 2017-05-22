@@ -11,7 +11,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Customer List</h1>
+            <h1 class="page-header">Individual Customer List</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -28,7 +28,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="{{ url('customer/create') }}" class="btn btn-primary ">New</a>
+                    <a href="{{ url('customer/individual/create') }}" class="btn btn-primary ">New</a>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -42,9 +42,6 @@
                                 last name
                             </th>
                             <th>
-                                type
-                            </th>
-                            <th>
                                 phone
                             </th>
                             <th>
@@ -53,7 +50,6 @@
                             <th>
                                 email
                             </th>
-
                             <th>
                                 street
                             </th>
@@ -69,6 +65,7 @@
                             <th>
                                 comment
                             </th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -77,26 +74,15 @@
                             <tr>
                                 <td>{{ $customer->first }}</td>
                                 <td>{{ $customer->last }}</td>
-                                <td>
-                                    @if($invoice->type == 0)
-
-                                    @elseif($invoice->state == 1)
-                                        <label class="label label-success">&nbsp;&nbsp;Company&nbsp;&nbsp;</label>
-                                    @else
-                                        <label class="label label-primary">Exception</label>
-                                    @endif
-                                </td>
                                 <td>{{ $customer->phone }}</td>
                                 <td>{{ $customer->mobile }}</td>
                                 <td>{{ $customer->email }}</td>
-                                <td>{{ $customer->street }}</td>
-                                <td>{{ $customer->sub }}</td>
-                                <td>{{ $customer->city }}</td>
-                                <td>{{ $customer->zip }}</td>
+                                <td>{{ $customer->getDefaultAddress[0]->street }}</td>
+                                <td>{{ $customer->getDefaultAddress[0]->sub }}</td>
+                                <td>{{ $customer->getDefaultAddress[0]->city }}</td>
+                                <td>{{ $customer->getDefaultAddress[0]->zip }}</td>
                                 <td>{{ $customer->comment }}</td>
-
-                                <td><a href="{{ url('appliance/invoice/job/'.$invoice->id) }}" class="btn btn-success">详情</a></td>
-                                {{--<td><a href="{{ url('appliance/invoice/job/'.$invoice->id.'/edit') }}" class="btn btn-success">修改</a></td>--}}
+                                <td><a href="{{ url('customer/individual/'.$customer->id) }}" class="btn btn-success">详情</a></td>
                             </tr>
                         @endforeach
                         </tbody>

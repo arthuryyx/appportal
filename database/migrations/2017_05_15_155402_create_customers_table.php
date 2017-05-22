@@ -17,15 +17,11 @@ class CreateCustomersTable extends Migration
             $table->increments('id');
             $table->string('first');
             $table->string('last')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('mobile')->nullable();
-            $table->string('email')->nullable();
-            $table->string('street')->nullable();
-            $table->string('sub')->nullable();
-            $table->string('city')->nullable();
-            $table->string('zip')->nullable();
-            $table->unsignedInteger('type')->default(0);
+            $table->string('phone')->nullable()->unique();
+            $table->string('mobile')->nullable()->unique();
+            $table->string('email')->nullable()->unique();
             $table->string('comment')->nullable();
+            $table->unsignedInteger('type')->default(0);
             $table->timestamps();
         });
     }

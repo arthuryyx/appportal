@@ -325,7 +325,13 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="{{ url('customer') }}"><i class="fa fa-user fa-fw"></i> Customer</a>
+                        <a href="#"><i class="fa fa-th- fa-user fa-fw"></i> Customer<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ url('customer/individual') }}">Individual</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Invoice<span class="fa arrow"></span></a>
