@@ -46,6 +46,10 @@
                             </div>
                             @endcan
 
+                            @cannot('modify_final_price')
+                                    {!! Form::hidden('price', null, array('step' => 'any', 'min' => '0')) !!}
+                            @endcannot
+
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>deliver fee:</strong>
