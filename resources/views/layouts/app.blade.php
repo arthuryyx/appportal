@@ -330,6 +330,9 @@
                             <li>
                                 <a href="{{ url('customer/individual') }}">Individual</a>
                             </li>
+                            <li>
+                                <a href="{{ url('customer/corporation') }}">Corporation</a>
+                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
