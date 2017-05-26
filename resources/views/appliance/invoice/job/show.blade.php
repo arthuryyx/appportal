@@ -88,34 +88,48 @@
                             <img src="{{ asset('img/paid.png')}}" height="150" width="150" >
                         @endif
                     </div>
-                    <div class="col-lg-3">
-                        {!! Form::open(['url' => 'appliance/stock/job/assign','method'=>'POST']) !!}
+                    {{--<div class="col-lg-3">--}}
+                        {{--{!! Form::open(['url' => 'appliance/stock/job/assign','method'=>'POST']) !!}--}}
+                        {{--<div class="row">--}}
+                            {{--<div class="col-xs-10 col-sm-10 col-md-10">--}}
+                                {{--<strong>from stock</strong>--}}
+                                {{--<select class="sid form-control" name="sid" required="required"></select>--}}
+                                {{--{{ Form::hidden('assign_to', $invoice->id) }}--}}
+                                {{--{{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--{!! Form::close() !!}--}}
+                    {{--</div>--}}
+                    {{--<div class="col-lg-3">--}}
+                        {{--{!! Form::open(['url' => 'appliance/stock','method'=>'POST']) !!}--}}
+                        {{--<div class="row">--}}
+                            {{--<div class="col-xs-10 col-sm-10 col-md-10">--}}
+                                {{--<strong>order new</strong>--}}
+                                {{--<select class="aid form-control" name="aid" required="required"></select>--}}
+                                {{--<strong>quantity</strong>--}}
+                                {{--{{ Form::number('qty', 1, array('class' => 'form-control', 'required' => 'required')) }}--}}
+                                {{--{{ Form::hidden('job', $invoice->id) }}--}}
+                                {{--{{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--{!! Form::close() !!}--}}
+                    {{--</div>--}}
+
+                    <div class="col-lg-4">
+                        {!! Form::open(['url' => 'appliance/stock/allocation','method'=>'POST']) !!}
                         <div class="row">
                             <div class="col-xs-10 col-sm-10 col-md-10">
-                                <strong>from stock</strong>
-                                <select class="sid form-control" name="sid" required="required"></select>
+                                <strong>Appliance</strong>
+                                <select class="aid form-control" name="aid" required="required"></select>
                                 {{ Form::hidden('assign_to', $invoice->id) }}
                                 {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
                             </div>
                         </div>
                         {!! Form::close() !!}
                     </div>
-                    <div class="col-lg-3">
-                        {!! Form::open(['url' => 'appliance/stock','method'=>'POST']) !!}
-                        <div class="row">
-                            <div class="col-xs-10 col-sm-10 col-md-10">
-                                <strong>order new</strong>
-                                <select class="aid form-control" name="aid" required="required"></select>
-                                <strong>quantity</strong>
-                                {{ Form::number('qty', 1, array('class' => 'form-control', 'required' => 'required')) }}
-                                {{ Form::hidden('job', $invoice->id) }}
-                                {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
-                            </div>
-                        </div>
-                        {!! Form::close() !!}
-                    </div>
+
                     @can('appliance_add_deposit')
-                    <div class="col-lg-2">
+                    <div class="col-lg-4">
                         {!! Form::open(['url' => 'appliance/deposit','method'=>'POST']) !!}
                         <div class="row">
                             <div class="col-xs-10 col-sm-10 col-md-10">

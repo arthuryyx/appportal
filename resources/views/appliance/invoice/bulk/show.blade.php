@@ -51,7 +51,7 @@
                                 <select class="aid form-control" name="aid" required="required"></select>
                                 <strong>quantity</strong>
                                 {{ Form::number('qty', 1, array('class' => 'form-control')) }}
-                                {{ Form::hidden('bulk', $invoice->id) }}
+                                {{ Form::hidden('init', $invoice->id) }}
                                 {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
                             </div>
                         </div>

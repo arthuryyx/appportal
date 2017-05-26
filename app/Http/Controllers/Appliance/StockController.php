@@ -81,15 +81,7 @@ class StockController extends Controller
             'qty' => 'required|integer|min:1',
         ]);
         $t = $request->all();
-        if(array_key_exists('job',$t)){
-            $t['init'] = $t['job'];
-            $t['assign_to'] = $t['job'];
-            $t['state'] = 0;
-        } elseif(array_key_exists('bulk',$t)){
-            $t['init'] = $t['bulk'];
-            $t['state'] = 1;
-        }
-
+        $t['state'] = 1;
         DB::beginTransaction();
         try {
             for ($x=$t['qty']; $x>0; $x--) {
@@ -135,11 +127,35 @@ class StockController extends Controller
             'assign_to' => 'required',
             'sid' => 'required',
         ]);
-        $t = $request->all();
-        if (Appliance_Stock::find($t['sid'])->update($t)) {
-            return redirect()->back()->withErrors('更新成功！');
-        } else {
-            return redirect()->back()->withInput()->withErrors('更新失败！');
+        return Appliance_Stock::find($request->input('sid'))->update(['assign_to'=>$request->input('assign_to')]);
+    }
+
+    public function allocation(Request $request){
+        $this->validate($request, [
+            'aid' => 'required',
+        ]);
+        $stock = Appliance_Stock::where('aid', $request->input('aid'))
+            ->where(function ($query){
+                $query->where('state', 1)
+                    ->whereNull('assign_to')
+                    ->orWhere('state', 2)
+                    ->whereNull('assign_to');
+            })->select('id')->first();
+
+        if($stock){
+            $request->merge(['sid'=>$stock->id]);
+            if ($this->assign($request)) {
+                return redirect('appliance/invoice/job/'.$request->input('assign_to'))->withErrors('更新成功！');
+            } else {
+                return redirect('appliance/invoice/job/'.$request->input('assign_to'))->withErrors('更新失败！');
+            }
+        }else{
+            $request->merge(['init'=>$request->input('assign_to'), 'state'=>0]);
+            if (Appliance_Stock::create($request->all())) {
+                return redirect('appliance/invoice/job/'.$request->input('assign_to'))->withErrors('更新成功！');
+            } else {
+                return redirect('appliance/invoice/job/'.$request->input('assign_to'))->withErrors('更新失败！');
+            }
         }
     }
 
