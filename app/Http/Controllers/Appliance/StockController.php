@@ -78,6 +78,7 @@ class StockController extends Controller
     public function store(Request $request){
         $this->validate($request, [
             'aid' => 'required',
+            'init' => 'required|exists:appliance__invoices,id',
             'qty' => 'required|integer|min:1',
         ]);
         $t = $request->all();
@@ -133,6 +134,7 @@ class StockController extends Controller
     public function allocation(Request $request){
         $this->validate($request, [
             'aid' => 'required',
+            'assign_to' => 'required|exists:appliance__invoices,id',
         ]);
         $stock = Appliance_Stock::where('aid', $request->input('aid'))
             ->where(function ($query){
