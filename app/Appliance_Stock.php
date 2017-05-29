@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appliance_Stock extends Model
 {
-    protected $fillable = ['aid', 'init', 'assign_to', 'deliver_to', 'shelf', 'state'];
+    protected $fillable = ['aid', 'init', 'assign_to', 'deliver_to', 'shelf', 'state', 'price'];
 
     public function appliance()
     {

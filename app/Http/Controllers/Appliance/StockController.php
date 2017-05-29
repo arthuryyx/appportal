@@ -123,18 +123,34 @@ class StockController extends Controller
         }
     }
 
+    public function editPrice($id){
+        return view('appliance.invoice.job.price')->withSid($id);
+    }
+
+    public function updatePrice(Request $request, $id){
+        if(is_string($request->input('price')) && $request->input('price') === '')
+            $request->offsetSet('price', null);
+        $obj = Appliance_Stock::find($id);
+        if ($obj->update($request->all())) {
+            return redirect('appliance/invoice/job/'.$obj->assign_to)->withErrors('更新成功！');
+        } else {
+            return redirect('appliance/invoice/job/'.$obj->assign_to)->withErrors('更新失败！');
+        }
+    }
+
     public function assign(Request $request){
         $this->validate($request, [
             'assign_to' => 'required',
             'sid' => 'required',
         ]);
-        return Appliance_Stock::find($request->input('sid'))->update(['assign_to'=>$request->input('assign_to')]);
+        return Appliance_Stock::find($request->input('sid'))->update(['assign_to' => $request->input('assign_to'), 'price' => $request->input('price')]);
     }
 
     public function allocation(Request $request){
         $this->validate($request, [
             'aid' => 'required',
             'assign_to' => 'required|exists:appliance__invoices,id',
+            'price' => 'numeric',
         ]);
         $stock = Appliance_Stock::where('aid', $request->input('aid'))
             ->where(function ($query){
@@ -143,7 +159,8 @@ class StockController extends Controller
                     ->orWhere('state', 2)
                     ->whereNull('assign_to');
             })->select('id')->first();
-
+        if(is_string($request->input('price')) && $request->input('price') === '')
+            $request->offsetUnset('price');
         if($stock){
             $request->merge(['sid'=>$stock->id]);
             if ($this->assign($request)) {
@@ -238,7 +255,7 @@ class StockController extends Controller
         foreach ($t['id'] as $id){
             $obj = Appliance_Stock::find($id);
             if($obj->state == 1 || $obj->state == 2){
-                $obj->update(['assign_to' => null]);
+                $obj->update(['assign_to' => null, 'price' => null]);
             }else{
                 $m = $m.$obj->appliance->model.' not updated.<br>';
             }

@@ -121,6 +121,8 @@
                             <div class="col-xs-10 col-sm-10 col-md-10">
                                 <strong>Appliance</strong>
                                 <select class="aid form-control" name="aid" required="required"></select>
+                                <strong>Price</strong>
+                                {{ Form::number('price', null, array('class' => 'form-control', 'step' => 'any')) }}
                                 {{ Form::hidden('assign_to', $invoice->id) }}
                                 {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
                             </div>
@@ -233,6 +235,9 @@
                                 <th>
                                     State
                                 </th>
+                                <th>
+                                    Price
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -255,6 +260,10 @@
                                         @else
                                             <label class="label label-danger">Exception</label>
                                         @endif
+                                    </td>
+                                    <td>
+                                        {{ $stock->price }}
+                                        <a href="{{ url('appliance/stock/'.$stock->id.'/price') }}" class="btn btn-success pull-right">编辑</a>
                                     </td>
                                 </tr>
                             @endforeach

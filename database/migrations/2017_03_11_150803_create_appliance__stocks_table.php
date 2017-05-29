@@ -21,6 +21,7 @@ class CreateApplianceStocksTable extends Migration
             $table->unsignedInteger('deliver_to')->nullable();
             $table->string('shelf')->nullable();
             $table->integer('state');
+            $table->unsignedFloat('price');
 
             $table->foreign('aid')
                 ->references('id')
