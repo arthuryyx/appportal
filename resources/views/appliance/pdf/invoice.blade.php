@@ -1938,8 +1938,8 @@ AA==
                 <td height=21 class=xl10629136 style='height:15.75pt;border-top:none'>{{ $stock->total }}</td>
                 <td class=xl10729136 style='border-top:none;border-left:none'>{{ $stock->appliance->model }}</td>
                 <td colspan=2 class=xl12129136 width=222 style='border-right:.5pt solid #3B5E91;border-left:none;width:167pt'>{{ $stock->appliance->belongsToBrand->name }}: {{ $stock->appliance->belongsToCategory->name }}</td>
-                <td class=xl8929136 style='border-top:none;border-left:none'>${{number_format($stock->price/$stock->total, 2, '.', ',')}}</td>
-                <td class=xl9029136 style='border-top:none;border-left:none'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${{number_format($stock->price, 2, '.', ',')}}</td>
+                <td class=xl8929136 style='border-top:none;border-left:none'>@if($stock->price>0)${{number_format($stock->price/$stock->total, 2, '.', ',')}}@endif</td>
+                <td class=xl9029136 style='border-top:none;border-left:none'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>@if($stock->price>0)${{number_format($stock->price, 2, '.', ',')}}@endif</td>
             </tr>
         @endforeach
         @if($invoice->fee>0)
