@@ -138,32 +138,26 @@ class StockController extends Controller
         }
     }
 
-    public function assign(Request $request){
-        $this->validate($request, [
-            'assign_to' => 'required',
-            'sid' => 'required',
-        ]);
-        return Appliance_Stock::find($request->input('sid'))->update(['assign_to' => $request->input('assign_to'), 'price' => $request->input('price')]);
-    }
-
     public function allocation(Request $request){
         $this->validate($request, [
             'aid' => 'required',
             'assign_to' => 'required|exists:appliance__invoices,id',
             'price' => 'numeric',
         ]);
+
         $stock = Appliance_Stock::where('aid', $request->input('aid'))
             ->where(function ($query){
                 $query->where('state', 1)
                     ->whereNull('assign_to')
                     ->orWhere('state', 2)
                     ->whereNull('assign_to');
-            })->select('id')->first();
+            })->lockForUpdate()->first();
+
         if(is_string($request->input('price')) && $request->input('price') === '')
             $request->offsetUnset('price');
+
         if($stock){
-            $request->merge(['sid'=>$stock->id]);
-            if ($this->assign($request)) {
+            if ($stock->update(['assign_to' => $request->input('assign_to'), 'price' => $request->input('price')])) {
                 return redirect('appliance/invoice/job/'.$request->input('assign_to'))->withErrors('更新成功！');
             } else {
                 return redirect('appliance/invoice/job/'.$request->input('assign_to'))->withErrors('更新失败！');
