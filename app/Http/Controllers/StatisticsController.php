@@ -21,7 +21,7 @@ class StatisticsController extends Controller
         $data = array();
         foreach ($array as $key => $value){
             $data [count($data)]['label']=User::where('id', $key)->select('name')->first()->name;
-            $data [count($data)-1]['value']=$value;
+            $data [count($data)-1]['value']=sprintf("%.2f", $value);
         }
         return $data;
     }
