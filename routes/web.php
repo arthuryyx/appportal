@@ -87,11 +87,13 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
 
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('tempstock/create', 'StockController@create');
-    Route::post('tempstock', 'StockController@store');
-    Route::get('tempstock/{id}/out', 'StockController@out');
-    Route::delete('tempstock/{id}', 'StockController@destroy');
-    Route::get('tempstock/exportAssigned', 'StockController@exportAssigned');
+//    Route::get('tempstock/create', 'StockController@create');
+//    Route::post('tempstock', 'StockController@store');
+//    Route::get('tempstock/{id}/out', 'StockController@out');
+//    Route::delete('tempstock/{id}', 'StockController@destroy');
+//    Route::get('tempstock/exportAssigned', 'StockController@exportAssigned');
+
+    Route::get('statistics/salesChart', 'StatisticsController@salesChart');
 
     Route::get('settings', 'UserController@settings');
     Route::post('/settings/reset', 'UserController@reset');
