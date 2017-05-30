@@ -140,7 +140,8 @@
                     Morris.Donut({
                         element: 'morris-donut-chart',
                         data: response,
-                        formatter: function (y, data) { return '$' + y }
+                        resize: true
+//                        formatter: function (y, data) { return '$' + y }
                     });
                 },
 
