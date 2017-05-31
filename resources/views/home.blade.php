@@ -104,7 +104,25 @@
     {{--</div>--}}
 {{--</div>--}}
 <!-- /.row -->
+
 <div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{date('M Y')}} Sales
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div id="morris-bar-chart"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+</div>
+
+<div class="row">
+
     <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -130,6 +148,29 @@
 
     <script>
         $(document).ready(function(){
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                url: 'statistics/salesBar',
+                data: '{}',
+                success: function (response) {
+                    Morris.Bar({
+                        element: 'morris-bar-chart',
+                        data: response,
+                        resize: true,
+                        stacked: true,
+                        xkey: 'y',
+                        ykeys: ['a', 'b'],
+                        labels: ['Hold', 'Delivered']
+                    });
+                },
+
+                error: function () {
+                    alert("Error loading data! Please try again.");
+                }
+            });
+
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
