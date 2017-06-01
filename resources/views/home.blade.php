@@ -167,6 +167,9 @@
                 url: 'statistics/salesBar',
                 data: '{}',
                 success: function (response) {
+                    if(response.length == 0){
+                        response.push({'y':'No Data'})
+                    }
                     Morris.Bar({
                         element: 'morris-bar-chart',
                         data: response,
@@ -190,6 +193,10 @@
                 url: 'statistics/salesChart',
                 data: '{}',
                 success: function (response) {
+                    if(response.length == 0){
+                        response.push({'label':'No Data', 'value':0})
+                    }
+
                     Morris.Donut({
                         element: 'morris-donut-chart',
                         data: response,
