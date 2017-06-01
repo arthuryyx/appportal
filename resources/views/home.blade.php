@@ -122,7 +122,19 @@
 </div>
 
 <div class="row">
-
+    <div class="col-lg-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Last 30 days Sales
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div id="morris-line"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
     <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -183,6 +195,28 @@
                         data: response,
                         resize: true
 //                        formatter: function (y, data) { return '$' + y }
+                    });
+                },
+
+                error: function () {
+                    alert("Error loading data! Please try again.");
+                }
+            });
+
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                url: 'statistics/salesLine',
+                data: '{}',
+                success: function (response) {
+                    Morris.Line({
+                        element: 'morris-line',
+                        data: response,
+                        resize: true,
+                        xkey: 'y',
+                        ykeys: ['a', 'b'],
+                        labels: ['Sub Total', 'Deposit']
                     });
                 },
 
