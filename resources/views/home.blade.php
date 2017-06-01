@@ -106,22 +106,6 @@
 <!-- /.row -->
 
 <div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                {{date('M Y')}} Sales
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-                <div id="morris-bar-chart"></div>
-            </div>
-            <!-- /.panel-body -->
-        </div>
-        <!-- /.panel -->
-    </div>
-</div>
-
-<div class="row">
     <div class="col-lg-8">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -150,6 +134,22 @@
     </div>
 </div>
 <!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{date('M Y')}} Top Sales
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div id="morris-bar-chart"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+</div>
+
 @endsection
 
 @section('js')
