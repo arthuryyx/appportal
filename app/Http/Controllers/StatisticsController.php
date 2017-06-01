@@ -42,10 +42,12 @@ class StatisticsController extends Controller
     public function salesChart(){
         $sales = Role::where('name', 'sales')->first()->users()->pluck('id');
         $array = Appliance_Invoice::whereIn('created_by', $sales)
+            ->where('type', 0)
             ->whereYear('created_at', date('Y'))
             ->whereMonth('created_at', date('m'))
             ->groupBy('created_by')
             ->select('created_by', DB::raw('sum(price) as value'))
+//            ->having('value', '>', 0)
             ->pluck('value', 'created_by');
         $data = array();
         foreach ($array as $key => $value){
