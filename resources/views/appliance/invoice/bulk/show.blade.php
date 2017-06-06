@@ -41,8 +41,8 @@
                             </tr>
                         </tbody>
                     </table>
+                    @can('appliance_order')
                     <hr>
-
                     <div class="col-lg-4">
                         {!! Form::open(['url' => 'appliance/stock','method'=>'POST']) !!}
                         <div class="row">
@@ -57,6 +57,7 @@
                         </div>
                         {!! Form::close() !!}
                     </div>
+                    @endcan
                 </div>
             </div>
             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
