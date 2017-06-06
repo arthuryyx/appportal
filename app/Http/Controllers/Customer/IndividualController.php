@@ -28,7 +28,7 @@ class IndividualController extends Controller
             'first' => 'required',
             'phone' => 'required_without_all:mobile|numeric|unique:customers',
             'mobile' => 'required_without_all:phone|numeric|unique:customers',
-            'email' => 'required|email|unique:customers',
+            'email' => 'email|unique:customers',
             'street' => 'required|unique:addresses',
             'sub' => 'required',
             'city' => 'required',
@@ -62,7 +62,7 @@ class IndividualController extends Controller
             'first' => 'required',
             'phone' => 'required_without_all:mobile|numeric|unique:customers,phone,'.$id,
             'mobile' => 'required_without_all:phone|numeric|unique:customers,mobile,'.$id,
-            'email' => 'required|unique:customers,email,'.$id,
+            'email' => 'unique:customers,email,'.$id,
         ]);
 
         if (Customer::find($id)->update($request->all())) {

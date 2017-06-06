@@ -59,14 +59,14 @@
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>mobile:</strong>
-                                    {!! Form::text('mobile', null, array('class' => 'form-control')) !!}
+                                    {!! Form::number('mobile', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>email:</strong>
-                                    {!! Form::text('email', null, array('class' => 'form-control')) !!}
+                                    {!! Form::email('email', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
 
