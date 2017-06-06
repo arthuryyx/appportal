@@ -34,12 +34,6 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
     Route::get('category/{type}', 'CategoryController@index');
     Route::resource('category', 'CategoryController',['except' => ['index', 'create', 'show']]);
 
-//    Route::resource('project', 'ProjectController');
-//    Route::get('project/{pid}/downloadpdf/', 'ProjectController@generateDeliveryList');
-//    Route::get('project/{pid}/appliance/', 'ProjectApplianceRecordController@create');
-
-    Route::resource('material/board', 'BoardController');
-
 });
 
 Route::group(['middleware' => 'auth', 'namespace' => 'Customer', 'prefix' => 'customer'], function() {
