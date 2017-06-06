@@ -306,22 +306,20 @@
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>
-                            @endcan
                             <li>
-                                <a href="{{ url('admin/appliance') }}"><i class="fa fa-gears fa-fw"></i> Appliance</a>
-                            </li>
-                            @can('root')
-                            <li>
-                                <a href="#"><i class="fa fa-gears fa-fw"></i> Material<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-gears fa-fw"></i> Contact<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="{{ url('admin/material/board') }}"><i class="fa fa-gears fa-fw"></i> Board</a>
+                                        <a href="{{ url('contact/supplier') }}"><i class="fa fa-gears fa-fw"></i> Supplier</a>
                                     </li>
 
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>
                             @endcan
+                            <li>
+                                <a href="{{ url('admin/appliance') }}"><i class="fa fa-gears fa-fw"></i> Appliance</a>
+                            </li>
                         </ul>
                     </li>
                     <li>

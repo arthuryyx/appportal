@@ -93,8 +93,7 @@ Route::group(['middleware' => 'auth'], function() {
 //    Route::delete('tempstock/{id}', 'StockController@destroy');
 //    Route::get('tempstock/exportAssigned', 'StockController@exportAssigned');
 
-    Route::get('test', 'StatisticsController@salesLine');
-
+    Route::resource('contact/supplier', 'Contact\SupplierController');
 
     Route::get('statistics/salesLine', 'StatisticsController@salesLine');
     Route::get('statistics/salesBar', 'StatisticsController@salesBar');
