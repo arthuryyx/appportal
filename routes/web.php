@@ -79,6 +79,16 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
 
 });
 
+Route::group(['middleware' => 'auth', 'namespace' => 'Material', 'prefix' => 'material'], function() {
+    Route::resource('attribute', 'AttributeTypeController');
+    Route::get('attribute/value/{id}/edit', 'AttributeValueController@edit');
+    Route::put('attribute/value/{id}', 'AttributeValueController@update', ['name' => 'value.update']);
+
+    Route::resource('attribute/{id}/value', 'AttributeValueController', ['except' => ['index', 'edit', 'update', 'show', 'destroy']]);
+
+
+});
+
 
 Route::group(['middleware' => 'auth'], function() {
 //    Route::get('tempstock/create', 'StockController@create');
