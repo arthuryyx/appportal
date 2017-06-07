@@ -145,16 +145,21 @@ class StockController extends Controller
             'price' => 'numeric',
         ]);
 
-        $stock = Appliance_Stock::where('aid', $request->input('aid'))
-            ->where(function ($query){
-                $query->where('state', 1)
-                    ->whereNull('assign_to')
-                    ->orWhere('state', 2)
-                    ->whereNull('assign_to');
-            })->lockForUpdate()->first();
-
         if(is_string($request->input('price')) && $request->input('price') === '')
             $request->offsetUnset('price');
+
+        $stock = Appliance_Stock::where('aid', $request->input('aid'))
+            ->whereNull('assign_to')
+            ->where('state', 2)
+            ->lockForUpdate()
+            ->first();
+
+        if(!$stock)
+            $stock = Appliance_Stock::where('aid', $request->input('aid'))
+                ->whereNull('assign_to')
+                ->where('state', 1)
+                ->lockForUpdate()
+                ->first();
 
         if($stock){
             if ($stock->update(['assign_to' => $request->input('assign_to'), 'price' => $request->input('price')])) {
