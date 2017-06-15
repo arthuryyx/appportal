@@ -322,6 +322,9 @@
                                     <li>
                                         <a href="{{ url('material/attribute') }}"><i class="fa fa-gears fa-fw"></i> Attribute</a>
                                     </li>
+                                    <li>
+                                        <a href="{{ url('material/item') }}"><i class="fa fa-gears fa-fw"></i> Item</a>
+                                    </li>
 
                                 </ul>
                                 <!-- /.nav-third-level -->
