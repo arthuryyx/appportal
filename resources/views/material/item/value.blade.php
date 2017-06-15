@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="{{ asset('vendor/jquery-ui/jquery-ui.min.css')}}">
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-lg-12">
@@ -36,15 +40,17 @@
                                 </div>
                             </div>
 
-                            @foreach($data as $obj)
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>{{$obj['name']}}:</strong>
-                                    <br/>
-                                    {{ Form::select('id[]', [null=>'Please Select'] + $obj['values'], null, ['class' => 'form-control', 'required' => 'required']) }}
-                                </div>
+                            <div id="sortable">
+                                @foreach($data as $obj)
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <strong>{{$obj['name']}}:</strong>
+                                            <br/>
+                                            {{ Form::select('id[]', [null=>'Please Select'] + $obj['values'], null, ['class' => 'form-control', 'required' => 'required']) }}
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
-                            @endforeach
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 {{Form::submit('Submit', ['class' => 'btn btn-success pull-right'])}}
@@ -56,4 +62,15 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script src="{{ asset('vendor/jquery-ui/jquery-ui.min.js')}}"></script>
+
+    <script>
+        $( function() {
+            $( "#sortable" ).sortable();
+            $( "#sortable" ).disableSelection();
+        } );
+    </script>
 @endsection
