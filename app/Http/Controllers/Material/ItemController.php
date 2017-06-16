@@ -38,6 +38,14 @@ class ItemController extends Controller
             'id' => 'required',
         ]);
 
+        if(Material_Item::where('model', $request->input('model'))->count()>0){
+            foreach (Material_Item::where('model', $request->input('model'))->get() as $item){
+                if($item->values->pluck('id')->all() == $request->input('id')){
+                    return redirect('material/item')->withErrors('This set of attribute values already exist!');
+                }
+            }
+        }
+
         DB::beginTransaction();
         try {
             $item = Material_Item::create($request->all());
