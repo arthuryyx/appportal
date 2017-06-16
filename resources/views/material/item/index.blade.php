@@ -36,12 +36,14 @@
                         <thead>
                         <tr>
                             <th>
-                                model
+                                Model
                             </th>
                             <th>
-                                supplier
+                                Attributes
                             </th>
-                            <th></th>
+                            <th>
+                                Supplier
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -49,6 +51,7 @@
                         @foreach ($items as $item)
                             <tr>
                                 <td>{{ $item->model }}</td>
+                                <td>{{ $item->values->implode('value', ', ') }}</td>
                                 <td>{{ $item->getSupplier->name }}</td>
                                 {{--<td><a href="{{ url('material/attribute/'.$attribute->id) }}" class="btn btn-info">Detail</a></td>--}}
                                 {{--<td><a href="{{ url('material/attribute/'.$attribute->id.'/edit') }}" class="btn btn-success">Edit</a></td>--}}
