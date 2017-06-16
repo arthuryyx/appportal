@@ -28,6 +28,7 @@
                                 <th>Receipt No.</th>
                                 <th>Data</th>
                                 <th>Job</th>
+                                <th>Comment</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,9 +36,7 @@
                                 <td>{{$invoice->receipt_id}}</td>
                                 <td>{{$invoice->created_at->format('d-m-Y')}}</td>
                                 <td>{{$invoice->getCreated_by->name}}</td>
-                                <td>{{$invoice->job_id}}</td>
-                                <td>{{$invoice->customer_name}}</td>
-                                <td>{{$invoice->address}}</td>
+                                <td>{{$invoice->comment}}</td>
                             </tr>
                         </tbody>
                     </table>

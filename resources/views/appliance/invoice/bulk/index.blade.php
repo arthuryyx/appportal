@@ -38,9 +38,9 @@
                             <th>
                                 receipt_id
                             </th>
-                            {{--<th>--}}
-                                {{--state--}}
-                            {{--</th>--}}
+                            <th>
+                                comment
+                            </th>
                             <th>
                                 created_by
                             </th>
@@ -59,7 +59,7 @@
                         @foreach ($invoices as $invoice)
                             <tr>
                                 <td>{{ $invoice->receipt_id }}</td>
-                                {{--<td>{{ $project->state }}</td>--}}
+                                <td>{{ $invoice->comment }}</td>
                                 <td>{{ $invoice->getCreated_by->name }}</td>
                                 <td>{{ $invoice->created_at->format('d-m-Y') }}</td>
                                 <td><a href="{{ url('appliance/invoice/bulk/'.$invoice->id) }}" class="btn btn-info">详情</a></td>

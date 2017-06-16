@@ -47,6 +47,8 @@
                                     <div class="modal-body">
                                         <strong>Receipt No.</strong>
                                         <input type="text" name="receipt_id" class="form-control">
+                                        <strong>Comment</strong>
+                                        <textarea name="comment" class="form-control"></textarea>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/merge')}}'">merge</button>

@@ -64,6 +64,7 @@
                                 <th>Final Price</th>
                                 <th>Customer</th>
                                 <th>Address</th>
+                                <th>Comment</th>
                                 <th>Deliver Fee</th>
                             </tr>
                         </thead>
@@ -76,6 +77,7 @@
                                 <td>{{$invoice->price}}</td>
                                 <td>{{$invoice->customer_name}}</td>
                                 <td>{{$invoice->address}}</td>
+                                <td>{{$invoice->comment}}</td>
                                 <td>{{$invoice->fee}}</td>
                             </tr>
                         </tbody>
