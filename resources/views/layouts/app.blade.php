@@ -21,6 +21,9 @@
     <!-- Custom CSS -->
     <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
 
+    <!-- Sidebar Toggle for SB Admin 2 -->
+    <link href="{{ asset('css/sbadmin2-sidebar-toggle.css') }}" rel="stylesheet">
+
     <!-- Custom Fonts -->
     <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
@@ -55,6 +58,11 @@
         <!-- /.navbar-header -->
 
         <ul class="nav navbar-top-links navbar-right">
+            <li>
+                <button id="menu-toggle" type="button" data-toggle="button" class="btn btn-default btn-xs">
+                    <i class="fa fa-exchange fa-fw"></i>
+                </button>
+            </li>
             {{--<li class="dropdown">--}}
                 {{--<a class="dropdown-toggle" data-toggle="dropdown" href="#">--}}
                     {{--<i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>--}}
@@ -270,6 +278,7 @@
         </ul>
         <!-- /.navbar-top-links -->
 
+        <div id="sidebar-wrapper">
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -395,6 +404,7 @@
             </div>
             <!-- /.sidebar-collapse -->
         </div>
+        </div>
         <!-- /.navbar-static-side -->
     </nav>
 
@@ -420,5 +430,15 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="{{ asset('js/sb-admin-2.js')}}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+            $("#wrapper.toggled").find("#sidebar-wrapper").find(".collapse").collapse("hide");
+        });
+    });
+</script>
 </body>
 </html>
