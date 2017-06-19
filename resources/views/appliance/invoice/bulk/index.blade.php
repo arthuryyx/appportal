@@ -91,11 +91,11 @@
         $(document).ready(function() {
             $('#dataTables').DataTable({
                 columnDefs: [
-                    { type: 'date-eu', targets: 2 }
+                    { type: 'date-eu', targets: 3 }
                 ],
                 responsive: true,
                 pageLength: 100,
-                order: [2]
+                order: [3]
             });
         });
     </script>
