@@ -64,10 +64,11 @@
                                 <td>{{ $stock->getInvoice->receipt_id }}</td>
                                 <td>
                                     @if($stock->assign_to != null)
-                                        <label class="label label-default">Assign</label>
+                                        <a href="{{ url('appliance/invoice/job/'.$stock->assign_to) }}" class="label label-default">Assign</a>
                                     @else
                                         <label class="label label-success">Available</label>
                                     @endif
+                                    {{ $stock->id }}
                                 </td>
                                 <td>
                                     <a href="{{ url('appliance/order/'.$stock->getInvoice->id) }}" class="btn btn-success">查看</a>
