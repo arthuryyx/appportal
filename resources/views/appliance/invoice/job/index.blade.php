@@ -47,9 +47,9 @@
                             <th>
                                 address
                             </th>
-                            <th>
-                                comment
-                            </th>
+                            {{--<th>--}}
+                                {{--comment--}}
+                            {{--</th>--}}
                             <th>
                                 created_by
                             </th>
@@ -73,7 +73,7 @@
                                 <td>{{ $invoice->job_id }}</td>
                                 <td>{{ $invoice->customer_name }}</td>
                                 <td>{{ $invoice->address }}</td>
-                                <td>{{ $invoice->comment }}</td>
+{{--                                <td>{{ $invoice->comment }}</td>--}}
                                 <td>{{ $invoice->getCreated_by->name }}</td>
                                 <td>{{ $invoice->price }}</td>
                                 {{--<td>{{ $invoice->created_at->format('d-m-Y') }}</td>--}}
