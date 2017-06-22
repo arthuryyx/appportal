@@ -129,7 +129,8 @@
         $(document).ready(function() {
             $('#dataTables').DataTable({
                 columnDefs: [
-                    { "width": "25%", "targets": 3 }
+                    { "width": "25%", "targets": 3 },
+                    { "width": "10%", "targets": 6 }
 //                    { type: 'date-eu', targets: 5 }
                 ],
                 responsive: true,
