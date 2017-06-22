@@ -79,7 +79,11 @@
                                 {{--<td>{{ $invoice->created_at->format('d-m-Y') }}</td>--}}
                                 <td>
                                     @if($invoice->state == 0)
-                                        <label class="label label-danger">Unpaid</label>
+                                        @if($invoice->hasManyDeposits->sum('amount')>0)
+                                            <label class="label label-warning">{{round(($invoice->hasManyDeposits->sum('amount')/$invoice->price)*100).'%'}}</label>
+                                        @else
+                                            <label class="label label-danger">Unpaid</label>
+                                        @endif
                                     @elseif($invoice->state == 1)
                                         <label class="label label-success">&nbsp;&nbsp;Paid&nbsp;&nbsp;</label>
                                     @else
