@@ -90,6 +90,8 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Material', 'prefix' => 'ma
     Route::get('item/create/type', 'ItemController@selectType');
     Route::post('item/create/value', 'ItemController@setValue');
 
+    Route::resource('type', 'ItemTypeController', ['except' => ['show', 'destroy']]);
+
 });
 
 

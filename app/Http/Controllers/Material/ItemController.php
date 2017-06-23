@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Material_Attribute_Type;
 use App\Material_Attribute_Value;
 use App\Material_Item;
+use App\Material_Item_Type;
 use App\Http\Controllers\Controller;
 
 class ItemController extends Controller
@@ -28,7 +29,7 @@ class ItemController extends Controller
         foreach (array_sort_recursive($request->input('types')) as $id){
             $data->push(['name' => Material_Attribute_Type::find($id)->name, 'values' => Material_Attribute_Value::where('attribute_id', $id)->pluck('value', 'id')->toArray()]);
         }
-        return view('material.item.value')->withModel($request->input('model'))->withSuppliers(Supplier::pluck('name', 'id')->sortBy('name')->toArray())->withData($data);
+        return view('material.item.value')->withModel($request->input('model'))->withSuppliers(Supplier::pluck('name', 'id')->sortBy('name')->toArray())->withTypes(Material_Item_Type::pluck('name', 'id')->toArray())->withData($data);
     }
 
     public function store(Request $request)
@@ -36,6 +37,8 @@ class ItemController extends Controller
         $this->validate($request, [
             'model' => 'required',
             'id' => 'required',
+            'supplier_id' => 'required',
+            'type_id' => 'required',
         ]);
 
         if(Material_Item::where('model', $request->input('model'))->count()>0){

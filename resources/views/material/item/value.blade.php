@@ -40,6 +40,14 @@
                                 </div>
                             </div>
 
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Type:</strong>
+                                    <br/>
+                                    {{ Form::select('type_id', [null=>'Please Select'] + $types, null, ['class' => 'form-control', 'required' => 'required']) }}
+                                </div>
+                            </div>
+
                             <div id="sortable">
                                 @foreach($data as $obj)
                                     <div class="col-xs-12 col-sm-12 col-md-12">

@@ -11,7 +11,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Material Item List</h1>
+            <h1 class="page-header">Item Type</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -28,7 +28,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="{{ url('material/item/create/type') }}" class="btn btn-primary ">New</a>
+                    <a href="{{ url('material/type/create') }}" class="btn btn-primary ">New</a>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -36,29 +36,17 @@
                         <thead>
                         <tr>
                             <th>
-                                Model
+                                name
                             </th>
-                            <th>
-                                Type
-                            </th>
-                            <th>
-                                Attributes
-                            </th>
-                            <th>
-                                Supplier
-                            </th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        @foreach ($items as $item)
+                        @foreach ($types as $type)
                             <tr>
-                                <td>{{ $item->model }}</td>
-                                <td>{{ $item->type->name }}</td>
-                                <td>{{ $item->values->implode('value', ', ') }}</td>
-                                <td>{{ $item->getSupplier->name }}</td>
-                                {{--<td><a href="{{ url('material/attribute/'.$attribute->id) }}" class="btn btn-info">Detail</a></td>--}}
-                                {{--<td><a href="{{ url('material/attribute/'.$attribute->id.'/edit') }}" class="btn btn-success">Edit</a></td>--}}
+                                <td>{{ $type->name }}</td>
+                                <td><a href="{{ url('material/type/'.$type->id.'/edit') }}" class="btn btn-success">Edit</a></td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -86,11 +74,12 @@
         $(document).ready(function() {
             $('#dataTables').DataTable({
 //                columnDefs: [
+//                    { "width": "10%", "targets": 2 },
 //                    { "width": "10%", "targets": 3 }
 //                    { type: 'date-eu', targets: 5 }
 //                ],
                 responsive: true,
-                pageLength: 100,
+//                pageLength: 100,
                 order: [0]
             });
         });

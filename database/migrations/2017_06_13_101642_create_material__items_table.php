@@ -16,7 +16,13 @@ class CreateMaterialItemsTable extends Migration
         Schema::create('material__items', function (Blueprint $table) {
             $table->increments('id');
             $table->string('model');
+            $table->unsignedInteger('type_id');
             $table->unsignedInteger('supplier_id');
+
+            $table->foreign('type_id')
+                ->references('id')
+                ->on('material__item__types')
+                ->onDelete('cascade');
 
             $table->foreign('supplier_id')
                 ->references('id')
@@ -26,7 +32,7 @@ class CreateMaterialItemsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('material__items__values', function (Blueprint $table) {
+        Schema::create('material__item__values', function (Blueprint $table) {
             $table->integer('item_id')->unsigned();
             $table->integer('attribute_value_id')->unsigned();
 
@@ -54,6 +60,6 @@ class CreateMaterialItemsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('material__items');
-        Schema::dropIfExists('material__items__values');
+        Schema::dropIfExists('material__item__values');
     }
 }
