@@ -336,6 +336,15 @@
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>
+                            <li>
+                                <a href="#"><i class="fa fa-gears fa-fw"></i> Product<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="{{ url('product/category-tree-view') }}"><i class="fa fa-gears fa-fw"></i> Category</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-third-level -->
+                            </li>
                             @endcan
                             <li>
                                 <a href="{{ url('admin/appliance') }}"><i class="fa fa-gears fa-fw"></i> Appliance</a>

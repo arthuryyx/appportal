@@ -95,6 +95,14 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Material', 'prefix' => 'ma
 });
 
 
+Route::group(['middleware' => 'auth', 'namespace' => 'Product', 'prefix' => 'product'], function() {
+    Route::get('category-tree-view','CategoryController@manageCategory');
+    Route::post('add-category',['as'=>'add.category','uses'=>'CategoryController@addCategory']);
+    Route::post('select-ajax', 'CategoryController@selectAjax');
+
+});
+
+
 Route::group(['middleware' => 'auth'], function() {
 //    Route::get('tempstock/create', 'StockController@create');
 //    Route::post('tempstock', 'StockController@store');
