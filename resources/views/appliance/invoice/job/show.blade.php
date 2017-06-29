@@ -117,6 +117,7 @@
                         {{--{!! Form::close() !!}--}}
                     {{--</div>--}}
 
+                    @if($invoice->state == 0)
                     <div class="col-lg-4">
                         {!! Form::open(['url' => 'appliance/stock/allocation','method'=>'POST']) !!}
                         <div class="row">
@@ -146,6 +147,8 @@
                         {!! Form::close() !!}
                     </div>
                     @endcan
+                    @endif
+
                     <div class="col-lg-2">
                         <p>
                             <strong>Deposit History: </strong>
@@ -262,6 +265,7 @@
                                         @else
                                             <label class="label label-danger">Exception</label>
                                         @endif
+                                            {{ $stock->id }}/{{ $stock->shelf }}
                                     </td>
                                     <td>
                                         {{ $stock->price }}
