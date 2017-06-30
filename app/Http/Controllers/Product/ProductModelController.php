@@ -23,6 +23,10 @@ class ProductModelController extends Controller
     }
 
     public function select(Request $request){
+        $this->validate($request, [
+            'model' => 'required|unique:product__models',
+            'types' => 'required',
+        ]);
         $data = collect();
         foreach (array_sort_recursive($request->input('types')) as $id){
             $data->push(['name' => Material_Item_Type::find($id)->name, 'values' => Material_Item::where('type_id', $id)->pluck('model', 'id')->toArray()]);

@@ -25,6 +25,10 @@ class ItemController extends Controller
     }
 
     public function setValue(Request $request){
+        $this->validate($request, [
+            'model' => 'required',
+            'types' => 'required',
+        ]);
         $data = collect();
         foreach (array_sort_recursive($request->input('types')) as $id){
             $data->push(['name' => Material_Attribute_Type::find($id)->name, 'values' => Material_Attribute_Value::where('attribute_id', $id)->pluck('value', 'id')->toArray()]);
