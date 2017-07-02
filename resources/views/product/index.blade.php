@@ -41,8 +41,8 @@
                             <th>
                                 category
                             </th>
-                            {{--<th></th>--}}
-                            {{--<th></th>--}}
+                            <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -51,8 +51,8 @@
                             <tr>
                                 <td>{{ $product->model }}</td>
                                 <td>{{ $product->category->name }}</td>
-                                {{--<td><a href="{{ url('product/model/'.$product->id) }}" class="btn btn-info">Detail</a></td>--}}
-                                {{--<td><a href="{{ url('product/model/'.$product->id.'/edit') }}" class="btn btn-success">Edit</a></td>--}}
+                                <td><a href="{{ url('product/model/'.$product->id) }}" class="btn btn-info">Detail</a></td>
+                                <td><a href="{{ url('product/model/'.$product->id.'/edit') }}" class="btn btn-success">Edit</a></td>
                             </tr>
                         @endforeach
                         </tbody>

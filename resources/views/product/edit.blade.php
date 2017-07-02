@@ -21,20 +21,26 @@
                         </div>
                     @endif
 
-                        {!! Form::model($attribute, ['method' => 'PATCH','route' => ['attribute.update', $attribute->id]]) !!}
+                        {!! Form::model($product, ['url' => 'product/model/reselect/'.$product->id,'method'=>'POST']) !!}
                         <div class="row">
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>name:</strong>
-                                    {!! Form::text('name', null, array('class' => 'form-control', 'required' => 'required')) !!}
+                                    <strong>Model:</strong>
+                                    {!! Form::text('model', null, array('class' => 'form-control', 'required' => 'required')) !!}
                                 </div>
                             </div>
-
+                            {!! Form::hidden('category_id', $product->category_id) !!}
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>unit:</strong>
-                                    {!! Form::text('unit', null, array('class' => 'form-control')) !!}
+                                    <strong>Material Type:</strong>
+                                    <br/>
+                                    @foreach($types as $id => $name)
+                                        <label>{{ Form::checkbox('types[]', $id, in_array($id, $checks) ? true : false, array('class' => 'checkbox-inline')) }}
+                                            {{ $name }}
+                                        </label>
+                                        &nbsp;
+                                    @endforeach
                                 </div>
                             </div>
 

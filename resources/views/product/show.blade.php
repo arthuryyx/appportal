@@ -8,7 +8,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">{{$attribute->name}}<a href="{{ url('material/attribute') }}" class="btn btn-primary pull-right">Back</a></h1>
+            <h1 class="page-header">{{$product->model}}</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -23,24 +23,30 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="{{ url('material/attribute/'.$attribute->id.'/value/create') }}" class="btn btn-primary ">New</a>
+                    <a href="{{ url('product/model') }}" class="btn btn-primary">Back</a>
+                    <a href="{{ url('product/model/'.$product->id.'/edit') }}" class="btn btn-success">修改</a>
                 </div>
                 <div class="panel panel-body">
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                         <thead>
                         <tr>
                             <th>
+                                Type
+                            </th>
+                            <th>
+                                Model
+                            </th>
+                            <th>
                                 Value
                             </th>
-                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($attribute->hasManyValues as $value)
+                        @foreach ($product->materials as $material)
                             <tr>
-                                <td>{{ $value->value }} {{$attribute->unit}}</td>
-
-                                <td><a href="{{ url('material/attribute/value/'.$value->id.'/edit') }}" class="btn btn-success">修改</a></td>
+                                <td>{{ $material->type->name }}</td>
+                                <td>{{ $material->model }}</td>
+                                <td>{{ $material->values->implode('value', ', ') }}</td>
                             </tr>
                         @endforeach
                         </tbody>
