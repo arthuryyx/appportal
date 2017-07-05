@@ -52,4 +52,9 @@ class User extends Authenticatable
             Role::whereName($role)->firstOrFail()
         );
     }
+
+    public function customers()
+    {
+        return $this->belongsToMany(Customer::class);
+    }
 }

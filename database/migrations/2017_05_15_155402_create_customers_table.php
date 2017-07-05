@@ -24,6 +24,25 @@ class CreateCustomersTable extends Migration
             $table->unsignedInteger('type')->default(0);
             $table->timestamps();
         });
+
+        Schema::create('customer_user', function (Blueprint $table) {
+            $table->integer('customer_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+
+            $table->foreign('customer_id')
+                ->references('id')
+                ->on('customers')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->primary(['customer_id', 'user_id']);
+        });
     }
 
     /**
@@ -34,5 +53,6 @@ class CreateCustomersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('customers');
+        Schema::dropIfExists('customer_user');
     }
 }
