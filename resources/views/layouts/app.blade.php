@@ -321,6 +321,9 @@
                                 <!-- /.nav-third-level -->
                             </li>
                             <li>
+                                <a href="{{ url('admin/appliance') }}"><i class="fa fa-gears fa-fw"></i> Appliance</a>
+                            </li>
+                            <li>
                                 <a href="#"><i class="fa fa-gears fa-fw"></i> Material<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
@@ -349,9 +352,6 @@
                                 <!-- /.nav-third-level -->
                             </li>
                             @endcan
-                            <li>
-                                <a href="{{ url('admin/appliance') }}"><i class="fa fa-gears fa-fw"></i> Appliance</a>
-                            </li>
                         </ul>
                     </li>
                     <li>
@@ -367,13 +367,22 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Invoice<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Appliance<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="{{ url('appliance/invoice/job') }}">Job</a>
                             </li>
                             <li>
                                 <a href="{{ url('appliance/invoice/bulk') }}">Bulk</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Kitchen<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ url('kitchen/quot') }}">Quotation</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->

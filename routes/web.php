@@ -94,6 +94,10 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Material', 'prefix' => 'ma
 
 });
 
+Route::group(['middleware' => 'auth', 'namespace' => 'Kitchen', 'prefix' => 'kitchen'], function() {
+    Route::resource('quot', 'QuotationController');
+
+});
 
 Route::group(['middleware' => 'auth', 'namespace' => 'Product', 'prefix' => 'product'], function() {
     Route::get('category-tree-view','CategoryController@manageCategory');
