@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Appliance;
 use App\Appliance_Stock;
+use App\Product_Model;
 use Illuminate\Http\Request;
 
 class Select2AutocompleteController extends Controller
@@ -15,6 +16,17 @@ class Select2AutocompleteController extends Controller
         if($request->has('q')){
             $search = $request->q;
             $data = Appliance::where('model','LIKE',"%$search%")->select('id', 'model')->get();
+        }
+        return response()->json($data);
+    }
+
+    public function productModel(Request $request)
+    {
+        $data = [];
+
+        if($request->has('q')){
+            $search = $request->q;
+            $data = Product_Model::where('model','LIKE',"%$search%")->select('id', 'model')->get();
         }
         return response()->json($data);
     }

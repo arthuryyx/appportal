@@ -87,20 +87,20 @@
                     {{--</div>--}}
 
                     {{--@if($quotation->state == 0)--}}
-                        {{--<div class="col-lg-4">--}}
-                            {{--{!! Form::open(['url' => 'appliance/stock/allocation','method'=>'POST']) !!}--}}
-                            {{--<div class="row">--}}
-                                {{--<div class="col-xs-10 col-sm-10 col-md-10">--}}
-                                    {{--<strong>Appliance</strong>--}}
-                                    {{--<select class="aid form-control" name="aid" required="required"></select>--}}
+                        <div class="col-lg-4">
+                            {!! Form::open(['url' => 'kitchen/quot/select','method'=>'POST']) !!}
+                            <div class="row">
+                                <div class="col-xs-10 col-sm-10 col-md-10">
+                                    <strong>Product</strong>
+                                    <select class="pid form-control" name="product_id" required="required"></select>
                                     {{--<strong>Price</strong>--}}
-                                    {{--{{ Form::number('price', null, array('class' => 'form-control', 'step' => 'any')) }}--}}
-                                    {{--{{ Form::hidden('assign_to', $quotation->id) }}--}}
-                                    {{--{{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--{!! Form::close() !!}--}}
-                        {{--</div>--}}
+{{--                                    {{ Form::number('price', null, array('class' => 'form-control', 'step' => 'any')) }}--}}
+                                    {{ Form::hidden('quotation_id', $quotation->id) }}
+                                    {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
+                                </div>
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
 
                         {{--@can('appliance_add_deposit')--}}
                             {{--<div class="col-lg-4">--}}
@@ -131,11 +131,11 @@
                     {{--</div>--}}
                 </div>
             </div>
-            {{--<div class="panel panel-default">--}}
-                {{--<form id="frm-example" name="frm_example" action="" method="post">--}}
-                    {{--{{ csrf_field() }}--}}
+            <div class="panel panel-default">
+                <form id="frm-example" name="frm_example" action="" method="post">
+                    {{ csrf_field() }}
 
-                    {{--<div class="panel-heading">--}}
+                    <div class="panel-heading">
                         {{--@can('appliance_order')--}}
                             {{--<button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/order')}}'">order</button>--}}
                         {{--@endcan--}}
@@ -188,65 +188,33 @@
                             {{--</div>--}}
                             {{--<!-- /.modal -->--}}
                         {{--@endcan--}}
-                    {{--</div>--}}
-                    {{--<div class="panel panel-body">--}}
-                        {{--<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">--}}
-                            {{--<thead>--}}
-                            {{--<tr>--}}
-                                {{--<th>--}}
-                                {{--Quantity--}}
-                                {{--</th>--}}
-                                {{--<th></th>--}}
-                                {{--<th>--}}
-                                    {{--Model--}}
-                                {{--</th>--}}
-                                {{--<th>--}}
-                                    {{--Brand--}}
-                                {{--</th>--}}
-                                {{--<th>--}}
-                                    {{--Category--}}
-                                {{--</th>--}}
-                                {{--<th>--}}
-                                    {{--State--}}
-                                {{--</th>--}}
-                                {{--<th>--}}
-                                    {{--Price--}}
-                                {{--</th>--}}
-                            {{--</tr>--}}
-                            {{--</thead>--}}
-                            {{--<tbody>--}}
-                            {{--@foreach ($quotation->hasManyStocks as $stock)--}}
-                                {{--<tr>--}}
-                                    {{--<td>{{ $stock->total }}</td>--}}
-                                    {{--<td>{{ $stock->id }}</td>--}}
-                                    {{--<td>{{ $stock->appliance->model }}</td>--}}
-                                    {{--<td>{{ $stock->appliance->belongsToBrand->name }}</td>--}}
-                                    {{--<td>{{ $stock->appliance->belongsToCategory->name }}</td>--}}
-                                    {{--<td>--}}
-                                        {{--@if($stock->state == 0)--}}
-                                            {{--<label class="label label-warning">Pending order</label>--}}
-                                        {{--@elseif($stock->state == 1)--}}
-                                            {{--<label class="label label-info">Order placed</label>--}}
-                                        {{--@elseif($stock->state == 2)--}}
-                                            {{--<label class="label label-success">In Stock</label>--}}
-                                        {{--@elseif($stock->state == 3)--}}
-                                            {{--<label class="label label-primary">Delivered</label>--}}
-                                        {{--@else--}}
-                                            {{--<label class="label label-danger">Exception</label>--}}
-                                        {{--@endif--}}
-                                        {{--{{ $stock->id }}/{{ $stock->shelf }}--}}
-                                    {{--</td>--}}
-                                    {{--<td>--}}
-                                        {{--{{ $stock->price }}--}}
-                                        {{--<a href="{{ url('appliance/stock/'.$stock->id.'/price') }}" class="btn btn-success pull-right">编辑</a>--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
-                            {{--@endforeach--}}
-                            {{--</tbody>--}}
-                        {{--</table>--}}
-                    {{--</div>--}}
-                {{--</form>--}}
-            {{--</div>--}}
+                    </div>
+                    <div class="panel panel-body">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>
+                                    Model
+                                </th>
+                                <th>
+                                    Type
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($quotation->products as $product)
+                                <tr>
+                                    <td>{{ $product->id }}</td>
+                                    <td>{{ $product->product->model }}</td>
+                                    <td>{{ $product->product->category->name }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -256,30 +224,10 @@
     <script src="{{ asset('vendor/select2/select2.min.js')}}"></script>
 
     <script type="text/javascript">
-        $('.sid').select2({
-            placeholder: 'Select an item',
-            ajax: {
-                url: '/select2-autocomplete-ajax/unsigned',
-                dataType: 'json',
-                delay: 200,
-                processResults: function (data) {
-                    return {
-                        results:  $.map(data, function (item) {
-                            return {
-                                text: item.model + ' 【' + item.shelf + '】',
-                                id: item.id
-                            }
-                        })
-                    };
-                },
-                cache: true
-            }
-        });
-
-        $('.aid').select2({
+        $('.pid').select2({
             placeholder: 'Select an model',
             ajax: {
-                url: '/select2-autocomplete-ajax/applianceModel',
+                url: '/select2-autocomplete-ajax/productModel',
                 dataType: 'json',
                 delay: 200,
                 processResults: function (data) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Kitchen;
 
 use App\Http\Controllers\Controller;
 
+use App\Kitchen_Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -67,6 +68,21 @@ class QuotationController extends Controller
     {
         return view('kitchen.quotation.show')->withQuotation(Kitchen_Quotation::find($id));
 //        return view('kitchen.quotation.show')->withQuotation(Kitchen_Quotation::with('hasManyStocks')->find($id));
+    }
+
+    public function selectProduct(Request $request) {
+//        dd($request->all());
+        $this->validate($request, [
+            'product_id' => 'required',
+            'quotation_id' => 'required|exists:appliance__invoices,id',
+//            'price' => 'numeric',
+        ]);
+
+        if (Kitchen_Product::create($request->all())) {
+            return redirect()->back()->withErrors('添加成功！');
+        } else {
+            return redirect()->back()->withInput()->withErrors('添加失败！');
+        }
     }
 
 }

@@ -21,4 +21,9 @@ class Kitchen_Quotation extends Model
     public function getCreated_by(){
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
+
+    public function products()
+    {
+        return $this->hasMany(Kitchen_Product::class, 'quotation_id', 'id');
+    }
 }
