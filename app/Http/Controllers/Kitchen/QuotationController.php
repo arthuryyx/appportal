@@ -67,15 +67,12 @@ class QuotationController extends Controller
     public function show($id)
     {
         return view('kitchen.quotation.show')->withQuotation(Kitchen_Quotation::find($id));
-//        return view('kitchen.quotation.show')->withQuotation(Kitchen_Quotation::with('hasManyStocks')->find($id));
     }
 
     public function selectProduct(Request $request) {
-//        dd($request->all());
         $this->validate($request, [
-            'product_id' => 'required',
-            'quotation_id' => 'required|exists:appliance__invoices,id',
-//            'price' => 'numeric',
+            'product_id' => 'required|exists:product__models,id',
+            'quotation_id' => 'required|exists:kitchen__quotations,id',
         ]);
 
         if (Kitchen_Product::create($request->all())) {
