@@ -106,9 +106,9 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Product', 'prefix' => 'pro
     Route::post('add-category',['as'=>'add.category','uses'=>'CategoryController@addCategory']);
     Route::post('select-ajax', 'CategoryController@selectAjax');
 
-    Route::post('model/select', 'ProductModelController@select');
-    Route::post('model/reselect/{id}', 'ProductModelController@reselect');
-    Route::resource('model', 'ProductModelController', ['except' => ['destroy']]);
+    Route::post('model/select', 'ModelController@select');
+    Route::post('model/reselect/{id}', 'ModelController@reselect');
+    Route::resource('model', 'ModelController', ['except' => ['destroy']]);
 
 });
 
