@@ -28,7 +28,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="{{ url('material/item/create/type') }}" class="btn btn-primary ">New</a>
+                    <a href="{{ url('material/item/create') }}" class="btn btn-primary ">New</a>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -47,6 +47,7 @@
                             <th>
                                 Supplier
                             </th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -57,8 +58,7 @@
                                 <td>{{ $item->type->name }}</td>
                                 <td>{{ $item->values->implode('value', ', ') }}</td>
                                 <td>{{ $item->getSupplier->name }}</td>
-                                {{--<td><a href="{{ url('material/attribute/'.$attribute->id) }}" class="btn btn-info">Detail</a></td>--}}
-                                {{--<td><a href="{{ url('material/attribute/'.$attribute->id.'/edit') }}" class="btn btn-success">Edit</a></td>--}}
+                                <td><a href="{{ url('material/item/'.$item->id.'/edit') }}" class="btn btn-success">Edit</a></td>
                             </tr>
                         @endforeach
                         </tbody>

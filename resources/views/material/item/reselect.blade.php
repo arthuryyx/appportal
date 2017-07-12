@@ -22,7 +22,7 @@
                             {!! implode('<br>', $errors->all()) !!}
                         </div>
                     @endif
-                        {!! Form::open(['url' => 'material/item','method'=>'POST']) !!}
+                        {!! Form::open(['url' => 'material/item/'.$iid,'method'=>'PUT']) !!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
@@ -36,7 +36,7 @@
                                 <div class="form-group">
                                     <strong>Suppliers:</strong>
                                     <br/>
-                                    {{ Form::select('supplier_id', [null=>'Please Select'] + $suppliers, null, ['class' => 'form-control', 'required' => 'required']) }}
+                                    {{ Form::select('supplier_id', $suppliers, $sid, ['class' => 'form-control', 'placeholder'=>'Select', 'required' => 'required']) }}
                                 </div>
                             </div>
 
@@ -44,7 +44,7 @@
                                 <div class="form-group">
                                     <strong>Type:</strong>
                                     <br/>
-                                    {{ Form::select('type_id', [null=>'Please Select'] + $types, null, ['class' => 'form-control', 'required' => 'required']) }}
+                                    {{ Form::select('type_id', $types, $tid, ['class' => 'form-control', 'placeholder'=>'Select', 'required' => 'required']) }}
                                 </div>
                             </div>
 
@@ -54,7 +54,7 @@
                                         <div class="form-group">
                                             <strong>{{$obj['name']}}:</strong>
                                             <br/>
-                                            {{ Form::select('id[]', [null=>'Please Select'] + $obj['values'], null, ['class' => 'form-control', 'required' => 'required']) }}
+                                            {{ Form::select('id[]', $obj['values'], $selected, ['class' => 'form-control', 'placeholder'=>'Select', 'required' => 'required']) }}
                                         </div>
                                     </div>
                                 @endforeach

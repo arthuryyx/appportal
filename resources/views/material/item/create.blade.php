@@ -18,7 +18,7 @@
                             {!! implode('<br>', $errors->all()) !!}
                         </div>
                     @endif
-                        {!! Form::open(['url' => 'material/item/create/value','method'=>'POST']) !!}
+                        {!! Form::open(['url' => 'material/item/select','method'=>'POST']) !!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
