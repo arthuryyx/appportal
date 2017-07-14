@@ -346,6 +346,9 @@
                                         <a href="{{ url('product/category-tree-view') }}"><i class="fa fa-gears fa-fw"></i> Category</a>
                                     </li>
                                     <li>
+                                        <a href="{{ url('product/part') }}"><i class="fa fa-gears fa-fw"></i> Part</a>
+                                    </li>
+                                    <li>
                                         <a href="{{ url('product/model') }}"><i class="fa fa-gears fa-fw"></i> Model</a>
                                     </li>
                                 </ul>
