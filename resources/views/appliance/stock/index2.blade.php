@@ -29,9 +29,6 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a href="{{ url('appliance/stock/exportAvailable') }}" target="_blank" class="btn btn-primary ">exportAvailable</a>
-                    @can('root')
-                        <a href="{{ url('appliance/stock/exportCheckingList') }}" target="_blank" class="btn btn-primary ">CheckingList</a>
-                    @endif
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
