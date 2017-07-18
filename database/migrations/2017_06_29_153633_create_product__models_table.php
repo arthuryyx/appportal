@@ -28,24 +28,24 @@ class CreateProductModelsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('product__materials', function (Blueprint $table) {
-            $table->integer('product_id')->unsigned();
-            $table->integer('material_id')->unsigned();
-
-            $table->foreign('product_id')
-                ->references('id')
-                ->on('product__models')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->foreign('material_id')
-                ->references('id')
-                ->on('material__items')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->primary(['product_id', 'material_id']);
-        });
+//        Schema::create('product__materials', function (Blueprint $table) {
+//            $table->integer('product_id')->unsigned();
+//            $table->integer('material_id')->unsigned();
+//
+//            $table->foreign('product_id')
+//                ->references('id')
+//                ->on('product__models')
+//                ->onUpdate('cascade')
+//                ->onDelete('cascade');
+//
+//            $table->foreign('material_id')
+//                ->references('id')
+//                ->on('material__items')
+//                ->onUpdate('cascade')
+//                ->onDelete('cascade');
+//
+//            $table->primary(['product_id', 'material_id']);
+//        });
     }
 
     /**
@@ -56,6 +56,6 @@ class CreateProductModelsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('product__models');
-        Schema::dropIfExists('product__materials');
+//        Schema::dropIfExists('product__materials');
     }
 }

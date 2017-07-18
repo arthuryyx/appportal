@@ -24,29 +24,29 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a href="{{ url('product/model') }}" class="btn btn-primary">Back</a>
-                    <a href="{{ url('product/model/'.$product->id.'/edit') }}" class="btn btn-success">修改</a>
+                    {{--<a href="{{ url('product/model/'.$product->id.'/edit') }}" class="btn btn-success">修改</a>--}}
                 </div>
                 <div class="panel panel-body">
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                         <thead>
                         <tr>
                             <th>
-                                Type
+                                Part Name
                             </th>
                             <th>
-                                Model
+                                Material Type
                             </th>
                             <th>
-                                Value
+                                Qty
                             </th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($product->materials as $material)
+                        @foreach ($product->parts as $part)
                             <tr>
-                                <td>{{ $material->type->name }}</td>
-                                <td>{{ $material->model }}</td>
-                                <td>{{ $material->values->implode('value', ', ') }}</td>
+                                <td>{{ $part->name }}</td>
+                                <td>{{ $part->materialTypes->implode('name', ', ') }}</td>
+                                <td>{{ $part->pivot->qty }}</td>
                             </tr>
                         @endforeach
                         </tbody>

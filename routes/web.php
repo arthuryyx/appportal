@@ -113,9 +113,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Product', 'prefix' => 'pro
 
     Route::resource('part', 'PartController', ['except' => ['show', 'destroy']]);
 
-    Route::post('model/select', 'ModelController@select');
-    Route::post('model/reselect/{id}', 'ModelController@reselect');
-    Route::resource('model', 'ModelController', ['except' => ['show', 'destroy']]);
+    Route::resource('model', 'ModelController', ['except' => ['destroy']]);
 
 });
 
