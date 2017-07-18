@@ -320,9 +320,13 @@
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>
+                            @endcan
+                            @can('appliance_add')
                             <li>
                                 <a href="{{ url('admin/appliance') }}"><i class="fa fa-gears fa-fw"></i> Appliance</a>
                             </li>
+                            @endcan
+                            @can('root')
                             <li>
                                 <a href="#"><i class="fa fa-gears fa-fw"></i> Material<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -339,6 +343,8 @@
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>
+                            @endcan
+                            @can('root')
                             <li>
                                 <a href="#"><i class="fa fa-gears fa-fw"></i> Product<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -357,6 +363,7 @@
                             @endcan
                         </ul>
                     </li>
+                    @can('root')
                     <li>
                         <a href="#"><i class="fa fa-th- fa-user fa-fw"></i> Customer<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -369,18 +376,24 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
+                    @endcan
                     <li>
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Appliance<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
+                            @can('appliance_job')
                             <li>
                                 <a href="{{ url('appliance/invoice/job') }}">Job</a>
                             </li>
+                            @endcan
+                            @can('root')
                             <li>
                                 <a href="{{ url('appliance/invoice/bulk') }}">Bulk</a>
                             </li>
+                            @endcan
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
+                    @can('kitchen_menu')
                     <li>
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Kitchen<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -390,6 +403,8 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
+                    @endcan
+                    @can('appliance_stock')
                     <li>
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Stock<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -425,6 +440,7 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
+                    @endcan
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

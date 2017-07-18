@@ -28,7 +28,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="{{ url('admin/appliance/create') }}" class="btn btn-primary ">Add</a>
+                    @can('appliance_add')<a href="{{ url('admin/appliance/create') }}" class="btn btn-primary ">Add</a>@endcan
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -74,8 +74,8 @@
                                 <td>{{ $appliance->best }}</td>
                                 <td>{{ $appliance->cutout }}</td>
                                 <td>{{ $appliance->description }}</td>
-                                <td><a href="{{ url('admin/appliance/'.$appliance->id.'/edit') }}" class="btn btn-success">编辑</a></td>
-                                <td>
+                                <td>@can('appliance_edit')<a href="{{ url('admin/appliance/'.$appliance->id.'/edit') }}" class="btn btn-success">编辑</a>@endcan</td>
+                                <td>@can('appliance_delete')
                                     <!-- Button trigger modal -->
                                     <button class="btn btn-danger" data-toggle="modal" data-target={{"#myModal".$appliance->id}}>
                                         删除
@@ -103,7 +103,7 @@
                                         </div>
                                         <!-- /.modal-dialog -->
                                     </div>
-                                    <!-- /.modal -->
+                                    <!-- /.modal -->@endcan
                                 </td>
                             </tr>
                         @endforeach
