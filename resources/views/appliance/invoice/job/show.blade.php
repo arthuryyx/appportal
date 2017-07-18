@@ -126,6 +126,8 @@
                                 <select class="aid form-control" name="aid" required="required"></select>
                                 <strong>Price</strong>
                                 {{ Form::number('price', null, array('class' => 'form-control', 'step' => 'any')) }}
+                                <strong>Warranty (year)</strong>
+                                {{ Form::number('warranty', null, array('class' => 'form-control')) }}
                                 {{ Form::hidden('assign_to', $invoice->id) }}
                                 {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
                             </div>
@@ -243,6 +245,9 @@
                                 <th>
                                     Price
                                 </th>
+                                <th>
+                                    Warranty
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -270,6 +275,9 @@
                                     <td>
                                         {{ $stock->price }}
                                         <a href="{{ url('appliance/stock/'.$stock->id.'/price') }}" class="btn btn-success pull-right">编辑</a>
+                                    </td>
+                                    <td>
+                                        {{ $stock->warranty }} @if($stock->warranty)year(s)@endif
                                     </td>
                                 </tr>
                             @endforeach

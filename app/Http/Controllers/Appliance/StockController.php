@@ -143,10 +143,13 @@ class StockController extends Controller
             'aid' => 'required',
             'assign_to' => 'required|exists:appliance__invoices,id',
             'price' => 'numeric',
+            'warranty' => 'numeric',
         ]);
 
         if(is_string($request->input('price')) && $request->input('price') === '')
             $request->offsetUnset('price');
+        if(is_string($request->input('warranty')) && $request->input('warranty') === '')
+            $request->offsetUnset('warranty');
 
         $stock = Appliance_Stock::where('aid', $request->input('aid'))
             ->whereNull('assign_to')
@@ -162,7 +165,7 @@ class StockController extends Controller
                 ->first();
 
         if($stock){
-            if ($stock->update(['assign_to' => $request->input('assign_to'), 'price' => $request->input('price')])) {
+            if ($stock->update(['assign_to' => $request->input('assign_to'), 'price' => $request->input('price'), 'warranty' => $request->input('warranty')])) {
                 return redirect('appliance/invoice/job/'.$request->input('assign_to'))->withErrors('更新成功！');
             } else {
                 return redirect('appliance/invoice/job/'.$request->input('assign_to'))->withErrors('更新失败！');
@@ -370,7 +373,7 @@ class StockController extends Controller
 
     public function invoiceHtml($id){
         return view('appliance.pdf.invoice')->withInvoice(Appliance_Invoice::find($id))
-            ->withStocks(Appliance_Stock::where('assign_to', $id)->groupBy('aid')->select('aid', DB::raw('count(aid) as total'), DB::raw('sum(price) as price'))->get());
+            ->withStocks(Appliance_Stock::where('assign_to', $id)->groupBy('aid', 'price', 'warranty')->select('aid', DB::raw('count(aid) as total'), DB::raw('sum(price) as price'), 'warranty')->get());
     }
 
 //    public function exportAssigned(){

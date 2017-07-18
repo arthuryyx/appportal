@@ -23,6 +23,8 @@ class CreateStocksTable extends Migration
             $table->string('deliver_to')->nullable();
             $table->string('shelf')->nullable();
             $table->integer('state');
+            $table->float('price')->nullable();
+            $table->unsignedInteger('warranty')->nullable();
 
             $table->foreign('aid')
                 ->references('id')

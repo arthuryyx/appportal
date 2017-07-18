@@ -1938,7 +1938,7 @@ AA==
             <tr height=21 style='height:15.75pt'>
                 <td height=21 class=xl10629136 style='height:15.75pt;border-top:none'>{{ $stock->total }}</td>
                 <td class=xl10729136 style='border-top:none;border-left:none'>{{ $stock->appliance->model }}</td>
-                <td colspan=2 class=xl12129136 width=222 style='border-right:.5pt solid #3B5E91;border-left:none;width:167pt'>{{ $stock->appliance->belongsToBrand->name }}: {{ $stock->appliance->belongsToCategory->name }}</td>
+                <td colspan=2 class=xl12129136 width=222 style='border-right:.5pt solid #3B5E91;border-left:none;width:167pt'>{{ $stock->appliance->belongsToBrand->name }}: {{ $stock->appliance->belongsToCategory->name }}  @if($stock->warranty){{$stock->warranty.' year(s) warranty'}}@endif</td>
                 <td class=xl8929136 style='border-top:none;border-left:none'>@if($stock->price>0)${{number_format($stock->price/$stock->total, 2, '.', ',')}}@endif</td>
                 <td class=xl9029136 style='border-top:none;border-left:none'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>@if($stock->price>0)${{number_format($stock->price, 2, '.', ',')}}@endif</td>
             </tr>
@@ -1963,8 +1963,8 @@ AA==
         @endfor
 
         <tr height=21 style='mso-height-source:userset;height:15.95pt'>
-            <td height=21 class=xl9729136 colspan=2 style='height:15.95pt'>All appliance
-                come with 2 years warrant<span style='display:none'>y!</span></td>
+            <td height=21 class=xl9729136 colspan=2 style='height:15.95pt'>{{--All appliance--}}
+                {{--come with 2 years warrant--}}<span style='display:none'>y!</span></td>
             <td class=xl9429136 style='border-top:none'>　</td>
             <td colspan=2 class=xl11629136 style='border-right:.5pt solid #3B5E91'><span
                         style='mso-spacerun:yes'>&nbsp;</span>SUBTOTAL<span
