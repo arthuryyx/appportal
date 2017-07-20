@@ -18,7 +18,7 @@ class ApplianceController extends Controller
 
     public function create()
     {
-        return view('admin.appliance.create')->withBrands(Brand::pluck('name', 'id'))->withCategories(Category::pluck('name', 'id'));
+        return view('admin.appliance.create')->withBrands(Brand::orderBy('name')->pluck('name', 'id'))->withCategories(Category::orderBy('name')->pluck('name', 'id'));
     }
 
     public function store(Request $request)
@@ -45,7 +45,7 @@ class ApplianceController extends Controller
 
     public function edit($id)
     {
-        return view('admin/appliance/edit')->withAppliance(Appliance::find($id))->withBrands(Brand::pluck('name', 'id'))->withCategories(Category::pluck('name', 'id'));
+        return view('admin/appliance/edit')->withAppliance(Appliance::find($id))->withBrands(Brand::orderBy('name')->pluck('name', 'id'))->withCategories(Category::orderBy('name')->pluck('name', 'id'));
     }
 
     public function update(Request $request, $id)
