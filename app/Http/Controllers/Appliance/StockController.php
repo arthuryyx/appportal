@@ -257,7 +257,7 @@ class StockController extends Controller
         foreach ($t['id'] as $id){
             $obj = Appliance_Stock::find($id);
             if($obj->state == 1 || $obj->state == 2){
-                $obj->update(['assign_to' => null, 'price' => null]);
+                $obj->update(['assign_to' => null, 'price' => null, 'warranty' => null]);
             }else{
                 $m = $m.$obj->appliance->model.' not updated.<br>';
             }
