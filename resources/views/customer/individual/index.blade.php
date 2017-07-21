@@ -27,9 +27,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="{{ url('customer/individual/create') }}" class="btn btn-primary ">New</a>
-                </div>
+                {{--<div class="panel-heading">--}}
+                    {{--<a href="{{ url('customer/individual/create') }}" class="btn btn-primary ">New</a>--}}
+                {{--</div>--}}
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
@@ -51,17 +51,20 @@
                                 email
                             </th>
                             <th>
-                                street
+                                address
                             </th>
-                            <th>
-                                sub
-                            </th>
-                            <th>
-                                city
-                            </th>
-                            <th>
-                                zip
-                            </th>
+                            {{--<th>--}}
+                                {{--street--}}
+                            {{--</th>--}}
+                            {{--<th>--}}
+                                {{--sub--}}
+                            {{--</th>--}}
+                            {{--<th>--}}
+                                {{--city--}}
+                            {{--</th>--}}
+                            {{--<th>--}}
+                                {{--zip--}}
+                            {{--</th>--}}
                             <th>
                                 comment
                             </th>
@@ -77,12 +80,17 @@
                                 <td>{{ $customer->phone }}</td>
                                 <td>{{ $customer->mobile }}</td>
                                 <td>{{ $customer->email }}</td>
-                                <td>{{ $customer->getDefaultAddress[0]->street }}</td>
-                                <td>{{ $customer->getDefaultAddress[0]->sub }}</td>
-                                <td>{{ $customer->getDefaultAddress[0]->city }}</td>
-                                <td>{{ $customer->getDefaultAddress[0]->zip }}</td>
+                                <td>
+                                    @foreach($customer->hasManyAddresses()->get() as $address)
+                                        {{$address->address}}</br>
+                                    @endforeach
+                                </td>
+                                {{--<td>{{ $customer->getDefaultAddress[0]->street }}</td>--}}
+                                {{--<td>{{ $customer->getDefaultAddress[0]->sub }}</td>--}}
+                                {{--<td>{{ $customer->getDefaultAddress[0]->city }}</td>--}}
+                                {{--<td>{{ $customer->getDefaultAddress[0]->zip }}</td>--}}
                                 <td>{{ $customer->comment }}</td>
-                                <td><a href="{{ url('customer/individual/'.$customer->id) }}" class="btn btn-success">详情</a></td>
+                                <td><a href="{{ url('customer/individual/'.$customer->id) }}" class="btn btn-info">详情</a></td>
                             </tr>
                         @endforeach
                         </tbody>

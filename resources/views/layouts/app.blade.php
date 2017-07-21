@@ -363,20 +363,23 @@
                             @endcan
                         </ul>
                     </li>
-                    @can('root')
+                    @can('menu_customer')
                     <li>
                         <a href="#"><i class="fa fa-th- fa-user fa-fw"></i> Customer<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="{{ url('customer/individual') }}">Individual</a>
                             </li>
+                            @can('dev')
                             <li>
                                 <a href="{{ url('customer/corporation') }}">Corporation</a>
                             </li>
+                            @endcan
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     @endcan
+                    @can('menu_appliance')
                     <li>
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Appliance<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -393,7 +396,8 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-                    @can('kitchen_menu')
+                    @endcan
+                    @can('menu_kitchen')
                     <li>
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Kitchen<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -404,7 +408,7 @@
                         <!-- /.nav-second-level -->
                     </li>
                     @endcan
-                    @can('appliance_stock')
+                    @can('menu_stock')
                     <li>
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Stock<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">

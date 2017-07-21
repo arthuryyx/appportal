@@ -18,9 +18,9 @@ class Customer extends Model
         return $this->hasMany('App\Address', 'customer_id', 'id');
     }
 
-    public function getDefaultAddress()
-    {
-        return $this->hasManyAddresses()->where('type', 1);
-    }
+//    public function getDefaultAddress()
+//    {
+//        return $this->hasManyAddresses()->where('type', 1);
+//    }
 
 }

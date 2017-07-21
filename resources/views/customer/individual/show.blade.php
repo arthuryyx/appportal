@@ -55,43 +55,47 @@
                         <thead>
                         <tr>
                             <th>
-                                Street
+                                Address
                             </th>
-                            <th>
-                                Sub
-                            </th>
-                            <th>
-                                City
-                            </th>
-                            <th>
-                                Zip
-                            </th>
-                            <th>Type</th>
-                            <th></th>
+                            {{--<th>--}}
+                                {{--Street--}}
+                            {{--</th>--}}
+                            {{--<th>--}}
+                                {{--Sub--}}
+                            {{--</th>--}}
+                            {{--<th>--}}
+                                {{--City--}}
+                            {{--</th>--}}
+                            {{--<th>--}}
+                                {{--Zip--}}
+                            {{--</th>--}}
+                            {{--<th>Type</th>--}}
+                            {{--<th></th>--}}
                         </tr>
                         </thead>
                         <tbody>
                         @foreach ($customer->hasManyAddresses as $address)
                             <tr>
                                 {{--<td>{{ $stock->total }}</td>--}}
-                                <td>{{ $address->street }}</td>
-                                <td>{{ $address->sub }}</td>
-                                <td>{{ $address->city }}</td>
-                                <td>{{ $address->zip }}</td>
-                                <td>
-                                    @if($address->type == 0)
-                                        <label class="label label-danger">Invalid</label>
-                                    @elseif($address->type == 1)
-                                        <label class="label label-primary">Default</label>
-                                    @elseif($address->type == 2)
+                                <td>{{ $address->address }}</td>
+                                {{--<td>{{ $address->street }}</td>--}}
+                                {{--<td>{{ $address->sub }}</td>--}}
+                                {{--<td>{{ $address->city }}</td>--}}
+                                {{--<td>{{ $address->zip }}</td>--}}
+                                {{--<td>--}}
+                                    {{--@if($address->type == 0)--}}
+                                        {{--<label class="label label-danger">Invalid</label>--}}
+                                    {{--@elseif($address->type == 1)--}}
+                                        {{--<label class="label label-primary">Default</label>--}}
+                                    {{--@elseif($address->type == 2)--}}
                                         {{--<label class="label label-success">Normal</label>--}}
                                     {{--@elseif($address->type == 3)--}}
                                         {{--<label class="label label-primary">Delivered</label>--}}
-                                    @else
-                                        <label class="label label-danger">Exception</label>
-                                    @endif
-                                </td>
-                                <td><a href="{{ url('customer/address/'.$address->id.'/edit') }}" class="btn btn-success">修改</a></td>
+                                    {{--@else--}}
+                                        {{--<label class="label label-danger">Exception</label>--}}
+                                    {{--@endif--}}
+                                {{--</td>--}}
+                                {{--<td><a href="{{ url('customer/address/'.$address->id.'/edit') }}" class="btn btn-success">修改</a></td>--}}
                             </tr>
                         @endforeach
                         </tbody>
