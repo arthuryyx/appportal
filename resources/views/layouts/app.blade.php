@@ -392,6 +392,9 @@
                             <li>
                                 <a href="{{ url('appliance/invoice/bulk') }}">Bulk</a>
                             </li>
+                            <li>
+                                <a href="{{ url('statistics/sales') }}">Sales</a>
+                            </li>
                             @endcan
                         </ul>
                         <!-- /.nav-second-level -->

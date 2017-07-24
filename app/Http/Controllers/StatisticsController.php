@@ -70,4 +70,13 @@ class StatisticsController extends Controller
         }
         return $data;
     }
+
+    public function applianceSalesTable(){
+        $invoices = Appliance_Invoice::whereYear('created_at', date('Y'))->whereMonth('created_at', date('m'))->pluck('id');
+//        dd($invoices);
+        $data = Appliance_Stock::whereIn('assign_to', $invoices)
+            ->groupBy('aid')
+            ->select('aid', DB::raw('count(aid) as total'))->get();
+        return view('statistics.index')->withData($data);
+    }
 }

@@ -130,6 +130,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('statistics/salesLine', 'StatisticsController@salesLine');
     Route::get('statistics/salesBar', 'StatisticsController@salesBar');
     Route::get('statistics/salesChart', 'StatisticsController@salesChart');
+    Route::get('statistics/sales', 'StatisticsController@applianceSalesTable');
 
     Route::get('settings', 'UserController@settings');
     Route::post('/settings/reset', 'UserController@reset');
