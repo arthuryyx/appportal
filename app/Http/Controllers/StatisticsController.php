@@ -16,25 +16,21 @@ use Illuminate\Support\Facades\DB;
 class StatisticsController extends Controller
 {
     public function salesBar(){
-        $array = Appliance_Stock::whereYear('updated_at', date('Y'))
-            ->whereMonth('updated_at', date('m'))
-            ->where(function ($query){
-            $query->where('state', 2)
-                ->whereNotNull('assign_to')
-                ->orWhere('state', 3);
-        })->groupBy('aid')
+        $invoices = Appliance_Invoice::whereYear('created_at', date('Y'))->whereMonth('created_at', date('m'))->pluck('id');
+        $sids = Appliance_Stock::whereIn('assign_to', $invoices)->pluck('id');
+        $aids = array_unique(
+            Appliance_Stock::whereIn('assign_to', $invoices)
+            ->groupBy('aid')
             ->select('aid', DB::raw('count(aid) as total'))
             ->orderBy('total', 'desc')
-            ->take(10)
-            ->pluck('aid');
-
-        $year = date('Y');
-        $month = date('m');
+            ->take(10)->pluck('aid')->all());
         $data = array();
-        foreach ($array as $value){
-            $data [count($data)]['y']=Appliance::where('id', $value)->select('model')->first()->model;
-            $data [count($data)-1]['a']=Appliance_Stock::where('aid', $value)->whereYear('updated_at', $year)->whereMonth('updated_at', $month)->where('state', 2)->whereNotNull('assign_to')->count();
-            $data [count($data)-1]['b']=Appliance_Stock::where('aid', $value)->whereYear('updated_at', $year)->whereMonth('updated_at', $month)->where('state', 3)->count();
+        foreach ($aids as $aid){
+            $data [count($data)]['y']=Appliance::where('id', $aid)->select('model')->first()->model;
+            $data [count($data)-1]['a']=Appliance_Stock::whereIn('id', $sids)->where('aid', $aid)->where('state', 0)->count();
+            $data [count($data)-1]['b']=Appliance_Stock::whereIn('id', $sids)->where('aid', $aid)->where('state', 1)->count();
+            $data [count($data)-1]['c']=Appliance_Stock::whereIn('id', $sids)->where('aid', $aid)->where('state', 2)->count();
+            $data [count($data)-1]['d']=Appliance_Stock::whereIn('id', $sids)->where('aid', $aid)->where('state', 3)->count();
         }
         return $data;
     }
@@ -73,7 +69,6 @@ class StatisticsController extends Controller
 
     public function applianceSalesTable(){
         $invoices = Appliance_Invoice::whereYear('created_at', date('Y'))->whereMonth('created_at', date('m'))->pluck('id');
-//        dd($invoices);
         $data = Appliance_Stock::whereIn('assign_to', $invoices)
             ->groupBy('aid')
             ->select('aid', DB::raw('count(aid) as total'))->get();

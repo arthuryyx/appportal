@@ -176,8 +176,9 @@
                         resize: true,
                         stacked: true,
                         xkey: 'y',
-                        ykeys: ['a', 'b'],
-                        labels: ['Hold', 'Delivered']
+                        ykeys: ['a', 'b', 'c', 'd'],
+                        labels: ['Pending', 'Ordered','Hold', 'Delivered'],
+                        barColors: ['#F0AD4E', '#5BC0DE', '#5CB85C', '#337AB7']
                     });
                 },
 
