@@ -13,7 +13,7 @@ class RoleController extends Controller
 {
     public function index()
     {
-        return view('admin.role.index')->withRoles(Role::all())->withPermissions(Permission::pluck('label', 'id'));
+        return view('admin.role.index')->withRoles(Role::all())->withPermissions(Permission::orderBy('label')->pluck('label', 'id'));
     }
 
     public function store(Request $request)
@@ -40,7 +40,7 @@ class RoleController extends Controller
 
     public function edit($id)
     {
-        return view('admin/role/edit')->withRole(Role::find($id))->withPermissions(Permission::pluck('label', 'id'))->withChecks(Role::find($id)->permissions()->pluck('id')->all());
+        return view('admin/role/edit')->withRole(Role::find($id))->withPermissions(Permission::orderBy('name')->pluck('label', 'id'))->withChecks(Role::find($id)->permissions()->pluck('id')->all());
     }
 
     public function update(Request $request, $id)

@@ -23,7 +23,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <a href="{{ url('customer/individual/'.$customer->id.'/edit') }}" class="btn btn-success">修改</a>
+{{--                    <a href="{{ url('customer/individual/'.$customer->id.'/edit') }}" class="btn btn-success">修改</a>--}}
                     <table width="100%" class="table">
                         <thead>
                             <tr>
@@ -50,7 +50,7 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel panel-body">
-                    <a href="{{ url('customer/address/create/'.$customer->id) }}" class="btn btn-primary ">New</a>
+{{--                    <a href="{{ url('customer/address/create/'.$customer->id) }}" class="btn btn-primary ">New</a>--}}
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                         <thead>
                         <tr>
