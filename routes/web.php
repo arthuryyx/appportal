@@ -102,7 +102,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Material', 'prefix' => 'ma
 Route::group(['middleware' => 'auth', 'namespace' => 'Kitchen', 'prefix' => 'kitchen'], function() {
     Route::resource('quot', 'QuotationController');
     Route::post('quot/select', 'QuotationController@selectProduct');
-
+    Route::post('quot/select-ajax', 'QuotationController@selectAjax');
 
 });
 

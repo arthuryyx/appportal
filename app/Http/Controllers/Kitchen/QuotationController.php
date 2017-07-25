@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Kitchen;
 use App\Http\Controllers\Controller;
 
 use App\Kitchen_Product;
+use App\Kitchen_Product_Material;
+use App\Product_Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Address;
 use App\Customer;
+use App\Material_Item;
 use App\Kitchen_Quotation;
 
 
@@ -69,17 +72,38 @@ class QuotationController extends Controller
         return view('kitchen.quotation.show')->withQuotation(Kitchen_Quotation::find($id));
     }
 
+    public function selectAjax(Request $request)
+    {
+        if($request->ajax()){
+            $data = array();
+            foreach (Product_Model::find($request->model_id)->parts()->get() as $part){
+                $data[$part->id] = Material_Item::whereIn('type_id', $part->materialTypes->pluck('id')->all())->pluck('model', 'id')->all();
+            }
+            return view('kitchen.quotation.parts')->withParts(Product_Model::find($request->model_id)->parts()->get())->withData($data)->render();
+//            return response()->json(['options'=>$data]);
+        }
+    }
+
     public function selectProduct(Request $request) {
         $this->validate($request, [
             'product_id' => 'required|exists:product__models,id',
             'quotation_id' => 'required|exists:kitchen__quotations,id',
         ]);
 
-        if (Kitchen_Product::create($request->all())) {
-            return redirect()->back()->withErrors('添加成功！');
-        } else {
-            return redirect()->back()->withInput()->withErrors('添加失败！');
+        DB::beginTransaction();
+        try {
+            $kpi = Kitchen_Product::create($request->all())->id;
+            foreach (request()->input('materials') as $key => $value){
+                Kitchen_Product_Material::create(['kitchen_product_id' => $kpi, 'product_part_id' => $key, 'material_item_id' => $value['mid'], 'qty' => $value['qty']===''?null:$value['qty']]);
+            }
+        } catch(\Exception $e)
+        {
+            DB::rollback();
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
         }
+        DB::commit();
+
+        return redirect()->back()->withErrors('添加成功！');
     }
 
 }

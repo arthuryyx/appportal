@@ -87,17 +87,17 @@
                     {{--</div>--}}
 
                     {{--@if($quotation->state == 0)--}}
-                        <div class="col-lg-4">
+                        <div class="col-lg-12">
                             {!! Form::open(['url' => 'kitchen/quot/select','method'=>'POST']) !!}
                             <div class="row">
-                                <div class="col-xs-10 col-sm-10 col-md-10">
+                                <div class="col-xs-3 col-sm-3 col-md-3">
                                     <strong>Product</strong>
                                     <select class="pid form-control" name="product_id" required="required"></select>
                                     {{--<strong>Price</strong>--}}
 {{--                                    {{ Form::number('price', null, array('class' => 'form-control', 'step' => 'any')) }}--}}
                                     {{ Form::hidden('quotation_id', $quotation->id) }}
-                                    {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
                                 </div>
+                                <div id="selectparts"></div>
                             </div>
                             {!! Form::close() !!}
                         </div>
@@ -242,6 +242,21 @@
                 },
                 cache: true
             }
+        }).on('change', function() {
+//            alert();
+            $.ajax({
+                url: 'select-ajax',
+                method: 'POST',
+                data: {model_id:this.value, _token:$("input[name='_token']").val()},
+                success: function(data) {
+//                    console.log(data);
+                    $('#selectparts').html('');
+                    $('#selectparts').html(data)
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
         });
 
     </script>
