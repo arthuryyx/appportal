@@ -90,6 +90,13 @@ class QuotationController extends Controller
             'quotation_id' => 'required|exists:kitchen__quotations,id',
         ]);
 
+        $price = 0;
+        foreach (request()->input('materials') as $value){
+            $price += Material_Item::find($value['mid'])->price * $value['qty'];
+        }
+        $request->merge(['price' => $price]);
+//        dd($price);
+
         DB::beginTransaction();
         try {
             $kpi = Kitchen_Product::create($request->all())->id;

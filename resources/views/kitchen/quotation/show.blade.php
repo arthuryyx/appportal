@@ -203,6 +203,9 @@
                                 <th>
                                     Materials
                                 </th>
+                                <th>
+                                    Price
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -213,12 +216,14 @@
                                     <td>{{ $product->product->category->name }}</td>
                                     <td>
                                         @foreach ($product->materials as $material)
-                                            {{$material->item->model}} {{$material->qty}}</br>
+                                            {{$material->item->model}} x {{$material->qty}} = ${{$material->item->price * $material->qty}}</br>
                                         @endforeach
                                     </td>
+                                    <td>{{ $product->price }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
+                            <tfoot><tr><td></td><td></td><td></td><td></td><td><strong>Total: {{ $quotation->products->sum('price') }}</strong></td></tr></tfoot>
                         </table>
                     </div>
                 </form>

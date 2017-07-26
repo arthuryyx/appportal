@@ -18,6 +18,7 @@ class CreateKitchenProductsTable extends Migration
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('quotation_id');
             $table->unsignedInteger('job_id')->nullable();
+            $table->unsignedFloat('price');
             $table->timestamps();
 
             $table->foreign('quotation_id')
