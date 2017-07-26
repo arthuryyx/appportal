@@ -200,6 +200,9 @@
                                 <th>
                                     Type
                                 </th>
+                                <th>
+                                    Materials
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -208,6 +211,11 @@
                                     <td>{{ $product->id }}</td>
                                     <td>{{ $product->product->model }}</td>
                                     <td>{{ $product->product->category->name }}</td>
+                                    <td>
+                                        @foreach ($product->materials as $material)
+                                            {{$material->item->model}} {{$material->qty}}</br>
+                                        @endforeach
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -285,7 +293,7 @@
                 select: {
                     'style': 'multi'
                 },
-                order: [[1, 'asc']]
+//                order: [[1, 'asc']]
             });
 
             // Handle form submission event

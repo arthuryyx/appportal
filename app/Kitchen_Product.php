@@ -11,4 +11,9 @@ class Kitchen_Product extends Model
     public function product(){
         return $this->belongsTo(Product_Model::class, 'product_id', 'id');
     }
+
+    public function materials(){
+        return $this->hasMany(Kitchen_Product_Material::class, 'kitchen_product_id', 'id');
+    }
+
 }
