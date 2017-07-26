@@ -34,6 +34,14 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
+                                    <strong>Price:</strong>
+                                    <br/>
+                                    {{ Form::number('price', null, array('class' => 'form-control', 'step' => 'any', 'required' => 'required')) }}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
                                     <strong>Suppliers:</strong>
                                     <br/>
                                     {{ Form::select('supplier_id', $suppliers, $sid, ['class' => 'form-control', 'placeholder'=>'Select', 'required' => 'required']) }}

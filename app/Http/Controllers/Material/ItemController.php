@@ -41,6 +41,7 @@ class ItemController extends Controller
         $this->validate($request, [
             'model' => 'required|unique:material__items',
             'supplier_id' => 'required',
+            'price' => 'required|numeric|min:0',
             'type_id' => 'required',
             'id' => 'required',
         ]);
@@ -87,6 +88,7 @@ class ItemController extends Controller
     {
         $this->validate($request, [
             'model' => 'required|unique:material__items,model,'.$id,
+            'price' => 'required|numeric|min:0',
             'supplier_id' => 'required',
             'type_id' => 'required',
             'id' => 'required',
