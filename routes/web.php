@@ -76,6 +76,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
     Route::get('delivery/index/{invoice}', 'DeliveryController@index');
     Route::get('delivery/packing-slip/{delivery}', 'DeliveryController@exportPackingSlip');
     Route::get('order/{invoice}', 'OrderController@index');
+    Route::get('record/{type}', 'RecordController@index');
 
 });
 

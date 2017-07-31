@@ -396,6 +396,16 @@
                                 <a href="{{ url('statistics/sales') }}">Sales</a>
                             </li>
                             @endcan
+                            <li>
+                                <a href="#"><i class="fa fa-history fa-fw"></i> Record<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="{{ url('appliance/record/2') }}"><i class="fa fa-history fa-fw"></i> Arrival</a>
+                                    </li>
+
+                                </ul>
+                                <!-- /.nav-third-level -->
+                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>

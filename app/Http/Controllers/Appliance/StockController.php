@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Appliance;
 
+use App\Appliance_Record;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -233,14 +234,26 @@ class StockController extends Controller
         ]);
         $t = $request->all();
         $m = '';
-        foreach ($t['id'] as $id){
-            $obj = Appliance_Stock::find($id);
-            if($obj->state == 1){
-                $obj->update(['state' => 2]);
-            }else{
-                $m = $m.$obj->appliance->model.' not updated.<br>';
+        $by = Auth::user()->id;
+
+        DB::beginTransaction();
+        try {
+            foreach ($t['id'] as $id){
+                $obj = Appliance_Stock::find($id);
+                if($obj->state == 1){
+                    $obj->update(['state' => 2]);
+                    Appliance_Record::create(['sid'=>$id, 'type'=> 2, 'created_by'=>$by]);
+                }else{
+                    $m = $m.$obj->appliance->model.' not updated.<br>';
+                }
             }
+        } catch(\Exception $e)
+        {
+            DB::rollback();
+            return redirect()->back()->withInput()->withErrors($e);
         }
+        DB::commit();
+
         if($m === ''){
             return redirect()->back()->withErrors('更新成功！');
         }else{
