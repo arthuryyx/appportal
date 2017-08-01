@@ -74,4 +74,20 @@ class StatisticsController extends Controller
             ->select('aid', DB::raw('count(aid) as total'))->get();
         return view('statistics.index')->withData($data);
     }
+
+    public function personalBar(){
+        $sales = Role::where('name', 'sales')->first()->users()->pluck('id');
+        $date0 = Carbon::now()->subMonthsWithOverflow(3);
+        $date1 = Carbon::now()->subMonthsWithOverflow(2);
+        $date2 = Carbon::now()->subMonthsWithOverflow(1);
+
+        $data = array();
+        foreach ($sales as $uid){
+            $data [count($data)]['y']=User::where('id', $uid)->select('name')->first()->name;
+            $data [count($data)-1]['a']=floor(Appliance_Invoice::whereYear('created_at', $date0->year)->whereMonth('created_at', $date0->month)->where('type', 0)->where('created_by', $uid)->sum('price'));
+            $data [count($data)-1]['b']=floor(Appliance_Invoice::whereYear('created_at', $date1->year)->whereMonth('created_at', $date1->month)->where('type', 0)->where('created_by', $uid)->sum('price'));
+            $data [count($data)-1]['c']=floor(Appliance_Invoice::whereYear('created_at', $date2->year)->whereMonth('created_at', $date2->month)->where('type', 0)->where('created_by', $uid)->sum('price'));
+        }
+        return ['data'=>$data, 'date'=>[$date0->format('M Y'), $date1->format('M Y'), $date2->format('M Y')]];
+    }
 }

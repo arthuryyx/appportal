@@ -109,15 +109,14 @@
     <div class="col-lg-8">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Last 30 days Sales
+                Last 3 Months
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <div id="morris-line"></div>
+                <div id="personal-morris-bar-chart"></div>
             </div>
             <!-- /.panel-body -->
         </div>
-        <!-- /.panel -->
     </div>
     <div class="col-lg-4">
         <div class="panel panel-default">
@@ -127,6 +126,21 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div id="morris-donut-chart"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Last 30 days Sales
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div id="morris-line"></div>
             </div>
             <!-- /.panel-body -->
         </div>
@@ -233,6 +247,32 @@
                 }
             });
         })
+
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: 'statistics/personalBar',
+            data: '{}',
+            success: function (response) {
+                if(response.length == 0){
+                    response.push({'y':'No Data'})
+                }
+                Morris.Bar({
+                    element: 'personal-morris-bar-chart',
+                    data: response.data,
+                    resize: true,
+//                    stacked: true,
+                    xkey: 'y',
+                    ykeys: ['a', 'b', 'c'],
+                    labels: [response.date[0],response.date[1],response.date[2]]
+                });
+            },
+
+            error: function () {
+                alert("Error loading data! Please try again.");
+            }
+        });
 
     </script>
 @endsection
