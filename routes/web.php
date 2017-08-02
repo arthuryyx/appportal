@@ -101,9 +101,15 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Material', 'prefix' => 'ma
 });
 
 Route::group(['middleware' => 'auth', 'namespace' => 'Kitchen', 'prefix' => 'kitchen'], function() {
-    Route::resource('quot', 'QuotationController');
+    Route::resource('quot', 'QuotationController', ['except' => ['edit', 'update', 'destroy']]);
     Route::post('quot/select', 'QuotationController@selectProduct');
     Route::post('quot/select-ajax', 'QuotationController@selectAjax');
+    Route::post('quot/approve', 'QuotationController@approve');
+    Route::post('product/delete', 'QuotationController@deleteProduct');
+
+    Route::get('job', ['as'=>'kitchen.job.index','uses'=>'JobController@index']);
+    Route::get('job/create/{qid}', ['as'=>'kitchen.job.store','uses'=>'JobController@store']);
+    Route::get('job/{id}', ['as'=>'kitchen.job.show','uses'=>'JobController@show']);
 
 });
 

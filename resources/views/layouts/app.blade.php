@@ -415,7 +415,10 @@
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Kitchen<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{{ url('kitchen/quot') }}">Quotation</a>
+                                <a href="{{ url('kitchen/quot') }}">Quot</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('kitchen/job') }}">Job</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->

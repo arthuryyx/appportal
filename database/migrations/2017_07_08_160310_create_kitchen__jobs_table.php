@@ -16,6 +16,7 @@ class CreateKitchenJobsTable extends Migration
         Schema::create('kitchen__jobs', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('quotation_id');
+            $table->unsignedFloat('total');
             $table->timestamps();
 
             $table->foreign('quotation_id')

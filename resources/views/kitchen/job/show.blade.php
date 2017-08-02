@@ -8,7 +8,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Quotation Info</h1>
+            <h1 class="page-header">Job Info</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -23,35 +23,35 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    @if($quotation->state == 0)
-                        @can('kitchen_confirm_quotation')
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#myModalpayment"}}>Approve</button>
-                            <!-- Modal -->
-                            <div class="modal fade" id={{"myModalpayment"}} tabindex="-1" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" >&times;</button>
-                                        </div>
+                    {{--@if($quotation->state == 0)--}}
+                        {{--@can('kitchen_confirm_quotation')--}}
+                            {{--<button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#myModalpayment"}}>Approve</button>--}}
+                            {{--<!-- Modal -->--}}
+                            {{--<div class="modal fade" id={{"myModalpayment"}} tabindex="-1" role="dialog">--}}
+                                {{--<div class="modal-dialog">--}}
+                                    {{--<div class="modal-content">--}}
+                                        {{--<div class="modal-header">--}}
+                                            {{--<button type="button" class="close" data-dismiss="modal" >&times;</button>--}}
+                                        {{--</div>--}}
                                         {{--<div class="modal-body">--}}
                                             {{--<strong>${{array_sum($quotation->hasManyDeposits->pluck('amount')->all())}}</strong>--}}
                                         {{--</div>--}}
-                                        <div class="modal-footer">
-                                            <form action="{{ url('kitchen/quot/approve') }}" method="POST" style="display: inline;">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name="id" value="{{$quotation->id}}">
-                                                <button type="submit" class="btn btn-danger">confirm</button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <!-- /.modal-content -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
-                            <!-- /.modal -->
-                        @endcan
-                    @endif
+                                        {{--<div class="modal-footer">--}}
+                                            {{--<form action="{{ url('kitchen/quot/approve') }}" method="POST" style="display: inline;">--}}
+                                                {{--{{ csrf_field() }}--}}
+                                                {{--<input type="hidden" name="id" value="{{$quotation->id}}">--}}
+                                                {{--<button type="submit" class="btn btn-danger">confirm</button>--}}
+                                                {{--<button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>--}}
+                                            {{--</form>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<!-- /.modal-content -->--}}
+                                {{--</div>--}}
+                                {{--<!-- /.modal-dialog -->--}}
+                            {{--</div>--}}
+                            {{--<!-- /.modal -->--}}
+                        {{--@endcan--}}
+                    {{--@endif--}}
                     {{--<a href="{{ url('appliance/invoice/job/'.$quotation->id.'/html') }}" class="btn btn-primary" target="_blank">Print</a>--}}
 {{--                    <a href="{{ url('appliance/invoice/job/'.$quotation->id.'/edit') }}" class="btn btn-success">Edit</a>--}}
                     <table width="100%" class="table">
@@ -63,37 +63,39 @@
                             <th>Email</th>
                             <th>Address</th>
                             <th>Date</th>
+                            <th>Total</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td>{{$quotation->customer->first.' '.$quotation->customer->last}}</td>
-                            <td>{{$quotation->customer->phone}}</td>
-                            <td>{{$quotation->customer->mobile}}</td>
-                            <td>{{$quotation->customer->email}}</td>
-                            <td>{{$quotation->address->address}}</td>
-                            <td>{{$quotation->created_at->format('d-m-Y')}}</td>
+                            <td>{{$job->quotation->customer->first.' '.$job->quotation->customer->last}}</td>
+                            <td>{{$job->quotation->customer->phone}}</td>
+                            <td>{{$job->quotation->customer->mobile}}</td>
+                            <td>{{$job->quotation->customer->email}}</td>
+                            <td>{{$job->quotation->address->address}}</td>
+                            <td>{{$job->created_at->format('d-m-Y')}}</td>
+                            <td>{{$job->total}}</td>
                             {{--<td>{{$quotation->getCreated_by->name}}</td>--}}
                         </tr>
                         </tbody>
                     </table>
                     <hr>
 
-                    @if($quotation->state == 0)
-                        <div class="col-lg-12">
-                            {!! Form::open(['url' => 'kitchen/quot/select','method'=>'POST']) !!}
-                            <div class="row">
-                                <div class="col-xs-3 col-sm-3 col-md-3">
-                                    <strong>Product</strong>
-                                    <select class="pid form-control" name="product_id" required="required"></select>
+                    {{--@if($quotation->state == 0)--}}
+                        {{--<div class="col-lg-12">--}}
+                            {{--{!! Form::open(['url' => 'kitchen/quot/select','method'=>'POST']) !!}--}}
+                            {{--<div class="row">--}}
+                                {{--<div class="col-xs-3 col-sm-3 col-md-3">--}}
+                                    {{--<strong>Product</strong>--}}
+                                    {{--<select class="pid form-control" name="product_id" required="required"></select>--}}
                                     {{--<strong>Price</strong>--}}
 {{--                                    {{ Form::number('price', null, array('class' => 'form-control', 'step' => 'any')) }}--}}
-                                    {{ Form::hidden('quotation_id', $quotation->id) }}
-                                </div>
-                                <div id="selectparts" class="col-xs-9 col-sm-9 col-md-9"></div>
-                            </div>
-                            {!! Form::close() !!}
-                        </div>
+                                    {{--{{ Form::hidden('quotation_id', $quotation->id) }}--}}
+                                {{--</div>--}}
+                                {{--<div id="selectparts" class="col-xs-9 col-sm-9 col-md-9"></div>--}}
+                            {{--</div>--}}
+                            {{--{!! Form::close() !!}--}}
+                        {{--</div>--}}
 
                         {{--@can('appliance_add_deposit')--}}
                             {{--<div class="col-lg-4">--}}
@@ -109,21 +111,21 @@
                                 {{--{!! Form::close() !!}--}}
                             {{--</div>--}}
                         {{--@endcan--}}
-                    @elseif($quotation->state == 1)
-                        <div class="col-lg-2">
-                            <img src="{{ asset('img/approved.png')}}" height="150" width="150" >
-                        </div>
-                        <div class="col-lg-2">
-                            <a href="{{ url('kitchen/job/create/'.$quotation->id) }}" class="btn btn-primary btn-lg">Create Job</a>
-                        </div>
-                        @elseif($quotation->state == 3)
-                        <div class="col-lg-2">
-                            <img src="{{ asset('img/approved.png')}}" height="150" width="150" >
-                        </div>
-                        <div class="col-lg-2">
-                            <a href="{{ url('kitchen/job/'.$quotation->job->id) }}" class="btn btn-primary btn-lg">Go Job</a>
-                        </div>
-                    @endif
+                    {{--@elseif($quotation->state == 1)--}}
+                        {{--<div class="col-lg-2">--}}
+                            {{--<img src="{{ asset('img/approved.png')}}" height="150" width="150" >--}}
+                        {{--</div>--}}
+                        {{--<div class="col-lg-2">--}}
+                            {{--<a href="{{ url('kitchen/job/create/'.$quotation->id) }}" class="btn btn-primary btn-lg">Create Job</a>--}}
+                        {{--</div>--}}
+                        {{--@elseif($quotation->state == 3)--}}
+                        {{--<div class="col-lg-2">--}}
+                            {{--<img src="{{ asset('img/approved.png')}}" height="150" width="150" >--}}
+                        {{--</div>--}}
+                        {{--<div class="col-lg-2">--}}
+                            {{--<a href="{{ url('kitchen/job/'.$quotation->job->id) }}" class="btn btn-primary btn-lg">Go Job</a>--}}
+                        {{--</div>--}}
+                    {{--@endif--}}
 
                     {{--<div class="col-lg-2">--}}
                         {{--<p>--}}
@@ -141,35 +143,35 @@
             <div class="panel panel-default">
                 <form id="frm-example" name="frm_example" action="" method="post">
                     {{ csrf_field() }}
-                    {!! Form::hidden('qid', $quotation->id) !!}
-                    @if($quotation->state == 0)
-                    <div class="panel-heading">
+                    {{--{!! Form::hidden('qid', $quotation->id) !!}--}}
+                    {{--@if($quotation->state == 0)--}}
+                    {{--<div class="panel-heading">--}}
                         {{--@can('appliance_order')--}}
                             {{--<button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/order')}}'">order</button>--}}
                         {{--@endcan--}}
 {{--                        @can('appliance_release')--}}
-                        <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#myModalrelease"}}>Delete</button>
-                            <!-- Modal -->
-                            <div class="modal fade" id={{"myModalrelease"}} tabindex="-1" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" >&times;</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Confirm delete item(s) from current job!
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('kitchen/product/delete')}}'">delete</button>
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
-                                        </div>
-                                    </div>
-                                    <!-- /.modal-content -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
-                            <!-- /.modal -->
+                        {{--<!-- Button trigger modal -->--}}
+                            {{--<button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#myModalrelease"}}>Delete</button>--}}
+                            {{--<!-- Modal -->--}}
+                            {{--<div class="modal fade" id={{"myModalrelease"}} tabindex="-1" role="dialog">--}}
+                                {{--<div class="modal-dialog">--}}
+                                    {{--<div class="modal-content">--}}
+                                        {{--<div class="modal-header">--}}
+                                            {{--<button type="button" class="close" data-dismiss="modal" >&times;</button>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="modal-body">--}}
+                                            {{--Confirm delete item(s) from current job!--}}
+                                        {{--</div>--}}
+                                        {{--<div class="modal-footer">--}}
+                                            {{--<button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('kitchen/product/delete')}}'">delete</button>--}}
+                                            {{--<button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<!-- /.modal-content -->--}}
+                                {{--</div>--}}
+                                {{--<!-- /.modal-dialog -->--}}
+                            {{--</div>--}}
+                            {{--<!-- /.modal -->--}}
                         {{--@endcan--}}
                         {{--@can('appliance_deliver')--}}
                         {{--<!-- Button trigger modal -->--}}
@@ -196,8 +198,8 @@
                             {{--</div>--}}
                             {{--<!-- /.modal -->--}}
                         {{--@endcan--}}
-                    </div>
-                    @endif
+                    {{--</div>--}}
+                    {{--@endif--}}
                     <div class="panel panel-body">
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                             <thead>
@@ -218,7 +220,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($quotation->products as $product)
+                            @foreach ($job->products as $product)
                                 <tr>
                                     <td>{{ $product->id }}</td>
                                     <td>{{ $product->product->model }}</td>
@@ -232,7 +234,7 @@
                                 </tr>
                             @endforeach
                             </tbody>
-                            <tfoot><tr><td></td><td></td><td></td><td></td><td><strong>Total: {{ $quotation->products->sum('price') }}</strong></td></tr></tfoot>
+                            {{--<tfoot><tr><td></td><td></td><td></td><td></td><td><strong>Total: {{ $quotation->products->sum('price') }}</strong></td></tr></tfoot>--}}
                         </table>
                     </div>
                 </form>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kitchen_Quotation extends Model
 {
-    protected $fillable = ['customer_id', 'address_id', 'created_by'];
+    protected $fillable = ['customer_id', 'address_id', 'created_by', 'state'];
 
     public function customer()
     {
@@ -25,5 +25,9 @@ class Kitchen_Quotation extends Model
     public function products()
     {
         return $this->hasMany(Kitchen_Product::class, 'quotation_id', 'id');
+    }
+
+    public function job() {
+        return $this->belongsTo(Kitchen_Job::class, 'id', 'quotation_id');
     }
 }

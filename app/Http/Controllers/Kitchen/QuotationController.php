@@ -113,4 +113,40 @@ class QuotationController extends Controller
         return redirect()->back()->withErrors('添加成功！');
     }
 
+    public function deleteProduct(Request $request){
+        $this->validate($request, [
+            'qid' => 'required',
+            'id' => 'required',
+        ]);
+
+        if(Kitchen_Quotation::find($request->input('qid'))->state >0) {
+            return redirect()->back()->withInput()->withErrors('删除失败！');
+        }
+
+        DB::beginTransaction();
+        try {
+            foreach ($request->input('id') as $id){
+                Kitchen_Product::find($id)->delete();
+            }
+
+        } catch(\Exception $e)
+        {
+            DB::rollback();
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
+        }
+        DB::commit();
+        return redirect()->back()->withInput()->withErrors('删除成功！');
+    }
+
+    public function approve(Request $request) {
+        $this->validate($request, [
+            'id' => 'required|exists:kitchen__quotations,id',
+        ]);
+        if (Kitchen_Quotation::find($request->input('id'))->update(['state'=>1])) {
+            return redirect('kitchen/quot/'.$request->input('id'))->withErrors('更新成功！');
+        } else {
+            return redirect()->back()->withInput()->withErrors('更新失败！');
+        }
+    }
+
 }

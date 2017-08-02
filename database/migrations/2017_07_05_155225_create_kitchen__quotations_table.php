@@ -18,6 +18,7 @@ class CreateKitchenQuotationsTable extends Migration
             $table->unsignedInteger('customer_id');
             $table->unsignedInteger('address_id');
             $table->unsignedInteger('created_by');
+            $table->unsignedInteger('state')->default(0);
             $table->timestamps();
 
             $table->foreign('customer_id')
