@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kitchen_Job extends Model
 {
-    protected $fillable = ['quotation_id', 'total'];
+    protected $fillable = ['quotation_id', 'total', 'created_by'];
 
     public function quotation() {
         return $this->belongsTo(Kitchen_Quotation::class, 'quotation_id', 'id');

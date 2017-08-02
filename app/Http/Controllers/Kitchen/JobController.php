@@ -34,7 +34,7 @@ class JobController extends Controller
 
         DB::beginTransaction();
         try {
-            $job_id = Kitchen_Job::create(['quotation_id'=>$qid, 'total'=>$total, 'created_at'=>Auth::user()->id])->id;
+            $job_id = Kitchen_Job::create(['quotation_id'=>$qid, 'total'=>$total, 'created_by'=>Auth::user()->id])->id;
             $quotation->update(['state'=>3]);
             foreach ($quotation->products as $product) {
                 $product->update(['job_id'=>$job_id]);
