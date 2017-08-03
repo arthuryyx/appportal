@@ -228,6 +228,57 @@ class StockController extends Controller
         }
     }
 
+    public function switch(Request $request){
+        $this->validate($request, [
+            'id' => 'required',
+        ]);
+
+        $obj = Appliance_Stock::find($request->input('id')[0]);
+
+        if($obj->state > 1) {
+            return redirect()->back()->withInput()->withErrors('Not allow to switch!');
+        }
+
+        $arr = Appliance_Stock::where('aid', $obj->aid)
+            ->where('appliance__stocks.state', 2)
+            ->where('assign_to', '!=', $obj->assign_to)
+            ->join('appliance__invoices', 'assign_to', '=', 'appliance__invoices.id')
+            ->pluck('receipt_id', 'appliance__stocks.id')
+            ->all();
+
+//        $avi = Appliance_Stock::where('aid', $obj->aid)->where('state', 2)->whereNull('assign_to')->first();
+//        if($avi){
+//            $arr = array_add($arr, $avi->id, 'Stock');
+//        }
+
+        if(count($arr) == 0) {
+            return redirect()->back()->withInput()->withErrors('No Appliance To Switch!');
+        }
+        return view('appliance.stock.switch')->withObj($obj)->withArr($arr);
+    }
+
+    public function exchange(Request $request) {
+        $this->validate($request, [
+            'id' => 'required',
+            'target' => 'required',
+        ]);
+
+        $original = Appliance_Stock::where('id', $request->input('id'))->select('assign_to', 'warranty', 'price')->first()->getAttributes();
+
+        DB::beginTransaction();
+        try {
+            Appliance_Stock::find($request->input('id'))->update(Appliance_Stock::where('id', $request->input('target'))->select('assign_to', 'warranty', 'price')->first()->getAttributes());
+            Appliance_Stock::find($request->input('target'))->update($original);
+        } catch(\Exception $e)
+        {
+            DB::rollback();
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
+        }
+        DB::commit();
+        return redirect('appliance/invoice/job/'.$original['assign_to'])->withErrors('更新成功！');
+
+    }
+
     public function warehousing(Request $request){
         $this->validate($request, [
             'id' => 'required',

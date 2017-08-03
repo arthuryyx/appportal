@@ -63,6 +63,8 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
     Route::get('stock/{id}/price', 'StockController@editPrice');
     Route::put('stock/{id}/price', 'StockController@updatePrice');
     Route::post('stock/order', 'StockController@placeOrder');
+    Route::post('stock/switch', 'StockController@switch');
+    Route::post('stock/exchange', 'StockController@exchange');
     Route::post('stock/arrive', 'StockController@warehousing');
     Route::post('stock/release', 'StockController@release');
     Route::post('stock/deliver/{invoice}', 'StockController@delivery');

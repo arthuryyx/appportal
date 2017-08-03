@@ -172,6 +172,9 @@
                         @can('appliance_order')
                         <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/order')}}'">order</button>
                         @endcan
+                        @can('appliance_switch')
+                            <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/switch')}}'">switch</button>
+                        @endcan
                         @can('appliance_release')
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target={{"#myModalrelease"}}>release</button>
