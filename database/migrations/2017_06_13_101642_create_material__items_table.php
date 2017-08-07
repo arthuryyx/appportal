@@ -18,6 +18,8 @@ class CreateMaterialItemsTable extends Migration
             $table->string('model');
             $table->unsignedInteger('type_id');
             $table->unsignedInteger('supplier_id');
+            $table->unsignedFloat('cost');
+            $table->unsignedFloat('base');
             $table->unsignedFloat('price');
 
             $table->foreign('type_id')

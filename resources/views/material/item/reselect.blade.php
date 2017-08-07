@@ -34,6 +34,22 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
+                                    <strong>Cost:</strong>
+                                    <br/>
+                                    {{ Form::number('cost', null, array('class' => 'form-control', 'step' => 'any', 'required' => 'required')) }}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Base:</strong>
+                                    <br/>
+                                    {{ Form::number('base', null, array('class' => 'form-control', 'step' => 'any', 'required' => 'required')) }}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
                                     <strong>Price:</strong>
                                     <br/>
                                     {{ Form::number('price', null, array('class' => 'form-control', 'step' => 'any', 'required' => 'required')) }}
