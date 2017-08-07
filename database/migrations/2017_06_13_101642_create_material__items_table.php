@@ -33,6 +33,8 @@ class CreateMaterialItemsTable extends Migration
                 ->onDelete('cascade');
 
             $table->timestamps();
+
+            $table->unique(['model', 'supplier_id']);
         });
 
         Schema::create('material__item__values', function (Blueprint $table) {

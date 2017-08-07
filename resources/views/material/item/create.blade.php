@@ -26,6 +26,15 @@
                                     {!! Form::text('model', null, array('placeholder' => 'Model','class' => 'form-control', 'required' => 'required')) !!}
                                 </div>
                             </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Suppliers:</strong>
+                                    <br/>
+                                    {{ Form::select('supplier_id', $suppliers, null, ['class' => 'form-control', 'placeholder'=>'Select', 'required' => 'required']) }}
+                                </div>
+                            </div>
+
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>Attributes:</strong>

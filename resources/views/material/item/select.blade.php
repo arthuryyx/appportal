@@ -34,6 +34,23 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
+                                    <strong>Supplier:</strong>
+                                    <br/>
+                                    {!! Form::text(null, $supplier->name, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                                    {!! Form::hidden('supplier_id', $supplier->id) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Type:</strong>
+                                    <br/>
+                                    {{ Form::select('type_id', $types, null, ['class' => 'form-control', 'placeholder'=>'Select', 'required' => 'required']) }}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
                                     <strong>Cost:</strong>
                                     <br/>
                                     {{ Form::number('cost', null, array('class' => 'form-control', 'step' => 'any', 'required' => 'required')) }}
@@ -53,22 +70,6 @@
                                     <strong>Price:</strong>
                                     <br/>
                                     {{ Form::number('price', null, array('class' => 'form-control', 'step' => 'any', 'required' => 'required')) }}
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>Suppliers:</strong>
-                                    <br/>
-                                    {{ Form::select('supplier_id', $suppliers, null, ['class' => 'form-control', 'placeholder'=>'Select', 'required' => 'required']) }}
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>Type:</strong>
-                                    <br/>
-                                    {{ Form::select('type_id', $types, null, ['class' => 'form-control', 'placeholder'=>'Select', 'required' => 'required']) }}
                                 </div>
                             </div>
 

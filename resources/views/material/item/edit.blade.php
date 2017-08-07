@@ -31,7 +31,14 @@
                                 </div>
                             </div>
 
-                            {!! Form::hidden('supplier_id', $item->supplier_id) !!}
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Suppliers:</strong>
+                                    <br/>
+                                    {{ Form::select('supplier_id', $suppliers, $item->supplier_id, ['class' => 'form-control', 'placeholder'=>'Select', 'required' => 'required']) }}
+                                </div>
+                            </div>
+
                             {!! Form::hidden('type_id', $item->type_id) !!}
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
