@@ -48,6 +48,12 @@
                                 Supplier
                             </th>
                             <th>
+                                Cost
+                            </th>
+                            <th>
+                                Base
+                            </th>
+                            <th>
                                 Price
                             </th>
                             <th></th>
@@ -61,6 +67,8 @@
                                 <td>{{ $item->type->name }}</td>
                                 <td>{{ $item->values->implode('value', ', ') }}</td>
                                 <td>{{ $item->getSupplier->name }}</td>
+                                <td>{{ $item->cost }}</td>
+                                <td>{{ $item->base }}</td>
                                 <td>{{ $item->price }}</td>
                                 <td><a href="{{ url('material/item/'.$item->id.'/edit') }}" class="btn btn-success">Edit</a></td>
                             </tr>
