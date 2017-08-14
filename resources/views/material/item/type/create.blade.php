@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header">New Attribute</h2>
+            <h2 class="page-header">New Material Type</h2>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -23,8 +23,23 @@
 
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>name:</strong>
+                                <strong>Name:</strong>
                                 {!! Form::text('name', null, array('class' => 'form-control', 'required' => 'required')) !!}
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>Attributes:</strong>
+                                {{ Form::select('types[]', $types, null, ['class' => 'form-control', 'multiple'=>'multiple', 'placeholder'=>'Select', 'required' => 'required']) }}
+
+                                {{--<br/>--}}
+                                {{--@foreach($types as $id => $name)--}}
+                                    {{--<label>{{ Form::checkbox('types[]', $id, false, array('class' => 'name checkbox-inline')) }}--}}
+                                        {{--{{ $name }}--}}
+                                    {{--</label>--}}
+                                    {{--&nbsp;--}}
+                                {{--@endforeach--}}
                             </div>
                         </div>
 

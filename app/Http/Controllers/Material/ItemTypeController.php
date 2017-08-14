@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Material;
 
 use App\Material_Item_Type;
-use Illuminate\Http\Request;
+use App\Material_Attribute_Type;
 use App\Http\Controllers\Controller;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ItemTypeController extends Controller
 {
@@ -15,36 +18,52 @@ class ItemTypeController extends Controller
 
     public function create()
     {
-        return view('material.item.type.create');
+        return view('material.item.type.create')->withTypes(Material_Attribute_Type::pluck('name', 'id'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
             'name' => 'required|unique:material__item__types',
+            'types' => 'required',
         ]);
-        if (Material_Item_Type::create($request->all())) {
-            return redirect('material/type')->withErrors('添加成功！');
-        } else {
-            return redirect()->back()->withInput()->withErrors('添加失败！');
+
+        DB::beginTransaction();
+        try {
+            $type = Material_Item_Type::create($request->all());
+            $type->attributes()->attach($request->input('types'));
+        } catch(\Exception $e)
+        {
+            DB::rollback();
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
         }
+        DB::commit();
+        return redirect('material/type')->withErrors('Success!');
     }
 
     public function edit($id)
     {
-        return view('material.item.type.edit')->withType(Material_Item_Type::find($id));
+        return view('material.item.type.edit')->withType(Material_Item_Type::find($id))->withTypes(Material_Attribute_Type::pluck('name', 'id'))->withSelected(Material_Item_Type::find($id)->attributes()->pluck('id')->all());
     }
 
     public function update(Request $request, $id)
     {
         $this->validate($request, [
             'name' => 'required|unique:material__item__types,name,'.$id,
+            'types' => 'required',
         ]);
-
-        if (Material_Item_Type::find($id)->update($request->all())) {
-            return redirect('material/type/')->withErrors('更新成功！');
-        } else {
-            return redirect()->back()->withInput()->withErrors('更新失败！');
+//        dd($request->all());
+        DB::beginTransaction();
+        try {
+            $type = Material_Item_Type::find($id);
+            $type->update($request->all());
+            $type->attributes()->sync($request->input('types'));
+        } catch(\Exception $e)
+        {
+            DB::rollback();
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
         }
+        DB::commit();
+        return redirect('material/type')->withErrors('Success!');
     }
 }

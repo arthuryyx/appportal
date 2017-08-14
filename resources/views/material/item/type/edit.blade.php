@@ -32,6 +32,21 @@
                             </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Material Type:</strong>
+                                    {{ Form::select('types[]', $types, $selected, ['class' => 'form-control', 'multiple'=>'multiple', 'placeholder'=>'Select', 'required' => 'required']) }}
+
+                                    {{--<br/>--}}
+                                    {{--@foreach($types as $id => $name)--}}
+                                        {{--<label>{{ Form::checkbox('types[]', $id, in_array($id, $checks) ? true : false, array('class' => 'checkbox-inline')) }}--}}
+                                            {{--{{ $name }}--}}
+                                        {{--</label>--}}
+                                        {{--&nbsp;--}}
+                                    {{--@endforeach--}}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
                                 <a href="{{ url()->previous()}}" class="btn btn-danger">Cancel</a>
                                 {{Form::submit('Submit', ['class' => 'btn btn-success pull-right'])}}
                             </div>

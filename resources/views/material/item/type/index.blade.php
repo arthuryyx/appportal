@@ -11,7 +11,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Item Type</h1>
+            <h1 class="page-header">Material Type</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -38,6 +38,9 @@
                             <th>
                                 name
                             </th>
+                            <th>
+                                attributes
+                            </th>
                             <th></th>
                         </tr>
                         </thead>
@@ -46,6 +49,7 @@
                         @foreach ($types as $type)
                             <tr>
                                 <td>{{ $type->name }}</td>
+                                <td>{{ $type->attributes->implode('name', ', ')  }}</td>
                                 <td><a href="{{ url('material/type/'.$type->id.'/edit') }}" class="btn btn-success">Edit</a></td>
                             </tr>
                         @endforeach
