@@ -95,7 +95,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Material', 'prefix' => 'ma
 
     Route::post('item/select', 'ItemController@select');
     Route::post('item/reselect/{id}', 'ItemController@reselect');
-    Route::resource('item', 'ItemController', ['except' => ['destroy']]);
+    Route::resource('item', 'ItemController', ['except' => ['show', 'destroy']]);
 
 
     Route::resource('type', 'ItemTypeController', ['except' => ['show', 'destroy']]);

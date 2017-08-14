@@ -104,7 +104,7 @@
     {{--</div>--}}
 {{--</div>--}}
 <!-- /.row -->
-
+@can('appliance_view_all_jobs')
 <div class="row">
     <div class="col-lg-8">
         <div class="panel panel-default">
@@ -163,7 +163,7 @@
         <!-- /.panel -->
     </div>
 </div>
-
+@endcan
 @endsection
 
 @section('js')

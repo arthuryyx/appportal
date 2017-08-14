@@ -326,7 +326,7 @@
                                 <a href="{{ url('admin/appliance') }}"><i class="fa fa-gears fa-fw"></i> Appliance</a>
                             </li>
                             @endcan
-                            @can('root')
+                            @can('menu_config_material')
                             <li>
                                 <a href="#"><i class="fa fa-gears fa-fw"></i> Material<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
