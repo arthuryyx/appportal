@@ -16,6 +16,7 @@ class CreateMaterialItemAttributes extends Migration
         Schema::create('material__item__attributes', function (Blueprint $table) {
             $table->integer('mat_tid')->unsigned();
             $table->integer('att_tid')->unsigned();
+            $table->unsignedInteger('order_by');
 
             $table->foreign('mat_tid')
                 ->references('id')
