@@ -88,17 +88,10 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Material', 'prefix' => 'ma
     Route::put('attribute/value/{id}', 'AttributeValueController@update', ['name' => 'value.update']);
     Route::resource('attribute/{id}/value', 'AttributeValueController', ['except' => ['index', 'edit', 'update', 'show', 'destroy']]);
 
+    Route::resource('type', 'ItemTypeController', ['except' => ['destroy']]);
 
-    Route::resource('type', 'ItemTypeController', ['except' => ['show', 'destroy']]);
-
-//    Route::get('item', 'ItemController@index');
-//    Route::post('item', 'ItemController@store');
-//    Route::get('item/create/type', 'ItemController@selectType');
-//    Route::post('item/create/value', 'ItemController@setValue');
-
-//    Route::post('item/select', 'ItemController@select');
-//    Route::post('item/reselect/{id}', 'ItemController@reselect');
-//    Route::resource('item', 'ItemController', ['except' => ['show', 'destroy']]);
+    Route::get('item/create/{tid}', 'ItemController@create');
+    Route::resource('item', 'ItemController', ['except' => ['create', 'show', 'destroy']]);
 
 
 

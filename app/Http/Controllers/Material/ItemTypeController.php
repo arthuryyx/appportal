@@ -52,7 +52,7 @@ class ItemTypeController extends Controller
             'name' => 'required|unique:material__item__types,name,'.$id,
             'types' => 'required',
         ]);
-//        dd($request->all());
+
         DB::beginTransaction();
         try {
             $type = Material_Item_Type::find($id);
@@ -65,5 +65,10 @@ class ItemTypeController extends Controller
         }
         DB::commit();
         return redirect('material/type')->withErrors('Success!');
+    }
+
+    public function show($id)
+    {
+        return view('material.item.index')->withType(Material_Item_Type::find($id));
     }
 }

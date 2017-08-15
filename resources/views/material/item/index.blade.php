@@ -11,7 +11,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Material Item List</h1>
+            <h1 class="page-header">{{ $type->name }}</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -28,7 +28,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="{{ url('material/item/create') }}" class="btn btn-primary ">New</a>
+                    <a href="{{ url('material/item/create/'.$type->id) }}" class="btn btn-primary ">New</a>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -37,9 +37,6 @@
                         <tr>
                             <th>
                                 Model
-                            </th>
-                            <th>
-                                Type
                             </th>
                             <th>
                                 Attributes
@@ -61,10 +58,9 @@
                         </thead>
                         <tbody>
 
-                        @foreach ($items as $item)
+                        @foreach ($type->hasManyItems as $item)
                             <tr>
                                 <td>{{ $item->model }}</td>
-                                <td>{{ $item->type->name }}</td>
                                 <td>{{ $item->values->implode('value', ', ') }}</td>
                                 <td>{{ $item->getSupplier->name }}</td>
                                 <td>{{ $item->cost }}</td>

@@ -14,45 +14,27 @@ use App\Http\Controllers\Controller;
 
 class ItemController extends Controller
 {
-    public function index()
+    public function create($tid)
     {
-        return view('material.item.index')->withItems(Material_Item::all());
-    }
-
-    public function create()
-    {
-        return view('material.item.create')->withTypes(Material_Attribute_Type::pluck('name', 'id'))->withSuppliers(Supplier::pluck('name', 'id'));
-    }
-
-    public function select(Request $request){
-        $this->validate($request, [
-            'model' => 'unique:material__items,model,NULL,id,supplier_id,'.$request->input('supplier_id'),
-            'types' => 'required',
-        ]);
-        $data = collect();
-        foreach (array_sort_recursive($request->input('types')) as $id){
-            $data->push(['name' => Material_Attribute_Type::find($id)->name, 'values' => Material_Attribute_Value::where('attribute_id', $id)->pluck('value', 'id')->toArray()]);
-        }
-        return view('material.item.select')->withModel($request->input('model'))->withSupplier(Supplier::find($request->input('supplier_id')))->withTypes(Material_Item_Type::pluck('name', 'id')->toArray())->withData($data);
+        return view('material.item.create')->withType(Material_Item_Type::find($tid))->withSuppliers(Supplier::pluck('name', 'id'));
     }
 
     public function store(Request $request)
     {
+        $model = $request->input('model');
+        $values = Material_Attribute_Value::whereIn('id', $request->input('id'))->pluck('value', 'attribute_id')->all();
+        foreach (Material_Item_Type::find($request->input('type_id'))->attributes->pluck('id')->all() as $tid){
+            $model==='' ? $model.=$values[$tid] : $model.='-'.$values[$tid];
+        }
+        $request->merge(['model'=>$model]);
+
         $this->validate($request, [
-            'model' => 'required',
+            'model' => 'unique:material__items,model,NULL,id,supplier_id,'.$request->input('supplier_id'),
             'supplier_id' => 'required',
             'type_id' => 'required',
             'price' => 'required|numeric|min:0',
             'id' => 'required',
         ]);
-
-//        if(Material_Item::where('model', $request->input('model'))->count()>0){
-//            foreach (Material_Item::where('model', $request->input('model'))->get() as $item){
-//                if($item->values->pluck('id')->all() == $request->input('id')){
-//                    return redirect('material/item')->withErrors('This set of attribute values already exist!');
-//                }
-//            }
-//        }
 
         DB::beginTransaction();
         try {
@@ -64,7 +46,7 @@ class ItemController extends Controller
             return redirect()->back()->withInput()->withErrors($e);
         }
         DB::commit();
-        return redirect('material/item')->withErrors('Success!');
+        return redirect('material/type/'.$request->input('type_id'))->withErrors('Success!');
     }
 
     public function edit($id)

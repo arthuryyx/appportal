@@ -11,7 +11,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Material Type</h1>
+            <h1 class="page-header">Material List</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -27,9 +27,11 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
+                @can('dev')
                 <div class="panel-heading">
                     <a href="{{ url('material/type/create') }}" class="btn btn-primary ">New</a>
                 </div>
+                @endcan
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
@@ -42,6 +44,9 @@
                                 attributes
                             </th>
                             <th></th>
+                            @can('dev')
+                                <th></th>
+                            @endcan
                         </tr>
                         </thead>
                         <tbody>
@@ -50,7 +55,10 @@
                             <tr>
                                 <td>{{ $type->name }}</td>
                                 <td>{{ $type->attributes->implode('name', ', ')  }}</td>
-                                <td><a href="{{ url('material/type/'.$type->id.'/edit') }}" class="btn btn-success">Edit</a></td>
+                                <td><a href="{{ url('material/type/'.$type->id) }}" class="btn btn-info">Item</a></td>
+                            @can('dev')
+                                    <td><a href="{{ url('material/type/'.$type->id.'/edit') }}" class="btn btn-success">Edit</a></td>
+                            @endcan
                             </tr>
                         @endforeach
                         </tbody>
