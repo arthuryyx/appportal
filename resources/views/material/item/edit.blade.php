@@ -21,15 +21,16 @@
                         </div>
                     @endif
 
-                        {!! Form::model($item, ['url' => 'material/item/reselect/'.$item->id,'method'=>'POST']) !!}
+                        {!! Form::model($item, ['url' => 'material/item/'.$item->id,'method'=>'PUT']) !!}
                         <div class="row">
-
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>Model:</strong>
-                                    {!! Form::text('model', null, array('class' => 'form-control', 'required' => 'required')) !!}
+                                    {!! Form::text('model', $item->bak, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
+
+                            {!! Form::hidden('type_id', $item->type_id) !!}
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
@@ -39,18 +40,37 @@
                                 </div>
                             </div>
 
-                            {!! Form::hidden('type_id', $item->type_id) !!}
+                            @foreach($item->type->attributes as $attribute)
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>{{$attribute->name}}:</strong>
+                                        <br/>
+                                        {{ Form::select('id[]', $attribute->hasManyValues->pluck('value', 'id'), $item->values->pluck('id')->toArray(), ['class' => 'form-control', 'placeholder'=>'Select', 'required' => 'required']) }}
+                                    </div>
+                                </div>
+                            @endforeach
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>Material Type:</strong>
+                                    <strong>RRP:</strong>
                                     <br/>
-                                    @foreach($types as $id => $name)
-                                        <label>{{ Form::checkbox('types[]', $id, in_array($id, $checks) ? true : false, array('class' => 'checkbox-inline')) }}
-                                            {{ $name }}
-                                        </label>
-                                        &nbsp;
-                                    @endforeach
+                                    {{ Form::number('price', null, array('class' => 'form-control', 'step' => 'any', 'required' => 'required')) }}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Cost:</strong>
+                                    <br/>
+                                    {{ Form::number('cost', 0, array('class' => 'form-control', 'step' => 'any', 'required' => 'required')) }}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Base:</strong>
+                                    <br/>
+                                    {{ Form::number('base', 0, array('class' => 'form-control', 'step' => 'any', 'required' => 'required')) }}
                                 </div>
                             </div>
 

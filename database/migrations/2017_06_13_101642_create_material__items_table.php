@@ -16,6 +16,7 @@ class CreateMaterialItemsTable extends Migration
         Schema::create('material__items', function (Blueprint $table) {
             $table->increments('id');
             $table->string('model');
+            $table->string('bak')->nullable();
             $table->unsignedInteger('type_id');
             $table->unsignedInteger('supplier_id');
             $table->unsignedFloat('cost');
