@@ -35,7 +35,7 @@ class CreateMaterialItemsTable extends Migration
 
             $table->timestamps();
 
-            $table->unique(['model', 'supplier_id']);
+            $table->unique(['model', 'type_id', 'supplier_id']);
         });
 
         Schema::create('material__item__values', function (Blueprint $table) {
