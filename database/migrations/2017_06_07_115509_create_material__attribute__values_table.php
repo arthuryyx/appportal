@@ -24,6 +24,7 @@ class CreateMaterialAttributeValuesTable extends Migration
                 ->onDelete('cascade');
 
             $table->timestamps();
+            $table->unique(['value', 'attribute_id']);
         });
     }
 

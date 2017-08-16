@@ -28,11 +28,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                {!! Form::hidden('attribute_id', $id) !!}
-                            </div>
-                        </div>
+                        {!! Form::hidden('attribute_id', $id) !!}
 
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <a href="{{ url()->previous()}}" class="btn btn-danger">Cancel</a>

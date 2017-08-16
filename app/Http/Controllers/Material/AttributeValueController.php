@@ -16,7 +16,7 @@ class AttributeValueController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'value' => 'required',
+            'value' => 'required|unique:material__attribute__values,value,NULL,id,attribute_id,'.$request->input('attribute_id'),
             'attribute_id' => 'required|exists:material__attribute__types,id',
         ]);
         if (Material_Attribute_Value::create($request->all())) {
@@ -34,11 +34,11 @@ class AttributeValueController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'value' => 'required',
+            'value' => 'required|unique:material__attribute__values,value,'.$id.',id,attribute_id,'.$request->input('attribute_id'),
         ]);
-        $obj = Material_Attribute_Value::find($id);
-        if ($obj->update($request->all())) {
-            return redirect('material/attribute/'.$obj->attribute_id)->withErrors('更新成功！');
+
+        if (Material_Attribute_Value::find($id)->update($request->all())) {
+            return redirect('material/attribute/'.$request->input('attribute_id'))->withErrors('更新成功！');
         } else {
             return redirect()->back()->withInput()->withErrors('更新失败！');
         }
