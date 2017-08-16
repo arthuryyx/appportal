@@ -25,7 +25,7 @@ class ItemTypeController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:material__item__types',
-            'types' => 'required',
+//            'types' => 'required',
         ]);
 
         DB::beginTransaction();
@@ -50,14 +50,18 @@ class ItemTypeController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:material__item__types,name,'.$id,
-            'types' => 'required',
+//            'types' => 'required',
         ]);
 
         DB::beginTransaction();
         try {
             $type = Material_Item_Type::find($id);
             $type->update($request->all());
-            $type->attributes()->sync($request->input('types'));
+            if (is_null($request->input('types'))){
+                $type->attributes()->detach();
+            } else{
+                $type->attributes()->sync($request->input('types'));
+            }
         } catch(\Exception $e)
         {
             DB::rollback();
