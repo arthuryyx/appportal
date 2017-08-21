@@ -20,7 +20,11 @@ class ItemController extends Controller
 
     public function store(Request $request)
     {
-        $combinations = $this->carteSian(array_values($request->input('id')));
+        if($request->offsetExists('id')){
+            $combinations = $this->carteSian(array_values($request->input('id')));
+        }else{
+            $combinations = [[]];
+        }
 
         DB::beginTransaction();
         try {
