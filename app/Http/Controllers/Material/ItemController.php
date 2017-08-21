@@ -26,13 +26,15 @@ class ItemController extends Controller
             'supplier_id' => 'required',
             'type_id' => 'required',
             'price' => 'required|numeric|min:0',
-            'id' => 'required',
+//            'id' => 'required',
         ]);
 
         DB::beginTransaction();
         try {
             $item = Material_Item::create($request->all());
-            $item->values()->attach($request->input('id'));
+            if($request->offsetExists('id')){
+                $item->values()->attach($request->input('id'));
+            }
         } catch(\Exception $e)
         {
             DB::rollback();
@@ -55,14 +57,18 @@ class ItemController extends Controller
             'supplier_id' => 'required',
             'type_id' => 'required',
             'price' => 'required|numeric|min:0',
-            'id' => 'required',
+//            'id' => 'required',
         ]);
 
         DB::beginTransaction();
         try {
             $item = Material_Item::find($id);
             $item->update($request->all());
-            $item->values()->sync($request->input('id'));
+            if($request->offsetExists('id')){
+                $item->values()->sync($request->input('id'));
+            } else{
+                $item->values()->detach();
+            }
         } catch(\Exception $e)
         {
             DB::rollback();
@@ -74,11 +80,21 @@ class ItemController extends Controller
 
     private function processRequest(Request $request)
     {
-        $model = trim($request->input('model'));
-        $request->merge(['bak'=>$model]);
-        $values = Material_Attribute_Value::whereIn('id', $request->input('id'))->pluck('value', 'attribute_id')->all();
-        foreach (Material_Item_Type::find($request->input('type_id'))->attributes->pluck('id')->all() as $tid){
-            $model=='' ? $model.=$values[$tid] : $model.='-'.$values[$tid];
+        $model = trim($request->input('bak'));
+
+        if($request->offsetExists('id')){
+            if(empty(array_filter($request->input('id')))){
+                $request->offsetUnset('id');
+            }else{
+                $request->merge(['id'=>array_filter($request->input('id'))]);
+
+                $values = Material_Attribute_Value::whereIn('id', $request->input('id'))->pluck('value', 'attribute_id')->all();
+                foreach (Material_Item_Type::find($request->input('type_id'))->attributes->pluck('id')->all() as $tid){
+                    if(array_has($values, $tid)){
+                        $model=='' ? $model.=$values[$tid] : $model.='-'.$values[$tid];
+                    }
+                }
+            }
         }
         $request->merge(['model'=>$model]);
     }

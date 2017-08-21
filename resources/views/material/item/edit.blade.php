@@ -26,7 +26,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>Model:</strong>
-                                    {!! Form::text('model', $item->bak, array('class' => 'form-control')) !!}
+                                    {!! Form::text('bak', $item->bak, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
 
@@ -45,7 +45,7 @@
                                     <div class="form-group">
                                         <strong>{{$attribute->name}}:</strong>
                                         <br/>
-                                        {{ Form::select('id[]', $attribute->hasManyValues->pluck('value', 'id'), $item->values->pluck('id')->toArray(), ['class' => 'form-control', 'placeholder'=>'Select', 'required' => 'required']) }}
+                                        {{ Form::select('id[]', $attribute->hasManyValues->pluck('value', 'id'), $item->values->pluck('id')->toArray(), ['class' => 'form-control', 'placeholder'=>'Select'/*, 'required' => 'required'*/]) }}
                                     </div>
                                 </div>
                             @endforeach
