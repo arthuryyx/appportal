@@ -20,20 +20,25 @@ class ItemController extends Controller
 
     public function store(Request $request)
     {
-        $this->processRequest($request);
-        $this->validate($request, [
-            'model' => 'required|unique:material__items,model,NULL,id,type_id,'.$request->input('type_id').',supplier_id,'.$request->input('supplier_id'),
-            'supplier_id' => 'required',
-            'type_id' => 'required',
-            'price' => 'required|numeric|min:0',
-//            'id' => 'required',
-        ]);
+        $combinations = $this->carteSian(array_values($request->input('id')));
 
         DB::beginTransaction();
         try {
-            $item = Material_Item::create($request->all());
-            if($request->offsetExists('id')){
-                $item->values()->attach($request->input('id'));
+            foreach ($combinations as $set){
+                $request->merge(['id' => $set]);
+                $this->processRequest($request);
+                $this->validate($request, [
+                    'model' => 'required|unique:material__items,model,NULL,id,type_id,'.$request->input('type_id').',supplier_id,'.$request->input('supplier_id'),
+                    'supplier_id' => 'required',
+                    'type_id' => 'required',
+                    'price' => 'required|numeric|min:0',
+//                  'id' => 'required',
+                ]);
+
+                $item = Material_Item::create($request->all());
+                if($request->offsetExists('id')){
+                    $item->values()->attach($request->input('id'));
+                }
             }
         } catch(\Exception $e)
         {
@@ -97,5 +102,19 @@ class ItemController extends Controller
             }
         }
         $request->merge(['model'=>$model]);
+    }
+
+    private function carteSian(array $params, array $temporary = [], array $products = [])
+    {
+        foreach (array_shift($params) as $param) {
+            array_push($temporary, $param);
+            if($params){
+                $products = $this->carteSian($params, $temporary, $products) ;
+            }else{
+                array_push($products, $temporary);
+            }
+            array_pop($temporary);
+        }
+        return $products;
     }
 }

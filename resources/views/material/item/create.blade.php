@@ -42,7 +42,7 @@
                                     <div class="form-group">
                                         <strong>{{$attribute->name}}:</strong>
                                         <br/>
-                                        {{ Form::select('id[]', $attribute->hasManyValues->pluck('value', 'id'), null, ['class' => 'form-control', 'placeholder'=>'Select'/*, 'required' => 'required'*/]) }}
+                                        {{ Form::select('id['.$attribute->id.'][]', $attribute->hasManyValues->pluck('value', 'id'), null, ['class' => 'form-control', 'multiple' => 'multiple', 'placeholder'=>'Null'/*, 'required' => 'required'*/]) }}
                                     </div>
                                 </div>
                             @endforeach
