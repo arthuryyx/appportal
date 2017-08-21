@@ -387,7 +387,7 @@
                                 <a href="{{ url('appliance/invoice/job') }}">Job</a>
                             </li>
                             @endcan
-                            @can('root')
+                            @can('appliance_order')
                             <li>
                                 <a href="{{ url('appliance/invoice/bulk') }}">Bulk</a>
                             </li>
