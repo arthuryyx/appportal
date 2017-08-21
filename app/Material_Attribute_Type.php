@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Material_Attribute_Type extends Model
 {
-    protected $fillable = ['name', 'unit'];
+    protected $fillable = ['name'];
 
     public function hasManyValues()
     {

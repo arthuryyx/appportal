@@ -22,7 +22,6 @@ class AttributeTypeController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:material__attribute__types',
-//            'unit' => 'required',
         ]);
         if (Material_Attribute_Type::create($request->all())) {
             return redirect('material/attribute')->withErrors('添加成功！');
@@ -40,7 +39,6 @@ class AttributeTypeController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:material__attribute__types,name,'.$id,
-//            'unit' => 'required',
         ]);
 
         if (Material_Attribute_Type::find($id)->update($request->all())) {

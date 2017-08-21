@@ -29,13 +29,6 @@
                         </div>
 
                         <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>unit:</strong>
-                                {!! Form::text('unit', null, array('class' => 'form-control')) !!}
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 col-sm-12 col-md-12">
                             <a href="{{ url()->previous()}}" class="btn btn-danger">Cancel</a>
                             {{Form::submit('Submit', ['class' => 'btn btn-success pull-right'])}}
                         </div>

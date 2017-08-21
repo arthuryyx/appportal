@@ -16,7 +16,6 @@ class CreateMaterialAttributeTypesTable extends Migration
         Schema::create('material__attribute__types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->string('unit')->nullable();
             $table->timestamps();
         });
     }

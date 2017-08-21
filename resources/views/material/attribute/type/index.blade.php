@@ -38,9 +38,6 @@
                             <th>
                                 name
                             </th>
-                            <th>
-                                unit
-                            </th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -50,7 +47,6 @@
                         @foreach ($attributes as $attribute)
                             <tr>
                                 <td>{{ $attribute->name }}</td>
-                                <td>{{ $attribute->unit }}</td>
                                 <td><a href="{{ url('material/attribute/'.$attribute->id) }}" class="btn btn-info">Detail</a></td>
                                 <td><a href="{{ url('material/attribute/'.$attribute->id.'/edit') }}" class="btn btn-success">Edit</a></td>
                             </tr>

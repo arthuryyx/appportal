@@ -38,7 +38,7 @@
                         <tbody>
                         @foreach ($attribute->hasManyValues as $value)
                             <tr>
-                                <td>{{ $value->value }} {{$attribute->unit}}</td>
+                                <td>{{ $value->value }}</td>
 
                                 <td><a href="{{ url('material/attribute/value/'.$value->id.'/edit') }}" class="btn btn-success">修改</a></td>
                             </tr>
