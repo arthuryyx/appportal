@@ -22,7 +22,7 @@ class ItemController extends Controller
     {
         $this->processRequest($request);
         $this->validate($request, [
-            'model' => 'unique:material__items,model,NULL,id,type_id,'.$request->input('type_id').',supplier_id,'.$request->input('supplier_id'),
+            'model' => 'required|unique:material__items,model,NULL,id,type_id,'.$request->input('type_id').',supplier_id,'.$request->input('supplier_id'),
             'supplier_id' => 'required',
             'type_id' => 'required',
             'price' => 'required|numeric|min:0',
@@ -53,7 +53,7 @@ class ItemController extends Controller
     {
         $this->processRequest($request);
         $this->validate($request, [
-            'model' => 'unique:material__items,model,'.$id.',id,type_id,'.$request->input('type_id').',supplier_id,'.$request->input('supplier_id'),
+            'model' => 'required|unique:material__items,model,'.$id.',id,type_id,'.$request->input('type_id').',supplier_id,'.$request->input('supplier_id'),
             'supplier_id' => 'required',
             'type_id' => 'required',
             'price' => 'required|numeric|min:0',
