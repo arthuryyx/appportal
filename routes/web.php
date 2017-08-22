@@ -90,6 +90,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Material', 'prefix' => 'ma
 
     Route::resource('type', 'ItemTypeController', ['except' => ['destroy']]);
 
+    Route::get('item/reconstruct/{tid}', 'ItemController@reconstruct');
     Route::get('item/create/{tid}', 'ItemController@create');
     Route::resource('item', 'ItemController', ['except' => ['create', 'show', 'destroy']]);
 

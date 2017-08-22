@@ -29,6 +29,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a href="{{ url('material/item/create/'.$type->id) }}" class="btn btn-primary ">New</a>
+                    @can('dev')
+                    <a href="{{ url('material/item/reconstruct/'.$type->id) }}" class="btn btn-danger pull-right">Reconstruct</a>
+                    @endcan
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">

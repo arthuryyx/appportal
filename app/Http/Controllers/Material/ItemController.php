@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Material;
 
-use App\Supplier;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
+use App\Supplier;
 use App\Material_Item;
 use App\Material_Item_Type;
 use App\Material_Attribute_Value;
@@ -120,5 +121,32 @@ class ItemController extends Controller
             array_pop($temporary);
         }
         return $products;
+    }
+
+    public function reconstruct($tid)
+    {
+        $attributes = Material_Item_Type::find($tid)->attributes->pluck('id')->all();
+        foreach (Material_Item_Type::find($tid)->hasManyItems->pluck('id')->all() as $id){
+            $item = Material_Item::find($id);
+            $model = $item->bak;
+            if(!empty($item->values->all())){
+                $values = $item->values->pluck('value', 'attribute_id')->all();
+                foreach ($attributes as $tid){
+                    if(array_has($values, $tid)){
+                        $model=='' ? $model.=$values[$tid] : $model.=' '.$values[$tid];
+                    }
+                }
+            }
+            $validator = Validator::make(['model' => $model], [
+                'model' => 'required|unique:material__items,model,'.$item->id.',id,type_id,'.$item->type_id.',supplier_id,'.$item->supplier_id,
+            ]);
+
+            if ($validator->fails()) {
+                $item->update(['model' => 'duplicate'.$item->id]);
+            }else{
+                $item->update(['model' => $model]);
+            }
+        }
+        return redirect('material/type/'.$item->type_id)->withErrors('Success!');
     }
 }
