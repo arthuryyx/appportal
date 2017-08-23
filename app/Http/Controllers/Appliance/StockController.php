@@ -228,7 +228,7 @@ class StockController extends Controller
         }
     }
 
-    public function switch(Request $request){
+    public function switchStock(Request $request){
         $this->validate($request, [
             'id' => 'required',
         ]);
