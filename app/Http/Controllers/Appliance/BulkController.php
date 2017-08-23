@@ -11,7 +11,7 @@ class BulkController extends Controller
 {
     public function index()
     {
-        return view('appliance.invoice.bulk.index')->withInvoices(Appliance_Invoice::where('type', 1)->get());
+        return view('appliance.invoice.bulk.index')->withInvoices(Appliance_Invoice::where('type', 1)->with('getCreated_by')->get());
     }
 
     public function create()

@@ -12,9 +12,9 @@ class JobController extends Controller
     public function index()
     {
         if(Auth::user()->can('appliance_view_all_jobs')){
-            return view('appliance.invoice.job.index')->withInvoices(Appliance_Invoice::where('type', 0)->get());
+            return view('appliance.invoice.job.index')->withInvoices(Appliance_Invoice::where('type', 0)->with('hasManyStocks')->with('getCreated_by')->with('hasManyDeposits')->with('getState')->get());
         } else{
-            return view('appliance.invoice.job.index')->withInvoices(Appliance_Invoice::where('type', 0)->where('created_by', Auth::user()->id)->get());
+            return view('appliance.invoice.job.index')->withInvoices(Appliance_Invoice::where('type', 0)->where('created_by', Auth::user()->id)->with('hasManyStocks')->with('getCreated_by')->with('hasManyDeposits')->with('getState')->get());
         }
     }
 

@@ -25,11 +25,11 @@ class StockController extends Controller
         {
             case 0:
                 return view('appliance.stock.index'.$state)
-                    ->withStocks(Appliance_Stock::where('state', $state)->get());
+                    ->withStocks(Appliance_Stock::where('state', $state)->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->with('getAssignTo')->get());
                 break;
             case 1:
                 return view('appliance.stock.index'.$state)
-                    ->withStocks(Appliance_Stock::where('state', $state)->get());
+                    ->withStocks(Appliance_Stock::where('state', $state)->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->with('getInvoice')->get());
                 break;
             case 2:
                 return view('appliance.stock.index'.$state)
@@ -39,7 +39,7 @@ class StockController extends Controller
                             ->orWhere('state', 2)
                             ->whereNull('assign_to');
                     })->groupBy('aid')
-                        ->select('aid', DB::raw('count(aid) as total'))->get())
+                        ->select('aid', DB::raw('count(aid) as total'))->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->get())
                     ->withAppliances(
                         Appliance::whereNotExists(function($query)
                         {
@@ -52,11 +52,11 @@ class StockController extends Controller
                                     ->orWhere('state', 2)
                                     ->whereNull('assign_to');
                             });
-                        })->get());
+                        })->with('belongsToBrand')->with('belongsToCategory')->get());
                 break;
             case 3:
                 return view('appliance.stock.index'.$state)
-                    ->withStocks(Appliance_Stock::where('state', $state)->get());
+                    ->withStocks(Appliance_Stock::where('state', $state)->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->with('getDeliveryHistory.getInvoice')->get());
                 break;
             case 4:
                 return view('appliance.stock.index'.$state)
@@ -101,7 +101,7 @@ class StockController extends Controller
     public function listing(Request $request){
         Session::flash('backUrl', $request->fullUrl());
         return view('appliance.stock.listing')
-            ->withStocks(Appliance_Stock::where('state', 2)->whereNull('shelf')->get());
+            ->withStocks(Appliance_Stock::where('state', 2)->whereNull('shelf')->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->get());
     }
 
     public function edit($id){
@@ -426,12 +426,11 @@ class StockController extends Controller
     }
 
     public function exportStockCheckingList(){
-        $data = Appliance_Stock::where('state', 2)->orderBy('shelf')->orderBy('aid')->get();
+        $data = Appliance_Stock::where('state', 2)->orderBy('shelf')->orderBy('aid')->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->with('getAssignTo')->get();
         $date = date('Y-m-d H:i:s');
-//        return view('appliance.pdf.checking_list')->withStocks($data)->withDate($date);
-        $pdf = PDF::loadView('appliance.pdf.checking_list', [ 'stocks' => $data, 'date' => $date]);
-
-        return $pdf->stream();
+        return view('appliance.pdf.checking_list')->withStocks($data)->withDate($date);
+//        $pdf = PDF::loadView('appliance.pdf.checking_list', [ 'stocks' => $data, 'date' => $date]);
+//        return $pdf->stream();
     }
 
 

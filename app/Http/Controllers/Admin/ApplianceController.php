@@ -13,7 +13,7 @@ class ApplianceController extends Controller
 {
     public function index()
     {
-        return view('admin.appliance.index')->withAppliances(Appliance::all());
+        return view('admin.appliance.index')->withAppliances(Appliance::with('belongsToBrand')->with('belongsToCategory')->get());
     }
 
     public function create()
