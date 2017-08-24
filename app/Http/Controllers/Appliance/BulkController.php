@@ -56,6 +56,6 @@ class BulkController extends Controller
 
     public function show($id)
     {
-        return view('appliance.invoice.bulk.show')->withInvoice(Appliance_Invoice::with('hasManyInits')->find($id));
+        return view('appliance.invoice.bulk.show')->withInvoice(Appliance_Invoice::with('hasManyInits.appliance.belongsToBrand')->with('hasManyInits.appliance.belongsToCategory')->find($id));
     }
 }

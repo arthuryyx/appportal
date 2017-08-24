@@ -13,7 +13,7 @@ class ItemTypeController extends Controller
 {
     public function index()
     {
-        return view('material.item.type.index')->withTypes(Material_Item_Type::all());
+        return view('material.item.type.index')->withTypes(Material_Item_Type::with('attributes')->get());
     }
 
     public function create()
@@ -73,6 +73,6 @@ class ItemTypeController extends Controller
 
     public function show($id)
     {
-        return view('material.item.index')->withType(Material_Item_Type::find($id));
+        return view('material.item.index')->withType(Material_Item_Type::with('hasManyItems.values')->with('hasManyItems.getSupplier')->find($id));
     }
 }

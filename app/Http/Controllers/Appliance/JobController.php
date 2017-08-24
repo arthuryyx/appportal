@@ -73,7 +73,7 @@ class JobController extends Controller
 
     public function show($id)
     {
-        return view('appliance.invoice.job.show')->withInvoice(Appliance_Invoice::with('hasManyStocks')->find($id));
+        return view('appliance.invoice.job.show')->withInvoice(Appliance_Invoice::with('hasManyStocks.appliance.belongsToBrand')->with('hasManyStocks.appliance.belongsToCategory')->find($id));
     }
 
     public function paid(Request $request)
