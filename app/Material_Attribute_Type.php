@@ -10,7 +10,7 @@ class Material_Attribute_Type extends Model
 
     public function hasManyValues()
     {
-        return $this->hasMany('App\Material_Attribute_Value', 'attribute_id', 'id');
+        return $this->hasMany('App\Material_Attribute_Value', 'attribute_id', 'id')->orderBy('value');
     }
 
 }
