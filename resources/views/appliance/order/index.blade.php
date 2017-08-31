@@ -39,10 +39,10 @@
                                 ref
                             </th>
                             <th>
-                                created_by
+                                comment
                             </th>
                             <th>
-                                comment
+                                created_by
                             </th>
                             <th>
                                 created_at
