@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Appliance;
 
+use App\Appliance_Order;
 use App\Appliance_Record;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,11 +26,11 @@ class StockController extends Controller
         {
             case 0:
                 return view('appliance.stock.index'.$state)
-                    ->withStocks(Appliance_Stock::where('state', $state)->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->with('getAssignTo')->get());
+                    ->withStocks(Appliance_Stock::where('state', $state)->whereNull('order_id')->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->with('getAssignTo')->get());
                 break;
             case 1:
                 return view('appliance.stock.index'.$state)
-                    ->withStocks(Appliance_Stock::where('state', $state)->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->with('getInvoice')->get());
+                    ->withStocks(Appliance_Stock::where('state', $state)->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->with('getOrder.getInvoice')->get());
                 break;
             case 2:
                 return view('appliance.stock.index'.$state)
@@ -79,11 +80,11 @@ class StockController extends Controller
     public function store(Request $request){
         $this->validate($request, [
             'aid' => 'required',
-            'init' => 'required|exists:appliance__invoices,id',
+            'order_id' => 'required|exists:appliance__orders,id',
             'qty' => 'required|integer|min:1',
         ]);
         $t = $request->all();
-        $t['state'] = 1;
+        $t['state'] = 0;
         DB::beginTransaction();
         try {
             for ($x=$t['qty']; $x>0; $x--) {
@@ -172,7 +173,7 @@ class StockController extends Controller
                 return redirect('appliance/invoice/job/'.$request->input('assign_to'))->withErrors('更新失败！');
             }
         }else{
-            $request->merge(['init'=>$request->input('assign_to'), 'state'=>0]);
+            $request->merge(['state'=>0]);
             if (Appliance_Stock::create($request->all())) {
                 return redirect('appliance/invoice/job/'.$request->input('assign_to'))->withErrors('更新成功！');
             } else {
@@ -207,24 +208,37 @@ class StockController extends Controller
         }
     }
 
-    public function placeOrder(Request $request){
+    public function placeOrder(Request $request, $invoice){
+        if (Appliance_Stock::whereIn('id', $request->input('id'))->whereNull('order_id')->count() == 0){
+            return redirect()->back()->withErrors('电器已在Bulk中！');
+        }
         $this->validate($request, [
             'id' => 'required',
         ]);
-        $t = $request->all();
         $m = '';
-        foreach ($t['id'] as $id){
-            $obj = Appliance_Stock::find($id);
-            if($obj->state == 0){
-                $obj->update(['state' => 1]);
-            }else{
-                $m = $m.$obj->appliance->model.' not updated.<br>';
+
+        DB::beginTransaction();
+        try {
+            $order = Appliance_Order::create(['ref'=>Appliance_Order::where('invoice_id', $invoice)->count()+1, 'invoice_id'=>$invoice, 'state'=>1, 'created_by'=>Auth::user()->id]);
+            foreach ($request->input('id') as $id){
+                $obj = Appliance_Stock::find($id);
+                if($obj->state == 0 && $obj->assign_to == $invoice && $obj->order_id == null){
+                    $obj->update(['order_id'=>$order->id, 'state' => 1]);
+                }else{
+                    $m = $m.$obj->appliance->model.' not updated.<br>';
+                }
             }
+        } catch(\Exception $e)
+        {
+            DB::rollback();
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
         }
+        DB::commit();
+
         if($m === ''){
             return redirect()->back()->withErrors('更新成功！');
         }else{
-            return redirect()->back()->withInput()->withErrors($m);
+            return redirect()->back()->withErrors($m);
         }
     }
 
@@ -357,31 +371,6 @@ class StockController extends Controller
         }
         DB::commit();
         return redirect('appliance/delivery/index/'.$invoice)->withErrors('出库成功！');
-    }
-
-    public function mergeOrders(Request $request)
-    {
-        $this->validate($request, [
-            'id' => 'required',
-            'receipt_id' => 'required|unique:appliance__invoices',
-        ]);
-        $t = $request->all();
-        $t['type'] = 1;
-        $t['created_by'] = Auth::user()->id;
-        $stocks = Appliance_Stock::whereIn('id', $t['id'])->get();
-        DB::beginTransaction();
-        try {
-            $invoice = Appliance_Invoice::create($t);
-            foreach ($stocks as $stock){
-                $stock->update(['state' => 1, 'init'=> $invoice->id]);
-            }
-        } catch(\Exception $e)
-        {
-            DB::rollback();
-            return redirect()->back()->withInput()->withErrors($e);
-        }
-        DB::commit();
-        return redirect('appliance/invoice/bulk/'.$invoice->id)->withErrors('订单合并成功！');
     }
 
     public function destroy($id)

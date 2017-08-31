@@ -383,14 +383,14 @@
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Appliance<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             @can('appliance_job')
-                            <li>
-                                <a href="{{ url('appliance/invoice/job') }}">Job</a>
-                            </li>
+                                <li>
+                                    <a href="{{ url('appliance/invoice/job') }}">Job</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('appliance/order') }}">Order</a>
+                                </li>
                             @endcan
-                            @can('appliance_order')
-                            <li>
-                                <a href="{{ url('appliance/invoice/bulk') }}">Bulk</a>
-                            </li>
+                            @can('root')
                             <li>
                                 <a href="{{ url('statistics/sales') }}">Sales</a>
                             </li>
@@ -436,14 +436,12 @@
                             <li>
                                 <a href="{{ url('appliance/stock/index/1') }}">Ordered</a>
                             </li>
-                            @can('root')
-                                <li>
-                                    <a href="{{ url('appliance/stock/listing') }}">Warehousing</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('appliance/stock/exportCheckingList') }}" target="_blank">Checking</a>
-                                </li>
-                            @endcan
+                            <li>
+                                <a href="{{ url('appliance/stock/listing') }}">Warehousing</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('appliance/stock/exportCheckingList') }}" target="_blank">Checking</a>
+                            </li>
                             <li>
                                 <a href="{{ url('appliance/stock/index/4') }}">Assigned</a>
                             </li>

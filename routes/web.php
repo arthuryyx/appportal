@@ -48,7 +48,6 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Customer', 'prefix' => 'cu
 
 Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'appliance'], function() {
     Route::resource('invoice/job', 'JobController');
-    Route::resource('invoice/bulk', 'BulkController');
     Route::post('invoice/paid', 'JobController@paid');
     Route::get('invoice/job/{id}/html', 'StockController@invoiceHtml');
     Route::get('stock/index/{state}', 'StockController@index');
@@ -62,13 +61,12 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
     Route::put('stock/{id}', 'StockController@update');
     Route::get('stock/{id}/price', 'StockController@editPrice');
     Route::put('stock/{id}/price', 'StockController@updatePrice');
-    Route::post('stock/order', 'StockController@placeOrder');
+    Route::post('stock/order/{invoice}', 'StockController@placeOrder');
     Route::post('stock/switch', 'StockController@switchStock');
     Route::post('stock/exchange', 'StockController@exchange');
     Route::post('stock/arrive', 'StockController@warehousing');
     Route::post('stock/release', 'StockController@release');
     Route::post('stock/deliver/{invoice}', 'StockController@delivery');
-    Route::post('stock/merge', 'StockController@mergeOrders');
     Route::post('stock/display', 'StockController@display');
     Route::delete('stock/{id}', 'StockController@destroy');
     Route::get('stock/exportAvailable', 'StockController@exportAvailable');
@@ -77,8 +75,11 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
     Route::post('deposit', 'DepositController@store');
     Route::get('delivery/index/{invoice}', 'DeliveryController@index');
     Route::get('delivery/packing-slip/{delivery}', 'DeliveryController@exportPackingSlip');
-    Route::get('order/{invoice}', 'OrderController@index');
     Route::get('record/{type}', 'RecordController@index');
+
+    Route::resource('order', 'OrderController', ['except' => ['destroy']]);
+    Route::post('order/confirm', 'OrderController@confirmOrder');
+    Route::post('order/merge', 'OrderController@mergeOrders');
 
 });
 

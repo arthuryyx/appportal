@@ -49,7 +49,7 @@
                         @foreach ($records as $record)
                             <tr>
                                 <td>{{ $record->stock->appliance->model }}</td>
-                                <td>{{ $record->stock->getInvoice->receipt_id }}</td>
+                                <td>@if($record->stock->getOrder->invoice_id){{ $record->stock->getOrder->getInvoice->receipt_id }}.@endif{{ $record->stock->getOrder->ref }}</td>
                                 <td>{{ $record->getCreated_by->name }}</td>
                                 <td>{{ $record->created_at }}</td>
                             </tr>

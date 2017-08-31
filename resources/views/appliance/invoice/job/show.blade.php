@@ -170,7 +170,7 @@
 
                     <div class="panel-heading">
                         @can('appliance_order')
-                        <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/order')}}'">order</button>
+                        <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/order/'.$invoice->id)}}'">order</button>
                         @endcan
                         @can('appliance_switch')
                             <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/switch')}}'">switch</button>

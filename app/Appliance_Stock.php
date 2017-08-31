@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appliance_Stock extends Model
 {
-    protected $fillable = ['aid', 'init', 'assign_to', 'deliver_to', 'shelf', 'state', 'price', 'warranty'];
+    protected $fillable = ['aid', 'order_id', 'arrival_id', 'assign_to', 'deliver_to', 'shelf', 'state', 'price', 'warranty'];
 
     public function appliance()
     {
@@ -18,9 +18,9 @@ class Appliance_Stock extends Model
         return $this->belongsTo('App\Appliance_Invoice', 'assign_to', 'id');
     }
 
-    public function getInvoice()
+    public function getOrder()
     {
-        return $this->belongsTo('App\Appliance_Invoice', 'init', 'id');
+        return $this->belongsTo('App\Appliance_Order', 'order_id', 'id');
     }
 
     public function getDeliveryHistory()

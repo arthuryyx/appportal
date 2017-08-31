@@ -61,7 +61,13 @@
                                 <td>{{ $stock->appliance->model }}</td>
                                 <td>{{ $stock->appliance->belongsToBrand->name }}</td>
                                 <td>{{ $stock->appliance->belongsToCategory->name }}</td>
-                                <td>{{ $stock->getInvoice->receipt_id }}</td>
+                                <td>
+                                    @if($stock->getOrder->invoice_id)
+                                        {{ $stock->getOrder->getInvoice->receipt_id }}
+                                    @else
+                                        {{ $stock->getOrder->ref }}
+                                    @endif
+                                </td>
                                 <td>
                                     @if($stock->assign_to != null)
                                         <a href="{{ url('appliance/invoice/job/'.$stock->assign_to) }}" class="label label-default">Assign</a>
@@ -71,7 +77,7 @@
                                     {{ $stock->id }}
                                 </td>
                                 <td>
-                                    <a href="{{ url('appliance/order/'.$stock->getInvoice->id) }}" class="btn btn-success">查看</a>
+                                    <a href="{{ url('appliance/order/'.$stock->getOrder->id) }}" class="btn btn-success">查看</a>
                                 </td>
                             </tr>
                         @endforeach

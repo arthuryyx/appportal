@@ -45,13 +45,13 @@
                                         <h3>Bulk</h3>
                                     </div>
                                     <div class="modal-body">
-                                        <strong>Receipt No.</strong>
-                                        <input type="text" name="receipt_id" class="form-control">
+                                        <strong>Order Ref.</strong>
+                                        <input type="text" name="ref" class="form-control">
                                         <strong>Comment</strong>
                                         <textarea name="comment" class="form-control"></textarea>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/merge')}}'">merge</button>
+                                        <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/order/merge')}}'">merge</button>
                                         <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
                                     </div>
                                 </div>
