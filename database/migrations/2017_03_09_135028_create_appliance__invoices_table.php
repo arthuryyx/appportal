@@ -23,7 +23,6 @@ class CreateApplianceInvoicesTable extends Migration
             $table->unsignedFloat('fee')->default(0);
             $table->unsignedInteger('state')->default(0);
             $table->string('comment')->nullable();
-            $table->unsignedInteger('type')->default(0);
             $table->unsignedInteger('created_by');
             $table->timestamps();
         });

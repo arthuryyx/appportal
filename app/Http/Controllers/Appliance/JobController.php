@@ -12,9 +12,9 @@ class JobController extends Controller
     public function index()
     {
         if(Auth::user()->can('appliance_view_all_jobs')){
-            return view('appliance.invoice.job.index')->withInvoices(Appliance_Invoice::where('type', 0)->with('hasManyStocks')->with('getCreated_by')->with('hasManyDeposits')->with('getState')->get());
+            return view('appliance.invoice.job.index')->withInvoices(Appliance_Invoice::with('hasManyStocks')->with('getCreated_by')->with('hasManyDeposits')->with('getState')->get());
         } else{
-            return view('appliance.invoice.job.index')->withInvoices(Appliance_Invoice::where('type', 0)->where('created_by', Auth::user()->id)->with('hasManyStocks')->with('getCreated_by')->with('hasManyDeposits')->with('getState')->get());
+            return view('appliance.invoice.job.index')->withInvoices(Appliance_Invoice::where('created_by', Auth::user()->id)->with('hasManyStocks')->with('getCreated_by')->with('hasManyDeposits')->with('getState')->get());
         }
     }
 
@@ -25,7 +25,7 @@ class JobController extends Controller
 
     public function store(Request $request)
     {
-        $request->merge(['receipt_id' => 'C'.(substr(Appliance_Invoice::where('type', 0)->max('receipt_id'), 1) + 1), 'created_by' => Auth::user()->id]);
+        $request->merge(['receipt_id' => 'C'.(substr(Appliance_Invoice::max('receipt_id'), 1) + 1), 'created_by' => Auth::user()->id]);
 
         $this->validate($request, [
             'receipt_id' => 'required|unique:appliance__invoices',

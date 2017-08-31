@@ -38,7 +38,6 @@ class StatisticsController extends Controller
     public function salesChart(){
         $sales = Role::where('name', 'sales')->first()->users()->pluck('id');
         $array = Appliance_Invoice::whereIn('created_by', $sales)
-            ->where('type', 0)
             ->whereYear('created_at', date('Y'))
             ->whereMonth('created_at', date('m'))
             ->groupBy('created_by')
@@ -60,7 +59,7 @@ class StatisticsController extends Controller
         for ($i = 0; $i<30; $i++){
             $dateString = $date->toDateString();
             $data [count($data)]['y'] = $dateString;
-            $data [count($data)-1]['a'] = floor(Appliance_Invoice::whereDate('created_at', $dateString)->where('type', 0)->sum('price'));
+            $data [count($data)-1]['a'] = floor(Appliance_Invoice::whereDate('created_at', $dateString)->sum('price'));
             $data [count($data)-1]['b'] = floor(Appliance_Deposit::whereDate('created_at', $dateString)->sum('amount'));
             $date->subDay(1);
         }
@@ -84,9 +83,9 @@ class StatisticsController extends Controller
         $data = array();
         foreach ($sales as $uid){
             $data [count($data)]['y']=User::where('id', $uid)->select('name')->first()->name;
-            $data [count($data)-1]['a']=floor(Appliance_Invoice::whereYear('created_at', $date0->year)->whereMonth('created_at', $date0->month)->where('type', 0)->where('created_by', $uid)->sum('price'));
-            $data [count($data)-1]['b']=floor(Appliance_Invoice::whereYear('created_at', $date1->year)->whereMonth('created_at', $date1->month)->where('type', 0)->where('created_by', $uid)->sum('price'));
-            $data [count($data)-1]['c']=floor(Appliance_Invoice::whereYear('created_at', $date2->year)->whereMonth('created_at', $date2->month)->where('type', 0)->where('created_by', $uid)->sum('price'));
+            $data [count($data)-1]['a']=floor(Appliance_Invoice::whereYear('created_at', $date0->year)->whereMonth('created_at', $date0->month)->where('created_by', $uid)->sum('price'));
+            $data [count($data)-1]['b']=floor(Appliance_Invoice::whereYear('created_at', $date1->year)->whereMonth('created_at', $date1->month)->where('created_by', $uid)->sum('price'));
+            $data [count($data)-1]['c']=floor(Appliance_Invoice::whereYear('created_at', $date2->year)->whereMonth('created_at', $date2->month)->where('created_by', $uid)->sum('price'));
         }
         return ['data'=>$data, 'date'=>[$date0->format('M Y'), $date1->format('M Y'), $date2->format('M Y')]];
     }
