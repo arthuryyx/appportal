@@ -35,6 +35,9 @@
                                 Model
                             </th>
                             <th>
+                                Brand
+                            </th>
+                            <th>
                                 Order
                             </th>
                             <th>
@@ -49,6 +52,7 @@
                         @foreach ($records as $record)
                             <tr>
                                 <td>{{ $record->stock->appliance->model }}</td>
+                                <td>{{ $record->stock->appliance->belongsToBrand->name }}</td>
                                 <td>@if($record->stock->getOrder->invoice_id){{ $record->stock->getOrder->getInvoice->receipt_id }}.@endif{{ $record->stock->getOrder->ref }}</td>
                                 <td>{{ $record->getCreated_by->name }}</td>
                                 <td>{{ $record->created_at }}</td>
@@ -79,7 +83,8 @@
         $(document).ready(function() {
             $('#dataTables').DataTable({
                 responsive: true,
-                order: [3, 'asc']
+                pageLength: 25,
+                order: [3]
             });
         });
     </script>
