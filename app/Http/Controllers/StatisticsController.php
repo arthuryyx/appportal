@@ -75,7 +75,7 @@ class StatisticsController extends Controller
         $invoices = Appliance_Invoice::whereYear('created_at', date('Y'))->whereMonth('created_at', date('m'))->pluck('id');
         $data = Appliance_Stock::whereIn('assign_to', $invoices)
             ->groupBy('aid')
-            ->select('aid', DB::raw('count(aid) as total'))->get();
+            ->select('aid', DB::raw('count(aid) as total'))->with('appliance.belongsToBrand')->get();
         return view('statistics.index')->withData($data);
     }
 
