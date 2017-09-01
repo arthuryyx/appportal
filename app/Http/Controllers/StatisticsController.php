@@ -17,20 +17,25 @@ class StatisticsController extends Controller
 {
     public function salesBar(){
         $invoices = Appliance_Invoice::whereYear('created_at', date('Y'))->whereMonth('created_at', date('m'))->pluck('id');
-        $sids = Appliance_Stock::whereIn('assign_to', $invoices)->pluck('id');
         $aids = array_unique(
             Appliance_Stock::whereIn('assign_to', $invoices)
-            ->groupBy('aid')
             ->select('aid', DB::raw('count(aid) as total'))
+            ->groupBy('aid')
             ->orderBy('total', 'desc')
             ->take(10)->pluck('aid')->all());
+
+        $sales = Appliance_Stock::whereIn('assign_to', $invoices)->whereIn('aid', $aids)
+            ->select('aid', 'state', DB::raw('count(aid) as total'))->groupBy('aid', 'state')
+            ->with('appliance')->get();
+
         $data = array();
         foreach ($aids as $aid){
-            $data [count($data)]['y']=Appliance::where('id', $aid)->select('model')->first()->model;
-            $data [count($data)-1]['a']=Appliance_Stock::whereIn('id', $sids)->where('aid', $aid)->where('state', 0)->count();
-            $data [count($data)-1]['b']=Appliance_Stock::whereIn('id', $sids)->where('aid', $aid)->where('state', 1)->count();
-            $data [count($data)-1]['c']=Appliance_Stock::whereIn('id', $sids)->where('aid', $aid)->where('state', 2)->count();
-            $data [count($data)-1]['d']=Appliance_Stock::whereIn('id', $sids)->where('aid', $aid)->where('state', 3)->count();
+            $ass = $sales->where('aid', $aid);
+            $data [count($data)]['y']=$sales->where('aid', $aid)->first()->appliance->model;
+            $data [count($data)-1]['a']=$ass->contains('state', 0)?$ass->where('state', 0)->first()->total:0;
+            $data [count($data)-1]['b']=$ass->contains('state', 1)?$ass->where('state', 1)->first()->total:0;
+            $data [count($data)-1]['c']=$ass->contains('state', 2)?$ass->where('state', 2)->first()->total:0;
+            $data [count($data)-1]['d']=$ass->contains('state', 3)?$ass->where('state', 3)->first()->total:0;
         }
         return $data;
     }
