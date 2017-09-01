@@ -53,14 +53,19 @@ class StatisticsController extends Controller
     }
 
     public function salesLine(){
-        $data = array();
+        $invoices = Appliance_Invoice::whereDate('created_at', '>=', Carbon::today()->addDays(-30))->whereDate('created_at' , '<=', Carbon::today())
+            ->select(DB::raw('sum(price) as price'),DB::raw('date(created_at) as date'))->groupBy('date')->get();
 
-        $date = Carbon::now();
+        $deposits = Appliance_Deposit::whereDate('created_at', '>=', Carbon::today()->addDays(-30))->whereDate('created_at' , '<=', Carbon::today())
+            ->select(DB::raw('sum(amount) as amount'),DB::raw('date(created_at) as date'))->groupBy('date')->get();
+
+        $data = array();
+        $date = Carbon::today();
         for ($i = 0; $i<30; $i++){
             $dateString = $date->toDateString();
             $data [count($data)]['y'] = $dateString;
-            $data [count($data)-1]['a'] = floor(Appliance_Invoice::whereDate('created_at', $dateString)->sum('price'));
-            $data [count($data)-1]['b'] = floor(Appliance_Deposit::whereDate('created_at', $dateString)->sum('amount'));
+            $data [count($data)-1]['a'] = $invoices->contains('date', $dateString)?floor($invoices->where('date', $dateString)->first()->price):0;
+            $data [count($data)-1]['b'] = $deposits->contains('date', $dateString)?floor($deposits->where('date', $dateString)->first()->amount):0;
             $date->subDay(1);
         }
         return $data;
