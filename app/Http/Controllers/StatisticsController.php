@@ -47,13 +47,12 @@ class StatisticsController extends Controller
             ->whereMonth('created_at', date('m'))
             ->groupBy('created_by')
             ->select('created_by', DB::raw('sum(price) as value'))
-            ->having('value', '>', 0)
-            ->with('getCreated_by')->get();
-
+//            ->having('value', '>', 0)
+            ->pluck('value', 'created_by');
         $data = array();
-        foreach ($array as $invoice){
-            $data [count($data)]['label']=$invoice->getCreated_by->name;
-            $data [count($data)-1]['value']=floor($invoice->value);
+        foreach ($array as $key => $value){
+            $data [count($data)]['label']=User::where('id', $key)->select('name')->first()->name;
+            $data [count($data)-1]['value']=floor($value);
         }
         return $data;
     }
