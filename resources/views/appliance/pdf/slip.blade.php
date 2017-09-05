@@ -1956,8 +1956,8 @@ AA==
         @endfor
 
         <tr height=21 style='mso-height-source:userset;height:15.95pt'>
-            <td height=21 class=xl9729136 colspan=2 style='height:15.95pt'>All appliance
-                come with 2 years warrant<span style='display:none'>y!</span></td>
+            <td height=21 class=xl9729136 colspan=2 style='height:15.95pt'>{{--All appliance
+                come with 2 years warrant--}}<span style='display:none'>y!</span></td>
             {{--<td class=xl9429136 style='border-top:none'>　</td>--}}
             {{--<td colspan=2 class=xl11629136 style='border-right:.5pt solid #3B5E91'><span--}}
                         {{--style='mso-spacerun:yes'>&nbsp;</span>SUBTOTAL<span--}}
