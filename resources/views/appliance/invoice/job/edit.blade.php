@@ -52,15 +52,22 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>deliver fee:</strong>
-                                    {!! Form::number('fee', null, array('class' => 'form-control', 'step' => 'any', 'min' => '0', 'required' => 'required')) !!}
+                                    <strong>customer_name:</strong>
+                                    {!! Form::text('customer_name', null, array('class' => 'form-control', 'required' => 'required')) !!}
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>customer_name:</strong>
-                                    {!! Form::text('customer_name', null, array('class' => 'form-control', 'required' => 'required')) !!}
+                                    <strong>phone:</strong>
+                                    {!! Form::number('phone', null, array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>email:</strong>
+                                    {!! Form::email('email', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
 

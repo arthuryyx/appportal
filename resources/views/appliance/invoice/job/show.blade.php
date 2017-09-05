@@ -59,13 +59,15 @@
                             <tr>
                                 <th>Receipt No.</th>
                                 <th>Data</th>
-                                <th>Job</th>
+                                <th>Created_by</th>
                                 <th>Job No.</th>
                                 <th>Final Price</th>
                                 <th>Customer</th>
+                                <th>Phone</th>
+                                <th>Email</th>
                                 <th>Address</th>
                                 <th>Comment</th>
-                                <th>Deliver Fee</th>
+                                {{--<th>Deliver Fee</th>--}}
                             </tr>
                         </thead>
                         <tbody>
@@ -76,9 +78,11 @@
                                 <td>{{$invoice->job_id}}</td>
                                 <td>{{$invoice->price}}</td>
                                 <td>{{$invoice->customer_name}}</td>
+                                <td>{{$invoice->phone}}</td>
+                                <td>{{$invoice->email}}</td>
                                 <td>{{$invoice->address}}</td>
                                 <td>{{$invoice->comment}}</td>
-                                <td>{{$invoice->fee}}</td>
+                                {{--<td>{{$invoice->fee}}</td>--}}
                             </tr>
                         </tbody>
                     </table>

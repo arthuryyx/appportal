@@ -1943,16 +1943,17 @@ AA==
                 <td class=xl9029136 style='border-top:none;border-left:none'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>@if($stock->price>0)${{number_format($stock->price, 2, '.', ',')}}@endif</td>
             </tr>
         @endforeach
-        @if($invoice->fee>0)
-            <tr height=21 style='height:15.75pt'>
-                <td height=21 class=xl10629136 style='height:15.75pt;border-top:none'>1</td>
-                <td class=xl10729136 style='border-top:none;border-left:none'>Delivery Fee</td>
-                <td colspan=2 class=xl12129136 width=222 style='border-right:.5pt solid #3B5E91;border-left:none;width:167pt'></td>
-                <td class=xl8929136 style='border-top:none;border-left:none'></td>
-                <td class=xl9029136 style='border-top:none;border-left:none'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${{number_format($invoice->fee, 2, '.', ',')}}</td>
-            </tr>
-        @endif
-        @for($i=17 - ($invoice->fee>0?$invoice->hasManyStocks->count()+1:$invoice->hasManyStocks->count()); $i>0; $i--)
+        {{--@if($invoice->fee>0)--}}
+            {{--<tr height=21 style='height:15.75pt'>--}}
+                {{--<td height=21 class=xl10629136 style='height:15.75pt;border-top:none'>1</td>--}}
+                {{--<td class=xl10729136 style='border-top:none;border-left:none'>Delivery Fee</td>--}}
+                {{--<td colspan=2 class=xl12129136 width=222 style='border-right:.5pt solid #3B5E91;border-left:none;width:167pt'></td>--}}
+                {{--<td class=xl8929136 style='border-top:none;border-left:none'></td>--}}
+                {{--<td class=xl9029136 style='border-top:none;border-left:none'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${{number_format($invoice->fee, 2, '.', ',')}}</td>--}}
+            {{--</tr>--}}
+        {{--@endif--}}
+{{--        @for($i=17 - ($invoice->fee>0?$invoice->hasManyStocks->count()+1:$invoice->hasManyStocks->count()); $i>0; $i--)--}}
+        @for($i=17 - $invoice->hasManyStocks->count(); $i>0; $i--)
             <tr height=21 style='height:15.75pt'>
                 <td height=21 class=xl10629136 style='height:15.75pt;border-top:none'></td>
                 <td class=xl10729136 style='border-top:none;border-left:none'></td>

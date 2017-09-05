@@ -98,6 +98,20 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
+                                    <strong>phone:</strong>
+                                    {!! Form::number('phone', null, array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>email:</strong>
+                                    {!! Form::email('email', null, array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
                                     <strong>address:</strong>
                                     {!! Form::text('address', null, array('id' => 'autocomplete', 'class' => 'form-control', 'required' => 'required')) !!}
                                 </div>
