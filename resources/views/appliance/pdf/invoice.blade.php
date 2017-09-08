@@ -1943,17 +1943,16 @@ AA==
                 <td class=xl9029136 style='border-top:none;border-left:none'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>@if($stock->price>0)${{number_format($stock->price, 2, '.', ',')}}@endif</td>
             </tr>
         @endforeach
-        {{--@if($invoice->fee>0)--}}
-            {{--<tr height=21 style='height:15.75pt'>--}}
-                {{--<td height=21 class=xl10629136 style='height:15.75pt;border-top:none'>1</td>--}}
-                {{--<td class=xl10729136 style='border-top:none;border-left:none'>Delivery Fee</td>--}}
-                {{--<td colspan=2 class=xl12129136 width=222 style='border-right:.5pt solid #3B5E91;border-left:none;width:167pt'></td>--}}
-                {{--<td class=xl8929136 style='border-top:none;border-left:none'></td>--}}
-                {{--<td class=xl9029136 style='border-top:none;border-left:none'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${{number_format($invoice->fee, 2, '.', ',')}}</td>--}}
-            {{--</tr>--}}
-        {{--@endif--}}
-{{--        @for($i=17 - ($invoice->fee>0?$invoice->hasManyStocks->count()+1:$invoice->hasManyStocks->count()); $i>0; $i--)--}}
-        @for($i=17 - $invoice->hasManyStocks->count(); $i>0; $i--)
+        @if($invoice->getDispatches->count()>0)
+            <tr height=21 style='height:15.75pt'>
+                <td height=21 class=xl10629136 style='height:15.75pt;border-top:none'>{{ $invoice->getDispatches->count() }}</td>
+                <td class=xl10729136 style='border-top:none;border-left:none'>Delivery</td>
+                <td colspan=2 class=xl12129136 width=222 style='border-right:.5pt solid #3B5E91;border-left:none;width:167pt'></td>
+                <td class=xl8929136 style='border-top:none;border-left:none'>—</td>
+                <td class=xl9029136 style='border-top:none;border-left:none'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${{number_format($invoice->getDispatches->sum('fee'), 2, '.', ',')}}</td>
+            </tr>
+        @endif
+        @for($i=17 - ($invoice->getDispatches->count()>0?$invoice->hasManyStocks->count()+1:$invoice->hasManyStocks->count()); $i>0; $i--)
             <tr height=21 style='height:15.75pt'>
                 <td height=21 class=xl10629136 style='height:15.75pt;border-top:none'></td>
                 <td class=xl10729136 style='border-top:none;border-left:none'></td>
@@ -1970,7 +1969,7 @@ AA==
             <td colspan=2 class=xl11629136 style='border-right:.5pt solid #3B5E91'><span
                         style='mso-spacerun:yes'>&nbsp;</span>SUBTOTAL<span
                         style='mso-spacerun:yes'>&nbsp;</span></td>
-            <td class=xl10429136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format(($invoice->price+$invoice->fee) / 1.15, 2, '.', ',')}}<span
+            <td class=xl10429136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format(($invoice->price/*+$invoice->getDispatches->sum('fee')*/) / 1.15, 2, '.', ',')}}<span
                         style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span>{{--1,110.00 --}}</td>
         </tr>
         <tr height=24 style='mso-height-source:userset;height:18.0pt'>
@@ -1979,7 +1978,7 @@ AA==
             <td class=xl6829136></td>
             <td class=xl8029136></td>
             <td class=xl8129136>Sales Tax</td>
-            <td class=xl10529136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format(($invoice->price+$invoice->fee) * 0.15 / 1.15, 2, '.', ',')}}<span
+            <td class=xl10529136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format(($invoice->price/*+$invoice->getDispatches->sum('fee')*/) * 0.15 / 1.15, 2, '.', ',')}}<span
                         style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{{--144.78 --}}</td>
         </tr>
         <tr height=21 style='mso-height-source:userset;height:15.95pt'>
@@ -1988,7 +1987,7 @@ AA==
             <td class=xl7529136>　</td>
             <td class=xl6829136></td>
             <td class=xl7129136>TOTAL:</td>
-            <td class=xl10929136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format(($invoice->price+$invoice->fee), 2, '.', ',')}}<span
+            <td class=xl10929136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format(($invoice->price/*+$invoice->getDispatches->sum('fee')*/), 2, '.', ',')}}<span
                         style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span>{{--1,110.00 --}}</td>
         </tr>
         {{--<tr height=21 style='mso-height-source:userset;height:15.95pt'>--}}

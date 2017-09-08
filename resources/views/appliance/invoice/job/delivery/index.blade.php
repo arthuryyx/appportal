@@ -11,7 +11,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Delivery History</h1>
+            <h1 class="page-header"></h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -32,6 +32,47 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
+                    <h2>Request</h2>
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables2">
+                        <thead>
+                        <tr>
+                            <th>
+                                request
+                            </th>
+                            <th>
+                                schedule
+                            </th>
+                            <th>
+                                created_by
+                            </th>
+                            <th>
+                                shipping fee
+                            </th>
+                            <th>
+                                comment
+                            </th>
+                            {{--<th></th>--}}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($requests as $dreq)
+                            <tr>
+                                <td>{{ $dreq->date }}</td>
+                                <td>@if($dreq->getSchedule){{ $dreq->getSchedule->date}}@endif</td>
+                                <td>@if($dreq->getCreated_by){{ $dreq->getCreated_by->name}}@endif</td>
+                                <td>${{ $dreq->fee }}</td>
+                                <td>{{ $dreq->comment }}</td>
+                                {{--<td>--}}
+                                    {{--@if($dreq->state<3)--}}
+                                    {{--<a href="{{ url('appliance/delivery/request/'.$dreq->id.'/edit') }}" class="btn btn-success ">edit</a>--}}
+                                    {{--@endif--}}
+                                {{--</td>--}}
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                    <hr>
+                    <h2>History</h2>
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                         <thead>
                         <tr>
@@ -82,6 +123,12 @@
     <script>
         $(document).ready(function() {
             $('#dataTables').DataTable({
+                responsive: true,
+//                order: [1, 'asc'],
+                paging: false,
+                searching: false
+            });
+            $('#dataTables2').DataTable({
                 responsive: true,
 //                order: [1, 'asc'],
                 paging: false,

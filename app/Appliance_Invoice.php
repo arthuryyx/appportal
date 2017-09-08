@@ -31,4 +31,9 @@ class Appliance_Invoice extends Model
     {
         return $this->hasManyStocks()->where('state', '<', 3);
     }
+
+    public function getDispatches()
+    {
+        return $this->hasMany('App\Appliance_Dispatch', 'invoice_id', 'id');
+    }
 }

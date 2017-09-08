@@ -162,7 +162,7 @@
                         </p>
                         <hr>
                         <p>
-                            <strong>Delivery History: </strong>
+                            <strong>Shipping Info: </strong>
                             <a href="{{ url('appliance/delivery/index/'.$invoice->id) }}" class="btn btn-primary">view</a>
                         </p>
                     </div>
@@ -202,6 +202,45 @@
                             <!-- /.modal-dialog -->
                         </div>
                         <!-- /.modal -->
+                        @endcan
+                        @can('appliance_request_delivery')
+                        <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target={{"#myModalRequest"}}>request</button>
+                            <!-- Modal -->
+                            <div class="modal fade" id={{"myModalRequest"}} tabindex="-1" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <strong>Date</strong>
+                                                <input type="datetime-local" name="date" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <strong>shipping fee:</strong>
+                                                {!! Form::number('fee', null, array('class' => 'form-control', 'step' => 'any', 'min' => '0', 'required' => 'required')) !!}
+                                            </div>
+                                            <div class="form-group">
+                                                <strong>Post</strong>
+                                                {{ Form::checkbox('post', 1, false, array('class' => 'name checkbox-inline')) }}
+                                            </div>
+                                            <div class="form-group">
+                                                <strong>comment:</strong>
+                                                {!! Form::textarea('comment', null, array('class' => 'form-control')) !!}
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/delivery/request/'.$invoice->id)}}'">request</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
                         @endcan
                         @can('appliance_deliver')
                         <!-- Button trigger modal -->

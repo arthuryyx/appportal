@@ -73,13 +73,20 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
     Route::get('stock/exportCheckingList', 'StockController@exportStockCheckingList');
     Route::get('deposit/index/{invoice}', 'DepositController@index');
     Route::post('deposit', 'DepositController@store');
-    Route::get('delivery/index/{invoice}', 'DeliveryController@index');
-    Route::get('delivery/packing-slip/{delivery}', 'DeliveryController@exportPackingSlip');
     Route::get('record/{type}', 'RecordController@index');
 
     Route::resource('order', 'OrderController', ['except' => ['destroy']]);
     Route::post('order/confirm', 'OrderController@confirmOrder');
     Route::post('order/merge', 'OrderController@mergeOrders');
+
+    Route::get('delivery/index/{invoice}', 'DeliveryController@index');
+    Route::get('delivery/packing-slip/{delivery}', 'DeliveryController@exportPackingSlip');
+    Route::post('delivery/request/{invoice}', 'DeliveryController@requestDelivery');
+//    Route::get('delivery/request/{id}/edit', 'DeliveryController@editDispatch');
+//    Route::put('delivery/request/{id}', 'DeliveryController@updateDispatch');
+
+    Route::get('delivery/test', 'DeliveryController@dataConvert');
+
 
 });
 
