@@ -209,12 +209,13 @@ class StockController extends Controller
     }
 
     public function placeOrder(Request $request, $invoice){
-        if (Appliance_Stock::whereIn('id', $request->input('id'))->whereNull('order_id')->count() == 0){
-            return redirect()->back()->withErrors('电器已在Bulk中！');
-        }
         $this->validate($request, [
             'id' => 'required',
         ]);
+
+        if (Appliance_Stock::whereIn('id', $request->input('id'))->whereNull('order_id')->count() == 0){
+            return redirect()->back()->withErrors('电器已在订单中！');
+        }
         $m = '';
 
         DB::beginTransaction();

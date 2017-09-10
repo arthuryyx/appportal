@@ -220,7 +220,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <strong>shipping fee:</strong>
-                                                {!! Form::number('fee', null, array('class' => 'form-control', 'step' => 'any', 'min' => '0', 'required' => 'required')) !!}
+                                                {!! Form::number('fee', 0, array('class' => 'form-control', 'step' => 'any', 'min' => '0', 'required' => 'required')) !!}
                                             </div>
                                             <div class="form-group">
                                                 <strong>Post</strong>
