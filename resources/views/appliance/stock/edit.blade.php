@@ -36,7 +36,7 @@
                         <br>
                         {{--<input type="text" name="job" class="form-control" placeholder="job" value="{{ $stock->assign_to }}">--}}
                         {{--<br>--}}
-                        <input type="text" name="receipt" class="form-control" disabled="disabled" value="{{ $stock->getInvoice->receipt_id }}">
+{{--                        <input type="text" name="receipt" class="form-control" disabled="disabled" value="{{ $stock->getAssignTo?$stock->getAssignTo->receipt_id:null }}">--}}
                         <br>
                         <input type="text" name="shelf" class="form-control" placeholder="shelf" value="{{ $stock->shelf }}">
                         <br>
