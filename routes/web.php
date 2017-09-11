@@ -85,7 +85,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
 //    Route::get('delivery/request/{id}/edit', 'DeliveryController@editDispatch');
 //    Route::put('delivery/request/{id}', 'DeliveryController@updateDispatch');
 
-    Route::get('delivery/test', 'DeliveryController@dataConvert');
+    Route::get('schedule', 'DispatchController@requestList');
 
 
 });

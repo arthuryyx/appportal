@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 class DeliveryController extends Controller
 {
     public function index($invoice){
-        return view('appliance.invoice.job.delivery.index')
+        return view('appliance.invoice.job.deliver')
             ->withDeliveries(Appliance_Delivery::where('invoice_id', $invoice)->get())
             ->withRequests(Appliance_Dispatch::where('invoice_id', $invoice)->with('getSchedule')->get());
     }
@@ -52,7 +52,7 @@ class DeliveryController extends Controller
 
     public function editDispatch($id)
     {
-        return view('appliance.invoice.job.delivery.edit')->withDispatch(Appliance_Dispatch::find($id));
+        return view('appliance.delivery.edit')->withDispatch(Appliance_Dispatch::find($id));
     }
 
     public function updateDispatch(Request $request, $id)

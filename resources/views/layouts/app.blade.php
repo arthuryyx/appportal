@@ -458,6 +458,11 @@
                         <!-- /.nav-second-level -->
                     </li>
                     @endcan
+                    @can('menu_shipping_schedule')
+                        <li>
+                            <a href="{{ url('appliance/schedule') }}"><i class="fa fa-th-list fa-list-alt"></i> Schedule</a>
+                        </li>
+                    @endcan
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
