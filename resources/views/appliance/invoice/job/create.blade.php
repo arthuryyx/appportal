@@ -65,7 +65,7 @@
                             {!! implode('<br>', $errors->all()) !!}
                         </div>
                     @endif
-                        {!! Form::open(['url' => 'appliance/invoice/job','method'=>'POST']) !!}
+                    {!! Form::open(['url' => 'appliance/invoice/job','method'=>'POST', 'id'=>'form']) !!}
                         <div class="row">
 
                             {{--<div class="col-xs-12 col-sm-12 col-md-12">--}}
@@ -129,7 +129,7 @@
                                 {{Form::submit('Submit', ['class' => 'btn btn-success pull-right'])}}
                             </div>
                         </div>
-                        {!! Form::close() !!}
+                    {!! Form::close() !!}
 
                 </div>
             </div>
@@ -139,6 +139,10 @@
 
 @section('js')
     <script>
+        $('#form').on('submit', function () {
+            $(this).find('input[type="submit"], button').attr('disabled', 'disabled');
+        });
+        
         // This example displays an address form, using the autocomplete feature
         // of the Google Places API to help users fill in the information.
 
