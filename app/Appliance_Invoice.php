@@ -36,4 +36,9 @@ class Appliance_Invoice extends Model
     {
         return $this->hasMany('App\Appliance_Dispatch', 'invoice_id', 'id');
     }
+
+    public function getOrders()
+    {
+        return $this->hasMany('App\Appliance_Order', 'invoice_id', 'id');
+    }
 }

@@ -165,6 +165,11 @@
                             <strong>Shipping Info: </strong>
                             <a href="{{ url('appliance/delivery/index/'.$invoice->id) }}" class="btn btn-primary">view</a>
                         </p>
+                        <hr>
+                        <p>
+                            <strong>Job Orders: </strong>
+                            <a href="{{ url('appliance/job/order/'.$invoice->id) }}" class="btn btn-primary">view</a>
+                        </p>
                     </div>
                 </div>
             </div>

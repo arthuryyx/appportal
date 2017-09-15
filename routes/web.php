@@ -75,6 +75,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
     Route::post('deposit', 'DepositController@store');
     Route::get('record/{type}', 'RecordController@index');
 
+    Route::get('job/order/{id}', 'OrderController@jobOrders');
     Route::resource('order', 'OrderController', ['except' => ['destroy']]);
     Route::post('order/confirm', 'OrderController@confirmOrder');
     Route::post('order/merge', 'OrderController@mergeOrders');

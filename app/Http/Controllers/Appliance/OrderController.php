@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Appliance;
 
+use App\Appliance_Invoice;
 use App\Appliance_Order;
 use App\Appliance_Stock;
 use App\Http\Controllers\Controller;
@@ -120,6 +121,11 @@ class OrderController extends Controller
         }
         DB::commit();
         return redirect('appliance/order/'.$order->id)->withErrors('订单合并成功！');
+    }
+
+    public function jobOrders($id){
+        return view('appliance.order.index')->withOrders(Appliance_Invoice::find($id)->getOrders);
+
     }
 
 }
