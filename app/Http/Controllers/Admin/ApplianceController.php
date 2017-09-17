@@ -37,7 +37,7 @@ class ApplianceController extends Controller
         }
 
         if (Appliance::create($t)) {
-            return redirect('admin/appliance');
+            return redirect()->back()->withSuccess('添加成功！');
         } else {
             return redirect()->back()->withInput()->withErrors('添加失败！');
         }

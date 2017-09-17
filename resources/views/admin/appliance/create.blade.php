@@ -23,8 +23,11 @@
                             <strong>新增失败</strong> 输入不符合要求<br><br>
                             {!! implode('<br>', $errors->all()) !!}
                         </div>
+                    @elseif ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
                     @endif
-
                     <form action="{{ url('admin/appliance') }}" method="POST">
                         {!! csrf_field() !!}
                         <input type="text" name="model" class="form-control" required="required" placeholder="model">
