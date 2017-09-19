@@ -80,7 +80,7 @@
                                 <td>
                                     @if($invoice->state == 0)
                                         @if($invoice->hasManyDeposits->sum('amount')>0)
-                                            <label class="label label-warning">{{round(($invoice->hasManyDeposits->sum('amount')/$invoice->price)*100).'%'}}</label>
+                                            <label class="label label-warning">{{ $invoice->price == 0? '$'.$invoice->hasManyDeposits->sum('amount'): round(($invoice->hasManyDeposits->sum('amount')/$invoice->price)*100).'%'}}</label>
                                         @else
                                             <label class="label label-danger">Unpaid</label>
                                         @endif
