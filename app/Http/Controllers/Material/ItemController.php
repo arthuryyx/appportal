@@ -133,7 +133,7 @@ class ItemController extends Controller
                 $values = $item->values->pluck('value', 'attribute_id')->all();
                 foreach ($attributes as $tid){
                     if(array_has($values, $tid)){
-                        $model=='' ? $model.=$values[$tid] : $model.=' '.$values[$tid];
+                        $model=='' ? $model.=$values[$tid] : $model.='-'.$values[$tid];
                     }
                 }
             }
