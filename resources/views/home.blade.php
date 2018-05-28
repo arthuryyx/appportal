@@ -106,7 +106,7 @@
 <!-- /.row -->
 @can('appliance_view_all_jobs')
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 Last 3 Months
@@ -118,14 +118,31 @@
             <!-- /.panel-body -->
         </div>
     </div>
-    <div class="col-lg-4">
+</div>
+<div class="row">
+    <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                {{date('M Y')}} Sales
-            </div>
+            {{--<div class="panel-heading">--}}
+                {{--{{date('M Y')}} Sales--}}
+            {{--</div>--}}
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <div id="morris-donut-chart"></div>
+                <div class="col-lg-3">
+                    <h4>{{date('M Y', strtotime('-3 Month'))}}</h4>
+                    <div id="morris-donut-chart3"></div>
+                </div>
+                <div class="col-lg-3">
+                    <h4>{{date('M Y', strtotime('-2 Month'))}}</h4>
+                    <div id="morris-donut-chart2"></div>
+                </div>
+                <div class="col-lg-3">
+                    <h4>{{date('M Y', strtotime('-1 Month'))}}</h4>
+                    <div id="morris-donut-chart1"></div>
+                </div>
+                <div class="col-lg-3">
+                    <h4>{{date('M Y')}}</h4>
+                    <div id="morris-donut-chart0"></div>
+                </div>
             </div>
             <!-- /.panel-body -->
         </div>
@@ -208,17 +225,28 @@
                 url: 'statistics/salesChart',
                 data: '{}',
                 success: function (response) {
-                    if(response.length == 0){
-                        response.push({'label':'No Data', 'value':0})
-                    }
-
                     Morris.Donut({
-                        element: 'morris-donut-chart',
-                        data: response,
+                        element: 'morris-donut-chart0',
+                        data: response[0],
                         resize: true
 //                        formatter: function (y, data) { return '$' + y }
                     });
-                },
+                    Morris.Donut({
+                            element: 'morris-donut-chart1',
+                            data: response[1],
+                            resize: true
+                        });
+                    Morris.Donut({
+                            element: 'morris-donut-chart2',
+                            data: response[2],
+                            resize: true
+                        });
+                    Morris.Donut({
+                            element: 'morris-donut-chart3',
+                            data: response[3],
+                            resize: true
+                        });
+                    },
 
                 error: function () {
                     alert("Error loading data! Please try again.");
@@ -246,33 +274,32 @@
                     alert("Error loading data! Please try again.");
                 }
             });
-        })
-
-        $.ajax({
-            type: 'GET',
-            dataType: 'json',
-            contentType: 'application/json',
-            url: 'statistics/personalBar',
-            data: '{}',
-            success: function (response) {
-                if(response.length == 0){
-                    response.push({'y':'No Data'})
-                }
-                Morris.Bar({
-                    element: 'personal-morris-bar-chart',
-                    data: response.data,
-                    resize: true,
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                url: 'statistics/personalBar',
+                data: '{}',
+                success: function (response) {
+                    if(response.length == 0){
+                        response.push({'y':'No Data'})
+                    }
+                    Morris.Bar({
+                        element: 'personal-morris-bar-chart',
+                        data: response.data,
+                        resize: true,
 //                    stacked: true,
-                    xkey: 'y',
-                    ykeys: ['a', 'b', 'c'],
-                    labels: [response.date[0],response.date[1],response.date[2]]
-                });
-            },
+                        xkey: 'y',
+                        ykeys: ['a', 'b', 'c'],
+                        labels: [response.date[0],response.date[1],response.date[2]]
+                    });
+                },
 
-            error: function () {
-                alert("Error loading data! Please try again.");
-            }
-        });
+                error: function () {
+                    alert("Error loading data! Please try again.");
+                }
+            });
+        })
 
     </script>
 @endsection
