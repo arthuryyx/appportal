@@ -1839,7 +1839,7 @@ AA==
             <td colspan=2 height=18 class=xl11929136 style='height:14.1pt'>171 Harris
                 Rd<span style='mso-spacerun:yes'>&nbsp;</span></td>
             <td class=xl6529136></td>
-            <td colspan=3 class=xl13129136>Tax Invoice<span
+            <td colspan=3 class=xl13129136>Job<span
                         style='mso-spacerun:yes'>&nbsp; </span>NO.<span
                         style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp; </span>{{$delivery->getInvoice->receipt_id}}</td>
         </tr>
@@ -1853,12 +1853,13 @@ AA==
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
             <td colspan=2 height=18 class=xl12529136 style='height:14.1pt'>Tel: 09
                 2173888</td>
-            <td colspan=2 class=xl10829136>CUSTOMER ID</td>
-            <td colspan=2 class=xl12529136>{{$delivery->getInvoice->job_id}}</td>
+            <td class=xl6529136></td>
+            <td colspan=3 class=xl13129136>REF:<span
+                        style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span>{{$delivery->getInvoice->job_id}}</td>
         </tr>
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
-            <td colspan=2 height=18 class=xl12929136 style='height:14.1pt'><a
-                        href="mailto:{{$delivery->getInvoice->getCreated_by->email}}">{{$delivery->getInvoice->getCreated_by->email}}</a></td>
+            <td colspan=2 height=18 class=xl12929136 style='height:14.1pt'>
+                <a href="mailto:{{$delivery->getInvoice->getCreated_by->email}}">{{$delivery->getInvoice->getCreated_by->email}}</a></td>
             <td colspan=2 class=xl6929136></td>
             <td class=xl7829136></td>
             <td class=xl6929136></td>
@@ -1879,17 +1880,12 @@ AA==
             {{--<td colspan=3 rowspan=2 class=xl13229136 width=307 style='width:231pt'>ACC NUM: ANZ 01-0190-0377780-00<span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>ACC NAME: Appliance Star NZ Ltd</td>--}}
         </tr>
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
-            <td height=18 class=xl7029136 width=82 style='height:14.1pt;width:62pt'>SOLD
-                TO</td>
-            <td colspan=2 class=xl14229136 width=282 style='width:212pt'>{{$delivery->getInvoice->customer_name}}</td>
+            <td height=18 class=xl7029136 width=82 style='height:14.1pt;width:62pt'>CUSTOMER</td>
+            <td colspan=2 class=xl14229136 width=282 style='width:212pt'>{{$delivery->getInvoice->customer_name}} {{$delivery->getInvoice->phone}}</td>
         </tr>
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
-            <td height=18 class=xl8229136 style='height:14.1pt'>ADD</td>
-            <td class=xl11229136 width=170 style='width:128pt'>{{$delivery->getInvoice->address}}</td>
-            <td class=xl9229136></td>
-            <td class=xl8529136></td>
-            <td class=xl8529136></td>
-            <td class=xl8529136></td>
+            <td height=18 class=xl7029136 width=82 style='height:14.1pt;width:62pt'>ADDRESS</td>
+            <td colspan=2 class=xl14229136 width=282 style='width:212pt'>{{$delivery->getInvoice->address}}</td>
         </tr>
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
             <td height=18 class=xl8329136 style='height:14.1pt'></td>
