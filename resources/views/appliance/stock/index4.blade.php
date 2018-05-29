@@ -11,7 +11,10 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Ready To Go</h1>
+            <h1 class="page-header">
+                Ready To Go 
+{{--                {{ $stocks->sum(function ($stock) {return $stock->appliance->rrp?$stock->appliance->rrp:0;}) }}--}}
+            </h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
