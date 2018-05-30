@@ -1880,12 +1880,11 @@ AA==
             <td colspan=3 rowspan=2 class=xl13229136 width=307 style='width:231pt'>ACC NUM: ANZ 01-0190-0377780-00</br>ACC NAME: Appliance Star NZ Ltd</td>
         </tr>
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
-            <td height=18 class=xl7029136 width=82 style='height:14.1pt;width:62pt'>SOLD
-                TO</td>
-            <td colspan=2 class=xl14229136 width=282 style='width:212pt'>{{$invoice->customer_name}}</td>
+            <td height=18 class=xl7029136 width=82 style='height:14.1pt;width:62pt'>SOLD TO</td>
+            <td colspan=2 class=xl14229136 width=282 style='width:212pt'>{{$invoice->customer_name}}  {{$invoice->phone}}</td>
         </tr>
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
-            <td height=18 class=xl8229136 style='height:14.1pt'>ADD</td>
+            <td height=18 class=xl7029136 style='height:14.1pt'>ADDRESS</td>
             <td class=xl11229136 width=170 style='width:128pt'>{{$invoice->address}}</td>
             <td class=xl9229136></td>
             <td class=xl8529136></td>
@@ -1893,8 +1892,8 @@ AA==
             <td class=xl8529136></td>
         </tr>
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
-            <td height=18 class=xl8329136 style='height:14.1pt'></td>
-            <td class=xl11229136 width=170 style='width:128pt'></td>
+            <td height=18 class=xl7029136 style='height:14.1pt'>E-MAIL</td>
+            <td class=xl11229136 width=170 style='width:128pt'>{{$invoice->email}}</td>
             <td class=xl9129136></td>
             <td class=xl6829136></td>
             <td colspan=2 class=xl7829136></td>
