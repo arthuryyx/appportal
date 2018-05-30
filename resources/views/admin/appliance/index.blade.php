@@ -48,7 +48,7 @@
                                 RRP
                             </th>
                             <th>
-                                Best price
+                                RSP
                             </th>
                             <th>
                                 Cut-out
@@ -71,7 +71,7 @@
                                 <td>{{ $appliance->belongsToBrand->name }}</td>
                                 <td>{{ $appliance->belongsToCategory->name }}</td>
                                 <td>{{ $appliance->rrp }}</td>
-                                <td>{{ $appliance->best }}</td>
+                                <td>{{ $appliance->lv1 }}</td>
                                 <td>{{ $appliance->cutout }}</td>
                                 <td>{{ $appliance->description }}</td>
                                 <td>@can('appliance_edit')<a href="{{ url('admin/appliance/'.$appliance->id.'/edit') }}" class="btn btn-success">编辑</a>@endcan</td>

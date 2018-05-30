@@ -9,7 +9,17 @@ class Appliance extends Model
 
     protected $table = 'appliances';
 
-    protected $fillable = ['name', 'brand_id', 'category_id', 'model', 'description', 'best', 'rrp', 'promotion', 'cutout'];
+    protected $fillable = [
+        'model',
+        'brand_id',
+        'category_id',
+        'rrp',
+        'lv1',
+        'lv2',
+        'lv3',
+        'lv4',
+        'description'
+    ];
 
     public function belongsToBrand()
     {

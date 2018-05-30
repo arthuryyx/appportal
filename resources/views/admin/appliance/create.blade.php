@@ -18,48 +18,99 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <strong>新增失败</strong> 输入不符合要求<br><br>
+                     @if (count($errors) > 0)
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                             {!! implode('<br>', $errors->all()) !!}
                         </div>
                     @elseif ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ $message }}
                         </div>
                     @endif
-                    <form action="{{ url('admin/appliance') }}" method="POST">
-                        {!! csrf_field() !!}
-                        <input type="text" name="model" class="form-control" required="required" placeholder="model">
-                        <br>
-                        <select name="brand_id" class="form-control" required="required">
-                            <option value="">Select One</option>
-                            @foreach($brands as $id => $name)
-                                <option value="{{$id}}">{{$name}}</option>
-                            @endforeach
-                        </select>
-                        <br>
-                        <select name="category_id" class="form-control" required="required">
-                            <option value="">Select One</option>
-                            @foreach($categories as $id => $name)
-                                <option value="{{$id}}">{{$name}}</option>
-                            @endforeach
-                        </select>
-                        <br>
-                        <input type="text" name="rrp" class="form-control" placeholder="RRP">
-                        <br>
-                        <input type="text" name="best" class="form-control" placeholder="Best Price">
-                        <br>
-                        <input type="text" name="cutout" class="form-control" placeholder="Cut-out">
-                        <br>
-                        <textarea name="description" rows="5" class="form-control" placeholder="Description"></textarea>
-                        <br>
-                        <a href="{{ url('admin/appliance') }}" class="btn btn-lg btn-danger">Cancel</a>
-                        <button class="btn btn-lg btn-success pull-right">Create</button>
-                    </form>
+                    {!! Form::open(['url' => 'admin/appliance','method'=>'POST', 'id'=>'form']) !!}
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>model:</strong>
+                                    {!! Form::text('model', null, array('class' => 'form-control', 'required' => 'required')) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>brand:</strong>
+                                    {{ Form::select('brand_id', $brands, null, ['class' => 'form-control', 'placeholder'=>'', 'required' => 'required']) }}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>category:</strong>
+                                    {{ Form::select('category_id', $categories, null, ['class' => 'form-control', 'placeholder'=>'', 'required' => 'required']) }}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>rrp:</strong>
+                                    {!! Form::number('rrp', null, array('class' => 'form-control', 'step' => 'any', 'min' => '0')) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>lv1 price:</strong>
+                                    {!! Form::number('lv1', null, array('class' => 'form-control', 'step' => 'any', 'min' => '0')) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>lv2 price:</strong>
+                                    {!! Form::number('lv2', null, array('class' => 'form-control', 'step' => 'any', 'min' => '0')) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>lv3 price:</strong>
+                                    {!! Form::number('lv3', null, array('class' => 'form-control', 'step' => 'any', 'min' => '0')) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>lv4 price:</strong>
+                                    {!! Form::number('lv4', null, array('class' => 'form-control', 'step' => 'any', 'min' => '0')) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>description:</strong>
+                                    {!! Form::textarea('description', null, array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <a href="{{ url()->previous()}}" class="btn btn-danger">Cancel</a>
+                                {{Form::submit('Submit', ['class' => 'btn btn-success pull-right'])}}
+                            </div>
+                        </div>
+                    {!! Form::close() !!}
 
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        $('#form').on('submit', function () {
+            $(this).find('input[type="submit"], button').attr('disabled', 'disabled');
+        });
+    </script>
 @endsection

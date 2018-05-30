@@ -27,8 +27,7 @@ class ApplianceController extends Controller
             'model' => 'required|unique:appliances',
             'brand_id' => 'required|exists:brands,id',
             'category_id' => 'required|exists:categories,id',
-            'rrp' => 'integer|min:1',
-            'best' => 'integer|min:1',
+            'rrp' => 'numeric|min:0',
         ]);
 
         $t = $request->all();
@@ -45,24 +44,23 @@ class ApplianceController extends Controller
 
     public function edit($id)
     {
-        return view('admin/appliance/edit')->withAppliance(Appliance::find($id))->withBrands(Brand::orderBy('name')->pluck('name', 'id'))->withCategories(Category::orderBy('name')->pluck('name', 'id'));
+        return view('admin/appliance/edit')->withModel(Appliance::find($id))->withBrands(Brand::orderBy('name')->pluck('name', 'id'))->withCategories(Category::orderBy('name')->pluck('name', 'id'));
     }
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
+            $this->validate($request, [
             'model' => 'required|unique:appliances,model,'.$id,
-            'brand_id' => 'required|exists:brands,id',
-            'category_id' => 'required|exists:categories,id',
-            'rrp' => 'integer|min:1',
-            'best' => 'integer|min:1',
-        ]);
+                'brand_id' => 'required|exists:brands,id',
+                'category_id' => 'required|exists:categories,id',
+                'rrp' => 'numeric|min:0',
+            ]);
 
 
         $t = $request->all();
-        foreach ($t as $k=>$v){
-            if(is_string($v) && $v === '') $t[$k] = null;
-        }
+            foreach ($t as $k=>$v){
+                if(is_string($v) && $v === '') $t[$k] = null;
+            }
 
 
         if (Appliance::find($id)->update($t)) {
@@ -70,7 +68,7 @@ class ApplianceController extends Controller
         } else {
             return redirect()->back()->withInput()->withErrors('更新失败！');
         }
-    }
+        }
     public function destroy($id)
     {
         if(Stock::where('aid', $id)->count()==0){

@@ -51,7 +51,7 @@
                                 RRP
                             </th>
                             <th>
-                                Best price
+                                RSP
                             </th>
                             <th>
 
@@ -66,7 +66,7 @@
                                 <td>{{ $stock->appliance->belongsToBrand->name }}</td>
                                 <td>{{ $stock->appliance->belongsToCategory->name }}</td>
                                 <td>{{ $stock->appliance->rrp }}</td>
-                                <td>{{ $stock->appliance->best }}</td>
+                                <td>{{ $stock->appliance->lv1 }}</td>
                                 <td><a href="{{ url('appliance/stock/'.$stock->aid.'/detail') }}" class="btn btn-success">查看</a></td>
                             </tr>
                         @endforeach
@@ -77,7 +77,7 @@
                                 <td>{{ $appliance->belongsToBrand->name }}</td>
                                 <td>{{ $appliance->belongsToCategory->name }}</td>
                                 <td>{{ $appliance->rrp }}</td>
-                                <td>{{ $appliance->best }}</td>
+                                <td>{{ $appliance->lv1 }}</td>
                                 <td></td>
                             </tr>
                         @endforeach
