@@ -56,9 +56,9 @@
                             <th>
                                 final price
                             </th>
-                            {{--<th>--}}
-                                {{--created_at--}}
-                            {{--</th>--}}
+                            <th>
+                                created_at
+                            </th>
                             <th>
                                 state
                             </th>
@@ -76,7 +76,7 @@
 {{--                                <td>{{ $invoice->comment }}</td>--}}
                                 <td>{{ $invoice->getCreated_by->name }}</td>
                                 <td>{{ $invoice->price }}</td>
-                                {{--<td>{{ $invoice->created_at->format('d-m-Y') }}</td>--}}
+                                <td>{{ $invoice->created_at->format('d-m-Y') }}</td>
                                 <td>
                                     @if($invoice->state == 0)
                                         @if($invoice->hasManyDeposits->sum('amount')>0)
