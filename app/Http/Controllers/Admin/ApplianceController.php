@@ -31,15 +31,18 @@ class ApplianceController extends Controller
         ]);
 
         $t = $request->all();
+        $t['state'] = 0;
         foreach ($t as $k=>$v){
             if(is_string($v) && $v === '') unset($t[$k]);
         }
 
-        if (Appliance::create($t)) {
-            return redirect()->back()->withSuccess('添加成功！');
-        } else {
-            return redirect()->back()->withInput()->withErrors('添加失败！');
+        try {
+            Appliance::create($t);
+        } catch (\Exception $e)
+        {
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
         }
+        return redirect()->back()->withSuccess('添加成功！');
     }
 
     public function edit($id)
@@ -49,6 +52,9 @@ class ApplianceController extends Controller
 
     public function update(Request $request, $id)
     {
+        $t = $request->all();
+
+        if(is_null($request->input('state'))) {
             $this->validate($request, [
                 'model' => 'required|unique:appliances,model,'.$id.',id,brand_id,'.$request->input('brand_id'),
                 'brand_id' => 'required|exists:brands,id',
@@ -56,19 +62,23 @@ class ApplianceController extends Controller
                 'rrp' => 'numeric|min:0',
             ]);
 
-
-        $t = $request->all();
             foreach ($t as $k=>$v){
                 if(is_string($v) && $v === '') $t[$k] = null;
             }
-
-
-        if (Appliance::find($id)->update($t)) {
-            return redirect('admin/appliance')->withErrors('更新成功！');
+            $t['state'] = 0;
         } else {
-            return redirect()->back()->withInput()->withErrors('更新失败！');
+            $t['state'] = 1;
         }
+
+        try {
+            Appliance::find($id)->update($t);
+        } catch (\Exception $e)
+        {
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
         }
+        return redirect()->back()->withSuccess('添加成功！');
+        }
+
     public function destroy($id)
     {
         if(Stock::where('aid', $id)->count()==0){

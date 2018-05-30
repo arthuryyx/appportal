@@ -13,6 +13,7 @@ class Appliance extends Model
         'model',
         'brand_id',
         'category_id',
+        'state',
         'rrp',
         'lv1',
         'lv2',
