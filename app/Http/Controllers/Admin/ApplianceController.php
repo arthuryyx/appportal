@@ -24,7 +24,7 @@ class ApplianceController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'model' => 'required|unique:appliances',
+            'model' => 'required|unique:appliances,model,NULL,id,brand_id,'.$request->input('brand_id'),
             'brand_id' => 'required|exists:brands,id',
             'category_id' => 'required|exists:categories,id',
             'rrp' => 'numeric|min:0',
@@ -50,7 +50,7 @@ class ApplianceController extends Controller
     public function update(Request $request, $id)
     {
             $this->validate($request, [
-            'model' => 'required|unique:appliances,model,'.$id,
+                'model' => 'required|unique:appliances,model,'.$id.',id,brand_id,'.$request->input('brand_id'),
                 'brand_id' => 'required|exists:brands,id',
                 'category_id' => 'required|exists:categories,id',
                 'rrp' => 'numeric|min:0',
