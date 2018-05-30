@@ -121,7 +121,7 @@
                         {{--{!! Form::close() !!}--}}
                     {{--</div>--}}
 
-                    @if($invoice->state == 0)
+                    @if($invoice->state == 0 || Gate::check('root'))
                     <div class="col-lg-4">
                         {!! Form::open(['url' => 'appliance/stock/allocation','method'=>'POST']) !!}
                         <div class="row">
@@ -138,7 +138,8 @@
                         </div>
                         {!! Form::close() !!}
                     </div>
-
+		            @endif
+		    
                     @can('appliance_add_deposit')
                     <div class="col-lg-4">
                         {!! Form::open(['url' => 'appliance/deposit','method'=>'POST']) !!}
@@ -153,8 +154,7 @@
                         {!! Form::close() !!}
                     </div>
                     @endcan
-                    @endif
-
+                   
                     <div class="col-lg-2">
                         <p>
                             <strong>Deposit History: </strong>
@@ -299,7 +299,7 @@
                                 <th>
                                     Warranty
                                 </th>
-                            </tr>
+                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($invoice->hasManyStocks as $stock)
