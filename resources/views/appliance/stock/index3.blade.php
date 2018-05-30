@@ -50,7 +50,6 @@
                                 Date
                             </th>
                             <th></th>
-                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -62,40 +61,40 @@
                                 <td>{{ $stock->appliance->belongsToCategory->name }}</td>
                                 <td>{{ $stock->getDeliveryHistory->getInvoice->receipt_id }}</td>
                                 <td>{{ $stock->getDeliveryhistory->created_at->format('d-m-Y') }}</td>
-                                <td><a href="{{ url('appliance/invoice/job/'.$stock->getDeliveryHistory->getInvoice->id) }}" class="btn btn-success">查看</a></td>
-                                @can('root')
                                 <td>
-                                    <!-- Button trigger modal -->
-                                    <button class="btn btn-danger" data-toggle="modal" data-target={{"#myModal".$stock->id}}>
-                                        重新入库
-                                    </button>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id={{"myModal".$stock->id}} tabindex="-1" role="dialog">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" >&times;</button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    {{ $stock->getDeliveryHistory->getInvoice->job_id }}
-                                                    {{ $stock->appliance->model }}
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <form action="{{ url('appliance/stock/reentry') }}" method="POST" style="display: inline;">
-                                                        {{ csrf_field() }}
-                                                        <input type="hidden" name="sid" value="{{$stock->id}}">
-                                                        <button type="submit" class="btn btn-danger">确认</button>
-                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <!-- /.modal-content -->
-                                        </div>
-                                        <!-- /.modal-dialog -->
-                                    </div>
-                                    <!-- /.modal -->
+                                	<a href="{{ url('appliance/invoice/job/'.$stock->getDeliveryHistory->getInvoice->id) }}" class="btn btn-success">查看</a>
+                                	@can('root')
+	                                    <!-- Button trigger modal -->
+	                                    <button class="btn btn-danger" data-toggle="modal" data-target={{"#myModal".$stock->id}}>
+	                                        重新入库
+	                                    </button>
+	                                    <!-- Modal -->
+	                                    <div class="modal fade" id={{"myModal".$stock->id}} tabindex="-1" role="dialog">
+	                                        <div class="modal-dialog">
+	                                            <div class="modal-content">
+	                                                <div class="modal-header">
+	                                                    <button type="button" class="close" data-dismiss="modal" >&times;</button>
+	                                                </div>
+	                                                <div class="modal-body">
+	                                                    {{ $stock->getDeliveryHistory->getInvoice->job_id }}
+	                                                    {{ $stock->appliance->model }}
+	                                                </div>
+	                                                <div class="modal-footer">
+	                                                    <form action="{{ url('appliance/stock/reentry') }}" method="POST" style="display: inline;">
+	                                                        {{ csrf_field() }}
+	                                                        <input type="hidden" name="sid" value="{{$stock->id}}">
+	                                                        <button type="submit" class="btn btn-danger">确认</button>
+	                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+	                                                    </form>
+	                                                </div>
+	                                            </div>
+	                                            <!-- /.modal-content -->
+	                                        </div>
+	                                        <!-- /.modal-dialog -->
+	                                    </div>
+	                                    <!-- /.modal -->
+	                                @endcan
                                 </td>
-                                @endcan
                             </tr>
                         @endforeach
 
