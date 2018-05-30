@@ -11,6 +11,7 @@ class Appliance extends Model
 
     protected $fillable = [
         'model',
+        'barcode',
         'brand_id',
         'category_id',
         'state',

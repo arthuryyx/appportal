@@ -88,4 +88,21 @@ class ApplianceController extends Controller
             return redirect()->back()->withInput()->withErrors('有关联关系，删除失败！');
         }
     }
+    
+    public function barcode(Request $request)
+    {
+        $this->validate($request, [
+            'aid' => 'required|exists:appliances,id',
+            'barcode' => 'required|unique:appliances,barcode,'.$request->input('aid'),
+        ]);
+
+        try {
+            Appliance::find($request->input('aid'))->update(['barcode' => $request->input('barcode')]);
+        } catch (\Exception $e)
+        {
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
+        }
+        return redirect()->back()->withSuccess('更新成功！');
+    }
+    
 }
