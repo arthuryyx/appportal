@@ -382,6 +382,9 @@
                     <li>
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Appliance<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ url('admin/appliance/model') }}">查电器信息</a>
+                            </li>
                             @can('appliance_job')
                                 <li>
                                     <a href="{{ url('appliance/invoice/job') }}">Job</a>

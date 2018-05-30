@@ -77,7 +77,7 @@ class ApplianceController extends Controller
             return redirect()->back()->withInput()->withErrors($e->getMessage());
         }
         return redirect()->back()->withSuccess('添加成功！');
-        }
+    }
 
     public function destroy($id)
     {
@@ -105,4 +105,13 @@ class ApplianceController extends Controller
         return redirect()->back()->withSuccess('更新成功！');
     }
     
+     public function show($id)
+    {
+        return view('admin.appliance.model')
+            ->withModel(Appliance::where('id', $id)->with('belongsToBrand', 'belongsToCategory')->first())
+//            ->withStock(Appliance_Stock::where('aid', $id)->get())
+            ->render();
+//        return response()->json(Appliance_Model::where('id', $id)->with('getBrand', 'getCategory')->first());
+    }
+
 }
