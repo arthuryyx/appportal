@@ -44,13 +44,10 @@
                                 Category
                             </th>
                             <th>
-                                Receipt No.
+                                Order Ref.
                             </th>
                             <th>
-                                Status
-                            </th>
-                            <th>
-
+                                Job
                             </th>
                         </tr>
                         </thead>
@@ -63,21 +60,16 @@
                                 <td>{{ $stock->appliance->belongsToCategory->name }}</td>
                                 <td>
                                     @if($stock->getOrder->invoice_id)
-                                        {{ $stock->getOrder->getInvoice->receipt_id }}
+                                        <a href="{{ url('appliance/order/'.$stock->getOrder->id) }}" class="btn btn-success">{{ $stock->getOrder->getInvoice->receipt_id }}</a>
                                     @else
-                                        {{ $stock->getOrder->ref }}
+                                        <a href="{{ url('appliance/order/'.$stock->getOrder->id) }}" class="btn btn-success">{{ $stock->getOrder->ref }}</a>
                                     @endif
                                 </td>
                                 <td>
-                                    @if($stock->assign_to != null)
-                                        <a href="{{ url('appliance/invoice/job/'.$stock->assign_to) }}" class="label label-default">Assign</a>
-                                    @else
-                                        <label class="label label-success">Available</label>
-                                    @endif
                                     {{ $stock->id }}
-                                </td>
-                                <td>
-                                    <a href="{{ url('appliance/order/'.$stock->getOrder->id) }}" class="btn btn-success">查看</a>
+                                    @if($stock->assign_to != null)
+                                        <a href="{{ url('appliance/invoice/job/'.$stock->assign_to) }}" class="btn btn-success">{{ $stock->getAssignTo->receipt_id }}</a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

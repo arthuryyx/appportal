@@ -103,7 +103,7 @@
                                 <th>
                                     Receipt No.
                                 </th>
-                                <th></th>
+                                <th>Job No.</th>
                                 {{--@can('root')--}}
                                 {{--<th></th>--}}
                                 {{--@endcan--}}
@@ -117,12 +117,23 @@
                                     <td>{{ $stock->appliance->model }}</td>
                                     <td>{{ $stock->appliance->belongsToBrand->name }}</td>
                                     <td>{{ $stock->appliance->belongsToCategory->name }}</td>
-                                    <td>
-                                        {{--@if($stock->assign_to != null)--}}
-                                            {{ $stock->getAssignTo->receipt_id }}
-                                        {{--@endif--}}
-                                    </td>
-                                    <td><a href="{{ url('appliance/invoice/job/'.$stock->getAssignTo->id) }}" class="btn btn-success">查看</a></td>
+                                    
+                                    @if($stock->order_id == null)
+                                    	<td></td>
+                                    @else
+                                    	<td>
+                                    		<a href="{{ url('appliance/order/'.$stock->order_id) }}" class="btn btn-success">查看{{ $stock->getOrder->ref}}</a>
+                                    	</td>
+                                    @endif
+                                    
+                                    @if($stock->assign_to == null)
+                                    	<td></td>
+                                    @else
+                                    	<td>
+                                    		<a href="{{ url('appliance/invoice/job/'.$stock->getAssignTo->id) }}" class="btn btn-success">查看{{ $stock->getAssignTo->receipt_id }}</a>
+                                    	</td>
+                                    @endif
+                                    
                                     {{--@can('root')--}}
                                     {{--<td>--}}
                                         {{--<!-- Button trigger modal -->--}}
@@ -184,7 +195,6 @@
             var table = $('#dataTables').DataTable({
                 responsive: true,
                 paging: false,
-                searching: false,
                 columnDefs: [
                     {
                         'targets': 0,

@@ -26,7 +26,7 @@ class StockController extends Controller
         {
             case 0:
                 return view('appliance.stock.index'.$state)
-                    ->withStocks(Appliance_Stock::where('state', $state)->whereNull('order_id')->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->with('getAssignTo')->get());
+                    ->withStocks(Appliance_Stock::where('state', $state)->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->with('getAssignTo')->get());
                 break;
             case 1:
                 return view('appliance.stock.index'.$state)

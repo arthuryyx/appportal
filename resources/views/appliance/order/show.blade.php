@@ -145,6 +145,9 @@
                                     Category
                                 </th>
                                 <th>
+                                    Job
+                                </th>
+                                <th>
                                     State
                                 </th>
                             </tr>
@@ -157,6 +160,13 @@
                                     <td>{{ $stock->appliance->belongsToBrand->name }}</td>
                                     <td>{{ $stock->appliance->belongsToCategory->name }}</td>
                                     <td>
+                                    	@if($stock->assign_to != null)
+                                            <a href="{{ url('appliance/invoice/job/'.$stock->assign_to) }}" class="btn btn-success">{{ $stock->getAssignTo->receipt_id }}</a>
+                                        @endif
+                                    
+                                    </td>
+                                    <td>
+                                        {{ $stock->id }}
                                         @if($stock->state == 0)
                                             <label class="label label-warning">Pending</label>
                                         @elseif($stock->state == 1)
@@ -169,7 +179,8 @@
                                             <label class="label label-primary">Display</label>
                                         @else
                                             <label class="label label-danger">Exception</label>
-                                        @endif</td>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
