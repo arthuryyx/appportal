@@ -69,7 +69,41 @@
                                 <td>{{ $stock->appliance->belongsToBrand->name }}</td>
                                 <td>{{ $stock->appliance->belongsToCategory->name }}</td>
                                 <td>{{ $stock->shelf }}</td>
-                                <td><a href="{{ url('appliance/stock/'.$stock->id.'/edit') }}" class="btn btn-success">编辑</a></td>
+                                <td>
+                                	<a href="{{ url('appliance/stock/'.$stock->id.'/edit') }}" class="btn btn-success">编辑</a>
+                                	@can('root')
+                               		    <!-- Button trigger modal -->
+	                                    <button class="btn btn-danger" data-toggle="modal" data-target={{"#myModal".$stock->id}}>
+	                                        重新入库
+	                                    </button>
+	                                    <!-- Modal -->
+	                                    <div class="modal fade" id={{"myModal".$stock->id}} tabindex="-1" role="dialog">
+	                                        <div class="modal-dialog">
+	                                            <div class="modal-content">
+	                                                <div class="modal-header">
+	                                                    <button type="button" class="close" data-dismiss="modal" >&times;</button>
+	                                                </div>
+	                                                <div class="modal-body">
+	                                                    Model: {{ $stock->appliance->model }}
+	                                                    <br/>
+	                                                    Location: {{ $stock->shelf }}
+	                                                </div>
+	                                                <div class="modal-footer">
+	                                                    <form action="{{ url('appliance/stock/reentry') }}" method="POST" style="display: inline;">
+	                                                        {{ csrf_field() }}
+	                                                        <input type="hidden" name="sid" value="{{$stock->id}}">
+	                                                        <button type="submit" class="btn btn-danger">确认</button>
+	                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+	                                                    </form>
+	                                                </div>
+	                                            </div>
+	                                            <!-- /.modal-content -->
+	                                        </div>
+	                                        <!-- /.modal-dialog -->
+	                                    </div>
+	                                    <!-- /.modal -->
+                                	@endcan
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
