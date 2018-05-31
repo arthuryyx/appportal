@@ -376,10 +376,34 @@ class StockController extends Controller
         return redirect('appliance/delivery/index/'.$invoice)->withErrors('出库成功！');
     }
 
-    public function destroy($id)
-    {
-        Appliance_Stock::find($id)->delete();
-        return redirect()->back()->withInput()->withErrors('删除成功！');
+    public function delete(Request $request){
+        $this->validate($request, [
+            'id' => 'required',
+        ]);
+        $m = '';
+        $n = 0;
+        DB::beginTransaction();
+        try {
+            foreach ($request->input('id') as $id){
+                $obj = Appliance_Stock::find($id);
+                if($obj->state < 2){
+                    $obj->delete();
+                    $n++;
+                }else{
+                    $m .= $obj->appliance->model.' not deleted.<br>';
+                }
+            }
+        } catch(\Exception $e)
+        {
+            DB::rollback();
+            return redirect()->back()->withInput()->withErrors($e);
+        }
+            DB::commit();
+            if($m === ''){
+                return redirect()->back()->withErrors('成功删除'.$n.'个');
+            }else{
+                return redirect()->back()->withInput()->withErrors('成功删除'.$n.'个<br>'.$m);
+        }
     }
 
     public function detail(Request $request, $aid){

@@ -104,11 +104,31 @@
                 <form id="frm-example" name="frm_example" action="" method="post">
                     {{ csrf_field() }}
                     @if($order->state == 1)
-                    @can('appliance_arrival')
-                    <div class="panel-heading">
-                        <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/arrive')}}'">arrival</button>
-                    </div>
-                    @endcan
+                        <div class="panel-heading">
+                            @can('appliance_arrival')
+                                <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/arrive')}}'">arrival</button>
+                            @endcan
+                            @can('root')
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#myModaldelete"}}>Delete</button>
+                            <!-- Modal -->
+                            <div class="modal fade" id={{"myModaldelete"}} tabindex="-1" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" >&times;</button>
+
+                                            <button type="submit" class="btn btn-danger" onclick="document.frm_example.action='{{ url('appliance/stock/delete')}}'">Confirm</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+                            @endcan
+                        </div>
                     @endif
                     <div class="panel panel-body">
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">

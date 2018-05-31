@@ -60,8 +60,28 @@
                             <!-- /.modal-dialog -->
                         </div>
                         <!-- /.modal -->
+                       
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#myModaldelete"}}>Delete</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id={{"myModaldelete"}} tabindex="-1" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                                        
+                                        <button type="submit" class="btn btn-danger" onclick="document.frm_example.action='{{ url('appliance/stock/delete')}}'">Confirm</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
                     </div>
                     @endcan
+                    
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
