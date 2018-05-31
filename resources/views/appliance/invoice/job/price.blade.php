@@ -27,7 +27,8 @@
 
                         <input type="number" name="price" placeholder="Price" class="form-control" step="any">
                         <br>
-
+			            <input type="number" name="warranty" placeholder="Warranty" class="form-control">
+                        <br>
                         <a href="{{ URL::previous() }}" class="btn btn-lg btn-danger">Cancel</a>
                         <button class="btn btn-lg btn-success pull-right">Modify</button>
 

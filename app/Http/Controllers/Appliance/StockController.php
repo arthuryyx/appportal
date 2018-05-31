@@ -132,7 +132,9 @@ class StockController extends Controller
     public function updatePrice(Request $request, $id){
         if(is_string($request->input('price')) && $request->input('price') === '')
             $request->offsetSet('price', null);
-        $obj = Appliance_Stock::find($id);
+        if(is_string($request->input('warranty')) && $request->input('warranty') === '')
+            $request->offsetSet('warranty', null);
+	        $obj = Appliance_Stock::find($id);
         if ($obj->update($request->all())) {
             return redirect('appliance/invoice/job/'.$obj->assign_to)->withErrors('更新成功！');
         } else {
