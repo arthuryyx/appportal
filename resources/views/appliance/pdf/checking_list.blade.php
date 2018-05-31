@@ -8,7 +8,12 @@
     </head>
     <body>
         <h2>Date: {{$date}}</h2>
-        <h2>{{$stocks->count()}} Item(s)</h2>
+        <h2>{{$stocks->sum('total')}} Item(s)</h2>
+        <h2>
+	        ${{ $stocks->sum(function ($stock) {
+	    		return $stock->appliance->rrp?($stock->appliance->rrp*$stock->total):0;
+		}) }}
+	</h2>
         <table>
             <thead>
             <tr>
@@ -22,21 +27,19 @@
                     Assign to
                 </th>
                 <th>
-                    Shelf
+                    RRP
                 </th>
             </tr>
             </thead>
             <tbody>
-            @foreach ($stocks as $stock)
+            @foreach ($stocks->sortBy('appliance.model') as $stock)
                 <tr>
+                    <td>{{ $stock->total }}</td>
                     <td>{{ $stock->appliance->model }}</td>
                     <td>{{ $stock->appliance->belongsToBrand->name }}</td>
                     <td>
-                        @if($stock->assign_to != null)
-                            {{ $stock->getAssignTo->job_id }}
-                        @endif
+                    	{{ $stock->appliance->rrp}}
                     </td>
-                    <td>{{ $stock->shelf }}</td>
                 </tr>
             @endforeach
             </tbody>
