@@ -34,6 +34,7 @@
                         {!! Form::open(['url' => 'appliance/stock/display','method'=>'POST']) !!}
                         <strong>from stock</strong>
                         <select class="sid form-control" name="sid" required="required"></select>
+                        {{ Form::select('shelf', [171 =>'171', '北岸' =>'北岸', '汉密尔顿' =>'汉密尔顿'], null, ['class' => 'form-control', 'placeholder'=>'Location', 'required' => 'required']) }}
                         {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
                         {!! Form::close() !!}
                     </div>

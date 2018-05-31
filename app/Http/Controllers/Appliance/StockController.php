@@ -202,8 +202,9 @@ class StockController extends Controller
         }
         $this->validate($request, [
             'sid' => 'required',
+            'shelf' => 'required',
         ]);
-        if (Appliance_Stock::find($request->all()['sid'])->update(['state' => 5])) {
+        if (Appliance_Stock::find($request->input('sid'))->update(['state' => 5, 'shelf' => $request->input('shelf')])) {
             return redirect()->back()->withErrors('更新成功！');
         } else {
             return redirect()->back()->withInput()->withErrors('更新失败！');
