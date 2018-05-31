@@ -17,6 +17,7 @@ class CreateApplianceRecordsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('sid');
             $table->unsignedInteger('type');
+            $table->unsignedInteger('delivery_id')->nullable();
             $table->unsignedInteger('created_by');
             $table->timestamps();
         });
