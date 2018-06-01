@@ -104,7 +104,7 @@
     {{--</div>--}}
 {{--</div>--}}
 <!-- /.row -->
-@can('appliance_view_all_jobs')
+@can('appliance_dashboard')
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
