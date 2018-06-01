@@ -38,7 +38,7 @@
         RRP
     </th>
     <th>
-        lv1 price
+        RSP
     </th>
     <th>
         lv2 price
@@ -47,7 +47,7 @@
         lv3 price
     </th>
     <th>
-        lv4 price
+        cost price
     </th>
 </tr>
 </thead>

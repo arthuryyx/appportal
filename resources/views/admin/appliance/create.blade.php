@@ -61,7 +61,7 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>lv1 price:</strong>
+                                    <strong>rsp:</strong>
                                     {!! Form::number('lv1', null, array('class' => 'form-control', 'step' => 'any', 'min' => '0')) !!}
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>lv4 price:</strong>
+                                    <strong>cost price:</strong>
                                     {!! Form::number('lv4', null, array('class' => 'form-control', 'step' => 'any', 'min' => '0')) !!}
                                 </div>
                             </div>
