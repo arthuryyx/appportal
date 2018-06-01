@@ -51,6 +51,15 @@
                                 RSP
                             </th>
                             <th>
+                                Lv2
+                            </th>
+                            <th>
+                                Lv3
+                            </th>
+                            <th>
+                                Cost Price
+                            </th>
+                            <th>
                                 Cut-out
                             </th>
                             <th>
@@ -72,6 +81,9 @@
                                 <td>{{ $appliance->belongsToCategory->name }}</td>
                                 <td>{{ $appliance->rrp }}</td>
                                 <td>{{ $appliance->lv1 }}</td>
+                                <td>{{ $appliance->lv2 }}</td>
+                                <td>{{ $appliance->lv3 }}</td>
+                                <td>{{ $appliance->lv4 }}</td>
                                 <td>{{ $appliance->cutout }}</td>
                                 <td>{{ $appliance->description }}</td>
                                 <td>@can('appliance_edit')<a href="{{ url('admin/appliance/'.$appliance->id.'/edit') }}" class="btn btn-success">编辑</a>@endcan</td>
