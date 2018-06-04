@@ -82,7 +82,7 @@ class OrderController extends Controller
                     $m = $m.$stock->appliance->model.' not updated.<br>';
                 }
             }
-            $order->update(['state'=>1, 'created_by'=>Auth::user()->id]);
+            $order->update(['state'=>1]);
         } catch(\Exception $e)
         {
             DB::rollback();
