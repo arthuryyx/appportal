@@ -21,4 +21,9 @@ class Appliance_Order extends Model
     public function getCreated_by(){
         return $this->belongsTo('App\User', 'created_by', 'id');
     }
+
+    public function getState()
+    {
+        return $this->getStocks()->where('state', 0);
+    }
 }

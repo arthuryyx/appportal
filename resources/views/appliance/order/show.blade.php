@@ -24,7 +24,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    @if($order->state == 0)
+                    @if($order->getState->count())
                         @can('appliance_order')
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#myModal"}}>Order</button>
                             <!-- Modal -->
@@ -79,7 +79,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    @if($order->state == 0)
+                    @if($order->state == 0 || Gate::check('root'))
                     @can('appliance_order')
                         <hr>
                         <div class="col-lg-4">
