@@ -445,7 +445,7 @@ class StockController extends Controller
     public function exportStockCheckingList(){
 //        $data = Appliance_Stock::where('state', 2)->orderBy('shelf')->orderBy('aid')->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->with('getAssignTo')->get();
         $date = date('Y-m-d H:i:s');
-        return view('appliance.pdf.checking_list')->withStocks(Appliance_Stock::where('state', 2)->groupBy('aid')->select('aid', DB::raw('count(aid) as total'))->with('appliance')->get())->withDate($date);
+        return view('appliance.pdf.checking_list')->withStocks(Appliance_Stock::where('state', 2)->groupBy('aid')->select('aid', DB::raw('count(aid) as total'))->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->get())->withDate($date);
 //        $pdf = PDF::loadView('appliance.pdf.checking_list', [ 'stocks' => $data, 'date' => $date]);
 //        return $pdf->stream();
     }
