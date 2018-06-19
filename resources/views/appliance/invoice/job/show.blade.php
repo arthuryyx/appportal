@@ -369,7 +369,7 @@
         $('.aid').select2({
             placeholder: 'Select an model',
             ajax: {
-                url: '/select2-autocomplete-ajax/applianceModel',
+                url: '/select2-autocomplete-ajax/availableModel',
                 dataType: 'json',
                 delay: 200,
                 processResults: function (data) {

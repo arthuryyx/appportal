@@ -158,6 +158,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/settings/reset', 'UserController@reset');
 
     Route::get('select2-autocomplete-ajax/applianceModel', 'Select2AutocompleteController@applianceModel');
+    Route::get('select2-autocomplete-ajax/activeModel', 'Select2AutocompleteController@activeModel');
+    Route::get('select2-autocomplete-ajax/availableModel', 'Select2AutocompleteController@availableModel');
     Route::get('select2-autocomplete-ajax/productModel', 'Select2AutocompleteController@productModel');
     Route::get('select2-autocomplete-ajax/available', 'Select2AutocompleteController@available');
     Route::get('select2-autocomplete-ajax/unsigned', 'Select2AutocompleteController@unsigned');
