@@ -42,7 +42,7 @@ class StockController extends Controller
                     })->groupBy('aid')
                         ->select('aid', DB::raw('count(aid) as total'))->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->get())
                     ->withAppliances(
-                        Appliance::whereNotExists(function($query)
+                        Appliance::where('state', 0)->whereNotExists(function($query)
                         {
                             $query->select(DB::raw(1))
                                 ->from('appliance__stocks')
