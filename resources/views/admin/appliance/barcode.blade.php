@@ -29,7 +29,7 @@
                             {{ $message }}
                         </div>
                     @endif
-                    {!! Form::open(['url' => 'appliance/model/barcode','method'=>'PUT', 'id'=>'form']) !!}
+                    {!! Form::open(['url' => 'admin/model/barcode','method'=>'PUT', 'id'=>'form']) !!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">

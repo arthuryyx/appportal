@@ -15,6 +15,7 @@ class CreateAppliancesTable extends Migration
     {
         Schema::create('appliances', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('barcode')->nullable()->unique();
             $table->string('model')->unique();
             $table->integer('brand_id')->unsigned();
             $table->integer('category_id')->unsigned();
