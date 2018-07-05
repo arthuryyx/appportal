@@ -60,7 +60,7 @@
                                 Cost Price
                             </th>
                             <th>
-                                Cut-out
+                                State
                             </th>
                             <th>
                                 Description
@@ -84,7 +84,13 @@
                                 <td>{{ $appliance->lv2 }}</td>
                                 <td>{{ $appliance->lv3 }}</td>
                                 <td>{{ $appliance->lv4 }}</td>
-                                <td>{{ $appliance->cutout }}</td>
+                                <td>
+                                    @if($model->state)
+                                        <label class="label label-danger">Discontinued</label>
+                                    @else
+                                        <label class="label label-success">In Use</label>
+                                    @endif
+                                </td>
                                 <td>{{ $appliance->description }}</td>
                                 <td>@can('appliance_edit')<a href="{{ url('admin/appliance/'.$appliance->id.'/edit') }}" class="btn btn-success">编辑</a>@endcan</td>
                                 <td>@can('appliance_delete')
