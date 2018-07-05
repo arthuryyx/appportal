@@ -85,7 +85,7 @@
                                 <td>{{ $appliance->lv3 }}</td>
                                 <td>{{ $appliance->lv4 }}</td>
                                 <td>
-                                    @if($model->state)
+                                    @if($appliance->state)
                                         <label class="label label-danger">Discontinued</label>
                                     @else
                                         <label class="label label-success">In Use</label>
