@@ -35,9 +35,7 @@ class StockController extends Controller
             case 2:
                 return view('appliance.stock.index'.$state)
                     ->withStocks(Appliance_Stock::where(function ($query){
-                        $query->where('state', 1)
-                            ->whereNull('assign_to')
-                            ->orWhere('state', 2)
+                        $query->where('state', 2)
                             ->whereNull('assign_to');
                     })->groupBy('aid')
                         ->select('aid', DB::raw('count(aid) as total'))->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->get())
@@ -48,9 +46,7 @@ class StockController extends Controller
                                 ->from('appliance__stocks')
                                 ->whereRaw('appliances.id = appliance__stocks.aid')
                                 ->where(function ($query){
-                                $query->where('state', 1)
-                                    ->whereNull('assign_to')
-                                    ->orWhere('state', 2)
+                                $query->where('state', 2)
                                     ->whereNull('assign_to');
                             });
                         })->with('belongsToBrand')->with('belongsToCategory')->get());
