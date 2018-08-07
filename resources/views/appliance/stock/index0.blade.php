@@ -32,7 +32,7 @@
             <div class="panel panel-default">
                 <form id="frm-example" name="frm_example" action="" method="post">
                     {{ csrf_field() }}
-                    @can('root')
+                    @can('appliance_merge')
                     <div class="panel-heading">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target={{"#myModalmerge"}}>Merge</button>
