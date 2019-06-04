@@ -6,16 +6,32 @@
 
     <!-- DataTables Responsive CSS -->
     <link href="{{ asset('vendor/datatables-responsive/dataTables.responsive.css')}}" rel="stylesheet">
+    
+    <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">{{date('M Y')}}</h1>
+        <div class="col-lg-2">
+            <h1 class="page-header">{{$date}}</h1>
         </div>
-        <!-- /.col-lg-12 -->
+        {!! Form::open(['url' => 'statistics/sales','method'=>'POST']) !!}
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker3'>
+                        <input type='text' name="date" class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
+            </div>
+        {!! Form::close() !!}
     </div>
-    <!-- /.row -->
 
     @if (count($errors) > 0)
         <div class="alert alert-danger alert-dismissable">
@@ -72,6 +88,8 @@
     <script src="{{ asset('vendor/datatables-plugins/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables-responsive/dataTables.responsive.js')}}"></script>
     {{--<script src="{{ asset('vendor/datatables-plugins/date-eu.js')}}"></script>--}}
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
         $(document).ready(function() {
@@ -84,6 +102,15 @@
                 responsive: true,
                 pageLength: 100,
                 order: [1]
+            });
+        });
+        $(function () {
+            $('#datetimepicker3').datetimepicker({
+                format: 'mm-yyyy',
+                autoclose: true,
+                startView: 3,
+                minView: 3,
+                forceParse: false
             });
         });
     </script>

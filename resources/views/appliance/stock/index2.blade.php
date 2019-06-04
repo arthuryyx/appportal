@@ -54,6 +54,9 @@
                                 RSP
                             </th>
                             <th>
+                                COST
+                            </th>
+                            <th>
 
                             </th>
                         </tr>
@@ -67,6 +70,7 @@
                                 <td>{{ $stock->appliance->belongsToCategory->name }}</td>
                                 <td>{{ $stock->appliance->rrp }}</td>
                                 <td>{{ $stock->appliance->lv1 }}</td>
+                                <td>{{ $stock->appliance->lv4 }}</td>
                                 <td><a href="{{ url('appliance/stock/'.$stock->aid.'/detail') }}" class="btn btn-success">查看</a></td>
                             </tr>
                         @endforeach
@@ -78,6 +82,7 @@
                                 <td>{{ $appliance->belongsToCategory->name }}</td>
                                 <td>{{ $appliance->rrp }}</td>
                                 <td>{{ $appliance->lv1 }}</td>
+                                <td>{{ $appliance->lv4 }}</td>
                                 <td></td>
                             </tr>
                         @endforeach

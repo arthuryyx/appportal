@@ -310,74 +310,14 @@
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>
-                            <li>
-                                <a href="#"><i class="fa fa-gears fa-fw"></i> Contact<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="{{ url('contact/supplier') }}"><i class="fa fa-gears fa-fw"></i> Supplier</a>
-                                    </li>
-
-                                </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
                             @endcan
                             @can('appliance_add')
                             <li>
                                 <a href="{{ url('admin/appliance') }}"><i class="fa fa-gears fa-fw"></i> Appliance</a>
                             </li>
                             @endcan
-                            @can('menu_config_material')
-                            <li>
-                                <a href="#"><i class="fa fa-gears fa-fw"></i> Material<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    @can('dev')
-                                    <li>
-                                        <a href="{{ url('material/attribute') }}"><i class="fa fa-gears fa-fw"></i> Attribute</a>
-                                    </li>
-                                    @endcan
-                                    <li>
-                                        <a href="{{ url('material/type') }}"><i class="fa fa-gears fa-fw"></i> Item</a>
-                                    </li>
-
-                                </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
-                            @endcan
-                            @can('root')
-                            <li>
-                                <a href="#"><i class="fa fa-gears fa-fw"></i> Product<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="{{ url('product/category-tree-view') }}"><i class="fa fa-gears fa-fw"></i> Category</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ url('product/part') }}"><i class="fa fa-gears fa-fw"></i> Part</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ url('product/model') }}"><i class="fa fa-gears fa-fw"></i> Model</a>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
-                            @endcan
                         </ul>
                     </li>
-                    @can('menu_customer')
-                    <li>
-                        <a href="#"><i class="fa fa-th- fa-user fa-fw"></i> Customer<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{ url('customer/individual') }}">Individual</a>
-                            </li>
-                            @can('dev')
-                            <li>
-                                <a href="{{ url('customer/corporation') }}">Corporation</a>
-                            </li>
-                            @endcan
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    @endcan
                     @can('menu_appliance')
                     <li>
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Appliance<span class="fa arrow"></span></a>
@@ -407,20 +347,6 @@
 
                                 </ul>
                                 <!-- /.nav-third-level -->
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    @endcan
-                    @can('menu_kitchen')
-                    <li>
-                        <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Kitchen<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{ url('kitchen/quot') }}">Quot</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('kitchen/job') }}">Job</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -460,11 +386,6 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-                    @endcan
-                    @can('menu_shipping_schedule')
-                        <li>
-                            <a href="{{ url('appliance/schedule') }}"><i class="fa fa-th-list fa-list-alt"></i> Schedule</a>
-                        </li>
                     @endcan
                 </ul>
             </div>

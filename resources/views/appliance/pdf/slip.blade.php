@@ -1858,8 +1858,8 @@ AA==
                         style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span>{{$delivery->getInvoice->job_id}}</td>
         </tr>
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
-            <td colspan=2 height=18 class=xl12929136 style='height:14.1pt'>
-                <a href="mailto:{{$delivery->getInvoice->getCreated_by->email}}">{{$delivery->getInvoice->getCreated_by->email}}</a></td>
+            <td colspan=2 height=18 class=xl12929136 style='height:14.1pt'><a
+                        href="mailto:{{$delivery->getInvoice->getCreated_by->email}}">{{$delivery->getInvoice->getCreated_by->email}}</a></td>
             <td colspan=2 class=xl6929136></td>
             <td class=xl7829136></td>
             <td class=xl6929136></td>

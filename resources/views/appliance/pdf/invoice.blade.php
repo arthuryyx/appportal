@@ -1966,9 +1966,9 @@ AA==
                 {{--come with 2 years warrant--}}<span style='display:none'>y!</span></td>
             <td class=xl9429136 style='border-top:none'>　</td>
             <td colspan=2 class=xl11629136 style='border-right:.5pt solid #3B5E91'><span
-                        style='mso-spacerun:yes'>&nbsp;</span>SUBTOTAL<span
+                        style='mso-spacerun:yes'>&nbsp;</span>Total GST 15%<span
                         style='mso-spacerun:yes'>&nbsp;</span></td>
-            <td class=xl10429136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format(($invoice->price/*+$invoice->getDispatches->sum('fee')*/) / 1.15, 2, '.', ',')}}<span
+            <td class=xl10429136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format(($invoice->price/*+$invoice->getDispatches->sum('fee')*/) * 0.15 / 1.15, 2, '.', ',')}}<span
                         style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span>{{--1,110.00 --}}</td>
         </tr>
         <tr height=24 style='mso-height-source:userset;height:18.0pt'>
@@ -1976,18 +1976,9 @@ AA==
             <td class=xl8429136></td>
             <td class=xl6829136></td>
             <td class=xl8029136></td>
-            <td class=xl8129136>Sales Tax</td>
-            <td class=xl10529136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format(($invoice->price/*+$invoice->getDispatches->sum('fee')*/) * 0.15 / 1.15, 2, '.', ',')}}<span
-                        style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{{--144.78 --}}</td>
-        </tr>
-        <tr height=21 style='mso-height-source:userset;height:15.95pt'>
-            <td height=21 class=xl7229136 style='height:15.95pt'>　</td>
-            <td class=xl7429136>　</td>
-            <td class=xl7529136>　</td>
-            <td class=xl6829136></td>
-            <td class=xl7129136>TOTAL:</td>
-            <td class=xl10929136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format(($invoice->price/*+$invoice->getDispatches->sum('fee')*/), 2, '.', ',')}}<span
-                        style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span>{{--1,110.00 --}}</td>
+            <td class=xl8129136>Invoice Total NZD</td>
+            <td class=xl10529136><span style='mso-spacerun:yes'>&nbsp;</span> ${{number_format(($invoice->price/*+$invoice->getDispatches->sum('fee')*/), 2, '.', ',')}}<span
+                        style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span></td>
         </tr>
         {{--<tr height=21 style='mso-height-source:userset;height:15.95pt'>--}}
             {{--<td height=21 class=xl6829136 style='height:15.95pt'></td>--}}

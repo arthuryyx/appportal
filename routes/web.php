@@ -31,7 +31,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
 
     Route::get('model/barcode', function () {return view('admin.appliance.barcode');});
     Route::put('model/barcode', 'ApplianceController@barcode');
-    Route::resource('appliance/ajax', 'ApplianceController@ajax');
+//    Route::resource('appliance/ajax', 'ApplianceController@ajax');
     Route::get('appliance/model', function () {return view('admin.appliance.show');});
     Route::resource('appliance', 'ApplianceController');
 
@@ -40,16 +40,6 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
 
     Route::get('category/{type}', 'CategoryController@index');
     Route::resource('category', 'CategoryController',['except' => ['index', 'create', 'show']]);
-
-});
-
-Route::group(['middleware' => 'auth', 'namespace' => 'Customer', 'prefix' => 'customer'], function() {
-    Route::resource('individual', 'IndividualController');
-    Route::resource('corporation', 'CorporationController');
-    Route::get('address/create/{cid}', 'AddressController@create');
-    Route::post('address', 'AddressController@store');
-    Route::get('address/{id}/edit', 'AddressController@edit');
-    Route::put('address/{id}', 'AddressController@update');
 
 });
 
@@ -98,64 +88,17 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
 
 });
 
-Route::group(['middleware' => 'auth', 'namespace' => 'Material', 'prefix' => 'material'], function() {
-    Route::resource('attribute', 'AttributeTypeController');
-    Route::get('attribute/value/{id}/edit', 'AttributeValueController@edit');
-    Route::put('attribute/value/{id}', 'AttributeValueController@update', ['name' => 'value.update']);
-    Route::resource('attribute/{id}/value', 'AttributeValueController', ['except' => ['index', 'edit', 'update', 'show', 'destroy']]);
-
-    Route::resource('type', 'ItemTypeController', ['except' => ['destroy']]);
-
-    Route::get('item/reconstruct/{tid}', 'ItemController@reconstruct');
-    Route::get('item/create/{tid}', 'ItemController@create');
-    Route::resource('item', 'ItemController', ['except' => ['create', 'show', 'destroy']]);
-
-
-
-});
-
-Route::group(['middleware' => 'auth', 'namespace' => 'Kitchen', 'prefix' => 'kitchen'], function() {
-    Route::resource('quot', 'QuotationController', ['except' => ['edit', 'update', 'destroy']]);
-    Route::post('quot/select', 'QuotationController@selectProduct');
-    Route::post('quot/select-ajax', 'QuotationController@selectAjax');
-    Route::post('quot/approve', 'QuotationController@approve');
-    Route::post('product/delete', 'QuotationController@deleteProduct');
-
-    Route::get('job', ['as'=>'kitchen.job.index','uses'=>'JobController@index']);
-    Route::get('job/create/{qid}', ['as'=>'kitchen.job.store','uses'=>'JobController@store']);
-    Route::get('job/{id}', ['as'=>'kitchen.job.show','uses'=>'JobController@show']);
-
-});
-
-Route::group(['middleware' => 'auth', 'namespace' => 'Product', 'prefix' => 'product'], function() {
-    Route::get('category-tree-view','CategoryController@manageCategory');
-    Route::post('add-category',['as'=>'add.category','uses'=>'CategoryController@addCategory']);
-    Route::post('select-ajax', 'CategoryController@selectAjax');
-
-    Route::resource('part', 'PartController', ['except' => ['show', 'destroy']]);
-
-    Route::resource('model', 'ModelController', ['except' => ['destroy']]);
-
-});
-
-
 Route::group(['middleware' => 'auth'], function() {
-//    Route::get('tempstock/create', 'StockController@create');
-//    Route::post('tempstock', 'StockController@store');
-//    Route::get('tempstock/{id}/out', 'StockController@out');
-//    Route::delete('tempstock/{id}', 'StockController@destroy');
-//    Route::get('tempstock/exportAssigned', 'StockController@exportAssigned');
 
-    Route::resource('contact/supplier', 'Contact\SupplierController');
+    Route::get('settings', 'UserController@settings');
+    Route::post('/settings/reset', 'UserController@reset');
 
     Route::get('statistics/salesLine', 'StatisticsController@salesLine');
     Route::get('statistics/salesBar', 'StatisticsController@salesBar');
     Route::get('statistics/personalBar', 'StatisticsController@personalBar');
     Route::get('statistics/salesChart', 'StatisticsController@salesChart');
     Route::get('statistics/sales', 'StatisticsController@applianceSalesTable');
-
-    Route::get('settings', 'UserController@settings');
-    Route::post('/settings/reset', 'UserController@reset');
+    Route::post('statistics/sales', 'StatisticsController@applianceSalesTable');
 
     Route::get('select2-autocomplete-ajax/applianceModel', 'Select2AutocompleteController@applianceModel');
     Route::get('select2-autocomplete-ajax/activeModel', 'Select2AutocompleteController@activeModel');

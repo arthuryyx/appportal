@@ -48,10 +48,10 @@ class StatisticsController extends Controller
             $temp = Appliance_Invoice::whereIn('created_by', $sales)
                 ->whereYear('created_at', $date->year)
                 ->whereMonth('created_at', $date->month)
-            ->groupBy('created_by')
-            ->select('created_by', DB::raw('sum(price) as value'))
+                ->groupBy('created_by')
+                ->select('created_by', DB::raw('sum(price) as value'))
 //            ->having('value', '>', 0)
-            ->pluck('value', 'created_by');
+                ->pluck('value', 'created_by');
             $array = array();
             if(count($temp)==0){
                 $array [0]['label']='No Data';
@@ -86,12 +86,17 @@ class StatisticsController extends Controller
         return $data;
     }
 
-    public function applianceSalesTable(){
-        $invoices = Appliance_Invoice::whereYear('created_at', date('Y'))->whereMonth('created_at', date('m'))->pluck('id');
+    public function applianceSalesTable(Request $request){
+         $invoices = null;
+        if ($request->input('date')==null){
+            $invoices = Appliance_Invoice::whereYear('created_at', date('Y'))->whereMonth('created_at', date('m'))->pluck('id');
+        }else{
+            $invoices = Appliance_Invoice::whereYear('created_at', substr($request->input('date'),3))->whereMonth('created_at', substr($request->input('date'),0,2))->pluck('id');
+        }
         $data = Appliance_Stock::whereIn('assign_to', $invoices)
             ->groupBy('aid')
             ->select('aid', DB::raw('count(aid) as total'))->with('appliance.belongsToBrand')->get();
-        return view('statistics.index')->withData($data);
+        return view('statistics.index')->withData($data)->withDate($request->input('date'));
     }
 
     public function personalBar(){

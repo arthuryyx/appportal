@@ -249,7 +249,7 @@ class StockController extends Controller
 
         $obj = Appliance_Stock::find($request->input('id')[0]);
 
-        if($obj->state > 1) {
+        if($obj->state > 2) {
             return redirect()->back()->withInput()->withErrors('Not allow to switch!');
         }
 

@@ -40,6 +40,12 @@
                             <th>
                                 Category
                             </th>
+                            <th>
+                                RRP
+                            </th>
+                            <th>
+                                RSP
+                            </th>                  
                         </tr>
                         </thead>
                         <tbody>
@@ -49,6 +55,8 @@
                                 <td>{{ $stock->appliance->model }}</td>
                                 <td>{{ $stock->appliance->belongsToBrand->name }}</td>
                                 <td>{{ $stock->appliance->belongsToCategory->name }}</td>
+                                <td>{{ $stock->appliance->rrp}}</td>
+                                <td>{{ $stock->appliance->lv1 }}</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -76,7 +84,7 @@
             $('#dataTables').DataTable({
                 responsive: true,
                 paging: false,
-                order: [1, 'desc']
+                order: [1, 'asc']
             });
         });
     </script>

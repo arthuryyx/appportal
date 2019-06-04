@@ -50,13 +50,23 @@
                         </thead>
                         <tbody>
                         @foreach ($records as $record)
-                            <tr>
-                                <td>{{ $record->stock->appliance->model }}</td>
-                                <td>{{ $record->stock->appliance->belongsToBrand->name }}</td>
-                                <td>@if($record->stock->getOrder->invoice_id){{ $record->stock->getOrder->getInvoice->receipt_id }}.@endif{{ $record->stock->getOrder->ref }}</td>
-                                <td>{{ $record->getCreated_by->name }}</td>
-                                <td>{{ $record->created_at }}</td>
-                            </tr>
+                            @if($record->stock)
+                                <tr>
+                                    <td>{{ $record->stock->appliance->model }}</td>
+                                    <td>{{ $record->stock->appliance->belongsToBrand->name }}</td>
+                                    <td>@if($record->stock->getOrder->invoice_id){{ $record->stock->getOrder->getInvoice->receipt_id }}@endif{{ $record->stock->getOrder->ref }}</td>
+                                    <td>{{ $record->getCreated_by->name }}</td>
+                                    <td>{{ $record->created_at }}</td>
+                                </tr>
+                            @else
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>$record->id</td>
+                                    <td>{{ $record->getCreated_by->name }}</td>
+                                    <td>{{ $record->created_at }}</td>
+                                </tr>    
+                            @endif
                         @endforeach
 
                         </tbody>

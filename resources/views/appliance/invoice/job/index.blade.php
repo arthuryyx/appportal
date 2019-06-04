@@ -128,12 +128,13 @@
     <script>
         $(document).ready(function() {
             $('#dataTables').DataTable({
+                autoWidth: false,
                 columnDefs: [
-                    { "width": "25%", "targets": 3 },
-                    { "width": "10%", "targets": 6 }
+//                    { "width": "25%", "targets": 3 },
+//                    { "width": "10%", "targets": 6 }
 //                    { type: 'date-eu', targets: 5 }
                 ],
-                responsive: true,
+//                responsive: true,
                 pageLength: 100,
                 order: [0]
             });
