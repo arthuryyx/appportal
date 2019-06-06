@@ -292,31 +292,31 @@
                     {{--</li>--}}
                     @can('root')
                     <li>
-                        <a href="#"><i class="fa fa-gears fa-fw"></i> Config<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Config<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#"><i class="fa fa-gears fa-fw"></i> Account<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Account<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="{{ url('admin/permission') }}"><i class="fa fa-gears fa-fw"></i> Permission</a>
+                                        <a href="{{ url('admin/permission') }}"> Permission</a>
                                     </li>
                                     <li>
-                                        <a href="{{ url('admin/role') }}"><i class="fa fa-gears fa-fw"></i> Role</a>
+                                        <a href="{{ url('admin/role') }}"> Role</a>
                                     </li>
                                     <li>
-                                        <a href="{{ url('admin/account') }}"><i class="fa fa-gears fa-fw"></i> User</a>
+                                        <a href="{{ url('admin/account') }}"> User</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-gears fa-fw"></i> Appliance<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Appliance<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="{{ url('admin/appliance') }}" target="_blank"><i class="fa fa-gears fa-fw"></i> Models</a>
+                                        <a href="{{ url('admin/appliance') }}" target="_blank"> Models</a>
                                     </li>
                                     <li>
-                                        <a href="{{ url('admin/appliance/create') }}" target="_blank"><i class="fa fa-gears fa-fw"></i> New One</a>
+                                        <a href="{{ url('admin/appliance/create') }}" target="_blank"> New One</a>
                                     </li>
                                 </ul>
                             </li>
@@ -334,7 +334,7 @@
                                 <a href="{{ url('admin/appliance/model') }}" target="_blank">Search</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-history fa-fw"></i> Record<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Record<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
                                         <a href="{{ url('statistics/sales') }}" target="_blank">Sales</a>
