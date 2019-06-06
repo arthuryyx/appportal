@@ -1,7 +1,12 @@
 <thead>
 <tr>
     <th>
-        Model
+        @can('dev')
+            <a href="{{ url('admin/appliance/'.$model->id.'/edit') }}" class="btn btn-success">编辑</a>{{$model->id}}
+        @endcan
+        @cannot('dev')
+            Model
+        @endcannot
     </th>
     <th>
         Brand

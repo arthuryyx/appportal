@@ -108,20 +108,6 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                Last 3 Months
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-                <div id="personal-morris-bar-chart"></div>
-            </div>
-            <!-- /.panel-body -->
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
             {{--<div class="panel-heading">--}}
                 {{--{{date('M Y')}} Sales--}}
             {{--</div>--}}
@@ -149,6 +135,22 @@
         <!-- /.panel -->
     </div>
 </div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Last 3 Months
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div id="personal-morris-bar-chart"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
@@ -164,22 +166,23 @@
         <!-- /.panel -->
     </div>
 </div>
-<!-- /.row -->
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                {{date('M Y')}} Top Sales
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-                <div id="morris-bar-chart"></div>
-            </div>
-            <!-- /.panel-body -->
-        </div>
-        <!-- /.panel -->
-    </div>
-</div>
+
+{{--<!-- /.row -->--}}
+{{--<div class="row">--}}
+    {{--<div class="col-lg-12">--}}
+        {{--<div class="panel panel-default">--}}
+            {{--<div class="panel-heading">--}}
+                {{--{{date('M Y')}} Top Sales--}}
+            {{--</div>--}}
+            {{--<!-- /.panel-heading -->--}}
+            {{--<div class="panel-body">--}}
+                {{--<div id="morris-bar-chart"></div>--}}
+            {{--</div>--}}
+            {{--<!-- /.panel-body -->--}}
+        {{--</div>--}}
+        {{--<!-- /.panel -->--}}
+    {{--</div>--}}
+{{--</div>--}}
 @endcan
 @endsection
 
@@ -191,32 +194,32 @@
 
     <script>
         $(document).ready(function(){
-            $.ajax({
-                type: 'GET',
-                dataType: 'json',
-                contentType: 'application/json',
-                url: 'statistics/salesBar',
-                data: '{}',
-                success: function (response) {
-                    if(response.length == 0){
-                        response.push({'y':'No Data'})
-                    }
-                    Morris.Bar({
-                        element: 'morris-bar-chart',
-                        data: response,
-                        resize: true,
-                        stacked: true,
-                        xkey: 'y',
-                        ykeys: ['a', 'b', 'c', 'd'],
-                        labels: ['Pending', 'Ordered','Hold', 'Delivered'],
-                        barColors: ['#F0AD4E', '#5BC0DE', '#5CB85C', '#337AB7']
-                    });
-                },
-
-                error: function () {
-                    alert("Error loading data! Please try again.");
-                }
-            });
+//            $.ajax({
+//                type: 'GET',
+//                dataType: 'json',
+//                contentType: 'application/json',
+//                url: 'statistics/salesBar',
+//                data: '{}',
+//                success: function (response) {
+//                    if(response.length == 0){
+//                        response.push({'y':'No Data'})
+//                    }
+//                    Morris.Bar({
+//                        element: 'morris-bar-chart',
+//                        data: response,
+//                        resize: true,
+//                        stacked: true,
+//                        xkey: 'y',
+//                        ykeys: ['a', 'b', 'c', 'd'],
+//                        labels: ['Pending', 'Ordered','Hold', 'Delivered'],
+//                        barColors: ['#F0AD4E', '#5BC0DE', '#5CB85C', '#337AB7']
+//                    });
+//                },
+//
+//                error: function () {
+//                    alert("Error loading data! Please try again.");
+//                }
+//            });
 
             $.ajax({
                 type: 'GET',

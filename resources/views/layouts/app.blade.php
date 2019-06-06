@@ -287,14 +287,13 @@
                                         {{--</span>--}}
                         {{--</div>--}}
                         <!-- /input-group -->
-                    <li>
-                        <a href="{{ url('/') }}"><i class="fa fa-th-list fa-fw"></i> Dashboard</a>
-                    </li>
-
+                    {{--<li>--}}
+                        {{--<a href="{{ url('/') }}"><i class="fa fa-th-list fa-fw"></i> Dashboard</a>--}}
+                    {{--</li>--}}
+                    @can('root')
                     <li>
                         <a href="#"><i class="fa fa-gears fa-fw"></i> Config<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            @can('root')
                             <li>
                                 <a href="#"><i class="fa fa-gears fa-fw"></i> Account<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -310,39 +309,38 @@
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>
-                            @endcan
-                            @can('appliance_add')
                             <li>
-                                <a href="{{ url('admin/appliance') }}"><i class="fa fa-gears fa-fw"></i> Appliance</a>
+                                <a href="#"><i class="fa fa-gears fa-fw"></i> Appliance<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="{{ url('admin/appliance') }}" target="_blank"><i class="fa fa-gears fa-fw"></i> Models</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('admin/appliance/create') }}" target="_blank"><i class="fa fa-gears fa-fw"></i> New One</a>
+                                    </li>
+                                </ul>
                             </li>
-                            @endcan
                         </ul>
                     </li>
-                    @can('menu_appliance')
+                    @endcan
+                    @can('appliance_job')
                     <li>
-                        <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Appliance<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Sales<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{ url('admin/appliance/model') }}">查电器信息</a>
+                                                        <li>
+                                <a href="{{ url('appliance/invoice/job') }}" target="_blank">Job</a>
                             </li>
-                            @can('appliance_job')
-                                <li>
-                                    <a href="{{ url('appliance/invoice/job') }}">Job</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('appliance/order') }}">Order</a>
-                                </li>
-                            @endcan
-                            @can('root')
                             <li>
-                                <a href="{{ url('statistics/sales') }}">Sales</a>
+                                <a href="{{ url('admin/appliance/model') }}" target="_blank">Search</a>
                             </li>
-                            @endcan
                             <li>
                                 <a href="#"><i class="fa fa-history fa-fw"></i> Record<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="{{ url('appliance/record/2') }}"><i class="fa fa-history fa-fw"></i> Arrival</a>
+                                        <a href="{{ url('statistics/sales') }}" target="_blank">Sales</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('appliance/record/2') }}" target="_blank"></i> Arrival</a>
                                     </li>
 
                                 </ul>
@@ -356,32 +354,32 @@
                     <li>
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Stock<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            {{--<li>--}}
-                                {{--<a href="{{ url('tempstock/create') }}">入库</a>--}}
+                            <li>
+                                <a href="{{ url('appliance/order') }}" target="_blank">Order</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('appliance/stock/index/0') }}" target="_blank">Pending</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('appliance/stock/index/1') }}" target="_blank">Ordered</a>
                             {{--</li>--}}
-                            <li>
-                                <a href="{{ url('appliance/stock/index/0') }}">Pending</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('appliance/stock/index/1') }}">Ordered</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('appliance/stock/listing') }}">Warehousing</a>
-                            </li>
+                            {{--<li>--}}
+                                {{--<a href="{{ url('appliance/stock/listing') }}" target="_blank">货架</a>--}}
+                            {{--</li>--}}
                             <li>
                                 <a href="{{ url('appliance/stock/exportCheckingList') }}" target="_blank">Checking</a>
                             </li>
                             <li>
-                                <a href="{{ url('appliance/stock/index/4') }}">Assigned</a>
+                                <a href="{{ url('appliance/stock/index/4') }}" target="_blank">Assigned</a>
                             </li>
                             <li>
-                                <a href="{{ url('appliance/stock/index/2') }}">Available</a>
+                                <a href="{{ url('appliance/stock/index/2') }}" target="_blank">Available</a>
                             </li>
                             <li>
-                                <a href="{{ url('appliance/stock/index/3') }}">Delivered</a>
+                                <a href="{{ url('appliance/stock/index/3') }}" target="_blank">Delivered</a>
                             </li>
                             <li>
-                                <a href="{{ url('appliance/stock/index/5') }}">Display</a>
+                                <a href="{{ url('appliance/stock/index/5') }}" target="_blank">Display</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
