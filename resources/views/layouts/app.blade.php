@@ -327,12 +327,17 @@
                     <li>
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Sales<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                                                        <li>
+                            <li>
                                 <a href="{{ url('appliance/invoice/job') }}" target="_blank">Job</a>
                             </li>
                             <li>
                                 <a href="{{ url('admin/appliance/model') }}" target="_blank">Search</a>
                             </li>
+                            @can('appliance_add_deposit')
+                            <li>
+                                <a href="{{ url('appliance/deposit/pending') }}" target="_blank">Payment</a>
+                            </li>
+                            @endcan
                             <li>
                                 <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Record<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">

@@ -29,4 +29,23 @@ class DepositController extends Controller
             return redirect()->back()->withInput()->withErrors('添加失败！');
         }
     }
+
+    public function pending()
+    {
+        return view('appliance.invoice.job.payment')->withDeposits(Appliance_Deposit::where('confirmed', 0)->with('getInvoice')->get());
+    }
+
+    public function confirm($id)
+    {
+        try {
+            $deposit = Appliance_Deposit::find($id);
+            $deposit->confirmed = 1;
+            $deposit->update();
+        } catch(\Exception $e)
+        {
+            return redirect()->back()->withErrors('操作失败！');
+        }
+        return redirect()->back()->withErrors('操作成功！');
+    }
+
 }

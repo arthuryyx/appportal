@@ -68,8 +68,12 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
     Route::post('stock/delete', 'StockController@delete');
     Route::get('stock/exportAvailable', 'StockController@exportAvailable');
     Route::get('stock/exportCheckingList', 'StockController@exportStockCheckingList');
+
     Route::get('deposit/index/{invoice}', 'DepositController@index');
     Route::post('deposit', 'DepositController@store');
+    Route::get('deposit/pending', 'DepositController@pending');
+    Route::post('deposit/confirm/{id}', 'DepositController@confirm');
+
     Route::get('record/{type}', 'RecordController@index');
 
     Route::get('job/order/{id}', 'OrderController@jobOrders');

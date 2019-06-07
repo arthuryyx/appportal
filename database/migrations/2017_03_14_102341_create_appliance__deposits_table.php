@@ -17,6 +17,7 @@ class CreateApplianceDepositsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('invoice_id');
             $table->float('amount');
+            $table->tinyInteger('confirmed')->default(0);
 
             $table->foreign('invoice_id')
                 ->references('id')
