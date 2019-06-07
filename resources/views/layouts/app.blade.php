@@ -373,7 +373,7 @@
                                 <a href="{{ url('appliance/stock/index/1') }}" target="_blank">Ordered</a>
                             {{--</li>--}}
                             {{--<li>--}}
-                                {{--<a href="{{ url('appliance/stock/listing') }}" target="_blank">货架</a>--}}
+                                <a href="{{ url('appliance/stock/listing') }}" target="_blank">Shelf</a>
                             {{--</li>--}}
                             <li>
                                 <a href="{{ url('appliance/stock/exportCheckingList') }}" target="_blank">Checking</a>

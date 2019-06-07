@@ -101,6 +101,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('statistics/salesBar', 'StatisticsController@salesBar');
     Route::get('statistics/personalBar', 'StatisticsController@personalBar');
     Route::get('statistics/salesChart', 'StatisticsController@salesChart');
+    Route::get('statistics/salesArea', 'StatisticsController@salesArea');
+
     Route::get('statistics/sales', 'StatisticsController@applianceSalesTable');
     Route::post('statistics/sales', 'StatisticsController@applianceSalesTable');
 

@@ -86,6 +86,29 @@ class StatisticsController extends Controller
         return $data;
     }
 
+    public function salesArea(){
+        $invoices = Appliance_Invoice::whereDate('created_at', '>=', Carbon::today()->addDays(-30))->whereDate('created_at' , '<=', Carbon::today())
+            ->select(DB::raw('sum(price) as price'),DB::raw('date(created_at) as date'))->groupBy('date')->get();
+
+        $deposits = DB::table('appliance__invoices')
+            ->join('appliance__deposits', 'appliance__invoices.id', '=', 'appliance__deposits.invoice_id')
+            ->select(DB::raw('sum(appliance__deposits.amount) as sum'), DB::raw('date(appliance__invoices.created_at) as date'))
+            ->groupBy('date')
+            ->whereDate('appliance__invoices.created_at', '>=', Carbon::today()->addDays(-30))
+            ->get();
+
+        $data = array();
+        $date = Carbon::today();
+        for ($i = 0; $i<30; $i++){
+            $dateString = $date->toDateString();
+            $data [count($data)]['y'] = $dateString;
+            $data [count($data)-1]['a'] = $invoices->contains('date', $dateString)?floor($invoices->where('date', $dateString)->first()->price):0;
+            $data [count($data)-1]['b'] = $deposits->contains('date', $dateString)?floor($deposits->where('date', $dateString)->first()->amount):0;
+            $date->subDay(1);
+        }
+        return $data;
+    }
+
     public function applianceSalesTable(Request $request){
          $invoices = null;
         if ($request->input('date')==null){
