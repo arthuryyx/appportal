@@ -22,12 +22,24 @@ class DepositController extends Controller
             'amount' => 'required|numeric',
             'created_by' => 'required|exists:users,id',
         ]);
-
-        if (Appliance_Deposit::create($request->all())) {
-            return redirect()->back()->withErrors('添加成功！');
-        } else {
-            return redirect()->back()->withInput()->withErrors('添加失败！');
+        $input = $request->input();
+        if ($input['amount'] > 0 ){
+            $input['confirmed'] =0;
+        } elseif ($input['amount'] <0){
+            $input['confirmed'] = 1;
+        } else{
+            return redirect()->back()->withErrors('无效金额！');
         }
+        try{
+            Appliance_Deposit::create($input);
+        } catch (\Exception $e)
+        {
+            return redirect()->back()->withInput()->withErrors('添加失败！');
+
+        }
+        return redirect()->back()->withErrors('添加成功！');
+
+
     }
 
     public function pending()
