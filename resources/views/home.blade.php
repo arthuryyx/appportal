@@ -150,20 +150,18 @@
         </div>
     </div>
 </div>
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Last 30 days Sales
-            </div>
-            <!-- /.panel-heading -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Last 30 days Sale & Payment
+    </div>
+    <div class="row">
+        <div class="col-lg-9">
             <div class="panel-body">
                 <div id="morris-area"></div>
             </div>
-            <!-- /.panel-body -->
         </div>
-        <!-- /.panel -->
+    <div class="col-lg-3">
+            <div id="morris-donut-chart4"></div>
     </div>
 </div>
 
@@ -313,12 +311,18 @@
                 success: function (response) {
                     Morris.Area({
                         element: 'morris-area',
-                        data: response,
+                        data: response.area,
                         resize: true,
                         xkey: 'y',
                         ykeys: ['a', 'b'],
                         labels: ['Sold', 'Paid'],
                         behaveLikeLine: true
+                    });
+
+                    Morris.Donut({
+                        element: 'morris-donut-chart4',
+                        data: response.payment,
+                        resize: true
                     });
                 },
 

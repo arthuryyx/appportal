@@ -78,9 +78,9 @@ class StatisticsController extends Controller
         $date = Carbon::today();
         for ($i = 0; $i<30; $i++){
             $dateString = $date->toDateString();
-            $data [count($data)]['y'] = $dateString;
-            $data [count($data)-1]['a'] = $invoices->contains('date', $dateString)?floor($invoices->where('date', $dateString)->first()->price):0;
-            $data [count($data)-1]['b'] = $deposits->contains('date', $dateString)?floor($deposits->where('date', $dateString)->first()->amount):0;
+            $data [$i]['y'] = $dateString;
+            $data [$i]['a'] = $invoices->contains('date', $dateString)?floor($invoices->where('date', $dateString)->first()->price):0;
+            $data [$i]['b'] = $deposits->contains('date', $dateString)?floor($deposits->where('date', $dateString)->first()->amount):0;
             $date->subDay(1);
         }
         return $data;
@@ -92,20 +92,31 @@ class StatisticsController extends Controller
 
         $deposits = DB::table('appliance__invoices')
             ->join('appliance__deposits', 'appliance__invoices.id', '=', 'appliance__deposits.invoice_id')
-            ->select(DB::raw('sum(appliance__deposits.amount) as sum'), DB::raw('date(appliance__invoices.created_at) as date'))
+            ->select(DB::raw('sum(appliance__deposits.amount) as amount'), DB::raw('date(appliance__invoices.created_at) as date'))
             ->groupBy('date')
             ->whereDate('appliance__invoices.created_at', '>=', Carbon::today()->addDays(-30))
             ->get();
 
         $data = array();
         $date = Carbon::today();
+        $m = 0;
+        $n= 0;
         for ($i = 0; $i<30; $i++){
             $dateString = $date->toDateString();
-            $data [count($data)]['y'] = $dateString;
-            $data [count($data)-1]['a'] = $invoices->contains('date', $dateString)?floor($invoices->where('date', $dateString)->first()->price):0;
-            $data [count($data)-1]['b'] = $deposits->contains('date', $dateString)?floor($deposits->where('date', $dateString)->first()->amount):0;
+            $data [$i]['y'] = $dateString;
+            $data [$i]['a'] = $invoices->contains('date', $dateString)?floor($invoices->where('date', $dateString)->first()->price):0;
+            $data [$i]['b'] = $deposits->contains('date', $dateString)?floor($deposits->where('date', $dateString)->first()->amount):0;
             $date->subDay(1);
+            $m=$m+$data [$i]['a'];
+            $n=$n+$data [$i]['b'];
         }
+        $data['area'] = $data;
+        $array = array();
+        $array[0]['label'] = 'Paid';
+        $array[0]['value'] = $n;
+        $array[1]['label'] = 'Unpaid';
+        $array[1]['value'] = $m-$n;
+        $data['payment'] = $array;
         return $data;
     }
 
