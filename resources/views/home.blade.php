@@ -116,18 +116,22 @@
                 <div class="col-lg-3">
                     <h4>{{date('M Y', strtotime('-3 Month'))}}</h4>
                     <div id="morris-donut-chart3"></div>
+                    <h4 id="morris-donut-chart03"></h4>
                 </div>
                 <div class="col-lg-3">
                     <h4>{{date('M Y', strtotime('-2 Month'))}}</h4>
                     <div id="morris-donut-chart2"></div>
+                    <h4 id="morris-donut-chart02"></h4>
                 </div>
                 <div class="col-lg-3">
                     <h4>{{date('M Y', strtotime('-1 Month'))}}</h4>
                     <div id="morris-donut-chart1"></div>
+                    <h4 id="morris-donut-chart01"></h4>
                 </div>
                 <div class="col-lg-3">
                     <h4>{{date('M Y')}}</h4>
                     <div id="morris-donut-chart0"></div>
+                    <h4 id="morris-donut-chart00"></h4>
                 </div>
             </div>
             <!-- /.panel-body -->
@@ -233,21 +237,26 @@
 //                        formatter: function (y, data) { return '$' + y }
                     });
                     Morris.Donut({
-                            element: 'morris-donut-chart1',
-                            data: response[1],
-                            resize: true
-                        });
+                        element: 'morris-donut-chart1',
+                        data: response[1],
+                        resize: true
+                    });
                     Morris.Donut({
-                            element: 'morris-donut-chart2',
-                            data: response[2],
-                            resize: true
-                        });
+                        element: 'morris-donut-chart2',
+                        data: response[2],
+                        resize: true
+                    });
                     Morris.Donut({
-                            element: 'morris-donut-chart3',
-                            data: response[3],
-                            resize: true
-                        });
-                    },
+                        element: 'morris-donut-chart3',
+                        data: response[3],
+                        resize: true
+                    });
+                    $('#morris-donut-chart00').append('Sum: $').append(response[0].reduce((p,e)=>p+e.value,0));
+                    $('#morris-donut-chart01').append('Sum: $').append(response[1].reduce((p,e)=>p+e.value,0));
+                    $('#morris-donut-chart02').append('Sum: $').append(response[2].reduce((p,e)=>p+e.value,0));
+                    $('#morris-donut-chart03').append('Sum: $').append(response[3].reduce((p,e)=>p+e.value,0));
+
+                },
 
                 error: function () {
                     alert("Error loading data! Please try again.");
