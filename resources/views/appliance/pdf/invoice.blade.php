@@ -31,8 +31,8 @@
             mso-font-charset:0;}
         .font629136
         {color:windowtext;
-            font-size:10.0pt;
-            font-weight:700;
+            font-size:1.0pt;
+            font-weight:100;
             font-style:normal;
             text-decoration:none;
             font-family:"Trebuchet MS", sans-serif;
@@ -2005,10 +2005,10 @@ AA==
             <td class=xl6529136></td>
         </tr>
         <tr height=21 style='mso-height-source:userset;height:15.95pt'>
-            <td colspan=6 rowspan=4 height=61 class=xl14529136 width=671
-                style='height:45.95pt;width:505pt'><font class="font629136">THANK YOU FOR
-                    YOUR BUSINESS!</font><font class="font529136"><br>
-                </font></td>
+            <td colspan=6 rowspan=4 height=61 class=xl14529136 width=671 style='height:45.95pt;width:505pt'>
+                <font class="font629136">*Please note that if faults and/or problems are resulting from improper installation or usage etc, then they aren't </font>
+                <font class="font529136"><br>covered by the manufacturer's warranty and it is the user's responsibility to pay for any fees related to the service call.</font>
+            </td>
         </tr>
         <tr height=13 style='mso-height-source:userset;height:9.75pt'>
         </tr>
