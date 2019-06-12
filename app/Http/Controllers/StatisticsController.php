@@ -169,15 +169,15 @@ class StatisticsController extends Controller
             }else{
                 $m = $temp->sum('price');
                 $n = Appliance_Deposit::whereIn('invoice_id', $temp->pluck('id'))->sum('amount');
-                if ($n>0)
+                if (floor($n)>0)
                 {
                     $array[count($array)]['label'] = 'Paid';
-                    $array[count($array)-1]['value'] = $n;
+                    $array[count($array)-1]['value'] = floor($n);
                 }
-                if ($m-$n >0)
+                if (floor($m-$n) >0)
                 {
                     $array[count($array)]['label'] = 'Unpaid';
-                    $array[count($array)-1]['value'] = $m-$n;
+                    $array[count($array)-1]['value'] = floor($m-$n);
                 }
             }
             array_push($data, $array);
