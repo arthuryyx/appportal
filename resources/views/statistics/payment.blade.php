@@ -54,22 +54,22 @@
                     success: function (response) {
                         Morris.Donut({
                             element: 'morris-donut-chart-3-'+obj.textContent,
-                            data: response[0],
+                            data: response[3],
                             resize: true
                         });
                         Morris.Donut({
                             element: 'morris-donut-chart-2-'+obj.textContent,
-                            data: response[1],
-                            resize: true
-                        });
-                        Morris.Donut({
-                            element: 'morris-donut-chart-1-'+obj.textContent,
                             data: response[2],
                             resize: true
                         });
                         Morris.Donut({
+                            element: 'morris-donut-chart-1-'+obj.textContent,
+                            data: response[1],
+                            resize: true
+                        });
+                        Morris.Donut({
                             element: 'morris-donut-chart-0-'+obj.textContent,
-                            data: response[3],
+                            data: response[0],
                             resize: true
                         });
                         $('#name-'+obj.textContent).text(response['name'])
