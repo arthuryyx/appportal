@@ -15,38 +15,37 @@ use Illuminate\Support\Facades\DB;
 
 class StatisticsController extends Controller
 {
-    public function salesBar(){
-        $invoices = Appliance_Invoice::whereYear('created_at', date('Y'))->whereMonth('created_at', date('m'))->pluck('id');
-        $aids = array_unique(
-            Appliance_Stock::whereIn('assign_to', $invoices)
-            ->select('aid', DB::raw('count(aid) as total'))
-            ->groupBy('aid')
-            ->orderBy('total', 'desc')
-            ->take(10)->pluck('aid')->all());
-
-        $sales = Appliance_Stock::whereIn('assign_to', $invoices)->whereIn('aid', $aids)
-            ->select('aid', 'state', DB::raw('count(aid) as total'))->groupBy('aid', 'state')
-            ->with('appliance')->get();
-
-        $data = array();
-        foreach ($aids as $aid){
-            $ass = $sales->where('aid', $aid);
-            $data [count($data)]['y']=$sales->where('aid', $aid)->first()->appliance->model;
-            $data [count($data)-1]['a']=$ass->contains('state', 0)?$ass->where('state', 0)->first()->total:0;
-            $data [count($data)-1]['b']=$ass->contains('state', 1)?$ass->where('state', 1)->first()->total:0;
-            $data [count($data)-1]['c']=$ass->contains('state', 2)?$ass->where('state', 2)->first()->total:0;
-            $data [count($data)-1]['d']=$ass->contains('state', 3)?$ass->where('state', 3)->first()->total:0;
-        }
-        return $data;
-    }
+//    public function salesBar(){
+//        $invoices = Appliance_Invoice::whereYear('created_at', date('Y'))->whereMonth('created_at', date('m'))->pluck('id');
+//        $aids = array_unique(
+//            Appliance_Stock::whereIn('assign_to', $invoices)
+//            ->select('aid', DB::raw('count(aid) as total'))
+//            ->groupBy('aid')
+//            ->orderBy('total', 'desc')
+//            ->take(10)->pluck('aid')->all());
+//
+//        $sales = Appliance_Stock::whereIn('assign_to', $invoices)->whereIn('aid', $aids)
+//            ->select('aid', 'state', DB::raw('count(aid) as total'))->groupBy('aid', 'state')
+//            ->with('appliance')->get();
+//
+//        $data = array();
+//        foreach ($aids as $aid){
+//            $ass = $sales->where('aid', $aid);
+//            $data [count($data)]['y']=$sales->where('aid', $aid)->first()->appliance->model;
+//            $data [count($data)-1]['a']=$ass->contains('state', 0)?$ass->where('state', 0)->first()->total:0;
+//            $data [count($data)-1]['b']=$ass->contains('state', 1)?$ass->where('state', 1)->first()->total:0;
+//            $data [count($data)-1]['c']=$ass->contains('state', 2)?$ass->where('state', 2)->first()->total:0;
+//            $data [count($data)-1]['d']=$ass->contains('state', 3)?$ass->where('state', 3)->first()->total:0;
+//        }
+//        return $data;
+//    }
 
     public function salesChart(){
-        $sales = Role::where('name', 'sales')->first()->users()->pluck('id');
+//        $sales = Role::where('name', 'sales')->first()->users()->pluck('id');
         $data = array();
         for ($i=0; $i<4; $i++){
             $date = Carbon::today()->subMonthsWithOverflow($i);
-            $temp = Appliance_Invoice::whereIn('created_by', $sales)
-                ->whereYear('created_at', $date->year)
+            $temp = Appliance_Invoice::whereYear('created_at', $date->year)
                 ->whereMonth('created_at', $date->month)
                 ->groupBy('created_by')
                 ->select('created_by', DB::raw('sum(price) as value'))
@@ -58,7 +57,7 @@ class StatisticsController extends Controller
                 $array [0]['value']=0;
             }else{
                 foreach ($temp as $key => $value){
-                    $array [count($array)]['label']=User::where('id', $key)->select('name')->first()->name;
+                    $array [count($array)]['label']=User::find($key)->name;
                     $array [count($array)-1]['value']=floor($value);
                 }
             }
@@ -67,24 +66,41 @@ class StatisticsController extends Controller
         return $data;
     }
 
-    public function salesLine(){
-        $invoices = Appliance_Invoice::whereDate('created_at', '>=', Carbon::today()->addDays(-30))->whereDate('created_at' , '<=', Carbon::today())
-            ->select(DB::raw('sum(price) as price'),DB::raw('date(created_at) as date'))->groupBy('date')->get();
-
-        $deposits = Appliance_Deposit::whereDate('created_at', '>=', Carbon::today()->addDays(-30))->whereDate('created_at' , '<=', Carbon::today())
-            ->select(DB::raw('sum(amount) as amount'),DB::raw('date(created_at) as date'))->groupBy('date')->get();
+    public function personalBar(){
+        $sales = Role::where('name', 'sales')->first()->users()->pluck('id');
+//        date('Y-m-01', strtotime('-3 month'))
+        $date0 = Carbon::now()->subMonthsWithOverflow(3);
+        $date1 = Carbon::now()->subMonthsWithOverflow(2);
+        $date2 = Carbon::now()->subMonthsWithOverflow(1);
 
         $data = array();
-        $date = Carbon::today();
-        for ($i = 0; $i<30; $i++){
-            $dateString = $date->toDateString();
-            $data [$i]['y'] = $dateString;
-            $data [$i]['a'] = $invoices->contains('date', $dateString)?floor($invoices->where('date', $dateString)->first()->price):0;
-            $data [$i]['b'] = $deposits->contains('date', $dateString)?floor($deposits->where('date', $dateString)->first()->amount):0;
-            $date->subDay(1);
+        foreach ($sales as $uid){
+            $data [count($data)]['y']=User::where('id', $uid)->select('name')->first()->name;
+            $data [count($data)-1]['a']=floor(Appliance_Invoice::whereYear('created_at', $date0->year)->whereMonth('created_at', $date0->month)->where('created_by', $uid)->sum('price'));
+            $data [count($data)-1]['b']=floor(Appliance_Invoice::whereYear('created_at', $date1->year)->whereMonth('created_at', $date1->month)->where('created_by', $uid)->sum('price'));
+            $data [count($data)-1]['c']=floor(Appliance_Invoice::whereYear('created_at', $date2->year)->whereMonth('created_at', $date2->month)->where('created_by', $uid)->sum('price'));
         }
-        return $data;
+        return ['data'=>$data, 'date'=>[$date0->format('M Y'), $date1->format('M Y'), $date2->format('M Y')]];
     }
+
+//    public function salesLine(){
+//        $invoices = Appliance_Invoice::whereDate('created_at', '>=', Carbon::today()->addDays(-30))->whereDate('created_at' , '<=', Carbon::today())
+//            ->select(DB::raw('sum(price) as price'),DB::raw('date(created_at) as date'))->groupBy('date')->get();
+//
+//        $deposits = Appliance_Deposit::whereDate('created_at', '>=', Carbon::today()->addDays(-30))->whereDate('created_at' , '<=', Carbon::today())
+//            ->select(DB::raw('sum(amount) as amount'),DB::raw('date(created_at) as date'))->groupBy('date')->get();
+//
+//        $data = array();
+//        $date = Carbon::today();
+//        for ($i = 0; $i<30; $i++){
+//            $dateString = $date->toDateString();
+//            $data [$i]['y'] = $dateString;
+//            $data [$i]['a'] = $invoices->contains('date', $dateString)?floor($invoices->where('date', $dateString)->first()->price):0;
+//            $data [$i]['b'] = $deposits->contains('date', $dateString)?floor($deposits->where('date', $dateString)->first()->amount):0;
+//            $date->subDay(1);
+//        }
+//        return $data;
+//    }
 
     public function salesArea(){
         $invoices = Appliance_Invoice::whereDate('created_at', '>=', Carbon::today()->addDays(-30))->whereDate('created_at' , '<=', Carbon::today())
@@ -110,14 +126,13 @@ class StatisticsController extends Controller
             $m=$m+$data [$i]['a'];
             $n=$n+$data [$i]['b'];
         }
-        $data['area'] = $data;
         $array = array();
         $array[0]['label'] = 'Paid';
         $array[0]['value'] = $n;
         $array[1]['label'] = 'Unpaid';
         $array[1]['value'] = $m-$n;
-        $data['payment'] = $array;
-        return $data;
+
+        return array('area'=>$data, 'payment'=>$array);
     }
 
     public function applianceSalesTable(Request $request){
@@ -133,19 +148,39 @@ class StatisticsController extends Controller
         return view('statistics.index')->withData($data)->withDate($request->input('date'));
     }
 
-    public function personalBar(){
-        $sales = Role::where('name', 'sales')->first()->users()->pluck('id');
-        $date0 = Carbon::now()->subMonthsWithOverflow(3);
-        $date1 = Carbon::now()->subMonthsWithOverflow(2);
-        $date2 = Carbon::now()->subMonthsWithOverflow(1);
+    public function payment()
+    {
+        return view('statistics.payment')->withData(array_unique(Appliance_Invoice::whereDate('created_at', '>=', Carbon::today()->subMonthsWithOverflow(3)->startOfMonth())->pluck('created_by')->toArray()));
+    }
 
+    public function paymentChart($id)
+    {
         $data = array();
-        foreach ($sales as $uid){
-            $data [count($data)]['y']=User::where('id', $uid)->select('name')->first()->name;
-            $data [count($data)-1]['a']=floor(Appliance_Invoice::whereYear('created_at', $date0->year)->whereMonth('created_at', $date0->month)->where('created_by', $uid)->sum('price'));
-            $data [count($data)-1]['b']=floor(Appliance_Invoice::whereYear('created_at', $date1->year)->whereMonth('created_at', $date1->month)->where('created_by', $uid)->sum('price'));
-            $data [count($data)-1]['c']=floor(Appliance_Invoice::whereYear('created_at', $date2->year)->whereMonth('created_at', $date2->month)->where('created_by', $uid)->sum('price'));
+        for ($i=0; $i<4; $i++){
+            $date = Carbon::today()->subMonthsWithOverflow($i);
+            $temp = Appliance_Invoice::whereYear('created_at', $date->year)
+                ->whereMonth('created_at', $date->month)
+                ->where('created_by', $id)
+                ->get();
+
+            $array = array();
+            if(count($temp)==0){
+                $array [0]['label']='No Data';
+                $array [0]['value']=0;
+            }else{
+                $m = $temp->sum('price');
+                $n = floor(Appliance_Deposit::whereIn('invoice_id', $temp->pluck('id'))->sum('amount'));
+                $array[0]['label'] = 'Paid';
+                $array[0]['value'] = $n;
+                if ($m-$n >0)
+                {
+                    $array[1]['label'] = 'Unpaid';
+                    $array[1]['value'] = $m-$n;
+                }
+            }
+            array_push($data, $array);
         }
-        return ['data'=>$data, 'date'=>[$date0->format('M Y'), $date1->format('M Y'), $date2->format('M Y')]];
+        $data['name'] = User::find($id)->name;
+        return $data;
     }
 }

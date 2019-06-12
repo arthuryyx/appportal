@@ -326,7 +326,10 @@
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Manage<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{{ url('appliance/deposit/pending') }}" target="_blank">Payment</a>
+                                <a href="{{ url('appliance/deposit/pending') }}" target="_blank"> Payment</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('statistics/payment') }}" target="_blank"> Unpaid</a>
                             </li>
                         </ul>
                     </li>
