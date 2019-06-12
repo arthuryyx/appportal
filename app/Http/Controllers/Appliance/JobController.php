@@ -72,6 +72,15 @@ class JobController extends Controller
         return view('appliance.invoice.job.show')->withInvoice(Appliance_Invoice::with('hasManyStocks.appliance.belongsToBrand')->with('hasManyStocks.appliance.belongsToCategory')->find($id));
     }
 
+    public function cidToJob($id)
+    {
+        if ($job = Appliance_Invoice::where('receipt_id', 'C'.$id)->select('id')->first()){
+            return redirect('appliance/invoice/job/'.$job->id);
+        }else{
+            return redirect()->back()->withErrors("Job doesn't exist!");
+        }
+    }
+
     public function paid(Request $request)
     {
         $this->validate($request, [

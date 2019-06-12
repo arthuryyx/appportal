@@ -277,18 +277,18 @@
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
-                    {{--<li class="sidebar-search">--}}
-                        {{--<div class="input-group custom-search-form">--}}
-                            {{--<input type="text" class="form-control" placeholder="Search...">--}}
-                            {{--<span class="input-group-btn">--}}
-                                            {{--<button class="btn btn-default" type="button">--}}
-                                                {{--<i class="fa fa-search"></i>--}}
-                                            {{--</button>--}}
-                                        {{--</span>--}}
-                        {{--</div>--}}
+                    <li class="sidebar-search">
+                        <div class="input-group custom-search-form">
+                            <input id="job-id" type="text" class="form-control" placeholder="To Job">
+                            <span class="input-group-btn">
+                                <button id="to-job" class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
                         <!-- /input-group -->
                     {{--<li>--}}
-                        {{--<a href="{{ url('/') }}"><i class="fa fa-th-list fa-fw"></i> Dashboard</a>--}}
+                        {{--<a href="{{ url('/') }}"><i class="fa fa-folder-open fa-fw"></i> Dashboard</a>--}}
                     {{--</li>--}}
                     @can('root')
                     <li>
@@ -437,6 +437,11 @@
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
             $("#wrapper.toggled").find("#sidebar-wrapper").find(".collapse").collapse("hide");
+        });
+
+        $("#to-job").click(function(e) {
+            e.preventDefault();
+            window.location.href="/appliance/cid/"+$("#job-id").val();
         });
     });
 </script>
