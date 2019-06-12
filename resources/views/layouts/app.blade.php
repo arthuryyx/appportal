@@ -438,10 +438,19 @@
             $("#wrapper").toggleClass("toggled");
             $("#wrapper.toggled").find("#sidebar-wrapper").find(".collapse").collapse("hide");
         });
-
+        $("#job-id").keyup(function(event) {
+            if (event.keyCode === 13) {
+                $("#to-job").click();
+            }
+        });
         $("#to-job").click(function(e) {
             e.preventDefault();
-            window.location.href="/appliance/cid/"+$("#job-id").val();
+            var cid = $("#job-id").val();
+            if (cid == "" || cid.length == 0 || cid == null)
+            {
+                return false
+            }
+            window.location.href="/appliance/cid/"+cid;
         });
     });
 </script>
