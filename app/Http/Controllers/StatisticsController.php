@@ -162,20 +162,22 @@ class StatisticsController extends Controller
                 ->whereMonth('created_at', $date->month)
                 ->where('created_by', $id)
                 ->get();
-
             $array = array();
             if(count($temp)==0){
                 $array [0]['label']='No Data';
                 $array [0]['value']=0;
             }else{
                 $m = $temp->sum('price');
-                $n = floor(Appliance_Deposit::whereIn('invoice_id', $temp->pluck('id'))->sum('amount'));
-                $array[0]['label'] = 'Paid';
-                $array[0]['value'] = $n;
+                $n = Appliance_Deposit::whereIn('invoice_id', $temp->pluck('id'))->sum('amount');
+                if ($n>0)
+                {
+                    $array[count($array)]['label'] = 'Paid';
+                    $array[count($array)-1]['value'] = $n;
+                }
                 if ($m-$n >0)
                 {
-                    $array[1]['label'] = 'Unpaid';
-                    $array[1]['value'] = $m-$n;
+                    $array[count($array)]['label'] = 'Unpaid';
+                    $array[count($array)-1]['value'] = $m-$n;
                 }
             }
             array_push($data, $array);
