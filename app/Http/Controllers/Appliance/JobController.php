@@ -25,8 +25,7 @@ class JobController extends Controller
 
     public function store(Request $request)
     {
-        $request->merge(['receipt_id' => 'C'.(substr(Appliance_Invoice::max('receipt_id'), 1) + 1), 'created_by' => Auth::user()->id]);
-
+        $request->merge(['receipt_id' => 'C'.(substr(Appliance_Invoice::latest()->first()->receipt_id, 1) + 1), 'created_by' => Auth::user()->id]);
         $this->validate($request, [
             'receipt_id' => 'required|unique:appliance__invoices',
             'price' => 'required|numeric|min:0',
