@@ -60,6 +60,7 @@
                                 <td>@if($deposit->getCreated_by){{ $deposit->getCreated_by->name}}@endif</td>
                                 <td>{{ $deposit->created_at }}</td>
                                 <td>
+                                    @can('appliance_confirm_payment')
                                     <!-- Button trigger modal -->
                                     <button class="btn btn-danger" data-toggle="modal" data-target={{"#myModal".$deposit->id}}>
                                         Confirm
@@ -87,6 +88,7 @@
                                         <!-- /.modal-dialog -->
                                     </div>
                                     <!-- /.modal -->
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

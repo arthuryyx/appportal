@@ -78,29 +78,27 @@
                                 <td>{{ $invoice->price }}</td>
                                 <td>{{ $invoice->created_at->format('d-m-Y') }}</td>
                                 <td>
-                                    @if($invoice->state == 0)
-                                        @if($invoice->hasManyDeposits->sum('amount')>0)
-                                            <label class="label label-warning">{{ $invoice->price == 0? '$'.$invoice->hasManyDeposits->sum('amount'): round(($invoice->hasManyDeposits->sum('amount')/$invoice->price)*100).'%'}}</label>
-                                        @else
-                                            <label class="label label-danger">Unpaid</label>
-                                        @endif
-                                    @elseif($invoice->state == 1)
-                                        <label class="label label-success">&nbsp;&nbsp;Paid&nbsp;&nbsp;</label>
+                                    @if($invoice->price == 0)
+                                        <label class="label label-warning">&nbsp;&nbsp;&nbsp;${{$invoice->hasManyDeposits->sum('amount')}}&nbsp;&nbsp;&nbsp;</label>
+                                    @elseif($invoice->hasManyDeposits->sum('amount')==$invoice->price)
+                                        <label class="label label-success">&nbsp;&nbsp;&nbsp;Paid&nbsp;&nbsp;&nbsp;</label>
+                                    @elseif($invoice->hasManyDeposits->count() == 0)
+                                        <label class="label label-danger">&nbsp;&nbsp;Unpaid&nbsp;&nbsp;</label>
                                     @else
-                                        <label class="label label-primary">Exception</label>
+                                        <label class="label label-warning">&nbsp;&nbsp;&nbsp;&nbsp;{{round(($invoice->hasManyDeposits->sum('amount')/$invoice->price)*100).'%'}}&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                     @endif
 
                                     @if($invoice->hasManyStocks->count() == 0)
-                                        <label class="label label-warning">Empty</label>
+                                        <label class="label label-warning">&nbsp;&nbsp;Empty&nbsp;&nbsp;</label>
                                     @elseif($invoice->getState->count() == 0)
                                         <label class="label label-success">Delivered</label>
                                     @elseif($invoice->getState->count() > 0)
-                                        <label class="label label-danger">&nbsp;&nbsp;Hold&nbsp;&nbsp;</label>
+                                        <label class="label label-danger">&nbsp;&nbsp;&nbsp;Hold&nbsp;&nbsp;&nbsp;</label>
                                     @else
                                         <label class="label label-primary">Exception</label>
                                     @endif
                                 </td>
-                                <td><a href="{{ url('appliance/invoice/job/'.$invoice->id) }}" class="btn btn-success">详情</a></td>
+                                <td><a href="{{ url('appliance/invoice/job/'.$invoice->id) }}" class="btn btn-success" target="_blank">详情</a></td>
                                 {{--<td><a href="{{ url('appliance/invoice/job/'.$invoice->id.'/edit') }}" class="btn btn-success">修改</a></td>--}}
                             </tr>
                         @endforeach
@@ -123,7 +121,7 @@
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables-plugins/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables-responsive/dataTables.responsive.js')}}"></script>
-    {{--<script src="{{ asset('vendor/datatables-plugins/date-eu.js')}}"></script>--}}
+    <script src="{{ asset('vendor/datatables-plugins/date-eu.js')}}"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
         $(document).ready(function() {
@@ -131,12 +129,11 @@
                 autoWidth: false,
                 columnDefs: [
 //                    { "width": "25%", "targets": 3 },
-//                    { "width": "10%", "targets": 6 }
-//                    { type: 'date-eu', targets: 5 }
+                    { type: 'date-eu', targets: 7 }
                 ],
 //                responsive: true,
                 pageLength: 100,
-                order: [0]
+                order: [7]
             });
         });
     </script>

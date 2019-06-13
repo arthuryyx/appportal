@@ -24,33 +24,33 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     @if($invoice->state == 0)
-                        @can('appliance_confirm_payment')
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#myModalpayment"}}>Payment</button>
-                            <!-- Modal -->
-                            <div class="modal fade" id={{"myModalpayment"}} tabindex="-1" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" >&times;</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <strong>${{array_sum($invoice->hasManyDeposits->pluck('amount')->all())}}</strong>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <form action="{{ url('appliance/invoice/paid') }}" method="POST" style="display: inline;">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name="id" value="{{$invoice->id}}">
-                                                <button type="submit" class="btn btn-danger">confirm</button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <!-- /.modal-content -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
-                            <!-- /.modal -->
-                        @endcan
+                        {{--@can('appliance_confirm_payment')--}}
+                            {{--<button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#myModalpayment"}}>Payment</button>--}}
+                            {{--<!-- Modal -->--}}
+                            {{--<div class="modal fade" id={{"myModalpayment"}} tabindex="-1" role="dialog">--}}
+                                {{--<div class="modal-dialog">--}}
+                                    {{--<div class="modal-content">--}}
+                                        {{--<div class="modal-header">--}}
+                                            {{--<button type="button" class="close" data-dismiss="modal" >&times;</button>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="modal-body">--}}
+                                            {{--<strong>${{$invoice->hasManyDeposits->sum('amount')}}</strong>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="modal-footer">--}}
+                                            {{--<form action="{{ url('appliance/invoice/paid') }}" method="POST" style="display: inline;">--}}
+                                                {{--{{ csrf_field() }}--}}
+                                                {{--<input type="hidden" name="id" value="{{$invoice->id}}">--}}
+                                                {{--<button type="submit" class="btn btn-danger">confirm</button>--}}
+                                                {{--<button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>--}}
+                                            {{--</form>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<!-- /.modal-content -->--}}
+                                {{--</div>--}}
+                                {{--<!-- /.modal-dialog -->--}}
+                            {{--</div>--}}
+                            {{--<!-- /.modal -->--}}
+                        {{--@endcan--}}
                     @endif
                     <a href="{{ url('appliance/invoice/job/'.$invoice->id.'/html') }}" class="btn btn-primary" target="_blank">Print</a>
                     <a href="{{ url('appliance/invoice/job/'.$invoice->id.'/edit') }}" class="btn btn-success">Edit</a>
@@ -88,10 +88,10 @@
                     </table>
                     <hr>
                     <div class="col-lg-2">
-                        @if($invoice->state == 0)
-                            <img src="{{ asset('img/unpaid.png')}}" height="150" width="150">
-                        @elseif($invoice->state == 1)
-                            <img src="{{ asset('img/paid.png')}}" height="150" width="150" >
+                        @if($invoice->hasManyDeposits->sum('amount') >= $invoice->price)
+                            <img src="{{ asset('img/paid.png')}}" height="150" width="150">
+                        @else
+                            <img src="{{ asset('img/unpaid.png')}}" height="150" width="150" >
                         @endif
                     </div>
                     {{--<div class="col-lg-3">--}}
