@@ -18,6 +18,11 @@
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             {!! implode('<br>', $errors->all()) !!}
         </div>
+    @elseif ($message = Session::get('success'))
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ $message }}
+        </div>
     @endif
     <div class="row">
         <div class="col-lg-12">

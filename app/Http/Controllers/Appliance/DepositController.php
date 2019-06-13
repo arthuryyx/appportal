@@ -35,7 +35,6 @@ class DepositController extends Controller
         } catch (\Exception $e)
         {
             return redirect()->back()->withInput()->withErrors('添加失败！');
-
         }
         return redirect()->back()->withErrors('添加成功！');
     }

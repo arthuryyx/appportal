@@ -165,18 +165,26 @@ class StockController extends Controller
                 ->first();
 
         if($stock){
-            if ($stock->update(['assign_to' => $request->input('assign_to'), 'price' => $request->input('price'), 'warranty' => $request->input('warranty')])) {
-                return redirect('appliance/invoice/job/'.$request->input('assign_to'))->withErrors('更新成功！');
-            } else {
-                return redirect('appliance/invoice/job/'.$request->input('assign_to'))->withErrors('更新失败！');
+            try{
+                $stock->update(['assign_to' => $request->input('assign_to'), 'price' => $request->input('price'), 'warranty' => $request->input('warranty')]);
+            } catch (\Exception $e)
+            {
+                return redirect()->back()->withInput()->withErrors('添加失败！');
             }
+            return redirect()->back()->withSuccess('添加成功！');
         }else{
-            $request->merge(['state'=>0]);
-            if (Appliance_Stock::create($request->all())) {
-                return redirect('appliance/invoice/job/'.$request->input('assign_to'))->withErrors('更新成功！');
+            if (Appliance::find(($request->input('aid')))->category_id == 60){
+                $request->merge(['state'=>2]);
             } else {
-                return redirect('appliance/invoice/job/'.$request->input('assign_to'))->withErrors('更新失败！');
+                $request->merge(['state'=>0]);
             }
+            try{
+                Appliance_Stock::create($request->input());
+            } catch (\Exception $e)
+            {
+                return redirect()->back()->withInput()->withErrors('添加失败！');
+            }
+            return redirect()->back()->withSuccess('添加成功！');
         }
     }
 
