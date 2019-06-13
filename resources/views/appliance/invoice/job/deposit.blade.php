@@ -46,6 +46,11 @@
                             <th>
                                 created_at
                             </th>
+                            @can('dev')
+                                <th>
+
+                                </th>
+                            @endcan
                         </tr>
                         </thead>
                         <tbody>
@@ -54,6 +59,9 @@
                                 <td>{{ $deposit->amount }}</td>
                                 <td>@if($deposit->getCreated_by){{ $deposit->getCreated_by->name}}@endif</td>
                                 <td>{{ $deposit->created_at }}</td>
+                                @can('dev')
+                                    <td><a href="{{ url('appliance/deposit/'.$deposit->id.'/edit') }}" class="btn btn-success" target="_blank">Edit</a></td>
+                                @endcan
                             </tr>
                         @endforeach
                         </tbody>

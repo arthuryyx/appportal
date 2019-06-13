@@ -38,8 +38,26 @@ class DepositController extends Controller
 
         }
         return redirect()->back()->withErrors('添加成功！');
+    }
 
+    public function edit($id)
+    {
+        return view('appliance.deposit.edit')->withData(Appliance_Deposit::find($id));
+    }
 
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'amount' => 'required|numeric',
+        ]);
+
+        try {
+            Appliance_Deposit::find($id)->update($request->input());
+        } catch (\Exception $e)
+        {
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
+        }
+        return redirect()->back()->withSuccess('添加成功！');
     }
 
     public function pending()

@@ -28,7 +28,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="{{ url('appliance/invoice/job/create') }}" class="btn btn-primary ">New</a>
+                    <a href="{{ url('appliance/invoice/job/create') }}" class="btn btn-primary" target="_blank">New</a>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">

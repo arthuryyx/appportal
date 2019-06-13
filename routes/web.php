@@ -73,6 +73,8 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
 
     Route::get('deposit/index/{invoice}', 'DepositController@index');
     Route::post('deposit', 'DepositController@store');
+    Route::get('deposit/{id}/edit', 'DepositController@edit');
+    Route::patch('deposit/{id}', 'DepositController@update');
     Route::get('deposit/pending', 'DepositController@pending');
     Route::post('deposit/confirm/{id}', 'DepositController@confirm');
 
