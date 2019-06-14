@@ -217,9 +217,8 @@
 //                        barColors: ['#F0AD4E', '#5BC0DE', '#5CB85C', '#337AB7']
 //                    });
 //                },
-//
-//                error: function () {
-//                    alert("Error loading data! Please try again.");
+//                error: function (e) {
+//                    console.log(e);
 //                }
 //            });
 
@@ -257,9 +256,8 @@
                     $('#morris-donut-chart03').append('Sum: $').append(response[3].reduce((p,e)=>p+e.value,0));
 
                 },
-
-                error: function () {
-                    alert("Error loading data! Please try again.");
+                error: function (e) {
+                    console.log(e);
                 }
             });
 
@@ -280,8 +278,8 @@
 //                    });
 //                },
 //
-//                error: function () {
-//                    alert("Error loading data! Please try again.");
+//                error: function (e) {
+//                    console.log(e);
 //                }
 //            });
 
@@ -305,9 +303,8 @@
                         labels: [response.date[0],response.date[1],response.date[2]]
                     });
                 },
-
-                error: function () {
-                    alert("Error loading data! Please try again.");
+                error: function (e) {
+                    console.log(e);
                 }
             });
 
@@ -334,9 +331,8 @@
                         resize: true
                     });
                 },
-
-                error: function () {
-                    alert("Error loading data! Please try again.");
+                error: function (e) {
+                    console.log(e);
                 }
             });
 

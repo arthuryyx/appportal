@@ -74,8 +74,8 @@
                         });
                         $('#name-'+obj.textContent).text(response['name'])
                     },
-                    error: function () {
-                        alert("Error loading data! Please try again.");
+                    error: function (e) {
+                        console.log(e);
                     }
                 });
             });
