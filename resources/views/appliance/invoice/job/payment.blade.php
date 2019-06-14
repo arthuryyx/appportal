@@ -39,16 +39,16 @@
                                 Job
                             </th>
                             <th>
-                                amount
+                                Amount
                             </th>
                             <th>
-                                created_by
+                                Created by
                             </th>
                             <th>
-                                created_at
+                                Created at
                             </th>
                             <th>
-                                confirm
+                                Action
                             </th>
                         </tr>
                         </thead>
@@ -58,7 +58,7 @@
                                 <td><a href="{{ url('appliance/invoice/job/'.$deposit->getInvoice->id) }}" class="btn btn-success" target="_blank"> {{ $deposit->getInvoice->receipt_id }}</a></td>
                                 <td>${{ $deposit->amount }}</td>
                                 <td>@if($deposit->getCreated_by){{ $deposit->getCreated_by->name}}@endif</td>
-                                <td>{{ $deposit->created_at }}</td>
+                                <td>{{ $deposit->created_at->format('d-m-Y') }}</td>
                                 <td>
                                     @can('appliance_confirm_payment')
                                     <!-- Button trigger modal -->
@@ -116,13 +116,12 @@
     <script>
         $(document).ready(function() {
             $('#dataTables').DataTable({
-                responsive: true,
                 columnDefs: [
                     { type: 'date-eu', targets: 3 }
                 ],
+                responsive: true,
                 order: [3, 'asc'],
-                paging: false,
-                searching: true
+                paging: false
             });
         });
     </script>
