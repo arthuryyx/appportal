@@ -13,11 +13,6 @@ class Appliance_Invoice extends Model
         return $this->hasMany('App\Appliance_Stock', 'assign_to', 'id');
     }
 
-    public function hasManyInits()
-    {
-        return $this->hasMany('App\Appliance_Stock', 'init', 'id');
-    }
-
     public function hasManyDeposits()
     {
         return $this->hasMany('App\Appliance_Deposit', 'invoice_id', 'id');
@@ -40,5 +35,10 @@ class Appliance_Invoice extends Model
     public function getOrders()
     {
         return $this->hasMany('App\Appliance_Order', 'invoice_id', 'id');
+    }
+
+    public function getMargin()
+    {
+        return $this->hasManyStocks()->with('appliance');
     }
 }

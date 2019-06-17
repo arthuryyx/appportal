@@ -78,12 +78,16 @@
                                 <td>{{ $invoice->price }}</td>
                                 <td>{{ $invoice->created_at->format('d-m-Y') }}</td>
                                 <td>
+                                    @if($invoice->price != 0)
+                                        <label class="label label-info">&nbsp;&nbsp;&nbsp;{{round((1-$invoice->getMargin->sum('appliance.lv4')/$invoice->price)*100, 2).'%'}}&nbsp;&nbsp;&nbsp;</label>
+                                    @endif
+
                                     @if($invoice->price == 0)
                                         <label class="label label-warning">&nbsp;&nbsp;&nbsp;${{$invoice->hasManyDeposits->sum('amount')}}&nbsp;&nbsp;&nbsp;</label>
                                     @elseif($invoice->hasManyDeposits->sum('amount')==$invoice->price)
                                         <label class="label label-success">&nbsp;&nbsp;&nbsp;Paid&nbsp;&nbsp;&nbsp;</label>
                                     @elseif($invoice->hasManyDeposits->count() == 0)
-                                        <label class="label label-danger">&nbsp;&nbsp;Unpaid&nbsp;&nbsp;</label>
+                                        <label class="label label-danger">&nbsp;Unpaid&nbsp;</label>
                                     @else
                                         <label class="label label-warning">&nbsp;&nbsp;&nbsp;&nbsp;{{round(($invoice->hasManyDeposits->sum('amount')/$invoice->price)*100).'%'}}&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                     @endif
@@ -91,7 +95,7 @@
                                     @if($invoice->hasManyStocks->count() == 0)
                                         <label class="label label-warning">&nbsp;&nbsp;Empty&nbsp;&nbsp;</label>
                                     @elseif($invoice->getState->count() == 0)
-                                        <label class="label label-success">Delivered</label>
+                                        <label class="label label-success">Shipped</label>
                                     @elseif($invoice->getState->count() > 0)
                                         <label class="label label-danger">&nbsp;&nbsp;&nbsp;Hold&nbsp;&nbsp;&nbsp;</label>
                                     @else
@@ -99,7 +103,7 @@
                                     @endif
                                 </td>
                                 <td><a href="{{ url('appliance/invoice/job/'.$invoice->id) }}" class="btn btn-success" target="_blank">详情</a></td>
-                                {{--<td><a href="{{ url('appliance/invoice/job/'.$invoice->id.'/edit') }}" class="btn btn-success">修改</a></td>--}}
+                                {{--<td><a href="{{ url('appliance/invoice/job/'.$invoice->id.'/edit') }}" class="btn btn-success" target="_blank">修改</a></td>--}}
                             </tr>
                         @endforeach
                         </tbody>

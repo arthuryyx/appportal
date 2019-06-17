@@ -12,9 +12,18 @@ class JobController extends Controller
     public function index()
     {
         if(Auth::user()->can('appliance_view_all_jobs')){
-            return view('appliance.invoice.job.index')->withInvoices(Appliance_Invoice::with('hasManyStocks')->with('getCreated_by')->with('hasManyDeposits')->with('getState')->get());
+            return view('appliance.invoice.job.index')->withInvoices(Appliance_Invoice::with('hasManyStocks')
+                ->with('getCreated_by')
+                ->with('hasManyDeposits')
+                ->with('getState')
+                ->with('getMargin')->get());
         } else{
-            return view('appliance.invoice.job.index')->withInvoices(Appliance_Invoice::where('created_by', Auth::user()->id)->with('hasManyStocks')->with('getCreated_by')->with('hasManyDeposits')->with('getState')->get());
+            return view('appliance.invoice.job.index')->withInvoices(Appliance_Invoice::where('created_by', Auth::user()->id)
+                ->with('hasManyStocks')
+                ->with('getCreated_by')
+                ->with('hasManyDeposits')
+                ->with('getState')
+                ->with('getMargin')->get());
         }
     }
 
@@ -69,7 +78,10 @@ class JobController extends Controller
 
     public function show($id)
     {
-        return view('appliance.invoice.job.show')->withInvoice(Appliance_Invoice::with('hasManyStocks.appliance.belongsToBrand')->with('hasManyStocks.appliance.belongsToCategory')->find($id));
+        return view('appliance.invoice.job.show')->withInvoice(Appliance_Invoice::with('hasManyStocks.appliance.belongsToBrand')
+            ->with('hasManyStocks.appliance.belongsToCategory')
+            ->with('hasManyDeposits')
+            ->with('getMargin')->find($id));
     }
 
     public function cidToJob($id)

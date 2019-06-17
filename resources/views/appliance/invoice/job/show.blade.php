@@ -28,7 +28,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    @if($invoice->state == 0)
+                    {{--@if($invoice->state == 0)--}}
                         {{--@can('appliance_confirm_payment')--}}
                             {{--<button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#myModalpayment"}}>Payment</button>--}}
                             {{--<!-- Modal -->--}}
@@ -56,7 +56,7 @@
                             {{--</div>--}}
                             {{--<!-- /.modal -->--}}
                         {{--@endcan--}}
-                    @endif
+                    {{--@endif--}}
                     <a href="{{ url('appliance/invoice/job/'.$invoice->id.'/html') }}" class="btn btn-primary" target="_blank">Print</a>
                     <a href="{{ url('appliance/invoice/job/'.$invoice->id.'/edit') }}" class="btn btn-success">Edit</a>
                     <table width="100%" class="table">
@@ -126,7 +126,7 @@
                         {{--{!! Form::close() !!}--}}
                     {{--</div>--}}
 
-                    @if($invoice->state == 0 || Gate::check('root'))
+                    @if($invoice->hasManyDeposits->count() == 0 || Gate::check('root'))
                     <div class="col-lg-4">
                         {!! Form::open(['url' => 'appliance/stock/allocation','method'=>'POST']) !!}
                         <div class="row">
