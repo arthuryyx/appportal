@@ -95,7 +95,7 @@
                                     @if($invoice->hasManyStocks->count() == 0)
                                         <label class="label label-warning">&nbsp;&nbsp;Empty&nbsp;&nbsp;</label>
                                     @elseif($invoice->getState->count() == 0)
-                                        <label class="label label-success">Shipped</label>
+                                        <label class="label label-success">Delivered</label>
                                     @elseif($invoice->getState->count() > 0)
                                         <label class="label label-danger">&nbsp;&nbsp;&nbsp;Hold&nbsp;&nbsp;&nbsp;</label>
                                     @else
@@ -132,7 +132,7 @@
             $('#dataTables').DataTable({
                 autoWidth: false,
                 columnDefs: [
-//                    { "width": "25%", "targets": 3 },
+                    { "width": "15%", "targets": 8 },
                     { type: 'date-eu', targets: 7 }
                 ],
 //                responsive: true,
