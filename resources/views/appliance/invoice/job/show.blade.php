@@ -93,7 +93,8 @@
                     </table>
                     <hr>
                     <div class="col-lg-2">
-                        @if($invoice->hasManyDeposits->sum('amount') >= $invoice->price)
+                        @if($invoice->price == 0 && $invoice->hasManyDeposits->sum('amount') == 0)
+                        @elseif($invoice->hasManyDeposits->sum('amount') >= $invoice->price)
                             <img src="{{ asset('img/paid.png')}}" height="150" width="150">
                         @else
                             <img src="{{ asset('img/unpaid.png')}}" height="150" width="150" >
