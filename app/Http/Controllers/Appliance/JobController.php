@@ -16,14 +16,18 @@ class JobController extends Controller
                 ->with('getCreated_by')
                 ->with('hasManyDeposits')
                 ->with('getState')
-                ->with('getMargin')->get());
+                ->with('getMargin')
+                ->orderBy('id', 'desc')
+                ->get());
         } else{
             return view('appliance.invoice.job.index')->withInvoices(Appliance_Invoice::where('created_by', Auth::user()->id)
                 ->with('hasManyStocks')
                 ->with('getCreated_by')
                 ->with('hasManyDeposits')
                 ->with('getState')
-                ->with('getMargin')->get());
+                ->with('getMargin')
+                ->orderBy('id', 'desc')
+                ->get());
         }
     }
 

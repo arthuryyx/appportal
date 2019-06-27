@@ -128,12 +128,27 @@
     <script src="{{ asset('vendor/datatables-plugins/date-eu.js')}}"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
+        jQuery.fn.dataTableExt.oSort['number-fate-asc']  = function(s1,s2) {
+            s1 = s1.replace('C','');
+            s2 = s2.replace('C','');
+            return s1-s2;
+        };
+
+        jQuery.fn.dataTableExt.oSort['number-fate-desc'] = function(s1,s2) {
+            s1 = s1.replace('C','');
+            s2 = s2.replace('C','');
+            return s2-s1;
+        };
+
+    </script>
+    <script>
         $(document).ready(function() {
             $('#dataTables').DataTable({
                 autoWidth: false,
                 columnDefs: [
                     { "width": "15%", "targets": 8 },
-                    { type: 'date-eu', targets: 7 }
+                    { type: 'date-eu', targets: 7 },
+                    { type: 'number-fate', targets: 0 }
                 ],
 //                responsive: true,
                 pageLength: 100,
