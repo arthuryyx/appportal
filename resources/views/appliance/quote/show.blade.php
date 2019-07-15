@@ -63,7 +63,7 @@
                         <thead>
                             <tr>
                                 <th>Quote No.</th>
-                                <th>Data</th>
+                                <th>Vaild Until</th>
                                 <th>Created_by</th>
                                 <th>Total Price</th>
                                 <th>Customer</th>
@@ -77,7 +77,7 @@
                         <tbody>
                             <tr>
                                 <td>{{$quote->quote_no}}</td>
-                                <td>{{$quote->created_at->format('d-m-Y')}}</td>
+                                <td>{{date('d/M/Y', strtotime('-1 Month', strtotime($quote->created_at)))}}</td>
                                 <td>{{$quote->getCreated_by->name}}</td>
                                 <td>{{$quote->price}}</td>
                                 <td>{{$quote->customer_name}}</td>

@@ -30,8 +30,9 @@
                         <div class="col-xs-10 col-sm-10 col-md-10">
                             <strong>Amount</strong>
                             {{ Form::number('price', null, array('class' => 'form-control', 'step' => 'any')) }}
+                            <strong>Warranty</strong>
                             {{ Form::number('warranty', null, array('class' => 'form-control')) }}
-                            {{ Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
+                        </br>{{ Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
                         </div>
                     </div>
                     {!! Form::close() !!}
