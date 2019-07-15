@@ -84,7 +84,7 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>customer_name:</strong>
+                                    <strong>customer name:</strong>
                                     {!! Form::text('customer_name', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
