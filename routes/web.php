@@ -44,11 +44,17 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
 });
 
 Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'appliance'], function() {
+    Route::resource('quote', 'QuoteController');
+    Route::get('quote/{id}/html', 'QuoteController@quoteHtml');
+
     Route::resource('invoice/job', 'JobController');
     Route::post('invoice/paid', 'JobController@paid');
     Route::get('invoice/job/{id}/html', 'StockController@invoiceHtml');
     Route::get('cid/{id}', 'JobController@cidToJob');
 
+    Route::post('item/create', 'ItemController@store');
+    Route::get('item/{id}/edit', 'ItemController@edit');
+    Route::patch('item/{id}', 'ItemController@update');
     Route::get('stock/index/{state}', 'StockController@index');
 //    Route::post('stock/job/assign', 'StockController@assign');
     Route::post('stock/allocation', 'StockController@allocation');

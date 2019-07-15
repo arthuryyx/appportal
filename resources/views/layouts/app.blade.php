@@ -340,6 +340,9 @@
                         <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Sales<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
+                                <a href="{{ url('appliance/quote') }}" target="_blank">Quote</a>
+                            </li>
+                            <li>
                                 <a href="{{ url('appliance/invoice/job') }}" target="_blank">Job</a>
                             </li>
                             <li>
