@@ -457,7 +457,7 @@ class StockController extends Controller
 
     public function invoiceHtml($id){
         return view('appliance.pdf.invoice')->withInvoice(Appliance_Invoice::find($id))
-            ->withStocks(Appliance_Stock::where('assign_to', $id)->groupBy('aid', 'price', 'warranty')->select('aid', DB::raw('count(aid) as total'), DB::raw('sum(price) as price'), 'warranty')->get());
+            ->withStocks(Appliance_Stock::where('assign_to', $id)->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->groupBy('aid', 'price', 'warranty')->select('aid', DB::raw('count(aid) as total'), DB::raw('sum(price) as price'), 'warranty')->get());
     }
 
 //    public function exportAssigned(){

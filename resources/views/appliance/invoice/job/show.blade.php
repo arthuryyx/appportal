@@ -373,7 +373,7 @@
         });
 
         $('.aid').select2({
-            placeholder: 'Select an model',
+            placeholder: 'Select a model',
             ajax: {
                 url: '/select2-autocomplete-ajax/availableModel',
                 dataType: 'json',
