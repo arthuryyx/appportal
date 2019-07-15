@@ -3283,7 +3283,7 @@
         <td class='x77'></td>
         <td class='x77'></td>
         <td colspan='2' class='x125' style='border-bottom:1px solid #808080;'>Total Amount</td>
-        <td class='x156' align='center' style='text-align:center;'>${{number_format(($invoice->price), 2, '.', ',')}}</td>
+        <td class='x156' align='center' style='text-align:center;'>${{number_format(($quote->price), 2, '.', ',')}}</td>
     </tr>
     <tr height='27' class='x65' style='mso-height-source:userset;height:20.25pt' id='r24'>
         <td height='27' class='x67' style='height:20.25pt;'></td>
