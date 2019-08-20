@@ -1877,7 +1877,7 @@ AA==
             <td height=18 class=xl6829136 style='height:14.1pt'></td>
             <td class=xl6829136></td>
             <td class=xl6829136></td>
-            <td colspan=3 rowspan=2 class=xl13229136 width=307 style='width:231pt'>ACC NUM: ANZ 01-0190-0377780-00</br>ACC NAME: Appliance Star NZ Ltd</td>
+            <td colspan=3 rowspan=2 class=xl13229136 width=307 style='width:231pt'>ACC NUM: BNZ 02-0108-0485046-00</br>ACC NAME: APPLIANCE STAR NZ LTD</td>
         </tr>
         <tr class=xl6829136 height=18 style='mso-height-source:userset;height:14.1pt'>
             <td height=18 class=xl7029136 width=82 style='height:14.1pt;width:62pt'>SOLD TO</td>
