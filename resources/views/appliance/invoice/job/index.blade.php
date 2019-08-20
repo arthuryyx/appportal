@@ -34,79 +34,19 @@
                 <div class="panel-body">
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                         <thead>
-                        <tr>
-                            <th>
-                                receipt_id
-                            </th>
-                            <th>
-                                job_id
-                            </th>
-                            <th>
-                                customer_name
-                            </th>
-                            <th>
-                                address
-                            </th>
-                            <th>
-                                phone
-                            </th>
-                            <th>
-                                created_by
-                            </th>
-                            <th>
-                                final price
-                            </th>
-                            <th>
-                                created_at
-                            </th>
-                            <th>
-                                state
-                            </th>
-                            <th></th>
-                            {{--<th></th>--}}
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($invoices as $invoice)
                             <tr>
-                                <td>{{ $invoice->receipt_id }}</td>
-                                <td>{{ $invoice->job_id }}</td>
-                                <td>{{ $invoice->customer_name }}</td>
-                                <td>{{ $invoice->address }}</td>
-                                <td>{{ $invoice->phone }}</td>
-                                <td>{{ $invoice->getCreated_by->name }}</td>
-                                <td>{{ $invoice->price }}</td>
-                                <td>{{ $invoice->created_at->format('d-m-Y') }}</td>
-                                <td>
-                                    @if($invoice->price != 0)
-                                        <label class="label label-info">&nbsp;&nbsp;&nbsp;{{round((1-$invoice->getMargin->sum('appliance.lv4')/$invoice->price)*100, 2).'%'}}&nbsp;&nbsp;&nbsp;</label>
-                                    @endif
-
-                                    @if($invoice->price == 0)
-                                        <label class="label label-warning">&nbsp;&nbsp;&nbsp;${{$invoice->hasManyDeposits->sum('amount')}}&nbsp;&nbsp;&nbsp;</label>
-                                    @elseif($invoice->hasManyDeposits->sum('amount')==$invoice->price)
-                                        <label class="label label-success">&nbsp;&nbsp;&nbsp;Paid&nbsp;&nbsp;&nbsp;</label>
-                                    @elseif($invoice->hasManyDeposits->count() == 0)
-                                        <label class="label label-danger">&nbsp;Unpaid&nbsp;</label>
-                                    @else
-                                        <label class="label label-warning">&nbsp;&nbsp;&nbsp;&nbsp;{{round(($invoice->hasManyDeposits->sum('amount')/$invoice->price)*100).'%'}}&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                    @endif
-
-                                    @if($invoice->hasManyStocks->count() == 0)
-                                        <label class="label label-warning">&nbsp;&nbsp;Empty&nbsp;&nbsp;</label>
-                                    @elseif($invoice->getState->count() == 0)
-                                        <label class="label label-success">Delivered</label>
-                                    @elseif($invoice->getState->count() > 0)
-                                        <label class="label label-danger">&nbsp;&nbsp;&nbsp;Hold&nbsp;&nbsp;&nbsp;</label>
-                                    @else
-                                        <label class="label label-primary">Exception</label>
-                                    @endif
-                                </td>
-                                <td><a href="{{ url('appliance/invoice/job/'.$invoice->id) }}" class="btn btn-success" target="_blank">详情</a></td>
-                                {{--<td><a href="{{ url('appliance/invoice/job/'.$invoice->id.'/edit') }}" class="btn btn-success" target="_blank">修改</a></td>--}}
+                                <th>receipt_id</th>
+                                <th>job_id</th>
+                                <th>customer_name</th>
+                                <th>address</th>
+                                <th>phone</th>
+                                <th>created_by</th>
+                                <th>final price</th>
+                                <th>created_at</th>
+                                <th>status</th>
+                                <th>action</th>
                             </tr>
-                        @endforeach
-                        </tbody>
+                        </thead>
                     </table>
                     <!-- /.table-responsive -->
                 </div>
@@ -127,32 +67,50 @@
     <script src="{{ asset('vendor/datatables-responsive/dataTables.responsive.js')}}"></script>
     <script src="{{ asset('vendor/datatables-plugins/date-eu.js')}}"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
-        jQuery.fn.dataTableExt.oSort['number-fate-asc']  = function(s1,s2) {
-            s1 = s1.replace('C','');
-            s2 = s2.replace('C','');
-            return s1-s2;
-        };
+    {{--<script>--}}
+        {{--jQuery.fn.dataTableExt.oSort['number-fate-asc']  = function(s1,s2) {--}}
+            {{--s1 = s1.replace('C','');--}}
+            {{--s2 = s2.replace('C','');--}}
+            {{--return s1-s2;--}}
+        {{--};--}}
 
-        jQuery.fn.dataTableExt.oSort['number-fate-desc'] = function(s1,s2) {
-            s1 = s1.replace('C','');
-            s2 = s2.replace('C','');
-            return s2-s1;
-        };
+        {{--jQuery.fn.dataTableExt.oSort['number-fate-desc'] = function(s1,s2) {--}}
+            {{--s1 = s1.replace('C','');--}}
+            {{--s2 = s2.replace('C','');--}}
+            {{--return s2-s1;--}}
+        {{--};--}}
 
-    </script>
+    {{--</script>--}}
     <script>
         $(document).ready(function() {
             $('#dataTables').DataTable({
-                autoWidth: false,
-                columnDefs: [
-                    { "width": "15%", "targets": 8 },
-                    { type: 'date-eu', targets: 7 },
-                    { type: 'number-fate', targets: 0 }
+                processing: true,
+                serverSide: true,
+//                serverMethod: 'post',
+                ajax: {
+                    'url':'ajax-index'
+                },
+                columns: [
+                    { data: 'receipt_id', orderable: false },
+                    { data: 'job_id', orderable: false },
+                    { data: 'customer_name', orderable: false },
+                    { data: 'address', orderable: false },
+                    { data: 'phone', orderable: false },
+                    { data: 'created_by', orderable: false },
+                    { data: 'price', orderable: false },
+                    { data: 'created_at', orderable: false },
+                    { data: 'status', orderable: false, searchable: false },
+                    { data: 'action', orderable: false, searchable: false }
                 ],
-//                responsive: true,
-                pageLength: 100,
-                order: [7]
+                columnDefs: [
+                    { width: "15%", "targets": 8 },
+                    { type: 'date-eu', targets: 7 },
+//                    { type: 'number-fate', targets: 0 }
+                ],
+                autoWidth: false,
+                responsive: true,
+                pageLength: 25,
+//                order: [7],
             });
         });
     </script>

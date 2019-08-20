@@ -170,6 +170,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -232,6 +234,7 @@ return [
 
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
 
     ],
 

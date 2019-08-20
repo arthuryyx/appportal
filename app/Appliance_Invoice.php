@@ -37,8 +37,8 @@ class Appliance_Invoice extends Model
         return $this->hasMany('App\Appliance_Order', 'invoice_id', 'id');
     }
 
-    public function getMargin()
-    {
-        return $this->hasManyStocks()->with('appliance');
-    }
+//    public function getMargin()
+//    {
+//        return $this->hasManyStocks()->with('appliance');
+//    }
 }
