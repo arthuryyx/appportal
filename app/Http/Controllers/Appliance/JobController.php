@@ -22,8 +22,8 @@ class JobController extends Controller
                 ->with('hasManyStocks.appliance')
                 ->with('getCreated_by')
                 ->with('hasManyDeposits')
-                ->with('getState')
-                ->orderBy('id', 'desc');
+                ->with('getState');
+//                ->orderBy('id', 'desc');
         } else{
             $invs = Appliance_Invoice::query()
                 ->where('created_by', Auth::user()->id)
@@ -39,7 +39,7 @@ class JobController extends Controller
             ->editColumn('created_by', function ($inv) {
                 return $inv->getCreated_by->name;
             })->editColumn('created_at', function ($inv) {
-                return $inv->created_at->format('d-m-Y');
+                return $inv->created_at->format('Y-m-d');
             })->addColumn('status', function ($inv) {
                 $str = '';
                 if($inv->price != 0)
