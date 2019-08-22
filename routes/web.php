@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
     Route::post('item/create', 'ItemController@store');
     Route::get('item/{id}/edit', 'ItemController@edit');
     Route::patch('item/{id}', 'ItemController@update');
+    Route::get('stock/ajaxIndex/{state}', 'StockController@ajaxIndex');
     Route::get('stock/index/{state}', 'StockController@index');
 //    Route::post('stock/job/assign', 'StockController@assign');
     Route::post('stock/allocation', 'StockController@allocation');
@@ -63,7 +64,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
     Route::get('stock/{aid}/detail', 'StockController@detail');
     Route::get('stock/listing', 'StockController@listing');
     Route::get('stock/{id}/edit', 'StockController@edit');
-    Route::post('stock/reentry', 'StockController@reentry');
+    Route::post('stock/restock', 'StockController@restock');
     Route::put('stock/{id}', 'StockController@update');
     Route::get('stock/{id}/price', 'StockController@editPrice');
     Route::put('stock/{id}/price', 'StockController@updatePrice');

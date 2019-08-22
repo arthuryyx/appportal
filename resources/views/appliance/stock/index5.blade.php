@@ -89,9 +89,9 @@
 	                                                    Location: {{ $stock->shelf }}
 	                                                </div>
 	                                                <div class="modal-footer">
-	                                                    <form action="{{ url('appliance/stock/reentry') }}" method="POST" style="display: inline;">
+	                                                    <form action="{{ url('appliance/stock/restock') }}" method="POST" style="display: inline;">
 	                                                        {{ csrf_field() }}
-	                                                        <input type="hidden" name="sid" value="{{$stock->id}}">
+	                                                        <input type="hidden" name="id[]" value="{{$stock->id}}">
 	                                                        <button type="submit" class="btn btn-danger">确认</button>
 	                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
 	                                                    </form>

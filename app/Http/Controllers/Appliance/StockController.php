@@ -17,6 +17,7 @@ use App\Appliance_Invoice;
 use App\Appliance_Delivery;
 
 use Barryvdh\DomPDF\Facade as PDF;
+use Yajra\Datatables\Datatables;
 
 class StockController extends Controller
 {
@@ -52,8 +53,7 @@ class StockController extends Controller
                         })->with('belongsToBrand')->with('belongsToCategory')->get());
                 break;
             case 3:
-                return view('appliance.stock.index'.$state)
-                    ->withStocks(Appliance_Stock::where('state', $state)->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->with('getDeliveryHistory.getInvoice')->get());
+                return view('appliance.stock.index'.$state);
                 break;
             case 4:
                 return view('appliance.stock.index'.$state)
@@ -66,6 +66,30 @@ class StockController extends Controller
             default:
                 break;
         }
+    }
+
+    public function  ajaxIndex($state)
+    {
+        $items = Appliance_Stock::query()
+            ->where('appliance__stocks.state', $state)
+            ->with('appliance.belongsToBrand')
+            ->with('appliance.belongsToCategory')
+            ->with('getDeliveryHistory.getInvoice');
+
+        return Datatables::of($items)
+            ->editColumn('model', function ($item) {
+                return $item->appliance->model;
+            })->editColumn('brand', function ($item) {
+                return $item->appliance->belongsToBrand->name;
+            })->editColumn('category', function ($item) {
+                return $item->appliance->belongsToCategory->name;
+            })->editColumn('receipt', function ($item) {
+                return $item->getDeliveryHistory->getInvoice->receipt_id;
+            })->editColumn('date', function ($item) {
+                return $item->getDeliveryHistory->created_at->format('Y-m-d');
+            })->addColumn('action', function ($item) {
+                return '<a href="'.url('appliance/invoice/job/'.$item->getDeliveryHistory->getInvoice->id).'" class="btn btn-success" target="_blank">查看</a>';
+            })->make(true);
     }
 
 ////    public function create(){
@@ -188,16 +212,27 @@ class StockController extends Controller
         }
     }
 
-    public function reentry(Request $request){
+    public function restock(Request $request){
         $this->validate($request, [
-            'sid' => 'required|exists:appliance__stocks,id',
+//            'id' => 'required|exists:appliance__stocks,id',
+            'id' => 'required',
         ]);
-        $request->merge(['shelf' => null, 'deliver_to' => null, 'state' => 2]);
-        if (Appliance_Stock::find($request->all()['sid'])->update($request->all())) {
-            return redirect()->back()->withErrors('更新成功！');
-        } else {
-            return redirect()->back()->withInput()->withErrors('更新失败！');
+        $t = $request->all();
+        $m = '';
+        foreach ($t['id'] as $id){
+            $obj = Appliance_Stock::find($id);
+            if($obj->state == 3 || $obj->state ==5){
+                $obj->update(['shelf' => null, 'deliver_to' => null, 'state' => 2]);
+            }else{
+                $m = $m.$obj->appliance->model.' not updated.<br>';
+            }
         }
+        if($m === ''){
+            return redirect()->back()->withErrors('更新成功！');
+        }else{
+            return redirect()->back()->withInput()->withErrors($m);
+        }
+
     }
 
     public function display(Request $request){

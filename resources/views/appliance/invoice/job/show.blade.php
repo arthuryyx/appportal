@@ -192,9 +192,9 @@
                         @endcan
                         @can('appliance_release')
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target={{"#myModalrelease"}}>release</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalrelease">release</button>
                         <!-- Modal -->
-                        <div class="modal fade" id={{"myModalrelease"}} tabindex="-1" role="dialog">
+                        <div class="modal fade" id="myModalrelease" tabindex="-1" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -204,7 +204,7 @@
                                         Confirm release appliance from current job!
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/release')}}'">release</button>
+                                        <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/release')}}'">confirm</button>
                                         <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
                                     </div>
                                 </div>
@@ -214,36 +214,60 @@
                         </div>
                         <!-- /.modal -->
                         @endcan
-                        @can('appliance_request_delivery')
+                        {{--@can('appliance_request_delivery')--}}
+                        {{--<!-- Button trigger modal -->--}}
+                            {{--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalRequest">request</button>--}}
+                            {{--<!-- Modal -->--}}
+                            {{--<div class="modal fade" id="myModalRequest" tabindex="-1" role="dialog">--}}
+                                {{--<div class="modal-dialog">--}}
+                                    {{--<div class="modal-content">--}}
+                                        {{--<div class="modal-header">--}}
+                                            {{--<button type="button" class="close" data-dismiss="modal" >&times;</button>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="modal-body">--}}
+                                            {{--<div class="form-group">--}}
+                                                {{--<strong>Date</strong>--}}
+                                                {{--<input type="datetime-local" name="date" class="form-control">--}}
+                                            {{--</div>--}}
+                                            {{--<div class="form-group">--}}
+                                                {{--<strong>shipping fee:</strong>--}}
+                                                {{--{!! Form::number('fee', 0, array('class' => 'form-control', 'step' => 'any', 'min' => '0', 'required' => 'required')) !!}--}}
+                                            {{--</div>--}}
+                                            {{--<div class="form-group">--}}
+                                                {{--<strong>Post</strong>--}}
+                                                {{--{{ Form::checkbox('post', 1, false, array('class' => 'name checkbox-inline')) }}--}}
+                                            {{--</div>--}}
+                                            {{--<div class="form-group">--}}
+                                                {{--<strong>comment:</strong>--}}
+                                                {{--{!! Form::textarea('comment', null, array('class' => 'form-control')) !!}--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="modal-footer">--}}
+                                            {{--<button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/delivery/request/'.$invoice->id)}}'">request</button>--}}
+                                            {{--<button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<!-- /.modal-content -->--}}
+                                {{--</div>--}}
+                                {{--<!-- /.modal-dialog -->--}}
+                            {{--</div>--}}
+                            {{--<!-- /.modal -->--}}
+                        {{--@endcan--}}
+                        @can('appliance_restock')
                         <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target={{"#myModalRequest"}}>request</button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalrestock">restock</button>
                             <!-- Modal -->
-                            <div class="modal fade" id={{"myModalRequest"}} tabindex="-1" role="dialog">
+                            <div class="modal fade" id="myModalrestock" tabindex="-1" role="dialog">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" >&times;</button>
                                         </div>
                                         <div class="modal-body">
-                                            <div class="form-group">
-                                                <strong>Date</strong>
-                                                <input type="datetime-local" name="date" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <strong>shipping fee:</strong>
-                                                {!! Form::number('fee', 0, array('class' => 'form-control', 'step' => 'any', 'min' => '0', 'required' => 'required')) !!}
-                                            </div>
-                                            <div class="form-group">
-                                                <strong>Post</strong>
-                                                {{ Form::checkbox('post', 1, false, array('class' => 'name checkbox-inline')) }}
-                                            </div>
-                                            <div class="form-group">
-                                                <strong>comment:</strong>
-                                                {!! Form::textarea('comment', null, array('class' => 'form-control')) !!}
-                                            </div>
+                                            Confirm Restock appliance!
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/delivery/request/'.$invoice->id)}}'">request</button>
+                                            <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/restock')}}'">confirm</button>
                                             <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
                                         </div>
                                     </div>
@@ -255,9 +279,9 @@
                         @endcan
                         @can('appliance_deliver')
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target={{"#myModaldeliver"}}>deliver</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModaldeliver">deliver</button>
                         <!-- Modal -->
-                        <div class="modal fade" id={{"myModaldeliver"}} tabindex="-1" role="dialog">
+                        <div class="modal fade" id="myModaldeliver" tabindex="-1" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">

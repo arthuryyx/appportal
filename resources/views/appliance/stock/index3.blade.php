@@ -34,71 +34,14 @@
                             {{--<th>--}}
                                 {{--Quantity--}}
                             {{--</th>--}}
-                            <th>
-                                Model
-                            </th>
-                            <th>
-                                Brand
-                            </th>
-                            <th>
-                                Category
-                            </th>
-                            <th>
-                                Receipt No.
-                            </th>
-                            <th>
-                                Date
-                            </th>
-                            <th></th>
+                            <th>model</th>
+                            <th>brand</th>
+                            <th>category</th>
+                            <th>receipt</th>
+                            <th>date</th>
+                            <th>action</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        @foreach ($stocks as $stock)
-                            <tr>
-                                {{--<td>{{ $stock->total }}</td>--}}
-                                <td>{{ $stock->appliance->model }}</td>
-                                <td>{{ $stock->appliance->belongsToBrand->name }}</td>
-                                <td>{{ $stock->appliance->belongsToCategory->name }}</td>
-                                <td>{{ $stock->getDeliveryHistory->getInvoice->receipt_id }}</td>
-                                <td>{{ $stock->getDeliveryhistory->created_at->format('d-m-Y') }}</td>
-                                <td>
-                                	<a href="{{ url('appliance/invoice/job/'.$stock->getDeliveryHistory->getInvoice->id) }}" class="btn btn-success">查看</a>
-                                	@can('root')
-	                                    <!-- Button trigger modal -->
-	                                    <button class="btn btn-danger" data-toggle="modal" data-target={{"#myModal".$stock->id}}>
-	                                        重新入库
-	                                    </button>
-	                                    <!-- Modal -->
-	                                    <div class="modal fade" id={{"myModal".$stock->id}} tabindex="-1" role="dialog">
-	                                        <div class="modal-dialog">
-	                                            <div class="modal-content">
-	                                                <div class="modal-header">
-	                                                    <button type="button" class="close" data-dismiss="modal" >&times;</button>
-	                                                </div>
-	                                                <div class="modal-body">
-	                                                    {{ $stock->getDeliveryHistory->getInvoice->job_id }}
-	                                                    {{ $stock->appliance->model }}
-	                                                </div>
-	                                                <div class="modal-footer">
-	                                                    <form action="{{ url('appliance/stock/reentry') }}" method="POST" style="display: inline;">
-	                                                        {{ csrf_field() }}
-	                                                        <input type="hidden" name="sid" value="{{$stock->id}}">
-	                                                        <button type="submit" class="btn btn-danger">确认</button>
-	                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
-	                                                    </form>
-	                                                </div>
-	                                            </div>
-	                                            <!-- /.modal-content -->
-	                                        </div>
-	                                        <!-- /.modal-dialog -->
-	                                    </div>
-	                                    <!-- /.modal -->
-	                                @endcan
-                                </td>
-                            </tr>
-                        @endforeach
-
-                        </tbody>
                     </table>
                     <!-- /.table-responsive -->
                 </div>
@@ -122,10 +65,25 @@
     <script>
         $(document).ready(function() {
             $('#dataTables').DataTable({
+                processing: true,
+                serverSide: true,
+//                serverMethod: 'post',
+                ajax: {
+                    'url':'/appliance/stock/ajaxIndex/3'
+                },
+                columns: [
+                    { data: 'appliance.model', orderable: false },
+                    { data: 'brand', name: 'appliance.belongsToBrand.name', orderable: false },
+                    { data: 'category', name: 'appliance.belongsToCategory.name', orderable: false },
+                    { data: 'receipt', name: 'getDeliveryHistory.getInvoice.receipt_id', orderable: false },
+                    { data: 'date', name: 'getDeliveryHistory.created_at'},
+                    { data: 'action', orderable: false, searchable: false }
+                ],
                 columnDefs: [
                     { type: 'date-eu', targets: 4 }
                 ],
                 responsive: true,
+//                pageLength: 50,
                 order: [4]
             });
         });
