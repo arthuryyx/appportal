@@ -153,4 +153,14 @@ class JobController extends Controller
 //    public function html($id){
 //        return view('appliance.pdf.invoice')->withInvoice(Appliance_Invoice::with('hasManyStocks')->find($id));
 //    }
+
+    public function indexAll()
+    {
+        return view('appliance.invoice.job.indexall')->withInvoices(Appliance_Invoice::with('hasManyStocks')
+            ->with('getCreated_by')
+            ->with('hasManyDeposits')
+            ->with('getState')
+            ->orderBy('id', 'desc')
+            ->get());
+    }
 }

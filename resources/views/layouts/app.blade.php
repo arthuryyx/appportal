@@ -331,6 +331,9 @@
                             <li>
                                 <a href="{{ url('statistics/payment') }}" target="_blank"> Unpaid</a>
                             </li>
+                            <li>
+                                <a href="{{ url('appliance/invoice/indexall') }}" target="_blank"> List</a>
+                            </li>
                         </ul>
                     </li>
                     @endcan
