@@ -6,7 +6,7 @@
 
     <!-- DataTables Responsive CSS -->
     <link href="{{ asset('vendor/datatables-responsive/dataTables.responsive.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('vendor/select2/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/datatables-checkboxes/dataTables.checkboxes.css') }}" rel="stylesheet">
 
 @endsection
@@ -52,6 +52,29 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/order/merge')}}'">merge</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target={{"#myModalappend"}}>Append</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id={{"myModalappend"}}  role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <strong>Appliance</strong>
+                                        <select class="ref form-control" name="ref"></select>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/order/append')}}'">Confirm</button>
                                         <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
                                     </div>
                                 </div>
@@ -185,6 +208,31 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('vendor/select2/select2.min.js')}}"></script>
+
+    <script type="text/javascript">
+        $('.ref').select2({
+            placeholder: 'Select a Order',
+            ajax: {
+                url: '/select2-autocomplete-ajax/existOrder',
+                dataType: 'json',
+                delay: 200,
+                processResults: function (data) {
+                    return {
+                        results:  $.map(data, function (item) {
+                            return {
+                                text: item.ref,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+
+    </script>
+
     <!-- DataTables JavaScript -->
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables-plugins/dataTables.bootstrap.min.js')}}"></script>

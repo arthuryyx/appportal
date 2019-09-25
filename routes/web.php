@@ -93,6 +93,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
     Route::resource('order', 'OrderController', ['except' => ['destroy']]);
     Route::post('order/confirm', 'OrderController@confirmOrder');
     Route::post('order/merge', 'OrderController@mergeOrders');
+    Route::post('order/append', 'OrderController@append');
 
     Route::get('delivery/index/{invoice}', 'DeliveryController@index');
     Route::get('delivery/packing-slip/{delivery}', 'DeliveryController@exportPackingSlip');
@@ -128,5 +129,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('select2-autocomplete-ajax/productModel', 'Select2AutocompleteController@productModel');
     Route::get('select2-autocomplete-ajax/available', 'Select2AutocompleteController@available');
     Route::get('select2-autocomplete-ajax/unsigned', 'Select2AutocompleteController@unsigned');
+    Route::get('select2-autocomplete-ajax/existOrder', 'Select2AutocompleteController@existOrder');
 
 });

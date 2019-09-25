@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Appliance;
+use App\Appliance_Invoice;
+use App\Appliance_Order;
 use App\Appliance_Stock;
 use App\Product_Model;
 use Illuminate\Http\Request;
@@ -85,6 +87,16 @@ class Select2AutocompleteController extends Controller
                 ->where('appliances.model','LIKE',"%$search%")
                 ->select('appliance__stocks.id', 'model', 'shelf')
                 ->get();
+        }
+        return response()->json($data);
+    }
+
+    public function existOrder(Request $request)
+    {
+        $data = [];
+        if($request->has('q')){
+            $search = $request->q;
+            $data = Appliance_Order::where('ref','LIKE',"%$search%")->select('id', 'ref')->get();
         }
         return response()->json($data);
     }

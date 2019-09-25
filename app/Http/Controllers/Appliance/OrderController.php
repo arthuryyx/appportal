@@ -128,4 +128,26 @@ class OrderController extends Controller
 
     }
 
+    public function append(Request $request)
+    {
+        $this->validate($request, [
+            'ref' => 'required|exists:appliance__orders,id',
+            'id' => 'required',
+        ]);
+        DB::beginTransaction();
+        try {
+            $order = Appliance_Order::find($request->input('ref'));
+            foreach (Appliance_Stock::whereIn('id', $request->input('id'))->get() as $stock){
+                if($stock->order_id == null)
+                    $stock->update(['order_id'=>$order->id]);
+            }
+        } catch(\Exception $e)
+        {
+            DB::rollback();
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
+        }
+        DB::commit();
+        return redirect('appliance/order/'.$order->id)->withErrors('操作成功！');
+    }
+
 }
