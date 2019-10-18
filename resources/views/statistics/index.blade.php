@@ -6,30 +6,38 @@
 
     <!-- DataTables Responsive CSS -->
     <link href="{{ asset('vendor/datatables-responsive/dataTables.responsive.css')}}" rel="stylesheet">
-    
+
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{ asset('vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')
+    <h1 class="page-header">{{$date}}</h1>
     <div class="row">
-        <div class="col-lg-2">
-            <h1 class="page-header">{{$date}}</h1>
-        </div>
         {!! Form::open(['url' => 'statistics/sales','method'=>'POST']) !!}
-            <div class="col-lg-2">
-                <div class="form-group">
-                    <div class='input-group date' id='datetimepicker3'>
-                        <input type='text' name="date" class="form-control" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
+        <div class='col-md-2'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker6'>
+                    <input type='text' name="StartDate" class="form-control" required="required" />
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
                 </div>
             </div>
-            <div class="col-lg-2">
-                {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
+        </div>
+        <div class='col-md-2'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker7'>
+                    <input type='text' name="EndDate" class="form-control" required="required" />
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                </div>
             </div>
+        </div>
+        <div class="col-lg-1">
+            {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
+        </div>
         {!! Form::close() !!}
     </div>
 
@@ -105,12 +113,26 @@
             });
         });
         $(function () {
-            $('#datetimepicker3').datetimepicker({
-                format: 'mm-yyyy',
+            $('#datetimepicker6').datetimepicker({
+                format: 'yyyy-mm-dd',
                 autoclose: true,
-                startView: 3,
+//                startView: 3,
                 minView: 3,
                 forceParse: false
+            });
+            $('#datetimepicker7').datetimepicker({
+                useCurrent: false, //Important! See issue #1075
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+//                startView: 3,
+                minView: 3,
+                forceParse: false
+            });
+            $('#datetimepicker6').on("changeDate", function (e) {
+                $('#datetimepicker7').datetimepicker('setStartDate', e.date);
+            });
+            $('#datetimepicker7').on("changeDate", function (e) {
+                $('#datetimepicker6').datetimepicker('setEndDate', e.date);
             });
         });
     </script>

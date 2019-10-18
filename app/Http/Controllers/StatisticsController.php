@@ -136,16 +136,15 @@ class StatisticsController extends Controller
     }
 
     public function applianceSalesTable(Request $request){
-         $invoices = null;
-        if ($request->input('date')==null){
-            $invoices = Appliance_Invoice::whereYear('created_at', date('Y'))->whereMonth('created_at', date('m'))->pluck('id');
+        if ($request->getMethod()=='GET'){
+            $invoices = [];
         }else{
-            $invoices = Appliance_Invoice::whereYear('created_at', substr($request->input('date'),3))->whereMonth('created_at', substr($request->input('date'),0,2))->pluck('id');
+            $invoices = Appliance_Invoice::whereBetween('created_at', [$request->input('StartDate'), $request->input('EndDate')])->pluck('id');
         }
         $data = Appliance_Stock::whereIn('assign_to', $invoices)
             ->groupBy('aid')
             ->select('aid', DB::raw('count(aid) as total'))->with('appliance.belongsToBrand')->get();
-        return view('statistics.index')->withData($data)->withDate($request->input('date'));
+        return view('statistics.index')->withData($data)->withDate($request->input('StartDate').' to '.$request->input('EndDate'));
     }
 
     public function payment()
