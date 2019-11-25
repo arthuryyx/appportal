@@ -57,13 +57,25 @@
                         <thead>
                         <tr>
                             <th>
-                                brand
+                                qty
                             </th>
                             <th>
                                 model
                             </th>
                             <th>
-                                total
+                                brand
+                            </th>
+                            <th>
+                                category
+                            </th>
+                            <th>
+                                rrp
+                            </th>
+                            <th>
+                                rsp
+                            </th>
+                        <th>
+                                cost
                             </th>
                         </tr>
                         </thead>
@@ -71,9 +83,13 @@
 
                         @foreach ($data as $product)
                             <tr>
-                                <td>{{ $product->appliance->belongsToBrand->name }}</td>
-                                <td>{{ $product->appliance->model }}</td>
                                 <td>{{ $product->total }}</td>
+                                <td>{{ $product->appliance->model }}</td>
+                                <td>{{ $product->appliance->belongsToBrand->name }}</td>
+                                <td>{{ $product->appliance->belongsToCategory->name }}</td>
+                                <td>{{ $product->appliance->rrp }}</td>
+                                <td>{{ $product->appliance->lv1 }}</td>
+                                <td>{{ $product->appliance->cost }}</td>
                             </tr>
                         @endforeach
                         </tbody>

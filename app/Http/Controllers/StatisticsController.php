@@ -143,7 +143,7 @@ class StatisticsController extends Controller
         }
         $data = Appliance_Stock::whereIn('assign_to', $invoices)
             ->groupBy('aid')
-            ->select('aid', DB::raw('count(aid) as total'))->with('appliance.belongsToBrand')->get();
+            ->select('aid', DB::raw('count(aid) as total'))->with('appliance.belongsToBrand')->with('appliance.belongsToCategory')->get();
         return view('statistics.index')->withData($data)->withDate($request->input('StartDate').' to '.$request->input('EndDate'));
     }
 
