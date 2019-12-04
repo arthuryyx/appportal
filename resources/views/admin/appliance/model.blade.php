@@ -2,7 +2,7 @@
 <tr>
     <th>
         @can('dev')
-            <a href="{{ url('admin/appliance/'.$model->id.'/edit') }}" class="btn btn-success">编辑</a>{{$model->id}}
+            <a href="{{ url('admin/appliance/'.$model->id.'/edit') }}" class="btn btn-success" target="_blank">编辑</a>{{$model->id}}
         @endcan
         @cannot('dev')
             Model

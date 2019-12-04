@@ -92,7 +92,7 @@
                                     @endif
                                 </td>
                                 <td>{{ $appliance->description }}</td>
-                                <td>@can('appliance_edit')<a href="{{ url('admin/appliance/'.$appliance->id.'/edit') }}" class="btn btn-success">编辑</a>@endcan</td>
+                                <td>@can('appliance_edit')<a href="{{ url('admin/appliance/'.$appliance->id.'/edit') }}" class="btn btn-success" target="_blank">编辑</a>@endcan</td>
                                 <td>@can('appliance_delete')
                                     <!-- Button trigger modal -->
                                     <button class="btn btn-danger" data-toggle="modal" data-target={{"#myModal".$appliance->id}}>
