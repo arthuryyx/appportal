@@ -110,7 +110,7 @@
                 autoWidth: false,
                 responsive: true,
                 pageLength: 25,
-                order: [0]
+                order: [7]
             });
         });
     </script>
