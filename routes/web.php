@@ -33,6 +33,11 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
     Route::put('model/barcode', 'ApplianceController@barcode');
 //    Route::resource('appliance/ajax', 'ApplianceController@ajax');
     Route::get('appliance/model', function () {return view('admin.appliance.show');});
+
+    Route::get('model/importExport', 'ApplianceController@importExport');
+//    Route::get('model/downloadExcel/{type}', 'ApplianceController@downloadExcel');
+    Route::post('model/importExcel', 'ApplianceController@importExcel');
+
     Route::resource('appliance', 'ApplianceController');
 
     Route::get('brand/{type}', 'BrandController@index');

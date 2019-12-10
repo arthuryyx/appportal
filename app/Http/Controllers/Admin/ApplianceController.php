@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Appliance;
 use App\Brand;
 use App\Category;
-use App\Stock;
+use App\Appliance_Stock;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 class ApplianceController extends Controller
 {
@@ -81,7 +83,7 @@ class ApplianceController extends Controller
 
     public function destroy($id)
     {
-        if(Stock::where('aid', $id)->count()==0){
+        if(Appliance_Stock::where('aid', $id)->count()==0){
             Appliance::find($id)->delete();
             return redirect()->back()->withInput()->withErrors('删除成功！');
         } else{
@@ -114,4 +116,75 @@ class ApplianceController extends Controller
 //        return response()->json(Appliance_Model::where('id', $id)->with('getBrand', 'getCategory')->first());
     }
 
+
+    public function importExport()
+    {
+        return view('admin.appliance.excel')->withBrands(Brand::orderBy('name')->pluck('name', 'id'));
+    }
+//
+//    public function downloadExcel(Request $request, $type)
+//    {
+//        $data = Item::get()->toArray();
+//        return Excel::create('itsolutionstuff_example', function($excel) use ($data) {
+//            $excel->sheet('mySheet', function($sheet) use ($data)
+//            {
+//                $sheet->fromArray($data);
+//            });
+//        })->download($type);
+//    }
+
+    public function importExcel(Request $request)
+    {
+        $this->validate($request, [
+            'brand_id' => 'required|exists:brands,id',
+        ]);
+        $bid = $request->input('brand_id');
+
+        if($request->hasFile('import_file')){
+            $path = $request->file('import_file')->getRealPath();
+            $data = Excel::load($path, function($reader) {})->get();
+//            if(!empty($data) && $data->count()){
+//                foreach ($data->toArray() as $key => $value) {
+//                    if(!empty($value)){
+//                        foreach ($value as $v) {
+//                            $insert[] = ['brand' => $v['brand'], 'category' => $v['category']];
+//                        }
+//                    }
+//                }
+//                if(!empty($insert)){
+//                    Item::insert($insert);
+//                    return back()->with('success','Insert Record successfully.');
+//                }
+//            }
+            $m = '';
+            if(!empty($data) && $data->count()){
+                DB::beginTransaction();
+                try {
+                    foreach ($data->toArray() as $key => $value) {
+                        if(empty($value) || $value['model'] == '')
+                            continue;
+                        $obj = Appliance::where('model', $value['model'])->where('brand_id', $bid)->first();
+                        if($obj==null) {
+                            $m = $m . $value['model'] .'<br>';
+                        }
+                        else{
+                            $obj->update($value);
+                        }
+                    }
+                } catch(\Exception $e)
+                {
+                    DB::rollback();
+                    return redirect()->back()->withInput()->with('error', $e->getMessage());
+                }
+                DB::commit();
+
+                if($m === ''){
+                    return redirect()->back()->with('success','更新成功！');
+                }else{
+                    return redirect()->back()->withInput()->withErrors($m);
+                }
+            }
+        }
+        return back()->with('error','Please Check your file, Something is wrong there.');
+    }
 }
