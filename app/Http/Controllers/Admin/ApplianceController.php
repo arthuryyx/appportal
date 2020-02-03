@@ -168,6 +168,7 @@ class ApplianceController extends Controller
                             $m = $m . $value['model'] .'<br>';
                         }
                         else{
+                            unset($value['model']);
                             $obj->update($value);
                         }
                     }
