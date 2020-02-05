@@ -48,6 +48,15 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
 
 });
 
+Route::group(['middleware' => 'auth', 'namespace' => 'Kitchen', 'prefix' => 'kitchen'], function() {
+
+
+    Route::resource('product/brand', 'Kitchen_Product_Brand_Controller',['except' => ['create', 'show']]);
+    Route::resource('product/category', 'Kitchen_Product_Category_Controller',['except' => ['create', 'show']]);
+    Route::resource('product/template', 'Kitchen_Product_Template_Controller');
+
+});
+
 Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'appliance'], function() {
     Route::resource('quote', 'QuoteController');
     Route::get('quote/{id}/html', 'QuoteController@quoteHtml');
