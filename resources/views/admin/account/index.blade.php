@@ -61,7 +61,19 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>Permission:</strong>
+                                        <strong>Region:</strong>
+                                        <br/>
+                                        @foreach($regions as $id => $name)
+                                            <label>{{ Form::checkbox('regions[]', $id, false, array('class' => 'name checkbox-inline')) }}
+                                                {{ $name }}
+                                            </label>
+                                            &nbsp;
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>Role:</strong>
                                         <br/>
                                         @foreach($roles as $id => $label)
                                             <label>{{ Form::checkbox('roles[]', $id, false, array('class' => 'name checkbox-inline')) }}
@@ -98,6 +110,9 @@
                                     Roles
                                 </th>
                                 <th>
+                                    Regions
+                                </th>
+                                <th>
 
                                 </th>
                             </tr>
@@ -119,6 +134,13 @@
                                         @if(!empty($user->roles))
                                             @foreach($user->roles as $v)
                                                 <label class="label label-info">{{ $v->label }}</label>
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if(!empty($user->regions))
+                                            @foreach($user->regions as $v)
+                                                <label class="label label-info">{{ $v->name }}</label>
                                             @endforeach
                                         @endif
                                     </td>

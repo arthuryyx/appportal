@@ -306,6 +306,9 @@
                                     <li>
                                         <a href="{{ url('admin/account') }}"> User</a>
                                     </li>
+                                    <li>
+                                        <a href="{{ url('admin/region') }}"> Region</a>
+                                    </li>
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>

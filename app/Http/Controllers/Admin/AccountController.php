@@ -8,12 +8,15 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use App\Role;
+use App\Region;
 
 class AccountController extends Controller
 {
     public function index()
     {
-        return view('admin.account.index')->withUsers(User::all())->withRoles(Role::pluck('label', 'id'));
+        return view('admin.account.index')->withUsers(User::all())
+            ->withRoles(Role::pluck('label', 'id'))
+            ->withRegions(Region::pluck('name', 'id'));
     }
 
     public function store(Request $request)
@@ -35,6 +38,7 @@ class AccountController extends Controller
                 'active' => $data['active'],
             ]);
             $user->roles()->attach($data['roles']);
+            $user->regions()->attach($data['regions']);
 
         } catch(\Exception $e)
         {
@@ -47,7 +51,12 @@ class AccountController extends Controller
 
     public function edit($id)
     {
-        return view('admin/account/edit')->withUser(User::find($id))->withRoles(Role::pluck('label', 'id'))->withChecks(User::find($id)->roles()->pluck('id')->all());
+        return view('admin/account/edit')
+            ->withUser(User::find($id))
+            ->withRoles(Role::pluck('label', 'id'))
+            ->withCroles(User::find($id)->roles()->pluck('id')->all())
+            ->withRegions(Region::pluck('name', 'id'))
+            ->withCregions(User::find($id)->regions()->pluck('id')->all());
     }
 
     public function update(Request $request, $id)
@@ -62,10 +71,14 @@ class AccountController extends Controller
         if (!array_key_exists('roles', $r)){
             $r['roles'] = [];
         }
+        if (!array_key_exists('regions', $r)){
+            $r['regions'] = [];
+        }
         try {
             $user = User::find($id);
             $user->update($r);
             $user->roles()->sync($r['roles']);
+            $user->regions()->sync($r['regions']);
         } catch(\Exception $e)
         {
             DB::rollback();

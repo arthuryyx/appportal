@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin
     Route::resource('permission', 'PermissionController');
     Route::resource('role', 'RoleController');
     Route::resource('account', 'AccountController');
+    Route::resource('region', 'RegionController');
 
     Route::get('model/barcode', function () {return view('admin.appliance.barcode');});
     Route::put('model/barcode', 'ApplianceController@barcode');

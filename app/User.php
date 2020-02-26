@@ -31,6 +31,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+    public function regions()
+    {
+        return $this->belongsToMany(Region::class);
+    }
+
 // 判断用户是否具有某个角色
     public function hasRole($role)
     {

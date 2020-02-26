@@ -43,10 +43,22 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
+                                        <strong>Regions:</strong>
+                                        <br/>
+                                        @foreach($regions as $id => $name)
+                                            <label>{{ Form::checkbox('regions[]', $id, in_array($id, $cregions) ? true : false, array('class' => 'name checkbox-inline')) }}
+                                                {{ $name }}
+                                            </label>
+                                            &nbsp;
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
                                         <strong>Roles:</strong>
                                         <br/>
                                         @foreach($roles as $id => $label)
-                                            <label>{{ Form::checkbox('roles[]', $id, in_array($id, $checks) ? true : false, array('class' => 'name checkbox-inline')) }}
+                                            <label>{{ Form::checkbox('roles[]', $id, in_array($id, $croles) ? true : false, array('class' => 'name checkbox-inline')) }}
                                                 {{ $label }}
                                             </label>
                                             &nbsp;
