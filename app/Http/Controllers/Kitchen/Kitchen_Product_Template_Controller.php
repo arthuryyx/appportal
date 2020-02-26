@@ -84,6 +84,12 @@ class Kitchen_Product_Template_Controller extends Controller
         return redirect()->back()->withSuccess('添加成功！');
     }
 
+    public function show($id)
+    {
+        return view('kitchen.product.template.show')
+            ->withModel(Kitchen_Product_Template::where('id', $id)->first())->render();
+    }
+
 //    public function destroy($id)
 //    {
 //        if(Appliance_Stock::where('aid', $id)->count()==0){

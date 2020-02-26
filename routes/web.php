@@ -55,6 +55,8 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Kitchen', 'prefix' => 'kit
     Route::resource('product/brand', 'Kitchen_Product_Brand_Controller',['except' => ['create', 'show']]);
     Route::resource('product/category', 'Kitchen_Product_Category_Controller',['except' => ['create', 'show']]);
     Route::resource('product/template', 'Kitchen_Product_Template_Controller');
+    Route::resource('product/item', 'Kitchen_Product_Item_Controller',['except' => ['index', 'show'], 'as' => 'kitchen' ]);
+    Route::resource('job/quote', 'Kitchen_Job_Quote_Controller',['except' => ['destroy'], 'as' => 'kitchen' ]);
 
 });
 
@@ -145,5 +147,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('select2-autocomplete-ajax/available', 'Select2AutocompleteController@available');
     Route::get('select2-autocomplete-ajax/unsigned', 'Select2AutocompleteController@unsigned');
     Route::get('select2-autocomplete-ajax/existOrder', 'Select2AutocompleteController@existOrder');
+    Route::get('select2-autocomplete-ajax/kitchen/template', 'Select2AutocompleteController@kitchenTemplate');
 
 });

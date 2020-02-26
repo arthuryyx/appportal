@@ -6,6 +6,7 @@ use App\Appliance;
 use App\Appliance_Invoice;
 use App\Appliance_Order;
 use App\Appliance_Stock;
+use App\Kitchen_Product_Template;
 use App\Product_Model;
 use Illuminate\Http\Request;
 
@@ -97,6 +98,16 @@ class Select2AutocompleteController extends Controller
         if($request->has('q')){
             $search = $request->q;
             $data = Appliance_Order::where('ref','LIKE',"%$search%")->select('id', 'ref')->get();
+        }
+        return response()->json($data);
+    }
+
+    public function kitchenTemplate(Request $request)
+    {
+        $data = [];
+        if($request->has('q')){
+            $search = $request->q;
+            $data = Kitchen_Product_Template::where('model','LIKE',"%$search%")->select('id', 'model')->get();
         }
         return response()->json($data);
     }

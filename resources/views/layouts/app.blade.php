@@ -412,28 +412,25 @@
                             <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Kitchen<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{{ url('kitchen/product/brand') }}" target="_blank"> Product Brand</a>
+                                    <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Product<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="{{ url('kitchen/product/brand') }}" target="_blank"> Product Brand</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url('kitchen/product/category') }}" target="_blank"> Product Category</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url('kitchen/product/template') }}" target="_blank"> Product List</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url('kitchen/product/template/create') }}" target="_blank"> New Product</a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li>
-                                    <a href="{{ url('kitchen/product/category') }}" target="_blank"> Product Category</a>
+                                    <a href="{{ url('kitchen/job/quote') }}" target="_blank"> Quote</a>
                                 </li>
-                                <li>
-                                    <a href="{{ url('kitchen/product/template/create') }}" target="_blank"> New Product</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('kitchen/product/template') }}" target="_blank"> Product List</a>
-                                </li>
-                                {{--<li>--}}
-                                    {{--<a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Config<span class="fa arrow"></span></a>--}}
-                                    {{--<ul class="nav nav-third-level">--}}
-                                        {{--<li>--}}
-                                            {{--<a href="{{ url('admin/appliance') }}" target="_blank"> Product List</a>--}}
-                                        {{--</li>--}}
-                                        {{--<li>--}}
-                                            {{--<a href="{{ url('admin/appliance/create') }}" target="_blank"> New Product</a>--}}
-                                        {{--</li>--}}
-                                    {{--</ul>--}}
-                                {{--</li>--}}
                             </ul>
                         </li>
 
