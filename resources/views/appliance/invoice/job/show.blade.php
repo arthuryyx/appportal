@@ -93,12 +93,34 @@
                     </table>
                     <hr>
                     <div class="col-lg-2">
-                        @if($invoice->price == 0 && $invoice->hasManyDeposits->sum('amount') == 0)
-                        @elseif($invoice->hasManyDeposits->sum('amount') >= $invoice->price)
-                            <img src="{{ asset('img/paid.png')}}" height="150" width="150">
-                        @else
-                            <img src="{{ asset('img/unpaid.png')}}" height="150" width="150" >
-                        @endif
+                        <div class="container">
+                            <div class="row">
+                                @if($invoice->price == 0 && $invoice->hasManyDeposits->sum('amount') == 0)
+                                @elseif($invoice->hasManyDeposits->sum('amount') >= $invoice->price)
+                                    <img src="{{ asset('img/paid.png')}}" height="150" width="150">
+                                @else
+                                    <img src="{{ asset('img/unpaid.png')}}" height="150" width="150" >
+                                @endif
+                            </div>
+                            </br>
+                            <div class="row">
+                                @can('appliance_add_deposit')
+                                    <div class="col-lg-2">
+                                        {!! Form::open(['url' => 'appliance/deposit','method'=>'POST']) !!}
+                                        <div class="row">
+                                            <div class="col-xs-10 col-sm-10 col-md-10">
+                                                <strong>Deposit</strong>
+                                                {{ Form::number('amount', null, array('class' => 'form-control', 'step' => 'any', 'required' => 'required')) }}
+                                                {{ Form::hidden('invoice_id', $invoice->id) }}
+                                                </br>
+                                                {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
+                                            </div>
+                                        </div>
+                                        {!! Form::close() !!}
+                                    </div>
+                                @endcan
+                            </div>
+                        </div>
                     </div>
                     {{--<div class="col-lg-3">--}}
                         {{--{!! Form::open(['url' => 'appliance/stock/job/assign','method'=>'POST']) !!}--}}
@@ -128,50 +150,47 @@
                     {{--</div>--}}
 
                     @if($invoice->hasManyDeposits->count() == 0 || Gate::check('root'))
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         {!! Form::open(['url' => 'appliance/stock/allocation','method'=>'POST']) !!}
                         <div class="row">
                             <div class="col-xs-10 col-sm-10 col-md-10">
                                 <strong>Appliance</strong>
                                 <select class="aid form-control" name="aid" required="required"></select>
+                                </br>
+                                </br>
                                 <strong>Price</strong>
                                 {{ Form::number('price', null, array('class' => 'form-control', 'step' => 'any')) }}
+                                </br>
                                 <strong>Warranty (year)</strong>
                                 {{ Form::number('warranty', null, array('class' => 'form-control')) }}
                                 {{ Form::hidden('assign_to', $invoice->id) }}
+                                </br>
                                 {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
                             </div>
                         </div>
                         {!! Form::close() !!}
                     </div>
 		            @endif
-		    
-                    @can('appliance_add_deposit')
-                    <div class="col-lg-4">
-                        {!! Form::open(['url' => 'appliance/deposit','method'=>'POST']) !!}
-                        <div class="row">
-                            <div class="col-xs-10 col-sm-10 col-md-10">
-                                <strong>Deposit</strong>
-                                {{ Form::number('amount', null, array('class' => 'form-control', 'step' => 'any', 'required' => 'required')) }}
-                                {{ Form::hidden('invoice_id', $invoice->id) }}
-                                {{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
-                            </div>
-                        </div>
-                        {!! Form::close() !!}
+
+                    <div class="col-lg-5">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="modelTables">
+
+                        </table>
                     </div>
-                    @endcan
-                   
+
+
+
                     <div class="col-lg-2">
                         <p>
                             <strong>Deposit History: </strong>
                             <a href="{{ url('appliance/deposit/index/'.$invoice->id) }}" class="btn btn-primary">view</a>
                         </p>
-                        <hr>
+                        </br>
                         <p>
                             <strong>Shipping Info: </strong>
                             <a href="{{ url('appliance/delivery/index/'.$invoice->id) }}" class="btn btn-primary">view</a>
                         </p>
-                        <hr>
+                        </br>
                         <p>
                             <strong>Job Orders: </strong>
                             <a href="{{ url('appliance/job/order/'.$invoice->id) }}" class="btn btn-primary">view</a>
@@ -414,6 +433,19 @@
                 },
                 cache: true
             }
+        })
+        .on('select2:select', function (e) {
+            $.ajax({
+                url: '/admin/appliance/' + e.params.data.id,
+                method: 'GET',
+                success: function(data) {
+                    $('#modelTables').html('');
+                    $('#modelTables').html(data);
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
         });
 
     </script>
