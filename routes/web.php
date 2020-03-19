@@ -71,6 +71,10 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
     Route::get('invoice/job/{id}/html', 'StockController@invoiceHtml');
     Route::get('cid/{id}', 'JobController@cidToJob');
 
+    Route::get('aircon', function () {return view('appliance.invoice.job.index');});
+    Route::get('ajax-index', 'AirConController@airConIndex');
+
+
     Route::post('item/create', 'ItemController@store');
     Route::get('item/{id}/edit', 'ItemController@edit');
     Route::patch('item/{id}', 'ItemController@update');
