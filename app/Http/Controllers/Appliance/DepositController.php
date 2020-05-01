@@ -23,12 +23,17 @@ class DepositController extends Controller
             'created_by' => 'required|exists:users,id',
         ]);
         $input = $request->input();
-        if ($input['amount'] > 0 ){
-            $input['confirmed'] =0;
-        } elseif ($input['amount'] <0){
-            $input['confirmed'] = 1;
-        } else{
+//        if ($input['amount'] > 0 ){
+//            $input['confirmed'] =0;
+//        } elseif ($input['amount'] <0){
+//            $input['confirmed'] = 1;
+//        } else{
+//            return redirect()->back()->withErrors('无效金额！');
+//        }
+        if ($input['amount'] = 0 ){
             return redirect()->back()->withErrors('无效金额！');
+        } else{
+            $input['confirmed'] = 1;
         }
         try{
             Appliance_Deposit::create($input);

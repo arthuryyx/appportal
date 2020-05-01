@@ -141,8 +141,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('statistics/sales', 'StatisticsController@applianceSalesTable');
     Route::post('statistics/sales', 'StatisticsController@applianceSalesTable');
 
-    Route::get('statistics/payment/{id}', 'StatisticsController@paymentChart');
+    Route::post('statistics/payment/{id}', 'StatisticsController@paymentChart');
     Route::get('statistics/payment', 'StatisticsController@payment');
+    Route::post('statistics/payment', 'StatisticsController@payment');
 
     Route::get('select2-autocomplete-ajax/applianceModel', 'Select2AutocompleteController@applianceModel');
     Route::get('select2-autocomplete-ajax/activeModel', 'Select2AutocompleteController@activeModel');

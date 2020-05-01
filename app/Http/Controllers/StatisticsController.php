@@ -147,40 +147,48 @@ class StatisticsController extends Controller
         return view('statistics.index')->withData($data)->withDate($request->input('StartDate').' to '.$request->input('EndDate'));
     }
 
-    public function payment()
+//    public function payment()
+//    {
+//        return view('statistics.payment')->withData(array_unique(Appliance_Invoice::whereDate('created_at', '>=', Carbon::today()->subMonthsWithOverflow(3)->startOfMonth())->pluck('created_by')->toArray()));
+//    }
+
+    public function payment(Request $request)
     {
-        return view('statistics.payment')->withData(array_unique(Appliance_Invoice::whereDate('created_at', '>=', Carbon::today()->subMonthsWithOverflow(3)->startOfMonth())->pluck('created_by')->toArray()));
+        if ($request->getMethod()=='GET'){
+            $data = [];
+        }else{
+            $data = array_unique(Appliance_Invoice::whereBetween('created_at', [$request->input('StartDate'), $request->input('EndDate')])->pluck('created_by')->toArray());
+        }
+        return view('statistics.unpaid')->withData($data)->withStart($request->input('StartDate'))->withEnd($request->input('EndDate'));
     }
 
-    public function paymentChart($id)
+
+    public function paymentChart(Request $request, $id)
     {
         $data = array();
-        for ($i=0; $i<4; $i++){
-            $date = Carbon::today()->subMonthsWithOverflow($i);
-            $temp = Appliance_Invoice::whereYear('created_at', $date->year)
-                ->whereMonth('created_at', $date->month)
-                ->where('created_by', $id)
-                ->get();
-            $array = array();
-            if(count($temp)==0){
-                $array [0]['label']='No Data';
-                $array [0]['value']=0;
-            }else{
-                $m = $temp->sum('price');
-                $n = Appliance_Deposit::whereIn('invoice_id', $temp->pluck('id'))->sum('amount');
-                if (floor($n)>0)
-                {
-                    $array[count($array)]['label'] = 'Paid';
-                    $array[count($array)-1]['value'] = floor($n);
-                }
-                if (floor($m-$n) >0)
-                {
-                    $array[count($array)]['label'] = 'Unpaid';
-                    $array[count($array)-1]['value'] = floor($m-$n);
-                }
+
+        $temp = Appliance_Invoice::whereBetween('created_at', [$request->input('startDate'), $request->input('endDate')])
+            ->where('created_by', $id)
+            ->get();
+        $array = array();
+        if(count($temp)==0){
+            $array [0]['label']='No Data';
+            $array [0]['value']=0;
+        }else{
+            $m = $temp->sum('price');
+            $n = Appliance_Deposit::whereIn('invoice_id', $temp->pluck('id'))->sum('amount');
+            if (floor($n)>0)
+            {
+                $array[count($array)]['label'] = 'Paid';
+                $array[count($array)-1]['value'] = floor($n);
             }
-            array_push($data, $array);
+            if (floor($m-$n) >0)
+            {
+                $array[count($array)]['label'] = 'Unpaid';
+                $array[count($array)-1]['value'] = floor($m-$n);
+            }
         }
+        $data['arr'] = $array;
         $data['name'] = User::find($id)->name;
         return $data;
     }
