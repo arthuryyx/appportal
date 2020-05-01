@@ -150,6 +150,9 @@
                     { type: 'date-eu', targets: 7 },
                     { type: 'number-fate', targets: 0 }
                 ],
+                search: {
+                    "search": "Unpaid"
+                },
 //                responsive: true,
                 pageLength: 100,
                 order: [7]

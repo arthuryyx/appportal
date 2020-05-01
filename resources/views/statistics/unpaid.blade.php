@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-        <div class="panel panel-default">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <div class="row">
                 {!! Form::open(['url' => 'statistics/payment','method'=>'POST']) !!}
@@ -42,13 +42,23 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                @foreach($data as $dt)
-                    <div class="col-lg-4 ">
-                        <h4 id="name-{{$dt}}"></h4>
-                        <div id="morris-donut-chart-3-{{$dt}}"></div>
-                        <text class="hidden">{{$dt}}</text>
-                    </div>
-                @endforeach
+                <form id="frm_example" name="frm_example" action="" method="post">
+                    {{ csrf_field() }}
+                    <input name="start" value="{{$start}}" style="visibility: hidden">
+                    <input name="end" value="{{$end}}" style="visibility: hidden">
+                    @foreach($data as $dt)
+                        <div class="col-lg-4 ">
+                            <h4 id="name-{{$dt}}"></h4>
+                            @if(Auth::user()->id == $dt || Gate::check('appliance_view_all_jobs'))
+                                <button type="submit" class="btn btn-success" onclick="document.frm_example.action='{{ url('/appliance/unpaid/index/'.$dt)}}'">more</button>
+                            @else
+                                <button type="submit" class="btn btn-success" disabled="disabled">more</button>
+                            @endif
+                            <div id="morris-donut-chart-3-{{$dt}}"></div>
+                            <text class="hidden">{{$dt}}</text>
+                        </div>
+                    @endforeach
+                </form>
             </div>
         </div>
     </div>

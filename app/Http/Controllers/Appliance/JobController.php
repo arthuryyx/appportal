@@ -154,9 +154,12 @@ class JobController extends Controller
 //        return view('appliance.pdf.invoice')->withInvoice(Appliance_Invoice::with('hasManyStocks')->find($id));
 //    }
 
-    public function indexAll()
+    public function unpaidList(Request $request, $uid)
     {
-        return view('appliance.invoice.job.indexall')->withInvoices(Appliance_Invoice::with('hasManyStocks')
+        return view('appliance.invoice.job.indexall')
+            ->withInvoices(Appliance_Invoice::whereBetween('created_at', [$request->input('start'), $request->input('end')])
+            ->where('created_by', $uid)
+            ->with('hasManyStocks')
             ->with('getCreated_by')
             ->with('hasManyDeposits')
             ->with('getState')
