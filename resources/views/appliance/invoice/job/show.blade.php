@@ -159,7 +159,7 @@
                                 </br>
                                 </br>
                                 <strong>Price</strong>
-                                {{ Form::number('price', null, array('class' => 'form-control', 'step' => 'any')) }}
+                                {{ Form::number('price', null, array('class' => 'form-control', 'step' => 'any', 'required' => 'required')) }}
                                 </br>
                                 <strong>Warranty (year)</strong>
                                 {{ Form::number('warranty', null, array('class' => 'form-control')) }}

@@ -25,7 +25,7 @@
                         {{ method_field('PUT') }}
                         {{ csrf_field() }}
 
-                        <input type="number" name="price" placeholder="Price" class="form-control" step="any">
+                        <input type="number" name="price" placeholder="Price" class="form-control" step="any" required = "required">
                         <br>
 			            <input type="number" name="warranty" placeholder="Warranty" class="form-control">
                         <br>
