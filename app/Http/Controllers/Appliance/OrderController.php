@@ -10,13 +10,40 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Yajra\Datatables\Datatables;
 
 
 class OrderController extends Controller
 {
     public function index()
     {
-        return view('appliance.order.index')->withOrders(Appliance_Order::with('getInvoice')->with('getCreated_by')->get());
+//        return view('appliance.order.index')->withOrders(Appliance_Order::with('getInvoice')->with('getCreated_by')->get());
+        return view('appliance.order.index');
+    }
+
+    public function  ajaxIndex()
+    {
+        $orders = Appliance_Order::query()
+//            ->with('getInvoice')
+            ->with('getCreated_by');
+//            ->orderBy('id', 'desc');
+
+        return Datatables::of($orders)
+            ->editColumn('ref', function ($order) {
+                if ($order->invoice_id)
+                    return $order->getInvoice->receipt_id.'.'.$order->ref;
+                else
+                    return $order->ref;
+            })->editColumn('created_by', function ($order) {
+                return $order->getCreated_by->name;
+            })->editColumn('created_at', function ($order) {
+                return $order->created_at->format('Y-m-d');
+            })->addColumn('detail', function ($order) {
+                return '<a href="'.url('appliance/order/'.$order->id).'" class="btn btn-success" target="_blank">详情</a>';
+            })->addColumn('edit', function ($order) {
+                return '<a href="'.url('appliance/order/'.$order->id).'/edit'.'" class="btn btn-success" target="_blank">修改</a>';
+            })
+            ->make(true);
     }
 
     public function create()

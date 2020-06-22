@@ -111,10 +111,11 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Appliance', 'prefix' => 'a
     Route::get('record/{type}', 'RecordController@index');
 
     Route::get('job/order/{id}', 'OrderController@jobOrders');
-    Route::resource('order', 'OrderController', ['except' => ['destroy']]);
+    Route::get('order/ajax-index', 'OrderController@ajaxIndex');
     Route::post('order/confirm', 'OrderController@confirmOrder');
     Route::post('order/merge', 'OrderController@mergeOrders');
     Route::post('order/append', 'OrderController@append');
+    Route::resource('order', 'OrderController', ['except' => ['destroy']]);
 
     Route::get('delivery/index/{invoice}', 'DeliveryController@index');
     Route::get('delivery/packing-slip/{delivery}', 'DeliveryController@exportPackingSlip');
