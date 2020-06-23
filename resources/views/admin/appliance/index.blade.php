@@ -35,97 +35,72 @@
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                         <thead>
                         <tr>
-                            <th>
-                                Model
-                            </th>
-                            <th>
-                                Brand
-                            </th>
-                            <th>
-                                Category
-                            </th>
-                            <th>
-                                RRP
-                            </th>
-                            <th>
-                                RSP
-                            </th>
-                            <th>
-                                Lv2
-                            </th>
-                            <th>
-                                Lv3
-                            </th>
-                            <th>
-                                Cost Price
-                            </th>
-                            <th>
-                                State
-                            </th>
-                            <th>
-                                Description
-                            </th>
-                            <th>
-
-                            </th>
-                            <th>
-
-                            </th>
+                            <th>Model</th>
+                            <th>Brand</th>
+                            <th>Category</th>
+                            <th>RRP</th>
+                            <th>RSP</th>
+                            <th>Lv2</th>
+                            <th>Lv3</th>
+                            <th>Cost Price</th>
+                            <th>Status</th>
+                            <th>Description</th>
+                            <th>Edit</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        @foreach ($appliances as $appliance)
-                            <tr>
-                                <td>{{ $appliance->model }}</td>
-                                <td>{{ $appliance->belongsToBrand->name }}</td>
-                                <td>{{ $appliance->belongsToCategory->name }}</td>
-                                <td>{{ $appliance->rrp }}</td>
-                                <td>{{ $appliance->lv1 }}</td>
-                                <td>{{ $appliance->lv2 }}</td>
-                                <td>{{ $appliance->lv3 }}</td>
-                                <td>{{ $appliance->lv4 }}</td>
-                                <td>
-                                    @if($appliance->state)
-                                        <label class="label label-danger">Discontinued</label>
-                                    @else
-                                        <label class="label label-success">In Use</label>
-                                    @endif
-                                </td>
-                                <td>{{ $appliance->description }}</td>
-                                <td>@can('appliance_edit')<a href="{{ url('admin/appliance/'.$appliance->id.'/edit') }}" class="btn btn-success" target="_blank">编辑</a>@endcan</td>
-                                <td>@can('appliance_delete')
-                                    <!-- Button trigger modal -->
-                                    <button class="btn btn-danger" data-toggle="modal" data-target={{"#myModal".$appliance->id}}>
-                                        删除
-                                    </button>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id={{"myModal".$appliance->id}} tabindex="-1" role="dialog">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" >&times;</button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    {{$appliance->model}}
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <form action="{{ url('admin/appliance/'.$appliance->id) }}" method="POST" style="display: inline;">
-                                                        {{ method_field('DELETE') }}
-                                                        {{ csrf_field() }}
-                                                        <button type="submit" class="btn btn-danger">删除</button>
-                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <!-- /.modal-content -->
-                                        </div>
-                                        <!-- /.modal-dialog -->
-                                    </div>
-                                    <!-- /.modal -->@endcan
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
+                        {{--<tbody>--}}
+                        {{--@foreach ($appliances as $appliance)--}}
+                            {{--<tr>--}}
+                                {{--<td>{{ $appliance->model }}</td>--}}
+                                {{--<td>{{ $appliance->belongsToBrand->name }}</td>--}}
+                                {{--<td>{{ $appliance->belongsToCategory->name }}</td>--}}
+                                {{--<td>{{ $appliance->rrp }}</td>--}}
+                                {{--<td>{{ $appliance->lv1 }}</td>--}}
+                                {{--<td>{{ $appliance->lv2 }}</td>--}}
+                                {{--<td>{{ $appliance->lv3 }}</td>--}}
+                                {{--<td>{{ $appliance->lv4 }}</td>--}}
+                                {{--<td>--}}
+                                    {{--@if($appliance->state)--}}
+                                        {{--<label class="label label-danger">Discontinued</label>--}}
+                                    {{--@else--}}
+                                        {{--<label class="label label-success">In Use</label>--}}
+                                    {{--@endif--}}
+                                {{--</td>--}}
+                                {{--<td>{{ $appliance->description }}</td>--}}
+                                {{--<td></td>--}}
+                                {{--<td>@can('appliance_delete')--}}
+                                    {{--<!-- Button trigger modal -->--}}
+                                    {{--<button class="btn btn-danger" data-toggle="modal" data-target={{"#myModal".$appliance->id}}>--}}
+                                        {{--删除--}}
+                                    {{--</button>--}}
+                                    {{--<!-- Modal -->--}}
+                                    {{--<div class="modal fade" id={{"myModal".$appliance->id}} tabindex="-1" role="dialog">--}}
+                                        {{--<div class="modal-dialog">--}}
+                                            {{--<div class="modal-content">--}}
+                                                {{--<div class="modal-header">--}}
+                                                    {{--<button type="button" class="close" data-dismiss="modal" >&times;</button>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="modal-body">--}}
+                                                    {{--{{$appliance->model}}--}}
+                                                {{--</div>--}}
+                                                {{--<div class="modal-footer">--}}
+                                                    {{--<form action="{{ url('admin/appliance/'.$appliance->id) }}" method="POST" style="display: inline;">--}}
+                                                        {{--{{ method_field('DELETE') }}--}}
+                                                        {{--{{ csrf_field() }}--}}
+                                                        {{--<button type="submit" class="btn btn-danger">删除</button>--}}
+                                                        {{--<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>--}}
+                                                    {{--</form>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<!-- /.modal-content -->--}}
+                                        {{--</div>--}}
+                                        {{--<!-- /.modal-dialog -->--}}
+                                    {{--</div>--}}
+                                    {{--<!-- /.modal -->@endcan--}}
+                                {{--</td>--}}
+                            {{--</tr>--}}
+                        {{--@endforeach--}}
+                        {{--</tbody>--}}
                     </table>
                     <!-- /.table-responsive -->
                 </div>
@@ -148,6 +123,26 @@
     <script>
         $(document).ready(function() {
             $('#dataTables').DataTable({
+                processing: true,
+                serverSide: true,
+//                serverMethod: 'post',
+                ajax: {
+                    'url':'appliance/ajax-index'
+                },
+                columns: [
+                    { data: 'model'},
+                    { data: 'brand', name: 'belongsToBrand.name' },
+                    { data: 'category', name: 'belongsToCategory.name' },
+                    { data: 'rrp'},
+                    { data: 'lv1'},
+                    { data: 'lv2'},
+                    { data: 'lv3'},
+                    { data: 'lv4'},
+                    { data: 'state', name: 'state', searchable: false },
+                    { data: 'description', orderable: false, searchable: false },
+                    { data: 'edit', orderable: false, searchable: false }
+                ],
+                autoWidth: false,
                 responsive: true
             });
         });

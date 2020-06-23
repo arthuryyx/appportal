@@ -10,14 +10,39 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use Yajra\Datatables\Datatables;
+
 
 class ApplianceController extends Controller
 {
     public function index()
     {
-        return view('admin.appliance.index')->withAppliances(Appliance::with('belongsToBrand')->with('belongsToCategory')->get());
+        return view('admin.appliance.index');
+//        return view('admin.appliance.index')->withAppliances(Appliance::with('belongsToBrand')->with('belongsToCategory')->get());
     }
 
+    public function  ajaxIndex()
+    {
+        $objects = Appliance::query()
+            ->with('belongsToBrand')
+            ->with('belongsToCategory');
+//            ->orderBy('id', 'desc');
+
+        return Datatables::of($objects)
+            ->editColumn('brand', function ($obj) {
+                return $obj->belongsToBrand->name;
+            })->editColumn('category', function ($obj) {
+                return $obj->belongsToCategory->name;
+            })->editColumn('state', function ($obj) {
+                if ($obj->state)
+                    return '<label class="label label-danger">Discontinued</label>';
+                else
+                    return '<label class="label label-success">In Use</label>';
+            })->addColumn('edit', function ($obj) {
+                return '<a href="' . url('admin/appliance/' . $obj->id) . '/edit' . '" class="btn btn-success" target="_blank">编辑</a>';
+            })
+            ->make(true);
+    }
     public function create()
     {
         return view('admin.appliance.create')->withBrands(Brand::orderBy('name')->pluck('name', 'id'))->withCategories(Category::orderBy('name')->pluck('name', 'id'));
