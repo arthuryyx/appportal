@@ -441,6 +441,28 @@
                     <li>
                         <a href="{{ url('appliance/aircon') }}" target="_blank"><i class="fa fa-th- fa-folder-open fa-fw"></i> AirCon</a>
                     </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-th- fa-folder-open fa-fw"></i> Board<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ url('kitchen/board/stock') }}"> 库存</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('kitchen/board/order') }}"> 订单</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('kitchen/board/usage') }}"> 出库</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('kitchen/board/order/pending') }}"> 已定未到</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('kitchen/board/arrived') }}"> 到货记录</a>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

@@ -55,8 +55,29 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Kitchen', 'prefix' => 'kit
     Route::resource('product/brand', 'Kitchen_Product_Brand_Controller',['except' => ['create', 'show']]);
     Route::resource('product/category', 'Kitchen_Product_Category_Controller',['except' => ['create', 'show']]);
     Route::resource('product/template', 'Kitchen_Product_Template_Controller');
-    Route::resource('product/item', 'Kitchen_Product_Item_Controller',['except' => ['index', 'show'], 'as' => 'kitchen' ]);
+    Route::resource('product/item', 'Kitchen_Product_Item_Controller',['except' => ['index', 'show'], 'as' => 'kitchen']);
     Route::resource('job/quote', 'Kitchen_Job_Quote_Controller',['except' => ['destroy'], 'as' => 'kitchen' ]);
+
+    Route::post('board/arriving', 'Kitchen_Board_Order_Controller@arriving');
+    Route::get('board/arrived', 'Kitchen_Board_Stock_Controller@arrived');
+    Route::get('board/ajax-arrived', 'Kitchen_Board_Stock_Controller@ajaxArrived');
+
+    Route::get('board/usage', 'Kitchen_Board_Stock_Controller@usage');
+    Route::get('board/ajax-usage', 'Kitchen_Board_Stock_Controller@ajaxUsage');
+    Route::post('board/usage', 'Kitchen_Board_Stock_Controller@uses');
+
+
+    Route::get('board/stock/ajax-index', 'Kitchen_Board_Stock_Controller@ajaxIndex');
+    Route::resource('board/stock', 'Kitchen_Board_Stock_Controller',['except' => ['destroy'], 'as' => 'board']);
+
+    Route::get('board/order/pending', 'Kitchen_Board_Order_Controller@pending');
+    Route::get('board/order/ajax-pending', 'Kitchen_Board_Order_Controller@ajaxPending');
+
+    Route::get('board/order/item/{id}/cancel', 'Kitchen_Board_Order_Controller@cancelItem');
+    Route::post('board/order/item', 'Kitchen_Board_Order_Controller@itemStore');
+    Route::get('board/order/ajax-index', 'Kitchen_Board_Order_Controller@ajaxIndex');
+    Route::resource('board/order', 'Kitchen_Board_Order_Controller',['except' => ['destroy'], 'as' => 'board']);
+    Route::get('board/name-select2', 'Kitchen_Board_Stock_Controller@getIdByName');
 
 });
 
