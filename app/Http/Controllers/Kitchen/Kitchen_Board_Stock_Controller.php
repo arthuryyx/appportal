@@ -23,10 +23,15 @@ class Kitchen_Board_Stock_Controller extends Controller
         $objects = Kitchen_Board_Stock::query();
 
         return Datatables::of($objects)
-            ->addColumn('view', function ($order) {
-                return '<a href="'.url('kitchen/board/order/'.$order->id).'" class="btn btn-success" target="_blank">查看</a>';
+            ->addColumn('edit', function ($order) {
+                return '<a href="'.url('kitchen/board/stock/'.$order->id.'/edit').'" class="btn btn-success" >查看</a>';
             })
             ->make(true);
+    }
+
+    public function create()
+    {
+        return view('kitchen.board.stock.create');
     }
 
     public function store(Request $request)
@@ -35,6 +40,7 @@ class Kitchen_Board_Stock_Controller extends Controller
             'title' => 'required|unique:kitchen__board__stocks,title,NULL,id,brand,'.$request->input('brand'),
             'brand' => 'required',
             'size' => 'required',
+            'qty' => 'numeric|min:0',
         ]);
 
         try {
@@ -44,6 +50,29 @@ class Kitchen_Board_Stock_Controller extends Controller
             return redirect()->back()->withInput()->withErrors($e->getMessage());
         }
         return redirect()->back()->withSuccess('添加成功！');
+    }
+
+    public function edit($id)
+    {
+        return view('kitchen.board.stock.edit')->withStock(Kitchen_Board_Stock::find($id));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'brand' => 'required',
+            'title' => 'required|unique:kitchen__board__stocks,title,'.$id.',id,brand,'.$request->input('brand_id'),
+            'size' => 'required',
+            'qty' => 'numeric|min:0',
+        ]);
+
+        try{
+            Kitchen_Board_Stock::find($id)->update($request->input());
+        } catch (QueryException $e)
+        {
+            return redirect()->back()->withInput()->withErrors('修改失败！');
+        }
+        return redirect('kitchen/board/stock')->withSuccess('修改成功！');
     }
 
     public function getIdByName(Request $request)

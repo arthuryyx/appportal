@@ -58,7 +58,7 @@
                                 {!! Form::open(['url' => 'kitchen/board/stock','method'=>'POST']) !!}
                                 </br>{{ Form::select('brand', ['Prime' =>'Prime', 'Melteca' =>'Melteca', 'bestwood' =>'bestwood', 'Zealand' =>'Zealand'], null, ['class' => 'form-control', 'placeholder'=>'Brand', 'required' => 'required']) }}
                                 </br>{{ Form::text('title', '', array('class' => 'form-control', 'placeholder' => 'Title', 'required' => 'required')) }}
-                                </br>{{ Form::select('size', ['2440X1220mm' =>'2440X1220mm', '2400X900mm' =>'2400X900mm', '3660X1220mm' =>'3660X1220mm'], null, ['class' => 'form-control', 'placeholder'=>'Size', 'required' => 'required']) }}
+                                </br>{{ Form::select('size', ['2440X1220mm' =>'2440X1220mm', '2400X900mm' =>'2400X900mm', '3660X1220mm' =>'3660X1220mm', '3600X600mm' =>'3600X600mm'], null, ['class' => 'form-control', 'placeholder'=>'Size', 'required' => 'required']) }}
                                 </br>{{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
                                 {!! Form::close() !!}
 

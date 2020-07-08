@@ -68,7 +68,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Kitchen', 'prefix' => 'kit
 
 
     Route::get('board/stock/ajax-index', 'Kitchen_Board_Stock_Controller@ajaxIndex');
-    Route::resource('board/stock', 'Kitchen_Board_Stock_Controller',['except' => ['show', 'edit', 'update', 'destroy'], 'as' => 'board']);
+    Route::resource('board/stock', 'Kitchen_Board_Stock_Controller',['except' => ['show', 'destroy'], 'as' => 'board']);
 
     Route::get('board/order/pending', 'Kitchen_Board_Order_Controller@pending');
     Route::get('board/order/ajax-pending', 'Kitchen_Board_Order_Controller@ajaxPending');

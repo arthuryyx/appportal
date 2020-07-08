@@ -13,17 +13,6 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            @if (count($errors) > 0)
-                <div class="alert alert-danger alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    {!! implode('<br>', $errors->all()) !!}
-                </div>
-            @elseif ($message = Session::get('success'))
-                <div class="alert alert-success alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    {{ $message }}
-                </div>
-            @endif
             <h1 class="page-header">出库</h1>
         </div>
         {!! Form::open(['url' => 'kitchen/board/usage','method'=>'POST']) !!}
@@ -47,6 +36,17 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-body">
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {!! implode('<br>', $errors->all()) !!}
+                        </div>
+                    @elseif ($message = Session::get('success'))
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ $message }}
+                        </div>
+                    @endif
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                         <thead>
                         <tr>

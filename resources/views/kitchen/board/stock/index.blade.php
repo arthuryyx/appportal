@@ -31,6 +31,9 @@
 
     <div class="row">
         <div class="col-lg-12">
+            <div class="panel-heading">
+                <a href="{{ url('kitchen/board/stock/create') }}" class="btn btn-primary" target="_blank" >New</a>
+            </div>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
@@ -40,6 +43,7 @@
                                 <th>Brand</th>
                                 <th>Title</th>
                                 <th>Size</th>
+                                <th>Edit</th>
                             </tr>
                         </thead>
                     </table>
@@ -75,7 +79,8 @@
                     { data: 'qty', searchable: false },
                     { data: 'brand' },
                     { data: 'title' },
-                    { data: 'size', orderable: false}
+                    { data: 'size', orderable: false},
+                    { data: 'edit', orderable: false, searchable: false }
                 ],
 //                columnDefs: [
 //                    { width: "15%", "targets": 8 }

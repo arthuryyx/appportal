@@ -21,69 +21,33 @@
                         </div>
                     @endif
 
-                        {!! Form::model($invoice, ['method' => 'PATCH','route' => ['job.update', $invoice->id]]) !!}
+                        {!! Form::model($stock, ['method' => 'PATCH','route' => ['board.stock.update', $stock->id]]) !!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>receipt_id:</strong>
-                                    {!! Form::text('receipt_id', null, array('class' => 'form-control', 'disabled' => 'disabled')) !!}
+                                    {{ Form::text('brand', null, ['class' => 'form-control', 'placeholder'=>'Brand', 'required' => 'required']) }}
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>job_id:</strong>
-                                    {!! Form::text('job_id', null, array('class' => 'form-control', 'required' => 'required')) !!}
+                                    {{ Form::text('title', null, array('class' => 'form-control', 'placeholder' => 'Title', 'required' => 'required')) }}
                                 </div>
                             </div>
 
-                            @can('modify_final_price')
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>final price:</strong>
-                                    {!! Form::number('price', null, array('class' => 'form-control', 'step' => 'any', 'min' => '0', 'required' => 'required')) !!}
+                                    {{ Form::text('size', null, ['class' => 'form-control', 'placeholder'=>'Size', 'required' => 'required']) }}
+                                </div>
+                            </div>
+
+                            @can('root')
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    {{ Form::number('qty', null, array('class' => 'form-control', 'placeholder' => 'Qty', 'required' => 'required')) }}
                                 </div>
                             </div>
                             @endcan
-
-                            @cannot('modify_final_price')
-                                    {!! Form::hidden('price', null, array('step' => 'any', 'min' => '0')) !!}
-                            @endcannot
-
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>customer_name:</strong>
-                                    {!! Form::text('customer_name', null, array('class' => 'form-control', 'required' => 'required')) !!}
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>phone:</strong>
-                                    {!! Form::number('phone', null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>email:</strong>
-                                    {!! Form::email('email', null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>address:</strong>
-                                    {!! Form::text('address', null, array('class' => 'form-control', 'required' => 'required')) !!}
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>comment:</strong>
-                                    {!! Form::textarea('comment', null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <a href="{{ url()->previous()}}" class="btn btn-danger">Cancel</a>
