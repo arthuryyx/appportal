@@ -74,7 +74,7 @@ class Kitchen_Board_Stock_Controller extends Controller
 
         return Datatables::of($objects)
             ->addColumn('order', function ($obj) {
-                return '<a href="'.url('kitchen/board/order/'.$obj->getItem->order_id).'" class="btn btn-success" target="_blank">'.$obj->getItem->getOrder->ref.'</a>';
+                return '<a href="'.url('kitchen/board/order/'.$obj->getItem->order_id).'" class="btn btn-success" target="_blank">查看</a>';
             }) ->addColumn('brand', function ($obj) {
                 return $obj->getItem->getStock->brand;
             })->addColumn('title', function ($obj) {

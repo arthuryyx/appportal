@@ -56,7 +56,7 @@
                             </div>
                             <div id="menu1" class="tab-pane fade">
                                 {!! Form::open(['url' => 'kitchen/board/stock','method'=>'POST']) !!}
-                                </br>{{ Form::select('brand', ['Prime' =>'Prime', 'Melteca' =>'Melteca', 'bestwood' =>'bestwood', 'Arcylic' =>'Arcylic'], null, ['class' => 'form-control', 'placeholder'=>'Brand', 'required' => 'required']) }}
+                                </br>{{ Form::select('brand', ['Prime' =>'Prime', 'Melteca' =>'Melteca', 'bestwood' =>'bestwood', 'Zealand' =>'Zealand'], null, ['class' => 'form-control', 'placeholder'=>'Brand', 'required' => 'required']) }}
                                 </br>{{ Form::text('title', '', array('class' => 'form-control', 'placeholder' => 'Title', 'required' => 'required')) }}
                                 </br>{{ Form::select('size', ['2440X1220mm' =>'2440X1220mm', '2400X900mm' =>'2400X900mm', '3660X1220mm' =>'3660X1220mm'], null, ['class' => 'form-control', 'placeholder'=>'Size', 'required' => 'required']) }}
                                 </br>{{Form::submit('Submit', ['class' => 'btn  add-more btn-success pull-right'])}}
@@ -140,17 +140,7 @@
                                         {{ Form::number('qty['.$item->id.']', $item->remain, array('class' => 'form-control', 'placeholder' => 'Qty', 'max' => $item->remain, 'min' => 1)) }}
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#myModal".$item->id}}>Delete</button>
-                                        <div class="modal fade" id={{"myModal".$item->id}} tabindex="-1" role="dialog">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" >&times;</button>
-                                                        <a href="{{ url('kitchen/board/order/item/'.$item->id.'/cancel') }}" class="btn btn-success">Cancel {{$item->remain. ' sheet(s) '.$item->getStock->brand . ', ' . $item->getStock->title }}</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <a href="{{ url('kitchen/board/order/item/'.$item->id) }}" class="btn btn-danger"> Cancel</a>
                                     </td>
                                     @else
                                         <td>0</td>

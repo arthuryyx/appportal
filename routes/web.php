@@ -68,15 +68,17 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Kitchen', 'prefix' => 'kit
 
 
     Route::get('board/stock/ajax-index', 'Kitchen_Board_Stock_Controller@ajaxIndex');
-    Route::resource('board/stock', 'Kitchen_Board_Stock_Controller',['except' => ['destroy'], 'as' => 'board']);
+    Route::resource('board/stock', 'Kitchen_Board_Stock_Controller',['except' => ['show', 'edit', 'update', 'destroy'], 'as' => 'board']);
 
     Route::get('board/order/pending', 'Kitchen_Board_Order_Controller@pending');
     Route::get('board/order/ajax-pending', 'Kitchen_Board_Order_Controller@ajaxPending');
 
-    Route::get('board/order/item/{id}/cancel', 'Kitchen_Board_Order_Controller@cancelItem');
+    Route::get('board/order/item/{id}', 'Kitchen_Board_Order_Controller@edit');
+    Route::post('board/order/item/{id}', 'Kitchen_Board_Order_Controller@update');
+
     Route::post('board/order/item', 'Kitchen_Board_Order_Controller@itemStore');
     Route::get('board/order/ajax-index', 'Kitchen_Board_Order_Controller@ajaxIndex');
-    Route::resource('board/order', 'Kitchen_Board_Order_Controller',['except' => ['destroy'], 'as' => 'board']);
+    Route::resource('board/order', 'Kitchen_Board_Order_Controller',['except' => ['edit', 'update', 'destroy'], 'as' => 'board']);
     Route::get('board/name-select2', 'Kitchen_Board_Stock_Controller@getIdByName');
 
 });

@@ -109,24 +109,39 @@ class Kitchen_Board_Order_Controller extends Controller
         return redirect()->back()->withSuccess('更新成功！');
     }
 
-    public function cancelItem($id)
+    public function edit($id)
     {
+        return view('kitchen.board.order.item')->withItem(Kitchen_Board_Order_Item::find($id));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'qty' => 'required',
+        ]);
+
         $by = Auth::user()->id;
 
         DB::beginTransaction();
         try {
             $item = Kitchen_Board_Order_Item::find($id);
-            $qty = $item->remain;
-            $item->update(['remain' => 0]);
-            Kitchen_Board_Arrive::create(['order_item_id'=>$id, 'value'=> -$qty, 'created_by'=>$by]);
+            if ($item->remain < $request->input('qty'))
+                throw new \Exception('数量有误，操作失败！');
+            $item->update(['remain' => $item->remain - $request->input('qty')]);
+            Kitchen_Board_Arrive::create([
+                'order_item_id'=>$id,
+                'value'=> -$request->input('qty'),
+                'remark'=>$request->input('remark'),
+                'created_by'=>$by
+            ]);
         } catch(\Exception $e)
         {
             DB::rollback();
-            return redirect()->back()->withErrors($e);
+            return redirect()->back()->withErrors($e->getMessage());
         }
         DB::commit();
 
-        return redirect()->back()->withSuccess('更新成功！');
+        return redirect('kitchen/board/order/'.$item->order_id)->withSuccess('更新成功！');
     }
 
     public function pending()

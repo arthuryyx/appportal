@@ -68,13 +68,14 @@
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                         <thead>
                         <tr>
-                            <th>Order</th>
+                            <th>Ref</th>
                             <th>Supplier</th>
                             <th>Board</th>
                             <th>Job No</th>
                             <th>Qty</th>
                             <th>By</th>
                             <th>Date</th>
+                            <th>Order</th>
                         </tr>
                         </thead>
                         {{--<tbody>--}}
@@ -125,13 +126,14 @@
                     'url':'ajax-arrived'
                 },
                 columns: [
-                    { data: 'order', name: 'getItem.getOrder.ref' },
-                    { data: 'brand', name: 'getItem.getStock.brand'},
-                    { data: 'title', name: 'getItem.getStock.title'},
-                    { data: 'job_no', name: 'getItem.job_no'},
-                    { data: 'value', name: 'value'},
-                    { data: 'created_by', name: 'getCreated_by.name'},
-                    { data: 'created_at' }
+                    { data: 'ref', name: 'getItem.getOrder.ref' },
+                    { data: 'brand', name: 'getItem.getStock.brand', orderable: false },
+                    { data: 'title', name: 'getItem.getStock.title', orderable: false },
+                    { data: 'job_no', name: 'getItem.job_no', orderable: false },
+                    { data: 'value', orderable: false },
+                    { data: 'created_by', name: 'getCreated_by.name', orderable: false },
+                    { data: 'created_at' , orderable: false },
+                    { data: 'order', searchable: false, orderable: false }
                 ],
 //                columnDefs: [
 //                    { type: 'date-eu', targets: 6 }
