@@ -29,7 +29,12 @@ class Kitchen_Board_Order_Controller extends Controller
                 return $obj->getCreated_by->name;
             })->editColumn('created_at', function ($obj) {
                 return $obj->created_at->format('Y-m-d');
-           })->addColumn('view', function ($order) {
+            })->addColumn('state', function ($obj) {
+                if($obj->hasManyItem->where('remain', '>', 0)->count() == 0)
+                    return '<label class="label label-success">完成</label>';
+                else
+                    return '<label class="label label-warning">'.$obj->hasManyItem->where('remain', '>', 0)->sum('remain').'</label>';
+            })->addColumn('view', function ($order) {
                 return '<a href="'.url('kitchen/board/order/'.$order->id).'" class="btn btn-success" target="_blank">查看</a>';
             })
             ->make(true);

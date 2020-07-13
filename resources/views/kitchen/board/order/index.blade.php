@@ -70,6 +70,7 @@
                             <th>ref</th>
                             <th>created_by</th>
                             <th>created_at</th>
+                            <th>state</th>
                             <th>view</th>
                         </tr>
                         </thead>
@@ -124,6 +125,7 @@
                     { data: 'ref'},
                     { data: 'created_by', name: 'getCreated_by.name'},
                     { data: 'created_at' },
+                    { data: 'state', orderable: false, searchable: false },
                     { data: 'view', orderable: false, searchable: false }
                 ],
                 columnDefs: [
