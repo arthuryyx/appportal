@@ -17,7 +17,7 @@ class CreateKitchenBoardUsagesTable extends Migration
             $table->increments('id');
             $table->integer('stock_id')->unsigned();
             $table->string('job_no')->nullable();
-            $table->float('qty')->unsigned();
+            $table->float('val')->unsigned();
             $table->integer('created_by')->unsigned();
             $table->timestamps();
         });

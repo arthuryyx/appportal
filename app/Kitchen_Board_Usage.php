@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kitchen_Board_Usage extends Model
 {
-    protected $fillable = ['stock_id', 'job_no', 'qty', 'created_by'];
+    protected $fillable = ['stock_id', 'job_no', 'val', 'created_by'];
 
     public function getStock()
     {

@@ -145,7 +145,7 @@ class Kitchen_Board_Stock_Controller extends Controller
     {
         $this->validate($request, [
             'stock_id' => 'required|exists:kitchen__board__stocks,id',
-            'qty' => 'required|min:1',
+            'val' => 'required|min:1',
         ]);
         $by = Auth::user()->id;
         DB::beginTransaction();
@@ -153,11 +153,11 @@ class Kitchen_Board_Stock_Controller extends Controller
             $stock = Kitchen_Board_Stock::find($request->input('stock_id'));
             if ($stock->qty< $request->input('qty'))
                 throw new \Exception('库存不足，操作失败！');
-            $stock->update(['qty' => $stock->qty - $request->input('qty')]);
+            $stock->update(['qty' => $stock->qty - $request->input('val')]);
             Kitchen_Board_Usage::create([
                 'stock_id'=>$request->input('stock_id'),
                 'job_no'=> $request->input('job_no'),
-                'qty'=>$request->input('qty'),
+                'val'=>$request->input('val'),
                 'created_by'=>$by]);
         } catch(\Exception $e)
         {

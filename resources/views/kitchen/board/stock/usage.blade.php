@@ -23,7 +23,7 @@
             {{ Form::text('job_no', '', array('class' => 'form-control', 'placeholder' => 'Job No.')) }}
         </div>
         <div class="col-lg-2">
-            {{ Form::number('qty', '', array('class' => 'form-control', 'placeholder' => 'Qty', 'required' => 'required')) }}
+            {{ Form::number('val', '', array('class' => 'form-control', 'placeholder' => 'Qty', 'required' => 'required')) }}
         </div>
         <div class="col-lg-1">
             {{Form::submit('Submit', ['class' => 'btn btn-success pull-right'])}}
@@ -93,7 +93,7 @@
                     { data: 'brand', name: 'getStock.brand'},
                     { data: 'title', name: 'getStock.title'},
                     { data: 'job_no', name: 'getItem.job_no'},
-                    { data: 'qty', name: 'value'},
+                    { data: 'val'},
                     { data: 'created_by', name: 'getCreated_by.name'},
                     { data: 'created_at' }
                 ],
