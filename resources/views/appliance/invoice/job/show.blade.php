@@ -308,7 +308,9 @@
                                     </div>
                                     <div class="modal-body">
                                         <strong>Carrier</strong>
-                                        <input type="text" name="carrier" class="form-control">
+                                        <input type="text" name="carrier" class="form-control", placeholder="">
+                                        <strong>Warehouse</strong>
+                                        {{ Form::select('region', $region, null, array('class' => 'form-control', 'placeholder'=>'', 'required' => 'required')) }}
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary" onclick="document.frm_example.action='{{ url('appliance/stock/deliver/'.$invoice->id)}}'">deliver</button>
@@ -367,6 +369,8 @@
                                             <label class="label label-success">In Stock</label>
                                         @elseif($stock->state == 3)
                                             <label class="label label-primary">Delivered</label>
+                                        @elseif($stock->state == 4)
+                                            <label class="label label-info">In Transit</label>
                                         @else
                                             <label class="label label-danger">Exception</label>
                                         @endif

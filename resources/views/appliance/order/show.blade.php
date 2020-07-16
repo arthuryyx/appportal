@@ -175,6 +175,8 @@
                                             <label class="label label-success">In Stock</label>
                                         @elseif($stock->state == 3)
                                             <label class="label label-primary">Delivered</label>
+                                        @elseif($stock->state == 4)
+                                            <label class="label label-info">In Transit</label>
                                         @elseif($stock->state == 5)
                                             <label class="label label-primary">Display</label>
                                         @else

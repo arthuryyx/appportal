@@ -100,6 +100,7 @@ class StockController extends Controller
     public function store(Request $request){
         $this->validate($request, [
             'aid' => 'required',
+            'price' => 'required',
             'order_id' => 'required|exists:appliance__orders,id',
             'qty' => 'required|integer|min:1',
         ]);
@@ -395,6 +396,7 @@ class StockController extends Controller
         $this->validate($request, [
             'id' => 'required',
             'carrier' => 'required',
+            'region' => 'required'
         ]);
         $t = $request->all();
         $stocks = Appliance_Stock::where('state', 2)->whereIn('id', $t['id'])->get();

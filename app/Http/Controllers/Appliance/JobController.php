@@ -118,7 +118,9 @@ class JobController extends Controller
 
     public function show($id)
     {
-        return view('appliance.invoice.job.show')->withInvoice(Appliance_Invoice::with('hasManyStocks.appliance.belongsToBrand')
+        return view('appliance.invoice.job.show')
+            ->withRegion(Auth::user()->regions()->pluck('name', 'id'))
+            ->withInvoice(Appliance_Invoice::with('hasManyStocks.appliance.belongsToBrand')
             ->with('hasManyStocks.appliance.belongsToCategory')
             ->with('hasManyDeposits')
             ->find($id));

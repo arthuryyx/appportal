@@ -30,7 +30,7 @@ class DepositController extends Controller
 //        } else{
 //            return redirect()->back()->withErrors('无效金额！');
 //        }
-        if ($input['amount'] = 0 ){
+        if ($input['amount'] == 0 ){
             return redirect()->back()->withErrors('无效金额！');
         } else{
             $input['confirmed'] = 1;
