@@ -66,7 +66,16 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Kitchen', 'prefix' => 'kit
     Route::get('board/ajax-usage', 'Kitchen_Board_Stock_Controller@ajaxUsage');
     Route::post('board/usage', 'Kitchen_Board_Stock_Controller@uses');
 
+    Route::get('statistics/salesChart', 'DashboardController@salesChart');
 
+    Route::get('job/ajax-index', 'JobController@ajaxIndex');
+    Route::post('job/{id}/remark', 'RemarkController@store');
+    Route::resource('job', 'JobController',['except' => ['destroy'], 'names' => 'kitchen.job']);
+
+    Route::post('payment', 'PaymentController@store');
+    Route::get('payment/{id}/edit', 'PaymentController@edit');
+    Route::patch('payment/{id}', 'PaymentController@update');
+    
     Route::get('board/stock/ajax-index', 'Kitchen_Board_Stock_Controller@ajaxIndex');
     Route::resource('board/stock', 'Kitchen_Board_Stock_Controller',['except' => ['show', 'destroy'], 'as' => 'board']);
 
