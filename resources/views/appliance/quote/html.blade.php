@@ -3206,7 +3206,7 @@
     <tr height='19' style='mso-height-source:userset;height:14.25pt' id='r4'>
         <td class='x64'></td>
         <td colspan='2' class='x143' style='border-right:1px solid #808080;border-bottom:1px solid windowtext;'>{{$quote->quote_no}}</td>
-        <td colspan='2' class='x139' style='border-right:1px solid #808080;border-bottom:1px solid #808080;'>{{date('d/M/Y', strtotime('-1 Month', strtotime($quote->created_at)))}}</td>
+        <td colspan='2' class='x139' style='border-right:1px solid #808080;border-bottom:1px solid #808080;'>{{ date('d/m/Y',strtotime('+30 days',strtotime($quote->created_at))) }}</td>
     </tr>
     <tr height='19' style='mso-height-source:userset;height:14.25pt' id='r5'>
         <td class='x64'></td>
@@ -3228,7 +3228,7 @@
         <td class='x70'></td>
     </tr>
     <tr height='21' style='mso-height-source:userset;height:15.75pt' id='r8'>
-        <td colspan='2' height='21' class='x89' style='mso-ignore:colspan;height:15.75pt;'><a href="mailto:{{$quote->getCreated_by->name}}" target="_parent"><span style='font-size:10pt;color:#0000FF;font-weight:400;text-decoration: underline;text-line-through:none;text-underline-style:single;font-family:"Arial";'>test@appliancestar.co.nz</span></a></td>
+        <td colspan='2' height='21' class='x89' style='mso-ignore:colspan;height:15.75pt;'><a href="mailto:{{$quote->getCreated_by->email}}" target="_parent"><span style='font-size:10pt;color:#0000FF;font-weight:400;text-decoration: underline;text-line-through:none;text-underline-style:single;font-family:"Arial";'>{{ $quote->getCreated_by->email }}</span></a></td>
         <td class='x63'></td>
         <td colspan='5' class='x133'><span style='float:right'>ACC NUM: ANZ 01-0190-0377780-00<span style='mso-spacerun:yes;white-space:nowrap;'></span></span></td>
     </tr>

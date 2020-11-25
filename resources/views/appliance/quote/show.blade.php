@@ -77,7 +77,7 @@
                         <tbody>
                             <tr>
                                 <td>{{$quote->quote_no}}</td>
-                                <td>{{date('d/M/Y', strtotime('-1 Month', strtotime($quote->created_at)))}}</td>
+                                <td>{{date('d/M/Y', strtotime('+30 days', strtotime($quote->created_at)))}}</td>
                                 <td>{{$quote->getCreated_by->name}}</td>
                                 <td>{{$quote->price}}</td>
                                 <td>{{$quote->customer_name}}</td>
