@@ -41,7 +41,7 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    {{ Form::select('size', ['2440X1220mm' =>'2440X1220mm', '2400X900mm' =>'2400X900mm', '3660X1220mm' =>'3660X1220mm', '3600X600mm' =>'3600X600mm'], null, ['class' => 'form-control', 'placeholder'=>'Size', 'required' => 'required']) }}
+                                    {{ Form::select('size', ['2440X1220mm'=>'2440X1220mm', '2400X900mm'=>'2400X900mm', '2700x1220mm'=>'2700x1220mm', '3660X1220mm'=>'3660X1220mm', '3600X600mm'=>'3600X600mm'], null, ['class' => 'form-control', 'placeholder'=>'Size', 'required' => 'required']) }}
                                 </div>
                             </div>
 

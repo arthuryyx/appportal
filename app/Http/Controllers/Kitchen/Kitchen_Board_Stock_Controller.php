@@ -37,7 +37,7 @@ class Kitchen_Board_Stock_Controller extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required|unique:kitchen__board__stocks,title,NULL,id,brand,'.$request->input('brand'),
+            'title' => 'required|unique:kitchen__board__stocks,title,NULL,id,brand,'.$request->input('brand').',size,'.$request->input('size'),
             'brand' => 'required',
             'size' => 'required',
             'qty' => 'numeric|min:0',
@@ -61,7 +61,7 @@ class Kitchen_Board_Stock_Controller extends Controller
     {
         $this->validate($request, [
             'brand' => 'required',
-            'title' => 'required|unique:kitchen__board__stocks,title,'.$id.',id,brand,'.$request->input('brand_id'),
+            'title' => 'required|unique:kitchen__board__stocks,title,'.$id.',id,brand,'.$request->input('brand').',size,'.$request->input('size'),
             'size' => 'required',
             'qty' => 'numeric|min:0',
         ]);

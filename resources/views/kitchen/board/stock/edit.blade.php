@@ -41,7 +41,7 @@
                                 </div>
                             </div>
 
-                            @can('root')
+                            @can('board')
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     {{ Form::number('qty', null, array('class' => 'form-control', 'placeholder' => 'Qty', 'required' => 'required')) }}

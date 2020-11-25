@@ -108,7 +108,7 @@
                     { type: 'number-fate', targets: 0 }
                 ],
                 autoWidth: false,
-                responsive: true,
+                responsive: false,
                 pageLength: 25,
                 order: [7]
             });

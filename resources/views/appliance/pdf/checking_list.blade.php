@@ -45,7 +45,10 @@
                             </th>
                             <th>
                                 RSP
-                            </th>                  
+                            </th> 
+                            <th>
+                                COST
+                            </th>  
                         </tr>
                         </thead>
                         <tbody>
@@ -57,6 +60,7 @@
                                 <td>{{ $stock->appliance->belongsToCategory->name }}</td>
                                 <td>{{ $stock->appliance->rrp}}</td>
                                 <td>{{ $stock->appliance->lv1 }}</td>
+                                <td>{{ $stock->appliance->lv4 }}</td>
                             </tr>
                         @endforeach
                         </tbody>

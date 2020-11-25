@@ -83,8 +83,6 @@
                             <!-- /.modal-dialog -->
                         </div>
                         <!-- /.modal -->
-                    @endcan
-                    @can('root')
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target={{"#myModaldelete"}}>Delete</button>
                         <!-- Modal -->

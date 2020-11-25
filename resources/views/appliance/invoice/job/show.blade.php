@@ -149,7 +149,7 @@
                         {{--{!! Form::close() !!}--}}
                     {{--</div>--}}
 
-                    @if($invoice->hasManyDeposits->count() == 0 || Gate::check('root'))
+                    @if($invoice->hasManyDeposits->count() == 0 || Gate::check('add_after_paid'))
                     <div class="col-lg-3">
                         {!! Form::open(['url' => 'appliance/stock/allocation','method'=>'POST']) !!}
                         <div class="row">

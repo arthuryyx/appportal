@@ -27,7 +27,6 @@
 
     <div class="row">
         <div class="col-lg-12">
-            @can('root')
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="col-xs-5">
@@ -40,7 +39,6 @@
                     </div>
                 </div>
             </div>
-            @endcan
             <div class="panel panel-default">
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -71,7 +69,7 @@
                                 <td>{{ $stock->shelf }}</td>
                                 <td>
                                 	<a href="{{ url('appliance/stock/'.$stock->id.'/edit') }}" class="btn btn-success">编辑</a>
-                                	@can('root')
+                                	@can('appliance_restock')
                                		    <!-- Button trigger modal -->
 	                                    <button class="btn btn-danger" data-toggle="modal" data-target={{"#myModal".$stock->id}}>
 	                                        重新入库

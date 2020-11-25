@@ -61,7 +61,7 @@ class StockController extends Controller
                 break;
             case 5:
                 return view('appliance.stock.index'.$state)
-                    ->withStocks(Appliance_Stock::where('state', $state)->get());
+                    ->withStocks(Appliance_Stock::where('state', $state)->orderBy('updated_at', 'desc')->get());
                 break;
             default:
                 break;

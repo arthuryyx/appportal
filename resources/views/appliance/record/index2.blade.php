@@ -71,6 +71,7 @@
 
                         </tbody>
                     </table>
+                    {{ $records->links() }}
                     <!-- /.table-responsive -->
                 </div>
                 <!-- /.panel-body -->
@@ -93,7 +94,7 @@
         $(document).ready(function() {
             $('#dataTables').DataTable({
                 responsive: true,
-                pageLength: 25,
+                // pageLength: 25,
                 order: [4]
             });
         });

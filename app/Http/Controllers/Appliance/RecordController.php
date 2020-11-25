@@ -14,7 +14,7 @@ class RecordController extends Controller
         {
             case 2:
                 return view('appliance.record.index'.$type)
-                    ->withRecords(Appliance_Record::where('type', $type)->with('getCreated_by', 'stock.appliance.belongsToBrand', 'stock.getOrder.getInvoice')->get());
+                    ->withRecords(Appliance_Record::where('type', $type)->with('getCreated_by', 'stock.appliance.belongsToBrand', 'stock.getOrder.getInvoice')->orderBy('id', 'desc')->paginate(25));
                 break;
             default:
                 break;
