@@ -1,2 +1,8 @@
-# appstarportal
 ![Image text](https://raw.githubusercontent.com/arthuryyx/appstarportal/main/Account%20Management.jpg)
+![Image text](https://raw.githubusercontent.com/arthuryyx/appstarportal/main/New%20Account.jpg)
+![Image text](https://raw.githubusercontent.com/arthuryyx/appstarportal/main/account%20Edit.jpg)
+![Image text](https://raw.githubusercontent.com/arthuryyx/appstarportal/main/Role%20Management.jpg)
+![Image text](https://raw.githubusercontent.com/arthuryyx/appstarportal/main/Job%20List.jpg)
+![Image text](https://raw.githubusercontent.com/arthuryyx/appstarportal/main/Job%20show.jpg)
+![Image text](https://raw.githubusercontent.com/arthuryyx/appstarportal/main/Ajax%20search%20and%20update%20page%20content.jpg)
+![Image text](https://raw.githubusercontent.com/arthuryyx/appstarportal/main/menu3.jpg)
